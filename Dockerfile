@@ -1,35 +1,35 @@
 # Build stage
 FROM node:18-alpine AS build-stage
 
-# Install pnpm
+# Cài đặt pnpm
 RUN npm install -g pnpm
 
-# Set working directory
+# Đặt thư mục làm việc
 WORKDIR /app
 
-# Copy package files
+# Sao chép các file cấu hình package
 COPY package.json pnpm-lock.yaml ./
 
-# Install dependencies using pnpm
+# Cài đặt các dependencies bằng pnpm
 RUN pnpm install
 
-# Copy all project files
+# Sao chép toàn bộ mã nguồn vào trong container
 COPY . .
 
-# Ensure vite is installed
-RUN pnpm list vite
-
-# Build the application
+# Build ứng dụng (tạo ra các file tĩnh)
 RUN pnpm run build
 
 # Production stage
 FROM nginx:stable-alpine AS production-stage
 
-# Copy built files from build stage
+# Sao chép file cấu hình nginx vào thư mục cấu hình của Nginx trong container
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Sao chép các file đã build từ build stage vào thư mục tĩnh của Nginx
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-# Expose port 80
+# Mở port 80 cho việc truy cập ứng dụng
 EXPOSE 80
 
-# Start nginx
+# Chạy Nginx (Nginx sẽ chạy dưới chế độ không chạy nền)
 CMD ["nginx", "-g", "daemon off;"]
