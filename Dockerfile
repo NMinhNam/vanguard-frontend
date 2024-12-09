@@ -22,9 +22,6 @@ RUN pnpm run build
 # Production stage
 FROM nginx:stable-alpine AS production-stage
 
-# Sao chép file cấu hình nginx vào thư mục cấu hình của Nginx trong container
-COPY nginx.conf /etc/nginx/nginx.conf
-
 # Sao chép các file đã build từ build stage vào thư mục tĩnh của Nginx
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
