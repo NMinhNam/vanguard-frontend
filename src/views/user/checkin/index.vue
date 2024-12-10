@@ -6,13 +6,11 @@
             <Header />
             <!--  End Header  -->
             <!--  Start Main  -->
-            <main class="container-fluid" :class="{ close: !isShow }" >
-                <div class="card p-3">
-                    <!-- Lắng nghe sự kiện từ HeaderCalendar lấy tháng bà năm -->
-                    <HeaderCalendar class="card-header p-2 mt-0" @updateDate="updateMonthYear" :todayTask="todayTask" />
-                    <!-- Truyền tháng và năm xuống Table -->
-                    <Table :month="selectedMonth" :year="selectedYear" @updateTodayTask="handleUpdateTodayTask" />
-                </div>
+            <main class="container-fluid" :class="{ close: !isShow }">
+                <!-- Lắng nghe sự kiện từ HeaderCalendar lấy tháng bà năm -->
+                <HeaderCalendar @updateDate="updateMonthYear" :todayTask="todayTask" />
+                <!-- Truyền tháng và năm xuống Table -->
+                <Table :month="selectedMonth" :year="selectedYear" @updateTodayTask="handleUpdateTodayTask" />
             </main>
             <!--  End Main  -->
         </article>
@@ -41,8 +39,6 @@ const todayTask = ref(null);
 const handleUpdateTodayTask = (task) => {
     todayTask.value = task;
 };
-
-
 </script>
 <style scoped>
 main {
@@ -53,6 +49,7 @@ main {
     display: inline-block;
     transition: var(--tran-04);
 }
+
 main.close {
     margin-left: 6.5%;
     width: 92%;

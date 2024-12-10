@@ -1,13 +1,13 @@
 <template>
-    <div class="card">
+    <div class="">
         <!-- Header Section -->
-        <div class="card-header border-bottom text-center d-flex align-items-center justify-content-between px-4 fs-4">
-            <div class="float-start mt-2">
-                Đơn nghỉ phép của tôi
-            </div>
+        <div class="mb-3 border-bottom text-center d-flex align-items-center justify-content-between px-2 fs-4 pb-3">
+            <h4 class="float-start fw-medium">
+                {{ $t('leave.title') }}
+            </h4>
             <router-link :to="{ path: '/user/timeoff/newrequest' }">
                 <div class="btn btn-add float-end">
-                    Tạo đơn nghỉ phép
+                    {{ $t('leave.buttons.create') }}
                     <i class="fa-solid fa-plus"></i>
                 </div>
             </router-link>
@@ -16,20 +16,22 @@
         <div class="card-body">
             <div class="col-sm-12 row m-0">
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-secondary rounded-2 fw-bolder">Chưa gửi</label>
+                    <label class="p-2 text-bg-secondary rounded-2 fw-bolder">{{ $t('leave.table.not_submitted')
+                        }}</label>
                     <!-- Card Item with Modal Trigger -->
-                    <div v-for="item in listChuaGui" :key="item.maDon" class="card p-2 my-2" 
-                    data-bs-toggle="modal" data-bs-target="#timeOffModal" @click="openModal(item)">
-                        <div class="d-flex m-0 justify-content-between text-header">
+                    <div v-for="item in listChuaGui" :key="item.maDon" class="card p-2 my-2">
+                        <div class="d-flex m-0 justify-content-between text-header" data-bs-toggle="modal"
+                            data-bs-target="#timeOffModal" @click="openModal(item)">
                             <div class="fw-medium text-start">
-                                <b>Mã đơn: </b>
+                                <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
                             <div class="fw-medium text-end text-secondary"> <i class="fa-solid fa-circle-dot"></i></div>
                         </div>
-                        <div class="content my-2">
+                        <div class="content my-2" data-bs-toggle="modal" data-bs-target="#timeOffModal"
+                            @click="openModal(item)">
                             <label class="w-100">
-                                <b>Lý do: </b>
+                                <b>{{ $t('leave.table.reason') }}: </b>
                                 {{ item.loaiDon }}
                             </label>
                             <div class="time_off col-sm-12 row m-0 my-2 gap-1 align-items-center">
@@ -43,40 +45,40 @@
                             </div>
                         </div>
                         <!-- Modal Trigger Button -->
-                        <div class="row col-sm-12 m-0 gap-2 justify-content-center">
-                            <button type="button" class="btn btn-success col-sm-2" data-bs-toggle="modal"
+                        <div class="row col-sm-12 gap-2 m-0 justify-content-center">
+                            <button type="button" class="btn btn-success col-sm-3" data-bs-toggle="modal"
                                 data-bs-target="#timeOffModalDuyet" @click="openModal(item)">
-                                Gửi
+                                <i class="fa-solid fa-paper-plane"></i>
+                                {{ $t('leave.buttons.send') }}
                             </button>
-                            <button type="button" class="btn btn-info col-sm-3" data-bs-toggle="modal"
-                                data-bs-target="#timeOffModal" @click="openModal(item)">
-                                Xem
-                            </button>
-                            <button type="button" class="btn btn-warning col-sm-2" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-warning col-sm-3" data-bs-toggle="modal"
                                 data-bs-target="#changeTimeOffModal" @click="openModal(item)">
-                                Sửa
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                {{ $t('leave.buttons.edit') }}
                             </button>
-                            <button type=" button" class="btn btn-danger col-sm-3" data-bs-toggle="modal"
-                                data-bs-target="#timeOffModal" @click="openModal(item)">
-                                Xóa
+                            <button type=" button" class="btn btn-danger col-sm-4"
+                                @click="btnDeleteDonYeuCau_click(item.maDon)">
+                                <i class="fa-solid fa-trash-can"></i>
+                                {{ $t('leave.buttons.delete') }}
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-primary  rounded-2 fw-bolder">Chờ phê duyệt</label>
+                    <label class="p-2 text-bg-primary  rounded-2 fw-bolder">{{ $t('leave.table.pending_approval')
+                        }}</label>
                     <!-- Card Item with Modal Trigger -->
                     <div v-for="item in listChoDuyet" :key="item.maDon" class="card p-2 my-2">
                         <div class="d-flex m-0 justify-content-between text-header">
                             <div class="fw-medium text-start">
-                                <b>Mã đơn: </b>
+                                <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
                             <div class="fw-medium text-end text-primary"> <i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2">
                             <label class="w-100">
-                                <b>Lý do: </b>
+                                <b>{{ $t('leave.table.reason') }}: </b>
                                 {{ item.loaiDon }}
                             </label>
                             <div class="time_off col-sm-12 row m-0 my-2 gap-1 align-items-center">
@@ -93,29 +95,32 @@
                         <div class="row col-sm-12 m-0 gap-2 justify-content-center">
                             <button type="button" class="btn btn-info col-sm-4" data-bs-toggle="modal"
                                 data-bs-target="#timeOffModal" @click="openModal(item)">
-                                Xem
+                                <i class="fa-solid fa-eye"></i>
+                                {{ $t('leave.buttons.view') }}
                             </button>
-                            <button type="button" class="btn btn-danger col-sm-3"
+                            <button type="button" class="btn btn-danger col-sm-4"
                                 @click="btnDeleteDonYeuCau_click(item.maDon)">
-                                Xóa
+                                <i class="fa-solid fa-trash-can"></i>
+                                {{ $t('leave.buttons.delete') }}
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-success text-white rounded-2 fw-bolder">Đã phê duyệt</label>
+                    <label class="p-2 text-bg-success text-white rounded-2 fw-bolder">{{ $t('leave.table.approved')
+                        }}</label>
                     <!-- Card Item with Modal Trigger -->
                     <div v-for="item in listDaDuyet" :key="item.maDon" class="card p-2 my-2">
                         <div class="d-flex m-0 justify-content-between text-header">
                             <div class="fw-medium text-start">
-                                <b>Mã đơn: </b>
+                                <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
                             <div class="fw-medium text-end text-success"> <i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2">
                             <label class="w-100">
-                                <b>Lý do: </b>
+                                <b>{{ $t('leave.table.reason') }}: </b>
                                 {{ item.loaiDon }}
                             </label>
                             <div class="time_off col-sm-12 row m-0 my-2 gap-1 align-items-center">
@@ -132,29 +137,31 @@
                         <div class="row col-sm-12 m-0 gap-2 justify-content-center">
                             <button type="button" class="btn btn-info col-sm-4" data-bs-toggle="modal"
                                 data-bs-target="#timeOffModal" @click="openModal(item)">
-                                Xem
+                                <i class="fa-solid fa-eye"></i>
+                                {{ $t('leave.buttons.view') }}
                             </button>
-                            <button type="button" class="btn btn-danger col-sm-3"
+                            <button type="button" class="btn btn-danger col-sm-4"
                                 @click="btnDeleteDonYeuCau_click(item.maDon)">
-                                Xóa
+                                <i class="fa-solid fa-trash-can"></i>
+                                {{ $t('leave.buttons.delete') }}
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-danger rounded-2 fw-bolder">Đã từ chối</label>
+                    <label class="p-2 text-bg-danger rounded-2 fw-bolder">{{ $t('leave.table.rejected') }}</label>
                     <!-- Card Item with Modal Trigger -->
                     <div v-for="item in listTuChoi" :key="item.maDon" class="card p-2 my-2">
                         <div class="d-flex m-0 justify-content-between text-header">
                             <div class="fw-medium text-start">
-                                <b>Mã đơn: </b>
+                                <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
                             <div class="fw-medium text-end text-danger"> <i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2">
                             <label class="w-100">
-                                <b>Lý do: </b>
+                                <b>{{ $t('leave.table.reason') }}: </b>
                                 {{ item.loaiDon }}
                             </label>
                             <div class="time_off col-sm-12 row m-0 my-2 gap-1 align-items-center">
@@ -171,11 +178,13 @@
                         <div class="row col-sm-12 m-0 gap-2 justify-content-center">
                             <button type="button" class="btn btn-info col-sm-4" data-bs-toggle="modal"
                                 data-bs-target="#timeOffModal" @click="openModal(item)">
-                                Xem
+                                <i class="fa-solid fa-eye"></i>
+                                {{ $t('leave.buttons.view') }}
                             </button>
-                            <button type="button" class="btn btn-danger col-sm-3"
+                            <button type="button" class="btn btn-danger col-sm-4"
                                 @click="btnDeleteDonYeuCau_click(item.maDon)">
-                                Xóa
+                                <i class="fa-solid fa-trash-can"></i>
+                                {{ $t('leave.buttons.delete') }}
                             </button>
                         </div>
                     </div>
@@ -188,7 +197,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-fullscreen-md-down">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="timeOffModalLabel">Chi tiết nghỉ phép</h5>
+                        <h5 class="modal-title" id="timeOffModalLabel">{{ $t('create_onleave.modal_view') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body m-0 row">
@@ -196,58 +205,60 @@
                         <div class="py-2 card card-body">
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="maNhanVien" class="form-label disabled">Mã nhân viên:</label>
+                                    <label for="maNhanVien" class="form-label disabled">{{
+                                        $t('create_onleave.items.employee_id') }}:</label>
                                     <input type="text" id="maNhanVien" class="bg-active form-control"
                                         :value="userInfo.maNhanVien" disabled>
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="hoTen" class="form-label">Họ và tên:</label>
+                                    <label for="hoTen" class="form-label">{{ $t('create_onleave.items.full_name')
+                                        }}:</label>
                                     <input type="text" id="hoTen" class="bg-active form-control" :value="userInfo.hoTen"
                                         disabled>
                                 </div>
                             </div>
                             <div class="row py-2">
-                                <div class="col-md-4">
-                                    <label for="chucVu" class="form-label">Chức vụ:</label>
+                                <div class="col-md-6">
+                                    <label for="chucVu" class="form-label">{{ $t('create_onleave.items.position')
+                                        }}:</label>
                                     <input type="text" id="chucVu" class="bg-active form-control"
                                         :value="userInfo.tenChucVu" disabled>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="phongBan" class="form-label disabled">Bộ phận:</label>
-                                    <input type="text" id="phongBan" class="bg-active form-control"
-                                        :value="userInfo.tenBoPhan" disabled>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="phongBan" class="form-label disabled">Phòng Ban:</label>
+                                <div class="col-md-6">
+                                    <label for="phongBan" class="form-label disabled">{{
+                                        $t('create_onleave.items.department') }}:</label>
                                     <input type="text" id="phongBan" class="bg-active form-control"
                                         :value="userInfo.tenPhongBan" disabled>
                                 </div>
                             </div>
                             <div class="col-md-12 mb-2">
-                                <label for="truongPhong" class="form-label">Người duyệt:</label>
+                                <label for="truongPhong" class="form-label">{{ $t('create_onleave.items.approver')
+                                    }}:</label>
                                 <input type="text" id="truongPhong" class="bg-active form-control" value="Phạm Hoàng Hà"
                                     disabled>
                             </div>
                             <div class="col-md-12 mb-2">
-                                <label for="lydo" class="form-label">Lý do nghỉ:</label>
+                                <label for="lydo" class="form-label">{{ $t('create_onleave.items.reason') }}:</label>
                                 <input type="text" id="lydo" class="bg-active form-control"
                                     :value="selectedItem.loaiDon" disabled>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="batdau" class="form-label">Từ ngày:</label>
+                                    <label for="batdau" class="form-label">{{ $t('create_onleave.items.from_day')
+                                        }}:</label>
                                     <input type="text" id="batdau" class="bg-active form-control"
                                         :value="formatDate(selectedItem.ngayBatDau)" disabled>
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="ketthuc" class="form-label">Đến ngày:</label>
+                                    <label for="ketthuc" class="form-label">{{ $t('create_onleave.items.to_day')
+                                        }}:</label>
                                     <input type="text" id="ketthuc" class="bg-active form-control"
                                         :value="formatDate(selectedItem.ngayKetThuc)" disabled>
                                 </div>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-12">
-                                    <label for="ghichu" class="form-label">Ghi chú</label>
+                                    <label for="ghichu" class="form-label">{{ $t('create_onleave.items.note') }}</label>
                                     <textarea type="text" id="ghichu" rows="5" class="bg-active form-control"
                                         :value="selectedItem.moTa" disabled></textarea>
                                 </div>
@@ -255,7 +266,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
+                            $t('create_onleave.buttons.close') }}</button>
                     </div>
                 </div>
             </div>
@@ -267,7 +279,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-fullscreen-md-down">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="timeOffModalLabel">Thay đổi đơn nghỉ phép</h5>
+                        <h5 class="modal-title" id="timeOffModalLabel">{{ $t('create_onleave.modal_edit') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body m-0 row">
@@ -275,18 +287,20 @@
                         <div class="py-2 card card-body">
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="maNhanVien" class="form-label disabled">Mã nhân viên:</label>
+                                    <label for="maNhanVien" class="form-label disabled">{{
+                                        $t('create_onleave.items.employee_id') }}:</label>
                                     <input type="text" id="maNhanVien" class="bg-active form-control"
                                         :value="userInfo.maNhanVien" disabled>
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="hoTen" class="form-label">Họ và tên:</label>
+                                    <label for="hoTen" class="form-label">{{ $t('create_onleave.items.full_name')
+                                        }}:</label>
                                     <input type="text" id="hoTen" class="bg-active form-control" :value="userInfo.hoTen"
                                         disabled>
                                 </div>
                             </div>
                             <div class="col-md-12 mb-2">
-                                <label for="lydo" class="form-label">Lý do nghỉ:</label>
+                                <label for="lydo" class="form-label">{{ $t('create_onleave.items.reason') }}:</label>
                                 <select class="form-select" id="lydo" v-model="selectedItem.loaiDon"
                                     :class="{ 'is-invalid': errorChange.loaiDon }">
                                     <option selected disabled>Chọn loại nghỉ phép</option>
@@ -296,31 +310,30 @@
                                     <option>Nghỉ không lương</option>
                                     <option>Khác</option>
                                 </select>
-                                <div class="invalid-feedback">
-                                    Chưa chọn lý do
-                                </div>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="batdau" class="form-label">Từ ngày</label>
+                                    <label for="batdau" class="form-label">{{ $t('create_onleave.items.from_day')
+                                        }}</label>
                                     <input type="date" v-model="selectedItem.ngayBatDau" id="batdau"
                                         class="form-control" :class="{ 'is-invalid': errorChange.ngayBatDau }">
                                     <div class="invalid-feedback">
-                                        Ngày không phù hợp
+                                        {{ $t('create_onleave.validate.from_day') }}
                                     </div>
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="ketthuc" class="form-label">Đến ngày</label>
+                                    <label for="ketthuc" class="form-label">{{ $t('create_onleave.items.to_day')
+                                        }}</label>
                                     <input type="date" v-model="selectedItem.ngayKetThuc" id="ketthuc"
                                         class="form-control" :class="{ 'is-invalid': errorChange.ngayKetThuc }">
                                     <div class="invalid-feedback">
-                                        Ngày không phù hợp
+                                        {{ $t('create_onleave.validate.to_day') }}
                                     </div>
                                 </div>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-12">
-                                    <label for="ghichu" class="form-label">Ghi chú</label>
+                                    <label for="ghichu" class="form-label">{{ $t('create_onleave.items.note') }}</label>
                                     <textarea type="text" id="ghichu" rows="5" class="bg-active form-control"
                                         :value="selectedItem.moTa"></textarea>
                                 </div>
@@ -328,9 +341,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" @click="btnChangeYeuCau_click(selectedItem)">Lưu
-                            thay đổi</button>
-                        <button type="button text-end" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-warning" @click="btnChangeYeuCau_click(selectedItem)">
+                            {{ $t('create_onleave.buttons.save') }}
+                        </button>
+                        <button type="button text-end" class="btn btn-secondary" data-bs-dismiss="modal">{{
+                            $t('create_onleave.buttons.close') }}</button>
                     </div>
                 </div>
             </div>
@@ -342,7 +357,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-fullscreen-md-down">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="timeOffModalLabel">Xác nhận người duyệt</h5>
+                        <h5 class="modal-title" id="timeOffModalLabel">{{ $t('create_onleave.modal_send') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body m-0 row">
@@ -358,13 +373,10 @@
                                         {{ staff.maNhanVien }} - {{ staff.hoTen }}
                                     </option>
                                 </select>
-                                <div class="invalid-feedback">
-                                    Chưa chọn người duyệt
-                                </div>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-12">
-                                    <label for="ghichu" class="form-label">Ghi chú</label>
+                                    <label for="ghichu" class="form-label">{{ $t('create_onleave.items.note') }}</label>
                                     <textarea type="text" id="ghichu" rows="5" class="bg-active form-control"
                                         v-model="ghiChu"></textarea>
                                 </div>
@@ -372,9 +384,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success"
-                            @click="guiDuyetYeuCau(selectedItem.maDon)">Gửi</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-success" @click="guiDuyetYeuCau(selectedItem.maDon)">{{
+                            $t('create_onleave.buttons.send') }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
+                            $t('create_onleave.buttons.close') }}</button>
                     </div>
                 </div>
             </div>
@@ -388,6 +401,9 @@ import { del, get, post, put } from '@/stores/https';
 import { onMounted, ref, reactive } from 'vue'
 import { useValidation } from '@/stores/mixin/validate_form'
 import SlimSelect from 'slim-select'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const listYeuCau = ref([])
 const listChuaGui = ref([])
@@ -416,61 +432,33 @@ const error = reactive({
     nhanVienSelect: ''
 })
 
-const validate = () => {
-    const formRule = {
-        nhanVienSelect: {
-            required: true
-        }
-    }
-    const validationData = {
-        nhanVienSelect: nhanVienSelect.value.length
-    }
-    Object.assign(error, validateForm(formRule, validationData))
-    for (let key in error) {
-        if (error[key] !== false) return false
-    }
-    return true
-}
-
 const guiDuyetYeuCau = async (maDon) => {
-    if (!validate()) {
-        await Swal.fire({
-            title: 'Có lỗi xảy',
-            text: 'Error',
-            icon: 'error',
-            timer: 1500,
-        })
-        return
-    }
     try {
         const formData = ref({
             maDon: maDon,
             maNhanVien: nhanVienSelect.value,
             ghiChu: ghiChu.value
         })
-
-        console.log(formData.value)
-
         const response = await post('/api/v1/approvals', formData.value)
         if (response.success) {
             Swal.fire({
-                title: 'Gửi yêu cầu thành công',
-                text: 'Đã gửi',
+                title: t('create_onleave.send_request.success.title'),
+                text: t('create_onleave.send_request.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
         } else {
             Swal.fire({
-                title: 'Gửi yêu cầu thất bại',
-                text: 'Không thành công',
+                title: t('create_onleave.send_request.fail.title'),
+                text: t('create_onleave.send_request.fail.text'),
                 icon: 'error',
                 timer: 1500,
             })
         }
     } catch (error) {
         Swal.fire({
-            title: 'Có lỗi',
-            text: 'Lỗi',
+            title: t('create_onleave.error.title'),
+            text: t('create_onleave.error.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -525,12 +513,12 @@ const loadYeuCau = async () => {
 
     } catch (error) {
         Swal.fire({
-            title: 'Lỗi',
-            text: 'Lỗi',
+            title: t('create_onleave.error.title'),
+            text: t('create_onleave.error.text'),
             icon: 'error',
             timer: 1500,
         })
-        console.error('Error during update info:', error)
+        console.error('Error during get info:', error)
     }
 }
 
@@ -538,27 +526,18 @@ const loadYeuCau = async () => {
 const loadInfoUser = async () => {
     try {
         const response = await get(`/api/v1/employees/${sessionStorage.getItem('maNhanVien')}`)
-        if (response.success) {
-            userInfo.value = {
-                hoTen: response.data.hoTen,
-                maNhanVien: response.data.maNhanVien,
-                tenChucVu: response.data.tenChucVu,
-                tenBoPhan: response.data.tenBoPhan,
-                tenPhongBan: response.data.tenPhongBan,
-                hinhAnh: response.data.hinhAnh
-            }
-        } else {
-            Swal.fire({
-                title: 'Lỗi',
-                text: 'Lấy thông tin thất bại',
-                icon: 'error',
-                timer: 1500,
-            })
+        userInfo.value = {
+            hoTen: response.data.hoTen,
+            maNhanVien: response.data.maNhanVien,
+            tenChucVu: response.data.tenChucVu,
+            tenBoPhan: response.data.tenBoPhan,
+            tenPhongBan: response.data.tenPhongBan,
+            hinhAnh: response.data.hinhAnh
         }
     } catch (error) {
         Swal.fire({
-            title: 'Error',
-            text: error.message,
+            title: t('create_onleave.error.title'),
+            text: t('create_onleave.error.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -600,7 +579,7 @@ const validateChange = (item) => {
 const btnChangeYeuCau_click = async (item) => {
     if (!validateChange(item)) {
         await Swal.fire({
-            title: 'Có lỗi xảy',
+            title: t('create_onleave.validate.error'),
             text: 'Error',
             icon: 'error',
             timer: 1500,
@@ -613,58 +592,73 @@ const btnChangeYeuCau_click = async (item) => {
 
         if (response.success) {
             await Swal.fire({
-                title: 'Thay đổi đơn yêu cầu thành công',
-                text: 'Đã lưu thay đổi',
+                title: t('create_onleave.update_request.success.title'),
+                text: t('create_onleave.update_request.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
         } else {
             await Swal.fire({
-                title: 'Thay đổi thông tin yêu cầu thất bại',
-                text: 'Lưu thay đổi thất bại',
-                icon: 'error',
-                timer: 1500,
-            })
-        }
-    } catch (error) {
-        await Swal.fire({
-                title: 'Lỗi hệ thống',
-                text: 'Lỗi',
-                icon: 'error',
-                timer: 1500,
-            })
-    }
-}
-
-const btnDeleteDonYeuCau_click = async (maDon) => {
-    try {
-        const response = await del(`/api/v1/don-yeu-cau/${maDon}`)
-        if (response.success) {
-            // Xóa item khỏi listYeuCau
-            listYeuCau.value = listYeuCau.value.filter(item => item.maDon !== maDon)
-
-            // Xóa item khỏi các danh sách phân loại
-            listChoDuyet.value = listChoDuyet.value.filter(item => item.maDon !== maDon)
-            listDaDuyet.value = listDaDuyet.value.filter(item => item.maDon !== maDon)
-            listTuChoi.value = listTuChoi.value.filter(item => item.maDon !== maDon)
-            Swal.fire({
-                title: 'Xóa đơn thành công',
-                text: 'Đã xóa',
-                icon: 'success',
-                timer: 1500,
-            })
-        } else {
-            Swal.fire({
-                title: 'Xóa đơn thất bại',
-                text: 'Lỗi xóa',
+                title: t('create_onleave.update_request.fail.title'),
+                text: t('create_onleave.update_request.fail.text'),
                 icon: 'error',
                 timer: 1500,
             })
         }
     } catch (error) {
         Swal.fire({
-            title: 'Lỗi',
-            text: 'error',
+            title: t('create_onleave.error.title'),
+            text: t('create_onleave.error.text'),
+            icon: 'error',
+            timer: 1500,
+        })
+    }
+}
+
+const btnDeleteDonYeuCau_click = async (maDon) => {
+    try {
+        Swal.fire({
+            title: t('create_onleave.delete_request.question.title'),
+            text: t('create_onleave.delete_request.question.text'),
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: t('create_onleave.delete_request.button.delete'),
+            cancelButtonText: t('create_onleave.delete_request.button.cancel'),
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const response = await del(`/api/v1/don-yeu-cau/${maDon}`)
+                if (response.success) {
+                    // Xóa item khỏi listYeuCau
+                    listYeuCau.value = listYeuCau.value.filter(item => item.maDon !== maDon)
+
+                    // Xóa item khỏi các danh sách phân loại
+                    listChoDuyet.value = listChoDuyet.value.filter(item => item.maDon !== maDon)
+                    listDaDuyet.value = listDaDuyet.value.filter(item => item.maDon !== maDon)
+                    listTuChoi.value = listTuChoi.value.filter(item => item.maDon !== maDon)
+                    Swal.fire({
+                        title: t('create_onleave.delete_request.success.title'),
+                        text: t('create_onleave.delete_request.success.text'),
+                        icon: 'success',
+                        timer: 1500,
+                    }).then(() => {
+                        location.reload();
+                    })
+                } else {
+                    Swal.fire({
+                        title: t('create_onleave.delete_request.fail.title'),
+                        text: t('create_onleave.delete_request.fail.text'),
+                        icon: 'error',
+                        timer: 1500,
+                    })
+                }
+            }
+        });
+    } catch (error) {
+        Swal.fire({
+            title: t('create_onleave.error.title'),
+            text: t('create_onleave.error.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -748,5 +742,9 @@ hr {
 .btn {
     padding: 3px 6px;
     font-size: 14px;
+}
+
+textarea {
+    height: 100px;
 }
 </style>

@@ -2,13 +2,13 @@
     <table class="table table-bordered text-center mt-1">
         <thead>
             <tr>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-                <th>Sun</th>
+                <th>{{ $t('checkin.table.mon') }}</th>
+                <th>{{ $t('checkin.table.tue') }}</th>
+                <th>{{ $t('checkin.table.wed') }}</th>
+                <th>{{ $t('checkin.table.thu') }}</th>
+                <th>{{ $t('checkin.table.fri') }}</th>
+                <th>{{ $t('checkin.table.sat') }}</th>
+                <th>{{ $t('checkin.table.sun') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -24,8 +24,8 @@
                         </div>
                         <div class="d-flex justify-content-between align-items-center text-success"
                             v-if="getCheckInOut(day).day">
-                            <span>In: {{ getCheckInOut(day).checkIn }}</span>
-                            <span>Out: {{ getCheckInOut(day).checkOut }}</span>
+                            <span>{{ $t('checkin.table.in') }}: {{ getCheckInOut(day).checkIn }}</span>
+                            <span>{{ $t('checkin.table.out') }}: {{ getCheckInOut(day).checkOut }}</span>
                         </div>
                     </div>
                 </td>
@@ -115,7 +115,7 @@ th {
 }
 
 td.day-cell {
-    width: 100px;
+    width: 150px;
     height: 100px;
     vertical-align: top;
     padding: 8px 12px;

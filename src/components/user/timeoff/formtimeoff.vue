@@ -7,28 +7,25 @@
             <div class="row py-2">
                 <div class="col-md-6">
                     <label for="hoTen" class="form-label">{{ $t('create_onleave.items.full_name') }}</label>
-                    <input type="text" id="hoTen" class="bg-active form-control disabled" v-model="data.hoTen" disabled>
+                    <input type="text" id="hoTen" class="bg-light form-control disabled" v-model="data.hoTen" disabled>
                 </div>
                 <div class="col-md-6 pt-md-0 pt-3">
-                    <label for="maNhanVien" class="form-label disabled">{{ $t('create_onleave.items.employee_id') }}</label>
-                    <input type="text" id="maNhanVien" class="bg-active form-control" v-model="formData.maNhanVien"
+                    <label for="maNhanVien" class="form-label disabled">{{ $t('create_onleave.items.employee_id')
+                        }}</label>
+                    <input type="text" id="maNhanVien" class="bg-light form-control" v-model="formData.maNhanVien"
                         disabled>
                 </div>
             </div>
             <div class="row py-2">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="chucVu" class="form-label">{{ $t('create_onleave.items.position') }}</label>
-                    <input type="text" id="chucVu" class="bg-active form-control disabled" v-model="data.tenChucVu"
+                    <input type="text" id="chucVu" class="bg-light form-control disabled" v-model="data.tenChucVu"
                         disabled>
                 </div>
-                <div class="col-md-4 pt-md-0 pt-3">
-                    <label for="phongBan" class="form-label disabled">{{ $t('create_onleave.items.job_title') }}</label>
-                    <input type="text" id="phongBan" class="bg-active form-control" v-model="data.tenBoPhan" disabled>
-                </div>
-                <div class="col-md-4 pt-md-0 pt-3">
+                <div class="col-md-6 pt-md-0 pt-3">
                     <label for="phongBan" class="form-label disabled">{{ $t('create_onleave.items.department')
                         }}</label>
-                    <input type="text" id="phongBan" class="bg-active form-control" v-model="data.tenPhongBan" disabled>
+                    <input type="text" id="phongBan" class="bg-light form-control" v-model="data.tenPhongBan" disabled>
                 </div>
             </div>
             <div class="row py-2">
@@ -41,34 +38,35 @@
                         <option>Nghỉ ốm</option>
                         <option>Nghỉ thai sản</option>
                         <option>Nghỉ không lương</option>
+                        <option>Khác</option>
                     </select>
                     <div class="invalid-feedback">
-                        Chưa chọn lý do
+                        {{ $t('create_onleave.validate.reason') }}
                     </div>
                 </div>
             </div>
             <div class="row py-2">
                 <div class="col-md-6">
                     <label for="batdau" class="form-label">{{ $t('create_onleave.items.from_day') }}</label>
-                    <input type="date" v-model="formData.ngayBatDau" id="batdau" class="bg-light form-control"
+                    <input type="date" v-model="formData.ngayBatDau" id="batdau" class="bg-active form-control"
                         :class="{ 'is-invalid': error.ngayBatDau }">
                     <div class="invalid-feedback">
-                        Ngày không phù hợp
+                        {{ $t('create_onleave.validate.from_day') }}
                     </div>
                 </div>
                 <div class="col-md-6 pt-md-0 pt-3">
                     <label for="ketthuc" class="form-label">{{ $t('create_onleave.items.to_day') }}</label>
-                    <input type="date" v-model="formData.ngayKetThuc" id="ketthuc" class="bg-light form-control"
+                    <input type="date" v-model="formData.ngayKetThuc" id="ketthuc" class="bg-active form-control"
                         :class="{ 'is-invalid': error.ngayKetThuc }">
                     <div class="invalid-feedback">
-                        Ngày không phù hợp
+                        {{ $t('create_onleave.validate.to_day') }}
                     </div>
                 </div>
             </div>
             <div class="row py-2">
                 <div class="col-md-12">
                     <label for="ghichu" class="form-label">{{ $t('create_onleave.items.note') }}</label>
-                    <textarea type="text" id="phone" rows="5" class="bg-light form-control"
+                    <textarea type="text" id="phone" rows="5" class="bg-active form-control"
                         v-model="formData.moTa"></textarea>
                 </div>
             </div>
@@ -90,6 +88,10 @@
     border-radius: 15px;
     margin: 10px auto;
     max-width: 900px;
+}
+
+textarea {
+    height: 100px;
 }
 </style>
 
@@ -115,30 +117,18 @@ const formData = reactive({
 const loadInfoUser = async () => {
     try {
         const response = await get(`/api/v1/employees/${sessionStorage.getItem('maNhanVien')}`)
-
-        if (response.success) {
-            data.value = {
-                hoTen: response.data.hoTen,
-                maNhanVien: response.data.maNhanVien,
-                tenChucVu: response.data.tenChucVu,
-                tenBoPhan: response.data.tenBoPhan,
-                tenPhongBan: response.data.tenPhongBan
-            }
-
-            formData.maNhanVien = data.value.maNhanVien;
+        data.value = {
+            hoTen: response.data.hoTen,
+            maNhanVien: response.data.maNhanVien,
+            tenChucVu: response.data.tenChucVu,
+            tenBoPhan: response.data.tenBoPhan,
+            tenPhongBan: response.data.tenPhongBan
         }
-        else {
-            await Swal.fire({
-                title: 'Lỗi',
-                text: 'Lấy thông tin thất bại',
-                icon: 'error',
-                timer: 1500,
-            })
-        }
+        formData.maNhanVien = data.value.maNhanVien;
     } catch (error) {
         await Swal.fire({
-            title: 'Error',
-            text: error,
+            title: t('create_onleave.error.title'),
+            text: t('create_onleave.error.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -150,7 +140,7 @@ const loadInfoUser = async () => {
 const btnCreateDonYeuCau_click = async () => {
     if (!validate()) {
         await Swal.fire({
-            title: 'Có lỗi xảy',
+            title: t('create_onleave.validate.error'),
             text: 'Error',
             icon: 'error',
             timer: 1500,
@@ -163,23 +153,23 @@ const btnCreateDonYeuCau_click = async () => {
 
         if (response.success) {
             await Swal.fire({
-                title: 'Tạo đơn nghỉ phép',
-                text: 'Đã gửi',
+                title: t('create_onleave.create_request.success.title'),
+                text: t('create_onleave.create_request.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
         } else {
             await Swal.fire({
-                title: 'Tạo đơn nghỉ phép',
-                text: 'Gửi thất bại',
+                title: t('create_onleave.create_request.fail.title'),
+                text: t('create_onleave.create_request.fail.text'),
                 icon: 'error',
                 timer: 1500,
             })
         }
     } catch (error) {
         await Swal.fire({
-            title: 'Có lỗi',
-            text: 'Gửi thất bại',
+            title: t('create_onleave.error.title'),
+            text: t('create_onleave.error.text'),
             icon: 'error',
             timer: 1500,
         })

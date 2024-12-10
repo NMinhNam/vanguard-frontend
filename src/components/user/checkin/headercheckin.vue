@@ -1,25 +1,29 @@
 <template>
-    <div class="col-12 row m-0 p-0 align-items-center text-center my-3 fw-bold">
-        <h2 class="text-start text-black mb-1 col-4">Theo dõi chấm công</h2>
+    <div class="col-12 row m-0 p-0 align-items-center text-center mb-3 fw-bold border-bottom pb-3">
+        <h4 class="text-start text-black mb-1 col-4">{{ $t('checkin.header.title') }}</h4>
         <div class="col-2">
-            <button v-if="!todayTask?.gioVao" class="btn btn-success px-1 py-1"
+            <button v-if="!todayTask?.gioVao" class="btn btn-success px-2 py-1"
                 @click="btnCheckIn_Click()">Check-in</button>
-            <button v-if="todayTask?.gioVao && !todayTask?.gioRa" class="btn btn-danger px-1 py-1"
+            <button v-if="todayTask?.gioVao && !todayTask?.gioRa" class="btn btn-danger px-2 py-1"
                 @click="btnCheckOut_Click()">Check-out</button>
         </div>
         <div class="col-4 row justify-content-center align-items-center">
             <select v-model="month" class="form-select mx-2 fw-bold" style="width: 150px;" @change="onMonthChange">
                 <option v-for="(monthName, index) in monthNames" :value="index + 1" :key="index">
-                    Tháng {{ monthName }}
+                    {{ $t('checkin.header.month') }} {{ monthName }}
                 </option>
             </select>
             {{ year }}
         </div>
-        <div class="col-1">
-            <i class="fas fa-chevron-left fs-3 px-3 py-2 bg-danger text-white rounded-3" @click="prevMonth"></i>
+        <div class="col-1 d-flex justify-content-end">
+            <button class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center" @click="prevMonth()">
+                <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
+            </button>
         </div>
         <div class="col-1">
-            <i class="fas fa-chevron-right fs-3 px-3 py-2 bg-danger text-white rounded-3" @click="nextMonth"></i>
+            <button class="btn btn-secondary rounded-0 d-flex align-items-center" @click="nextMonth()">
+                <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
+            </button>
         </div>
     </div>
 </template>
@@ -28,6 +32,9 @@
 import { post } from '@/stores/https';
 import { ref, watch, onMounted } from 'vue';
 import axios from "axios";
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const props = defineProps(['todayTask']);
 const emit = defineEmits(['updateDate']);
@@ -85,8 +92,8 @@ const btnCheckIn_Click = async () => {
 
         if (response.success) {
             Swal.fire({
-                title: 'Checkin thành công',
-                text: `Đã checkin: ${currentDateTime}`,
+                title: t('checkin.check_in.success.title'),
+                text:  `${t('checkin.check_in.success.text')}: ${currentDateTime}`,
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
@@ -94,16 +101,16 @@ const btnCheckIn_Click = async () => {
             })
         } else {
             Swal.fire({
-                title: 'Checkin không thành công',
-                text: 'Checkin Lỗi',
+                title: t('checkin.check_in.fail.title'),
+                text: t('checkin.check_in.fail.text'),
                 icon: 'error',
                 timer: 1500,
             })
         }
     } catch (error) {
         Swal.fire({
-            title: 'Lỗi hệ thống',
-            text: 'Lỗi',
+            title: t('checkin.erorr.title'),
+            text: t('checkin.erorr.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -122,8 +129,8 @@ const btnCheckOut_Click = async () => {
 
         if (response.success) {
             Swal.fire({
-                title: 'Checkout thành công',
-                text: `Đã checkout: ${currentDateTime}`,
+                title: t('checkin.check_out.success.title'),
+                text:  `${t('checkin.check_out.success.text')}: ${currentDateTime}`,
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
@@ -131,16 +138,16 @@ const btnCheckOut_Click = async () => {
             })
         } else {
             Swal.fire({
-                title: 'Checkout không thành công',
-                text: 'Checkout Lỗi',
+                title: t('checkin.check_out.fail.title'),
+                text: t('checkin.check_out.fail.text'),
                 icon: 'error',
                 timer: 1500,
             })
         }
     } catch (error) {
         Swal.fire({
-            title: 'Checkout không thành công',
-            text: 'Checkout Lỗi',
+            title: t('checkin.erorr.title'),
+            text: t('checkin.erorr.text'),
             icon: 'error',
             timer: 1500,
         })
