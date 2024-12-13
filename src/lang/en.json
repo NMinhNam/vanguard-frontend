@@ -74,7 +74,8 @@
             "allowance": "Allowance",
             "holiday": "Holiday",
             "work_type": "Job Type",
-            "configuration": "Configuration"
+            "configuration": "Configuration",
+            "account": "Account Management"
         },
         "menu_item_user": {
             "information": "Profile",

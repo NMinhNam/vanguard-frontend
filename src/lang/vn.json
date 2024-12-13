@@ -74,7 +74,8 @@
             "allowance": "Phụ cấp",
             "holiday": "Ngày lễ",
             "work_type": "Loại công",
-            "configuration": "Cấu hình"
+            "configuration": "Cấu hình",
+            "account": "Quản lý tài khoản"
         },
         "menu_item_user": {
             "information": "Thông tin nhân viên",

@@ -54,6 +54,11 @@ const featureAdmin = [
         icon: 'fa-solid fa-gears',
         text: 'home.menu_item_admin.configuration',
     },
+    {
+        path: '/admin/account',
+        icon: 'fa-solid fa-circle-user',
+        text: 'home.menu_item_admin.account',
+    },
 ]
 const featureManager = [
     {
