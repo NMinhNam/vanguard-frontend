@@ -304,7 +304,7 @@
                                 <select class="form-select" id="lydo" v-model="selectedItem.loaiDon"
                                     :class="{ 'is-invalid': errorChange.loaiDon }">
                                     <option selected disabled>Chọn loại nghỉ phép</option>
-                                    <option>Nghỉ phép năm</option>
+                                    <option v-if="nghiPhepNam">Nghỉ phép năm</option>
                                     <option>Nghỉ ốm</option>
                                     <option>Nghỉ thai sản</option>
                                     <option>Nghỉ không lương</option>
@@ -670,10 +670,19 @@ const openModal = (item) => {
     selectedItem.value = item
 }
 
+const nghiPhepNam = ref('')
+
+const getNghiPhepNam = async() => {
+    const response = await get(`/api/v1/annual-leave/employee/${sessionStorage.getItem('maNhanVien')}`)
+    nghiPhepNam.value = response.data.tongSoNgayPhepCon
+    console.log(nghiPhepNam.value)
+}
+
 onMounted(async () => {
     await loadYeuCau()
     await loadInfoUser()
     await getAllStaff()
+    await getNghiPhepNam()
     createSlimSelect()
 })
 </script>

@@ -34,7 +34,7 @@
                     <select class="form-select" id="lydo" v-model="formData.loaiDon"
                         :class="{ 'is-invalid': error.loaiDon }">
                         <option selected disabled>Chọn loại nghỉ phép</option>
-                        <option>Nghỉ phép năm</option>
+                        <option v-if="nghiPhepNam > 0">Nghỉ phép năm</option>
                         <option>Nghỉ ốm</option>
                         <option>Nghỉ thai sản</option>
                         <option>Nghỉ không lương</option>
@@ -104,6 +104,13 @@ import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
 
 const data = ref({})
+const nghiPhepNam = ref('')
+
+const getNghiPhepNam = async() => {
+    const response = await get(`/api/v1/annual-leave/employee/${sessionStorage.getItem('maNhanVien')}`)
+    nghiPhepNam.value = response.data.tongSoNgayPhepCon
+    console.log(nghiPhepNam.value)
+}
 
 const formData = reactive({
     maNhanVien: '',
@@ -213,5 +220,6 @@ const validate = () => {
 
 onMounted(async () => {
     await loadInfoUser()
+    await getNghiPhepNam()
 })
 </script>
