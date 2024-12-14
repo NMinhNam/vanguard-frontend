@@ -109,7 +109,6 @@ onUnmounted(() => {
     sessionStorage.removeItem('cccdStaff')
 })
 
-// Hàm lấy tên nhân viên từ mã nhân viên (maNhanVien)
 const getTenNhanVien = (maNhanVien) => {
     const nhanVien = listNhanVien.value.find((nv) => nv.maNhanVien === maNhanVien)
     return nhanVien ? nhanVien.hoTen : 'Không xác định' // Trả về tên hoặc giá trị mặc định

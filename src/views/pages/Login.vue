@@ -42,15 +42,22 @@
                                 <label for="password" class="form-label fw-bold">{{
                                     $t('login.input_text.password')
                                 }}</label>
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    :class="{ 'is-invalid': error.password }"
-                                    id="password"
-                                    v-model="password"
-                                    :placeholder="$t('login.input_text.password_placeholder')"
-                                    @keypress.enter="btnLogin_Click"
-                                />
+                                <div class="input-group">
+                                    <input
+                                        :type="showPassword ? 'text' : 'password'"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': error.password }"
+                                        id="password"
+                                        v-model="password"
+                                        :placeholder="$t('login.input_text.password_placeholder')"
+                                        @keypress.enter="btnLogin_Click"
+                                    />
+                                    <button type="button" class="btn btn-outline-secondary eye_icon"
+                                        @click="togglePasswordVisibility">
+                                        <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                                    </button>
+                                </div>
+                                
                                 <div class="invalid-feedback">
                                     {{ $t('login.messages.validate.password_required') }}
                                 </div>
@@ -92,6 +99,11 @@ const authStore = useAuthStore()
 const username = ref('')
 const password = ref('')
 const language = ref('vn')
+const showPassword = ref(false)
+
+const togglePasswordVisibility = () => {
+    showPassword.value = !showPassword.value
+}
 
 const error = reactive({
     username: '',
@@ -176,4 +188,18 @@ onMounted(() => {
     locale.value = lang || 'vn'
 })
 </script>
-<style scope></style>
+<style scoped>
+.eye_icon {
+    position: absolute;
+    right: 0px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: none; 
+    border: none; 
+    cursor: pointer;
+}
+
+.eye_icon:hover {
+    background: none;
+    color: black;
+}</style>

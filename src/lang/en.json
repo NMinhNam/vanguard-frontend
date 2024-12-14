@@ -63,19 +63,23 @@
         "menu_item_admin": {
             "staff": "Staff",
             "activitive": "Activities",
+            "position": "Position",
+            "calendar" : "Calendar",
             "payroll": "Payroll",
             "departments": "Departments",
             "approve": "Approve",
             "job_structure": "Organizational Chart",
             "chart": "Organizational Chart",
             "recruitment": "Recruitment",
-            "contract": "Contract"
+            "contract": "Contract",
+            "meeting": "Meeting"
         },
         "menu_item_user": {
             "information": "Profile",
             "checkin": "Timekeeping",
             "timeoff": "Time off",
-            "rewar_discipline": "Rewar/Discipline"
+            "rewar_discipline": "Rewar/Discipline",
+            "payroll": "Payroll"
         }
     },
     "profile": {
@@ -190,5 +194,12 @@
             "personal_infomation": "Personal information",
             "job_infomation": "Job information"
         }
+    },
+    "checkin": {
+        "header": {
+            "title": "",
+            "month": "Month"
+        }
+
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper bg-white">
-        <h4 class="pb-4 border-bottom fw-medium">{{ $t('profile.title') }}</h4>
+        <h4 class="pb-4 border-bottom fw-medium">Thông tin nhân viên</h4>
         <div class="row g-3 border-bottom pb-4 mt-2">
             <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
@@ -27,7 +27,7 @@
             </div>
             <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
-                    <div class="card-body">
+                    <!-- <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">CCCD:</h6>
@@ -89,7 +89,136 @@
                                 </router-link>
                             </div>
                         </div>
+                    </div> -->
+                    <!-- Nav tabs -->
+                    <ul class="px-2 pt-2 nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#home">Thông tin cá nhân</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#menu1">Menu 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#menu2">Menu 2</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content px-2">
+                        <div class="tab-pane container active p-0" id="home">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">CCCD:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ infoNV.cccd }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items.birthday') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ infoNV.ngaySinh }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items.gender') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ infoNV.gioiTinh ? 'Nam' : 'Nữ' }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items.address') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ infoNV.diaChi }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row text-end">
+                                    <div class="col-sm-12">
+                                        <router-link :to="{ path: `/user/information/${infoNV.maNhanVien}` }">
+                                            <button class="btn btn-info">{{ $t('profile.buttons.edit') }}</button>
+                                        </router-link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane container fade" id="menu1">...</div>
+                        <div class="tab-pane container fade" id="menu2">...</div>
                     </div>
+
+                    <!-- <div class="card-body" id="infoStaff">
+                        <div class="row align-items-center">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">CCCD:</h6>
+                            </div>
+                            <div class="col-sm-9 text-body-secondary">
+                                {{ infoNV.cccd }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row align-items-center">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">{{ $t('profile.items.birthday') }}:</h6>
+                            </div>
+                            <div class="col-sm-9 text-body-secondary">
+                                {{ infoNV.ngaySinh }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row align-items-center">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">{{ $t('profile.items.gender') }}:</h6>
+                            </div>
+                            <div class="col-sm-9 text-body-secondary">
+                                {{ infoNV.gioiTinh ? 'Nam' : 'Nữ' }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row align-items-center">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email:</h6>
+                            </div>
+                            <div class="col-sm-9 text-body-secondary">
+                                {{ infoNV.email }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row align-items-center">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">{{ $t('profile.items.phone') }}:</h6>
+                            </div>
+                            <div class="col-sm-9 text-body-secondary">
+                                {{ infoNV.dienThoai }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row align-items-center">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">{{ $t('profile.items.address') }}:</h6>
+                            </div>
+                            <div class="col-sm-9 text-body-secondary">
+                                {{ infoNV.diaChi }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row text-end">
+                            <div class="col-sm-12">
+                                <router-link :to="{ path: `/user/information/${infoNV.maNhanVien}` }">
+                                    <button class="btn btn-info">{{ $t('profile.buttons.edit') }}</button>
+                                </router-link>
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -138,7 +267,7 @@ const loadInfoUser = async () => {
                 ('0' + date.getDate()).slice(-2) + '-' +
                 ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
                 date.getFullYear();
-            
+
             infoNV.value.ngaySinh = formattedDate
         }
     } catch (error) {

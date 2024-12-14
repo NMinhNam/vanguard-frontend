@@ -18,7 +18,8 @@
                 <div class="col-sm-3 px-2">
                     <label class="p-2 text-bg-secondary rounded-2 fw-bolder">Chưa gửi</label>
                     <!-- Card Item with Modal Trigger -->
-                    <div v-for="item in listChuaGui" :key="item.maDon" class="card p-2 my-2">
+                    <div v-for="item in listChuaGui" :key="item.maDon" class="card p-2 my-2" 
+                    data-bs-toggle="modal" data-bs-target="#timeOffModal" @click="openModal(item)">
                         <div class="d-flex m-0 justify-content-between text-header">
                             <div class="fw-medium text-start">
                                 <b>Mã đơn: </b>
@@ -387,7 +388,6 @@ import { del, get, post, put } from '@/stores/https';
 import { onMounted, ref, reactive } from 'vue'
 import { useValidation } from '@/stores/mixin/validate_form'
 import SlimSelect from 'slim-select'
-import router from '@/router';
 
 const listYeuCau = ref([])
 const listChuaGui = ref([])

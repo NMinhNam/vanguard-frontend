@@ -63,19 +63,22 @@
         "menu_item_admin": {
             "staff": "Nhân viên",
             "departments": "Phòng ban",
+            "calendar" : "Lịch",
             "approve": "Phê duyệt",
             "position": "Chức vụ",
             "payroll": "Bảng lương",
             "job_structure": "Sơ đồ tổ chức",
             "chart": "Sơ đồ tổ chức",
             "recruitment": "Tuyển dụng",
-            "contract": "Hợp Đồng"
+            "contract": "Hợp Đồng",
+            "meeting": "Cuộc họp"
         },
         "menu_item_user": {
             "information": "Thông tin cá nhân",
             "checkin": "Chấm công",
             "timeoff": "Nghỉ phép",
-            "rewar_discipline": "Khen thưởng/Kỷ luật"
+            "rewar_discipline": "Khen thưởng/Kỷ luật",
+            "payroll": "Bảng lương"
         }
     },
     "profile": {

@@ -2,9 +2,10 @@
     <div class="col-12 row m-0 p-0 align-items-center text-center my-3 fw-bold">
         <h2 class="text-start text-black mb-1 col-4">Theo dõi chấm công</h2>
         <div class="col-2">
-            <button v-if="!todayTask?.gioVao" class="btn btn-success px-1 py-1" @click="btnCheckIn_Click()">Check
-                In</button>
-            <button v-if="todayTask?.gioVao && !todayTask?.gioRa" class="btn btn-danger px-1 py-1" @click="btnCheckOut_Click()">Check Out</button>
+            <button v-if="!todayTask?.gioVao" class="btn btn-success px-1 py-1"
+                @click="btnCheckIn_Click()">Check-in</button>
+            <button v-if="todayTask?.gioVao && !todayTask?.gioRa" class="btn btn-danger px-1 py-1"
+                @click="btnCheckOut_Click()">Check-out</button>
         </div>
         <div class="col-4 row justify-content-center align-items-center">
             <select v-model="month" class="form-select mx-2 fw-bold" style="width: 150px;" @change="onMonthChange">
@@ -25,7 +26,8 @@
 
 <script setup>
 import { post } from '@/stores/https';
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
+import axios from "axios";
 
 const props = defineProps(['todayTask']);
 const emit = defineEmits(['updateDate']);
@@ -59,9 +61,27 @@ const prevMonth = () => {
     }
 };
 
-const btnCheckIn_Click = async () => {
+const ip = ref("");
+
+const getIPAddress = async () => {
     try {
-        const response = await post('/api/v1/attendances/checkin', { maNhanVien: sessionStorage.getItem('maNhanVien') })
+        const response = await axios.get("https://api.ipify.org?format=json");
+        ip.value = response.data.ip;
+        console.log(ip.value)
+    } catch (error) {
+        console.error("Lỗi khi lấy IP:", error);
+    }
+};
+
+const btnCheckIn_Click = async () => {
+    await getIPAddress()
+    const formData = ref({
+        maNhanVien: sessionStorage.getItem('maNhanVien'),
+        publicIp: ip.value
+    })
+    try {
+        const response = await post('/api/v1/attendances/checkin', formData.value)
+        console.log
 
         if (response.success) {
             Swal.fire({
@@ -74,16 +94,16 @@ const btnCheckIn_Click = async () => {
             })
         } else {
             Swal.fire({
-            title: 'Checkout không thành công',
-            text: 'Checkout Lỗi',
-            icon: 'error',
-            timer: 1500,
-        })
+                title: 'Checkin không thành công',
+                text: 'Checkin Lỗi',
+                icon: 'error',
+                timer: 1500,
+            })
         }
     } catch (error) {
         Swal.fire({
-            title: 'Checkin không thành công',
-            text: 'Checkin Lỗi',
+            title: 'Lỗi hệ thống',
+            text: 'Lỗi',
             icon: 'error',
             timer: 1500,
         })
@@ -92,8 +112,13 @@ const btnCheckIn_Click = async () => {
 }
 
 const btnCheckOut_Click = async () => {
+    await getIPAddress()
+    const formData = ref({
+        maNhanVien: sessionStorage.getItem('maNhanVien'),
+        publicIp: ip.value
+    })
     try {
-        const response = await post('/api/v1/attendances/checkout', { maNhanVien: sessionStorage.getItem('maNhanVien') })
+        const response = await post('/api/v1/attendances/checkout', formData.value)
 
         if (response.success) {
             Swal.fire({
@@ -106,11 +131,11 @@ const btnCheckOut_Click = async () => {
             })
         } else {
             Swal.fire({
-            title: 'Checkout không thành công',
-            text: 'Checkout Lỗi',
-            icon: 'error',
-            timer: 1500,
-        })
+                title: 'Checkout không thành công',
+                text: 'Checkout Lỗi',
+                icon: 'error',
+                timer: 1500,
+            })
         }
     } catch (error) {
         Swal.fire({
@@ -122,4 +147,5 @@ const btnCheckOut_Click = async () => {
         console.log("Lỗi: ", error)
     }
 }
+
 </script>

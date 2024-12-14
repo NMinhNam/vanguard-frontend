@@ -149,7 +149,6 @@ td {
     text-wrap: nowrap;
 }
 
-input,
 textarea,
 select {
     height: 39.67px;
@@ -162,7 +161,7 @@ select {
     &:focus,
     &:active {
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.04) !important;
-        border: 1.5px solid #16a5ed !important;
+        border: 1.5px solid #828f96 !important;
     }
 }
 

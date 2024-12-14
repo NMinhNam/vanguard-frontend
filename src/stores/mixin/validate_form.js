@@ -35,6 +35,13 @@ export const useValidation = () => {
                 error[field] = 'pattern'
                 continue
             }
+            if (fieldsRule.email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                if (!emailRegex.test(value)) {
+                    error[field] = 'email'
+                    continue
+                }
+            }
             if (fieldsRule.minLength && value.length < fieldsRule.minLength) {
                 error[field] = 'minLength'
             }

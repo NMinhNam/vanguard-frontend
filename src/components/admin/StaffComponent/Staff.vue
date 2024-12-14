@@ -1,7 +1,12 @@
 <template>
     <div class="container-fluid mt-3" style="overflow-x: auto; background-color: var(--color-main)">
         <div class="row">
-            <HeadMenu @tab-change="setActiveTab" @search="handleSearch" :activeTab="activeTab" />
+            <HeadMenu
+                @tab-change="setActiveTab"
+                @search="handleSearch"
+                :activeTab="activeTab"
+                @filter-change="handleFilterChucVu"
+            />
             <div class="col-2 p-0">
                 <ListgroupItem :departments="departments" @filterStaffByDepartment="handleFilterByDepartment" />
             </div>
@@ -14,6 +19,7 @@
                         :currentPage="currentPage"
                         :pageSize="pageSize"
                         :departmentSelected="departmentSelected"
+                        :chucVuSelected="chucVuSelected"
                         @updatePage="currentPage = $event"
                     />
                     <StaffCard
@@ -22,6 +28,7 @@
                         :searchQuery="searchQuery"
                         :currentPage="currentPage"
                         :pageSize="pageSize"
+                        :chucVuSelected="chucVuSelected"
                         :departmentSelected="departmentSelected"
                         @updatePage="currentPage = $event"
                     />
@@ -46,6 +53,7 @@ const pageSize = ref(12)
 const searchQuery = ref('')
 const departments = ref([])
 const departmentSelected = ref([])
+const chucVuSelected = ref('')
 
 onMounted(async () => {
     await getAllStaff()
@@ -60,6 +68,10 @@ const getAllStaff = async () => {
 const getAllDepartments = async () => {
     const response = await get('/api/v1/departments')
     departments.value = response.data
+}
+
+const handleFilterChucVu = (chucVu) => {
+    chucVuSelected.value = chucVu
 }
 
 const handleSearch = (query) => {

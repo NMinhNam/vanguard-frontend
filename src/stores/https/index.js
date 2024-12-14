@@ -69,7 +69,7 @@ https.interceptors.response.use(
 
             const refreshToken = authStore.refreshToken
             if (!refreshToken) {
-                await authStore.clearToken()
+                authStore.clearToken()
                 await router.push('/login')
                 return Promise.reject(error)
             }

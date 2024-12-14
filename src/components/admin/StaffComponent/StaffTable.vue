@@ -90,6 +90,10 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    chucVuSelected: {
+        type: String,
+        default: '',
+    },
 })
 const filteredStaffs = computed(() => {
     let staffs = props.listStaff
@@ -104,6 +108,9 @@ const filteredStaffs = computed(() => {
         staffs = staffs.filter((staff) => props.departmentSelected.includes(staff.maPhongBan))
     }
 
+    if (props.chucVuSelected) {
+        staffs = staffs.filter((staff) => props.chucVuSelected === staff.maChucVu)
+    }
     return staffs
 })
 
