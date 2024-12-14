@@ -72,12 +72,18 @@
             "chart": "Organizational Chart",
             "recruitment": "Recruitment",
             "contract": "Contract",
+            "violation": "Violation",
+            "allowance": "Allowance",
+            "holiday": "Holiday",
+            "work_type": "Job Type",
+            "configuration": "Configuration",
+            "account": "Account Management",
             "meeting": "Meeting"
         },
         "menu_item_user": {
             "information": "Profile",
             "checkin": "Timekeeping",
-            "timeoff": "Time off",
+            "timeoff": "Leave Application",
             "rewar_discipline": "Rewar/Discipline",
             "payroll": "Payroll"
         }
@@ -85,13 +91,32 @@
     "profile": {
         "title": "Profile",
         "buttons": {
-            "edit": "Edit"
+            "edit": "Edit",
+            "information": "Information",
+            "experience": "Experience",
+            "education": "Education"
         },
-        "items": {
+        "items_info": {
             "birthday": "Birthday",
             "gender": "Gender",
             "phone": "Phone",
             "address": "Address"
+        },
+        "items_work": {
+            "from": "From",
+            "to": "To",
+            "company": "Company Name",
+            "position": "Position",
+            "description": "Description"
+        },
+        "items_edu": {
+            "from": "From",
+            "to": "To",
+            "school_name": "School Name",
+            "major": "Major",
+            "type_of_education": "Type of education",
+            "education_level": "Education level",
+            "classification": "Classification"
         }
     },
     "edit_profile": {
@@ -146,11 +171,34 @@
             }
         }
     },
+    "leave": {
+        "title": "My Leave Application",
+        "buttons": {
+            "create": "Create a Leave Request",
+            "send": "Send",
+            "view": "View",
+            "edit": "Edit",
+            "delete": "Delete"
+        },
+        "table": {
+            "not_submitted": "Not Submitted",
+            "pending_approval": "Pending Approval",
+            "approved": "Approved",
+            "rejected": "Rejected",
+            "request_id": "Request ID",
+            "reason": "Reason"
+        }
+    },
     "create_onleave": {
         "title": "Create a leave request",
+        "modal_view": "Leave Request Details",
+        "modal_edit": "Modify Leave Request",
+        "modal_send": "Approver Confirmation",
         "buttons": {
             "send": "Send",
-            "back": "Back"
+            "back": "Back",
+            "close": "Close",
+            "save": "Save change"
         },
         "items": {
             "full_name": "Full name",
@@ -163,6 +211,78 @@
             "from_day": "From day",
             "to_day": "To day",
             "note": "Note"
+        },
+        "validate": {
+            "from_day": "Date is invalid",
+            "to_day": "Date is invalid",
+            "reason": "No reason has been selected yet",
+            "error": "There is an invalid field."
+        },
+        "send_request": {
+            "success": {
+                "title": "Request Submitted Successfully",
+                "text": "Your request has been successfully submitted and is awaiting approval."
+            },
+            "fail": {
+                "title": "Request Submission Failed",
+                "text": "There was an issue submitting your request. Please try again later."
+            }
+        },
+        "update_request": {
+            "success": {
+                "title": "Changes Saved",
+                "text": "Your request has been updated successfully."
+            },
+            "fail": {
+                "title": "Changes Not Saved",
+                "text": "There was an issue updating your request. Please try again later."
+            }
+        },
+        "delete_request": {
+            "question": {
+                "title": "Do you want to delete?",
+                "text": "You won't be able to undo it!"
+            },
+            "success": {
+                "title": "Request Deleted",
+                "text": "Your request has been successfully deleted."
+            },
+            "fail": {
+                "title": "Request Not Deleted",
+                "text": "There was an issue deleting your request. Please try again later."
+            },
+            "button": {
+                "delete": "Delete",
+                "cancel": "Cancel"
+            }
+        },
+        "create_request": {
+            "success": {
+                "title": "Leave Request Created",
+                "text": "Your leave request has been successfully created."
+            },
+            "fail": {
+                "title": "Leave Request Failed",
+                "text": "There was an issue creating your leave request. Please try again later."
+            }
+        },
+        "error": {
+            "title": "System Error",
+            "text": "There was an error with the system. Please try again shortly."
+        }
+    },
+    "pay_roll": {
+        "title": "Payslip",
+        "items": {
+            "month": "Month",
+            "year": "Year",
+            "total_income": "Total Income",
+            "bonus": "Bonus",
+            "violation": "Violation Amount",
+            "allowance": "Allowance",
+            "violation_bonus": "Violation Amount - Bonus",
+            "additional_information": "Additional Information",
+            "net_pay": "Net Pay"
         }
     },
     "staffManagement": {
@@ -197,9 +317,309 @@
     },
     "checkin": {
         "header": {
-            "title": "",
+            "title": "Timekeeping",
             "month": "Month"
+        },
+        "table": {
+            "in": "In",
+            "out": "Out",
+            "mon": "Monday",
+            "tue": "Tuesday",
+            "wed": "Wednesday",
+            "thu": "Thursday",
+            "fri": "Friday",
+            "sat": "Saturday",
+            "sun": "Sunday"
+        },
+        "check_in": {
+            "success": {
+                "title": "Check-in Successful",
+                "text": "Check-in"
+            },
+            "fali": {
+                "title": "Check-in Failed",
+                "text": "There was an issue with your check-in. Please try again later."
+            }
+        },
+        "check_out": {
+            "success": {
+                "title": "Check-out Successful",
+                "text": "Check-out"
+            },
+            "fali": {
+                "title": "Check-out Failed",
+                "text": "There was an issue with your check-out. Please try again later."
+            }
+        },
+        "error": {
+            "title": "System Error",
+            "text": "There was an error with the system. Please try again shortly."
         }
-
+    },
+    "configuration": {
+        "error": {
+            "title": "System Error",
+            "text": "There was an error with the system. Please try again shortly."
+        },
+        "tabs": {
+            "work_type": "Job Type",
+            "holiday": "Holiday",
+            "allowance": "Allowance",
+            "violation": "Violation"
+        },
+        "work_type": {
+            "new": "New",
+            "title_new": "New job type",
+            "update": "Update",
+            "title_update": "Update job type",
+            "save": "Save",
+            "title": "Job type",
+            "page": "Page",
+            "search": "No data found",
+            "table": {
+                "no": "No.",
+                "work_type_id": "Job type id",
+                "work_type_name": "Job type name",
+                "start_time": "Start time",
+                "end_time": "End time",
+                "salary_coefficient": "Salary coefficient",
+                "tools": "Tools"
+            },
+            "validate": {
+                "name": "Job type name cannot be empty",
+                "start": "Start time is invalid",
+                "end": "End time is invalid",
+                "salary": "Salary coefficient is invalid"
+            },
+            "save_click": {
+                "success": {
+                    "title": "Save successful",
+                    "text": "Job type added successfully"
+                },
+                "fail": {
+                    "title": "Save failed",
+                    "text": "There was an issue save. Please try again later."
+                }
+            },
+            "update_click": {
+                "success": {
+                    "title": "Update successful",
+                    "text": "Job type changed successfully"
+                },
+                "fail": {
+                    "title": "Update failed",
+                    "text": "There was an issue updating. Please try again later."
+                }
+            },
+            "delete_click": {
+                "question": {
+                    "title": "Do you want to delete?",
+                    "text": "You won't be able to undo it!"
+                },
+                "success": {
+                    "title": "Delete successful",
+                    "text": "Job type has been successfully deleted."
+                },
+                "fail": {
+                    "title": "Delete failed",
+                    "text": "There was an issue deleting. Please try again later."
+                },
+                "button": {
+                    "delete": "Delete",
+                    "cancel": "Cancel"
+                }
+            }
+        },
+        "allowance": {
+            "new": "New",
+            "title_new": "New allowance",
+            "update": "Update",
+            "title_update": "Update allowance",
+            "save": "Save",
+            "title": "Allowance",
+            "page": "Page",
+            "search": "No data found",
+            "table": {
+                "no": "No.",
+                "allowance_id": "Allowance id",
+                "allowance_name": "Allowance name",
+                "amount": "Allowance amount",
+                "tools": "Tools"
+            },
+            "validate": {
+                "name": "Allowance name cannot be empty",
+                "amount": "Allowance amount is invalid",
+                "error": {
+                    "title": "There is an invalid field.",
+                    "text": "Please check again"
+                }
+            },
+            "save_click": {
+                "success": {
+                    "title": "Save successful",
+                    "text": "Allowance added successfully"
+                },
+                "fail": {
+                    "title": "Save failed",
+                    "text": "There was an issue save. Please try again later."
+                }
+            },
+            "update_click": {
+                "success": {
+                    "title": "Update successful",
+                    "text": "Allowance changed successfully"
+                },
+                "fail": {
+                    "title": "Update failed",
+                    "text": "There was an issue updating. Please try again later."
+                }
+            },
+            "delete_click": {
+                "question": {
+                    "title": "Do you want to delete?",
+                    "text": "You won't be able to undo it!"
+                },
+                "success": {
+                    "title": "Delete successful",
+                    "text": "Allowance has been successfully deleted."
+                },
+                "fail": {
+                    "title": "Delete failed",
+                    "text": "There was an issue deleting. Please try again later."
+                },
+                "button": {
+                    "delete": "Delete",
+                    "cancel": "Cancel"
+                }
+            }
+        },
+        "holiday": {
+            "new": "New",
+            "title_new": "New holiday",
+            "update": "Update",
+            "title_update": "Update holiday",
+            "save": "Save",
+            "title": "Holiday",
+            "page": "Page",
+            "search": "No data found",
+            "table": {
+                "no": "No.",
+                "holiday_id": "Holiday id",
+                "holiday_name": "Holiday name",
+                "start_day" : "Start day",
+                "end_day": "End day",
+                "tools": "Tools"
+            },
+            "validate": {
+                "name": "Holiday name cannot be empty",
+                "start_day": "Start day is invalid",
+                "end_day": "End day is invalid",
+                "error": {
+                    "title": "There is an invalid field.",
+                    "text": "Please check again"
+                }
+            },
+            "save_click": {
+                "success": {
+                    "title": "Save successful",
+                    "text": "Holiday added successfully"
+                },
+                "fail": {
+                    "title": "Save failed",
+                    "text": "There was an issue save. Please try again later."
+                }
+            },
+            "update_click": {
+                "success": {
+                    "title": "Update successful",
+                    "text": "Holiday changed successfully"
+                },
+                "fail": {
+                    "title": "Update failed",
+                    "text": "There was an issue updating. Please try again later."
+                }
+            },
+            "delete_click": {
+                "question": {
+                    "title": "Do you want to delete?",
+                    "text": "You won't be able to undo it!"
+                },
+                "success": {
+                    "title": "Delete successful",
+                    "text": "Holiday has been successfully deleted."
+                },
+                "fail": {
+                    "title": "Delete failed",
+                    "text": "There was an issue deleting. Please try again later."
+                },
+                "button": {
+                    "delete": "Delete",
+                    "cancel": "Cancel"
+                }
+            }
+        },
+        "violation": {
+            "new": "New",
+            "title_new": "New violation",
+            "update": "Update",
+            "title_update": "Update violation",
+            "save": "Save",
+            "title": "Violation",
+            "page": "Page",
+            "search": "No data found",
+            "table": {
+                "no": "No.",
+                "violation_id": "Violation id",
+                "violation_name": "Violation name",
+                "amount" : "Violation amount",
+                "tools": "Tools"
+            },
+            "validate": {
+                "name": "Violation name cannot be empty",
+                "amount": "Amount is invalid",
+                "error": {
+                    "title": "There is an invalid field.",
+                    "text": "Please check again"
+                }
+            },
+            "save_click": {
+                "success": {
+                    "title": "Save successful",
+                    "text": "Violation added successfully"
+                },
+                "fail": {
+                    "title": "Save failed",
+                    "text": "There was an issue save. Please try again later."
+                }
+            },
+            "update_click": {
+                "success": {
+                    "title": "Update successful",
+                    "text": "Violation changed successfully"
+                },
+                "fail": {
+                    "title": "Update failed",
+                    "text": "There was an issue updating. Please try again later."
+                }
+            },
+            "delete_click": {
+                "question": {
+                    "title": "Do you want to delete?",
+                    "text": "You won't be able to undo it!"
+                },
+                "success": {
+                    "title": "Delete successful",
+                    "text": "Violation has been successfully deleted."
+                },
+                "fail": {
+                    "title": "Delete failed",
+                    "text": "There was an issue deleting. Please try again later."
+                },
+                "button": {
+                    "delete": "Delete",
+                    "cancel": "Cancel"
+                }
+            }
+        }
     }
 }

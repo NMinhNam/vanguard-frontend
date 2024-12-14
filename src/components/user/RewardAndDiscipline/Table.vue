@@ -1,13 +1,13 @@
 <template>
-    <div class="card">
+    <div class="container-fluid">
         <!-- Header Section -->
-        <div class="card-header border-bottom text-center d-flex align-items-center justify-content-between px-3 fs-4">
-            <div class="float-start mt-2">
+        <div class="border-bottom text-center d-flex align-items-center justify-content-between pb-3 fs-4 mb-3">
+            <h4 class="fw-medium float-start mt-2">
                 Khen thưởng & Kỷ luật
-            </div>
+            </h4>
         </div>
         <!-- Main Content Section -->
-        <div id="tableRAD" class="card-body">
+        <div id="tableRAD" class="">
             <table class="table table-striped table-hover">
                 <thead class="table-secondary">
                     <tr>

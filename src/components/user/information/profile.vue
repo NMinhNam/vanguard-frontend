@@ -1,23 +1,22 @@
 <template>
-    <div class="wrapper bg-white">
-        <h4 class="pb-4 border-bottom fw-medium">Thông tin nhân viên</h4>
+    <div class="container-fluid">
+        <h4 class="pb-4 border-bottom fw-medium">{{ $t('profile.title') }}</h4>
         <div class="row g-3 border-bottom pb-4 mt-2">
-            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
-                <div class="card h-100">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                <div class="card">
                     <div class="card-body px-2">
-                        <div class="account-settings">
+                        <div class="account-settings py-2">
                             <div class="user-profile text-center">
-                                <img class="img rounded-circle border"
+                                <img class="img rounded-circle border mb-2"
                                     :src="infoNV.hinhAnh || 'https://i.pinimg.com/736x/8f/1c/a2/8f1ca2029e2efceebd22fa05cca423d7.jpg'">
-                                <h5 class="user-name my-3">{{ infoNV.hoTen }}</h5>
+                                <h5 class="user-name my-3">{{ infoNV.maNhanVien }} - {{ infoNV.hoTen }}</h5>
                                 <p class="fw-bold">{{ infoNV.tenChucVu }} - {{ infoNV.tenPhongBan }}</p>
-                                <p class="fw-bold">{{ infoNV.tenBoPhan }}</p>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <h6 class="m-0 p-2">Email: </h6>
+                                    <i class="fa-solid fa-envelope"></i>
                                     <span class="p-2">{{ infoNV.email }}</span>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <h6 class="m-0 p-2">{{ $t('profile.items.phone') }} </h6>
+                                    <i class="fa-solid fa-phone"></i>
                                     <span class="p-2">{{ infoNV.dienThoai }}</span>
                                 </div>
                             </div>
@@ -25,81 +24,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
-                    <!-- <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">CCCD:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.cccd }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">{{ $t('profile.items.birthday') }}:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.ngaySinh }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">{{ $t('profile.items.gender') }}:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.gioiTinh ? 'Nam' : 'Nữ' }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Email:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.email }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">{{ $t('profile.items.phone') }}:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.dienThoai }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">{{ $t('profile.items.address') }}:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.diaChi }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row text-end">
-                            <div class="col-sm-12">
-                                <router-link :to="{ path: `/user/information/${infoNV.maNhanVien}` }">
-                                    <button class="btn btn-info">{{ $t('profile.buttons.edit') }}</button>
-                                </router-link>
-                            </div>
-                        </div>
-                    </div> -->
                     <!-- Nav tabs -->
-                    <ul class="px-2 pt-2 nav nav-tabs">
+                    <ul class="p-2 nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#home">Thông tin cá nhân</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#home">{{ $t('profile.buttons.information') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#menu1">Menu 1</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#menu1">{{ $t('profile.buttons.experience') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#menu2">Menu 2</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#menu2">{{ $t('profile.buttons.education') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#menu3">Hợp đồng</a>
                         </li>
                     </ul>
 
@@ -108,37 +47,37 @@
                         <div class="tab-pane container active p-0" id="home">
                             <div class="p-3">
                                 <div class="row align-items-center">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <h6 class="mb-0">CCCD:</h6>
                                     </div>
-                                    <div class="col-sm-9 text-body-secondary">
+                                    <div class="col-sm-10 text-body-secondary">
                                         {{ infoNV.cccd }}
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row align-items-center">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">{{ $t('profile.items.birthday') }}:</h6>
+                                    <div class="col-sm-2">
+                                        <h6 class="mb-0">{{ $t('profile.items_info.birthday') }}:</h6>
                                     </div>
-                                    <div class="col-sm-9 text-body-secondary">
+                                    <div class="col-sm-10 text-body-secondary">
                                         {{ infoNV.ngaySinh }}
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row align-items-center">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">{{ $t('profile.items.gender') }}:</h6>
+                                    <div class="col-sm-2">
+                                        <h6 class="mb-0">{{ $t('profile.items_info.gender') }}:</h6>
                                     </div>
-                                    <div class="col-sm-9 text-body-secondary">
+                                    <div class="col-sm-10 text-body-secondary">
                                         {{ infoNV.gioiTinh ? 'Nam' : 'Nữ' }}
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row align-items-center">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">{{ $t('profile.items.address') }}:</h6>
+                                    <div class="col-sm-2">
+                                        <h6 class="mb-0">{{ $t('profile.items_info.address') }}:</h6>
                                     </div>
-                                    <div class="col-sm-9 text-body-secondary">
+                                    <div class="col-sm-10 text-body-secondary">
                                         {{ infoNV.diaChi }}
                                     </div>
                                 </div>
@@ -152,73 +91,99 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane container fade" id="menu1">...</div>
-                        <div class="tab-pane container fade" id="menu2">...</div>
+                        <div class="tab-pane container p-0" id="menu1">
+                            <div class="p-3"  v-for="item in listHistory_Works">
+                                <div class="row align-items-center mb-3">
+                                        <div class="p-0 ps-1">
+                                            <b class="border border-2 rounded-2 p-2">{{ $t('profile.items_work.from') }} {{ formatDate(item.thoiGianBatDau) }} - {{ $t('profile.items_work.to') }} {{ formatDate(item.thoiGianKetThuc) }}</b>
+                                        </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items_work.company') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.tenCongTy }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items_work.position') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.viTri }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items_work.description') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.moTaCongViec }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="tab-pane container p-0" id="menu2">
+                            <div class="p-3"  v-for="item in listHistory_Works">
+                                <div class="row align-items-center mb-3">
+                                        <div class="p-0 ps-1">
+                                            <b class="border border-2 rounded-2 p-2">{{ $t('profile.items_edu.from') }} {{ formatDate(item.thoiGianBatDau) }} - {{ $t('profile.items_edu.to') }} {{ formatDate(item.thoiGianKetThuc) }}</b>
+                                        </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items_edu.school_name') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.tenCongTy }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items_edu.major') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.viTri }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items_edu.type_of_education') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.viTri }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items_edu.education_level') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.viTri }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ $t('profile.items_edu.classification') }}:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.moTaCongViec }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- <div class="card-body" id="infoStaff">
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">CCCD:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.cccd }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">{{ $t('profile.items.birthday') }}:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.ngaySinh }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">{{ $t('profile.items.gender') }}:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.gioiTinh ? 'Nam' : 'Nữ' }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Email:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.email }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">{{ $t('profile.items.phone') }}:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.dienThoai }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">{{ $t('profile.items.address') }}:</h6>
-                            </div>
-                            <div class="col-sm-9 text-body-secondary">
-                                {{ infoNV.diaChi }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row text-end">
-                            <div class="col-sm-12">
-                                <router-link :to="{ path: `/user/information/${infoNV.maNhanVien}` }">
-                                    <button class="btn btn-info">{{ $t('profile.buttons.edit') }}</button>
-                                </router-link>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -231,7 +196,8 @@ import { onMounted, ref } from 'vue'
 import { get } from '@/stores/https'
 
 const infoNV = ref({})
-
+const listHistory_Works = ref([])
+const listEducations = ref([])
 
 //Lấy thông tin user
 const loadInfoUser = async () => {
@@ -281,8 +247,25 @@ const loadInfoUser = async () => {
     }
 }
 
+const getHistory_Works = async () => {
+    const response = await get('/api/v1/work-histories', {maNhanVien: sessionStorage.getItem('maNhanVien')})
+    listHistory_Works.value = response.data
+    listHistory_Works.value.sort((a, b) => new Date(b.thoiGianBatDau) - new Date(a.thoiGianBatDau));
+    console.log(listHistory_Works.value)
+
+}
+
+const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}-${month}-${year}`
+}
+
 onMounted(async () => {
     await loadInfoUser()
+    await getHistory_Works()
 })
 </script>
 
@@ -318,5 +301,11 @@ label {
     font-weight: 500;
     color: #777;
     padding-left: 3px;
+}
+
+.nav-tabs {
+    border-radius: 0 !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
 }
 </style>

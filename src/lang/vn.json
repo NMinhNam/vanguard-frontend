@@ -71,10 +71,16 @@
             "chart": "Sơ đồ tổ chức",
             "recruitment": "Tuyển dụng",
             "contract": "Hợp Đồng",
+            "violation": "Vi phạm",
+            "allowance": "Phụ cấp",
+            "holiday": "Ngày lễ",
+            "work_type": "Loại công",
+            "configuration": "Cấu hình",
+            "account": "Quản lý tài khoản",
             "meeting": "Cuộc họp"
         },
         "menu_item_user": {
-            "information": "Thông tin cá nhân",
+            "information": "Thông tin nhân viên",
             "checkin": "Chấm công",
             "timeoff": "Nghỉ phép",
             "rewar_discipline": "Khen thưởng/Kỷ luật",
@@ -82,15 +88,34 @@
         }
     },
     "profile": {
-        "title": "Thông tin cá nhân",
+        "title": "Thông tin nhân viên",
         "buttons": {
-            "edit": "Chỉnh sửa"
+            "edit": "Chỉnh sửa",
+            "information": "Thông tin cá nhân",
+            "experience": "Kinh nghiệm",
+            "education": "Học vấn"
         },
-        "items": {
+        "items_info": {
             "birthday": "Ngày sinh",
             "gender": "Giới tính",
             "phone": "Điện thoại",
             "address": "Địa chỉ"
+        },
+        "items_work": {
+            "from": "Từ ngày",
+            "to": "Đến ngày",
+            "company": "Tên công ty",
+            "position": "Vị trí",
+            "description": "Mô tả công việc"
+        },
+        "items_edu": {
+            "from": "Từ ngày",
+            "to": "Đến ngày",
+            "school_name": "Tên trường",
+            "major": "Chuyên ngành",
+            "type_of_education": "Loại hình đào tạo",
+            "education_level": "Trình độ học vấn",
+            "classification": "Xếp loại"
         }
     },
     "edit_profile": {
@@ -145,11 +170,34 @@
             }
         }
     },
+    "leave": {
+        "title": "Đơn nghỉ phép của tôi",
+        "buttons": {
+            "create": "Tạo đơn nghỉ phép",
+            "send": "Gửi",
+            "view": "Xem",
+            "edit": "Sửa",
+            "delete": "Xóa"
+        },
+        "table": {
+            "not_submitted": "Chưa gửi",
+            "pending_approval": "Chờ phê duyệt",
+            "approved": "Đã phê duyệt",
+            "rejected": "Đã từ chối",
+            "request_id": "Mã đơn",
+            "reason": "Lý do"
+        }
+    },
     "create_onleave": {
         "title": "Tạo đơn nghỉ phép",
+        "modal_view": "Chi tiết đơn nghỉ phép",
+        "modal_edit": "Chỉnh sửa đơn nghỉ phép",
+        "modal_send": "Xác nhận người duyệt",
         "buttons": {
             "send": "Gửi",
-            "back": "Quay lại"
+            "back": "Quay lại",
+            "close": "Đóng",
+            "save": "Lưu thay đổi"
         },
         "items": {
             "full_name": "Họ và tên",
@@ -162,6 +210,78 @@
             "from_day": "Từ ngày",
             "to_day": "Đến ngày",
             "note": "Ghi chú"
+        },
+        "validate": {
+            "from_day": "Ngày không hợp lệ",
+            "to_day": "Ngày không hợp lệ",
+            "reason": "Chưa chọn lý do",
+            "error": "Có trường không hợp lệ."
+        },
+        "send_request": {
+            "success": {
+                "title": "Yêu cầu đã gửi thành công",
+                "text": "Yêu cầu đã được gửi và đang chờ phê duyệt."
+            },
+            "fail": {
+                "title": "Yêu cầu gửi không thành công",
+                "text": "Đã xảy ra sự cố khi gửi yêu cầu của bạn. Vui lòng thử lại sau."
+            }
+        },
+        "update_request": {
+            "success": {
+                "title": "Đã lưu thay đổi",
+                "text": "Yêu cầu của bạn đã được cập nhật thành công."
+            },
+            "fail": {
+                "title": "Thay đổi chưa được lưu",
+                "text": "Đã xảy ra sự cố khi cập nhật yêu cầu của bạn. Vui lòng thử lại sau."
+            }
+        },
+        "delete_request": {
+            "question": {
+                "title": "Bạn có muốn xóa không?",
+                "text": "Bạn sẽ không hoàn tác lại được!"
+            },
+            "success": {
+                "title": "Yêu cầu đã được xóa",
+                "text": "Yêu cầu của bạn đã được xóa thành công."
+            },
+            "fail": {
+                "title": "Yêu cầu chưa được xóa",
+                "text": "Đã xảy ra sự cố khi xóa yêu cầu của bạn. Vui lòng thử lại sau."
+            },
+            "button": {
+                "delete": "Xóa",
+                "cancel": "Hủy"
+            }
+        },
+        "create_request": {
+            "success": {
+                "title": "Tạo đơn nghỉ phép thành công",
+                "text": "Đơn nghỉ phép của bạn đã được tạo."
+            },
+            "fail": {
+                "title": "Tạo đơn nghỉ phép không thành công",
+                "text": "Đã xảy ra sự cố khi tạo yêu cầu nghỉ phép của bạn. Vui lòng thử lại sau."
+            }
+        },
+        "error": {
+            "title": "Lỗi hệ thống",
+            "text": "Đã xảy ra lỗi với hệ thống. Vui lòng thử lại trong thời gian ngắn."
+        }
+    },
+    "pay_roll": {
+        "title": "Phiếu lương",
+        "items": {
+            "month": "Tháng",
+            "year": "Năm",
+            "total_income": "Tổng thu nhập",
+            "bonus": "Lương thưởng",
+            "violation": "Tiền phạt",
+            "allowance": "Phụ cấp",
+            "violation_bonus": "Khoản phạt - Lương thưởng",
+            "additional_information": "Thông tin bổ sung",
+            "net_pay": "Thực lãnh"
         }
     },
     "staffManagement": {
@@ -191,7 +311,276 @@
         },
         "header": {
             "personal_infomation": "Thông tin cá nhân",
-            "job_infomation":"Thông tin công việc"
+            "job_infomation": "Thông tin công việc"
+        }
+    },
+    "checkin": {
+        "header": {
+            "title": "Chấm công",
+            "month": "Tháng"
+        },
+        "table": {
+            "in": "Vào",
+            "out": "Ra",
+            "mon": "Thứ 2",
+            "tue": "Thứ 3",
+            "wed": "Thứ 4",
+            "thu": "Thứ 5",
+            "fri": "Thứ 6",
+            "sat": "Thứ 7",
+            "sun": "Chủ nhật"
+        },
+        "check_in": {
+            "success": {
+                "title": "Check-in thành công",
+                "text": "Check-in"
+            },
+            "fali": {
+                "title": "Check-in không thành công",
+                "text": "Có sự cố khi bạn check-in. Vui lòng thử lại."
+            }
+        },
+        "check_out": {
+            "success": {
+                "title": "Check-out thành công",
+                "text": "Check-out"
+            },
+            "fali": {
+                "title": "Check-out không thành công",
+                "text": "Có sự cố khi bạn check-out. Vui lòng thử lại."
+            }
+        },
+        "error": {
+            "title": "Lỗi hệ thống",
+            "text": "Đã xảy ra lỗi với hệ thống. Vui lòng thử lại trong thời gian ngắn."
+        }
+    },
+    "configuration": {
+        "error": {
+            "title": "Lỗi hệ thống",
+            "text": "Đã xảy ra lỗi với hệ thống. Vui lòng thử lại trong thời gian ngắn."
+        },
+        "tabs": {
+            "work_type":"Loại công",
+            "holiday": "Ngày lễ",
+            "allowance": "Phụ cấp",
+            "violation":"Vi phạm"
+        },
+        "work_type": {
+            "new": "Thêm mới" ,
+            "title_new": "Thêm loại công",
+            "update": "Cập nhật",
+            "title_update": "Sửa loại công",
+            "save": "Lưu",
+            "title": "Loại công",
+            "page": "Trang",
+            "search": "Không tìm thấy",
+            "table": {
+                "no": "STT",
+                "work_type_id": "Mã loại công",
+                "work_type_name": "Tên loại công",
+                "start_time": "Giờ bắt đầu",
+                "end_time": "Giờ kết thúc",
+                "salary_coefficient": "Hệ số lương",
+                "tools": "Công cụ"
+            },
+            "validate": {
+                "name": "Tên loại công không được để trống",
+                "start": "Giờ bắt đầu không hợp lệ",
+                "end": "Giờ kết thúc không hợp lệ",
+                "salary": "Hệ số lương không hợp lệ"
+            }
+        },
+        "allowance": {
+            "new": "Thêm mới",
+            "title_new": "Thêm phụ cấp",
+            "update": "Cập nhật",
+            "title_update": "Sửa phụ cấp",
+            "save": "Lưu",
+            "title": "Phụ cấp",
+            "page": "Trang",
+            "search": "Không tìm thấy",
+            "table": {
+                "no": "STT",
+                "allowance_id": "Mã phụ cấp",
+                "allowance_name": "Tên phụ cấp",
+                "amount": "Số tiền phụ cấp",
+                "tools": "Công cụ"
+            },
+            "validate": {
+                "name": "Tên phụ cấp không được để trống",
+                "amount": "Số tiền phụ cấp không hợp lệ",
+                "error": {
+                    "title": "Có trường không hợp lệ",
+                    "text": "Vui lòng kiểm tra lại"
+                }
+            },
+            "save_click": {
+                "success": {
+                    "title": "Lưu thành công",
+                    "text": "Thêm phụ cấp thành công"
+                },
+                "fail": {
+                    "title": "Lưu không thành công",
+                    "text": "Đã xảy ra sự cố khi lưu. Vui lòng thử lại sau."
+                }
+            },
+            "update_click": {
+                "success": {
+                    "title": "Cập nhật thành công",
+                    "text": "Phụ cấp đã được cập nhật"
+                },
+                "fail": {
+                    "title": "Cập nhật không thành công",
+                    "text": "Đã xảy ra sự cố khi cập nhật. Vui lòng thử lại sau."
+                }
+            },
+            "delete_click": {
+                "question": {
+                    "title": "Bạn có muốn xóa không?",
+                    "text": "Bạn sẽ không hoàn tác lại được!"
+                },
+                "success": {
+                    "title": "Xóa thành công",
+                    "text": "Phụ cấp đã được xóa"
+                },
+                "fail": {
+                    "title": "Xóa không thành công",
+                    "text": "Đã xảy ra sự cố khi xóa. Vui lòng thử lại sau."
+                },
+                "button": {
+                    "delete": "Xóa",
+                    "cancel": "Hủy"
+                }
+            }
+        },
+        "holiday": {
+            "new": "Thêm mới",
+            "title_new": "Thêm ngày lễ",
+            "update": "Cập nhật",
+            "title_update": "Sửa ngày lễ",
+            "save": "Lưu",
+            "title": "Phụ cấp",
+            "page": "Trang",
+            "search": "Không tìm thấy",
+            "table": {
+                "no": "STT",
+                "holiday_id": "Mã ngày lễ",
+                "holiday_name": "Tên ngày lễ",
+                "start_day": "Ngày bắt đầu",
+                "end_day": "Ngày kết thúc",
+                "tools": "Công cụ"
+            },
+            "validate": {
+                "name": "Tên ngày lễ không được để trống",
+                "start_day": "Ngày bắt đầu không hợp lệ",
+                "end_day":"Ngày kết thúc không hợp lệ",
+                "error": {
+                    "title": "Có trường không hợp lệ",
+                    "text": "Vui lòng kiểm tra lại"
+                }
+            },
+            "save_click": {
+                "success": {
+                    "title": "Lưu thành công",
+                    "text": "Thêm ngày lễ thành công"
+                },
+                "fail": {
+                    "title": "Lưu không thành công",
+                    "text": "Đã xảy ra sự cố khi lưu. Vui lòng thử lại sau."
+                }
+            },
+            "update_click": {
+                "success": {
+                    "title": "Cập nhật thành công",
+                    "text": "Ngày lễ đã được cập nhật"
+                },
+                "fail": {
+                    "title": "Cập nhật không thành công",
+                    "text": "Đã xảy ra sự cố khi cập nhật. Vui lòng thử lại sau."
+                }
+            },
+            "delete_click": {
+                "question": {
+                    "title": "Bạn có muốn xóa không?",
+                    "text": "Bạn sẽ không hoàn tác lại được!"
+                },
+                "success": {
+                    "title": "Xóa thành công",
+                    "text": "Ngày lễ đã được xóa"
+                },
+                "fail": {
+                    "title": "Xóa không thành công",
+                    "text": "Đã xảy ra sự cố khi xóa. Vui lòng thử lại sau."
+                },
+                "button": {
+                    "delete": "Xóa",
+                    "cancel": "Hủy"
+                }
+            }
+        },
+        "violation": {
+            "new": "Thêm mới",
+            "title_new": "Thêm vi phạm",
+            "update": "Cập nhật",
+            "title_update": "Sửa vi phạm",
+            "save": "Lưu",
+            "title": "Vi phạm",
+            "page": "Trang",
+            "search": "Không tìm thấy",
+            "table": {
+                "no": "STT",
+                "violation_id": "Mã vi phạm",
+                "violation_name": "Tên vi phạm",
+                "amount": "Số tiền",
+                "tools": "Công cụ"
+            },
+            "validate": {
+                "name": "Tên vi phạm không được để trống",
+                "amount": "Số tiền không hợp lệ",
+                "error": {
+                    "title": "Có trường không hợp lệ",
+                    "text": "Vui lòng kiểm tra lại"
+                }
+            },
+            "save_click": {
+                "success": {
+                    "title": "Lưu thành công",
+                    "text": "Thêm vi phạm thành công"
+                },
+                "fail": {
+                    "title": "Lưu không thành công",
+                    "text": "Đã xảy ra sự cố khi lưu. Vui lòng thử lại sau."
+                }
+            },
+            "update_click": {
+                "success": {
+                    "title": "Cập nhật thành công",
+                    "text": "Vi phạm đã được cập nhật"
+                },
+                "fail": {
+                    "title": "Cập nhật không thành công",
+                    "text": "Đã xảy ra sự cố khi cập nhật. Vui lòng thử lại sau."
+                }
+            },
+            "delete_click": {
+                "question": {
+                    "title": "Bạn có muốn xóa không?",
+                    "text": "Bạn sẽ không hoàn tác lại được!"
+                },
+                "success": {
+                    "title": "Xóa thành công",
+                    "text": "Vi phạm đã được xóa"
+                },
+                "fail": {
+                    "title": "Xóa không thành công",
+                    "text": "Đã xảy ra sự cố khi xóa. Vui lòng thử lại sau."
+                },
+                "button": {
+                    "delete": "Xóa",
+                    "cancel": "Hủy"
+                }
+            }
         }
     }
 }
