@@ -210,7 +210,7 @@ onMounted(() => {
         <div class="row h-100 m-0 d-flex justify-content-center align-items-center">
             <div class="col-lg-6 col-md-5 col-sm-7 pe-0 w-25">
                 <div class="p-4 shadow-lg row d-flex justify-content-center align-items-center">
-                    <div class="col" v-if="otpTrue">
+                    <div class="col" v-if="!otpTrue">
                         <div class="w-100 d-flex justify-content-center">
                             <img src="@/assets/images/logo.png" class="w-25" alt="Logo" />
                         </div>
@@ -245,7 +245,7 @@ onMounted(() => {
                             </div>
                         </div>
                     </div>
-                    <div class="col" v-if="!otpTrue">
+                    <div class="col" v-if="otpTrue">
                         <div class="w-100 d-flex justify-content-center">
                             <img src="@/assets/images/logo.png" class="w-25" alt="Logo" />
                         </div>
