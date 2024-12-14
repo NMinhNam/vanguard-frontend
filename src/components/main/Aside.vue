@@ -53,7 +53,18 @@ const featureAdmin = [
         path: '/admin/contract',
         icon: 'fa fa-file-contract',
         text: 'home.menu_item_admin.contract',
-    },{
+    },
+    {
+        path: '/admin/configuration',
+        icon: 'fa-solid fa-gears',
+        text: 'home.menu_item_admin.configuration',
+    },
+    {
+        path: '/admin/account',
+        icon: 'fa-solid fa-circle-user',
+        text: 'home.menu_item_admin.account',
+    },
+    {
         path: '/admin/meeting',
         icon: 'fa fa-file-contract',
         text: 'home.menu_item_admin.meeting',
@@ -219,6 +230,26 @@ aside main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+aside main .menu {
+    overflow-y: auto; /* Thêm thanh cuộn dọc */
+    overflow-x: hidden;
+    scrollbar-width: thin; /* Tùy chọn: Thanh cuộn nhỏ gọn (Firefox) */
+    scrollbar-color: #bbbdc0 transparent; /* Tùy chọn: Màu sắc thanh cuộn (Firefox) */
+}
+
+aside main .menu::-webkit-scrollbar {
+    width: 6px; /* Độ rộng thanh cuộn (Chrome, Edge) */
+}
+
+aside main .menu::-webkit-scrollbar-thumb {
+    background-color: #bbbdc0; /* Màu thanh cuộn */
+    border-radius: 4px; /* Làm tròn góc */
+}
+
+aside main .menu::-webkit-scrollbar-track {
+    background: transparent; /* Màu nền thanh cuộn */
 }
 
 aside main ul li {

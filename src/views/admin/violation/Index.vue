@@ -6,26 +6,28 @@
             <Header />
             <!--  End Header  -->
             <!--  Start Main  -->
-            <main class="container-fluid" :class="{ close: !isShow }" >
-                <Main />
+            <main :class="{ close: !isShow }">
+                <Violation />
             </main>
             <!--  End Main  -->
         </article>
         <!--  End Home  -->
     </div>
 </template>
+
 <script setup>
-import Header from '@/components/main/Header.vue';
-import Aside from '@/components/main/Aside.vue';
-import Main from '@/components/user/timeoff/add/TimeOffMain.vue'
+import Header from '@/components/main/Header.vue'
+import Aside from '@/components/main/Aside.vue'
+import Violation from '@/components/admin/Violation/Violation.vue'
 import { ref } from 'vue'
 
-const isShow = ref(true);
+const isShow = ref(true)
 
 const handleToggleSidebar = (show) => {
-    isShow.value = show;
-};
+    isShow.value = show
+}
 </script>
+
 <style scoped>
 main {
     margin-top: 10px;
@@ -35,6 +37,7 @@ main {
     display: inline-block;
     transition: var(--tran-04);
 }
+
 main.close {
     margin-left: 6.5%;
     width: 92%;

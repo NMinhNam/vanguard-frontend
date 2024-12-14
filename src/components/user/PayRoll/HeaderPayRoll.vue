@@ -2,14 +2,14 @@
     <div class="head-menu border-0 border-secondary-subtle col-12">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-                <h5 class="mb-0 fw-bolder">Phiếu lương</h5>
+                <h5 class="mb-0 fw-bolder">{{ $t('pay_roll.title') }}</h5>
             </div>
             <div class="pagination d-flex justify-content-center align-items-center">
                 <div class="px-2">
                     <select v-model="month" class="form-select mx-2 fw-bold" style="width: 150px;"
                         @change="onMonthChange">
                         <option v-for="(monthName, index) in monthNames" :value="index + 1" :key="index">
-                            Tháng {{ monthName }}
+                            {{ $t('pay_roll.items.month') }} {{ monthName }}
                         </option>
                     </select>
                 </div>
@@ -17,14 +17,14 @@
                     <select v-model="year" class="form-select mx-2 fw-bold" style="width: 150px;"
                         @change="onYearChange">
                         <option v-for="y in yearRange" :value="y" :key="y">
-                            Năm {{ y }}
+                            {{ $t('pay_roll.items.year') }} {{ y }}
                         </option>
                     </select>
                 </div>
                 <button class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center" @click="prevMonth()">
                     <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
                 </button>
-                <button class="btn btn-secondary rounded-0 d-flex align-items-center" @click="nextMonth()">
+                <button class="btn btn-secondary rounded-0 d-flex align-items-center ms-2" @click="nextMonth()">
                     <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
                 </button>
             </div>
