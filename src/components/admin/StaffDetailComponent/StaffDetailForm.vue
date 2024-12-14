@@ -14,6 +14,23 @@
                 <span class="badge bg-primary">{{ staff.maNhanVien }}</span>
                 <p class="text-muted">{{ props.staff.tenChucVu }}</p>
             </div>
+
+            <div class="col-md-3 d-flex justify-content-center align-items-center mt-2">
+                <div class="avatar-container w-50">
+                    <img
+                        v-if="props.staff.hinhAnh"
+                        :src="props.staff.hinhAnh"
+                        :alt="props.staff.hoTen || 'Avatar'"
+                        class="img-fluid avatar"
+                    />
+                    <img
+                        v-else
+                        src="https://khodulieu.sohoa.tuyenquang.gov.vn/congthongtin/thanhpho.tuyenquang.gov.vn/uploads/thumbnails/af90226ec4555c15e919244248b4cc21.jpg"
+                        alt="Avatar"
+                        class="img-fluid avatar"
+                    />
+                </div>
+            </div>
         </div>
 
         <div class="row mt-4">

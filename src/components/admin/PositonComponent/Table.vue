@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table class="table table-hover align-middle table-responsive">
+        <table class="table table-hover align-middle table-responsive text-center">
             <thead class="table-light">
                 <tr class="text-center">
                     <th scope="col">STT</th>

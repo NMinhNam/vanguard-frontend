@@ -32,7 +32,7 @@ onMounted(async () => {
 
 const getAllPostion = async () => {
     try {
-        const response = await get('/api/v1/chuc-vu')
+        const response = await get('/api/v1/positions')
         listPositon.value = response.data || []
     } catch (error) {
         console.error('Error fetching position data:', error)

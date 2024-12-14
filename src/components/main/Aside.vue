@@ -68,6 +68,11 @@ const featureAdmin = [
         path: '/admin/meeting',
         icon: 'fa fa-file-contract',
         text: 'home.menu_item_admin.meeting',
+    },
+    {
+        path: '/admin/position',
+        icon: 'fa fa-file-contract',
+        text: 'home.menu_item_admin.position',
     }
 ]
 const featureManager = [

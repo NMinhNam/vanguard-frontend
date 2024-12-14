@@ -26,7 +26,7 @@ const info = reactive({
 
 const savePosition = async () => {
     try {
-        const response = await post('/api/v1/chuc-vu', info)
+        const response = await post('/api/v1/positions', info)
         if (response) {
             Swal.fire({
                 title: 'Thành công',
