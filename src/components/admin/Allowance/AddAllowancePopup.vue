@@ -30,7 +30,7 @@
 
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
-import { get, post } from '@/stores/https'
+import {  post } from '@/stores/https'
 import { useValidation } from '@/stores/mixin/validate_form'
 import { useI18n } from 'vue-i18n'
 
@@ -39,6 +39,10 @@ const { t, locale } = useI18n()
 const phuCapInfo = reactive({
     tenPhuCap: '',
     soTien: ''
+})
+
+const props = defineProps({
+    getPhuCap: Function
 })
 
 onMounted(async () => {
@@ -65,6 +69,8 @@ const btnLuuPhuCap_click = async () => {
                 text: t('configuration.allowance.update_click.success.text'),
                 icon: 'success',
                 timer: 1500,
+            }).then(() => {
+                props.getPhuCap();
             })
         } else {
             Swal.fire({

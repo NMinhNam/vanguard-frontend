@@ -4,9 +4,9 @@
             <div class="d-flex align-items-center">
                 <button class="btn btn-primary me-2" @click="showPopup = true">
                     <i class="fa-solid fa-plus me-1"></i>
-                    Thêm mới
+                    {{ $t('configuration.violation.new') }}
                 </button>
-                <h5 class="mb-0 fw-bolder">Vi phạm</h5>
+                <h5 class="mb-0 fw-bolder">{{ $t('configuration.violation.title') }}</h5>
             </div>
             <div class="form-group fs has-search me-2">
                 <span class="material-symbols-outlined form-control-feedback">search</span>
@@ -14,7 +14,7 @@
                     v-model="searchQuery" />
             </div>
             <div class="pagination d-flex justify-content-center align-items-center">
-                <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+                <span>{{ $t('configuration.violation.page') }} {{ currentPage }} / {{ totalPages }}</span>
                 <button class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center" :disabled="currentPage === 1"
                     @click="$emit('prevPage')">
                     <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
@@ -29,9 +29,9 @@
     <div :class="['popup', { show: showPopup }]" tabindex="-1">
         <div class="popup-content modal-dialog">
             <div class="modal-content p-4">
-                <h2 class="modal-title border-bottom mb-4">Thêm vi phạm</h2>
+                <h2 class="modal-title border-bottom mb-4">{{ $t('configuration.violation.title_new') }}</h2>
                 <div class="modal-body">
-                    <AddViolationPopup />
+                    <AddViolationPopup :getViPham="getViPham"/>
                 </div>
                 <div class="modal-footer d-flex justify-content-end align-items-end">
                     <i @click="showPopup = false" class="text-danger fs-3 fa-solid fa-circle-xmark"></i>
@@ -59,6 +59,7 @@ const props = defineProps({
         type: Number,
         default: 1,
     },
+    getViPham: Function
 })
 </script>
 

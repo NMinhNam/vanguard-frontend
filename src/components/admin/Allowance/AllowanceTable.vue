@@ -1,80 +1,58 @@
 <script setup>
-import { reactive, ref } from 'vue';
-import { useValidation } from '@/stores/mixin/validate_form'
 import { useI18n } from 'vue-i18n'
+import { del } from '@/stores/https';
 
 const { t, locale } = useI18n()
-
-const showPopup = ref(false);
-const selectedItem = reactive({});
-
-const openPopup = (item) => {
-    Object.assign(selectedItem, item);
-    showPopup.value = true;
-};
 
 const props = defineProps({
     listPhuCap: Array,
     currentPage: Number,
     pageSize: Number,
+    getPhuCap: Function
 });
 
-const saveUpdate = () => {
-    if (!validate()) {
-        Swal.fire({
-            title: t('configuration.allowance.validate.error.title'),
-            text: t('configuration.allowance.validate.error.text'),
-            icon: 'error',
-            timer: 1500,
-        })
-
-        return
-    }
-
-    console.log('Dữ liệu sau chỉnh sửa:', selectedItem);
-    // Gửi dữ liệu về server hoặc xử lý cập nhật tại đây
-};
-
-const deleteItem = (item) => {
-    if (confirm(`Bạn có chắc chắn muốn xóa vi phạm: ${item.tenPhuCap}?`)) {
-        const index = props.listPhuCap.indexOf(item);
-        if (index !== -1) {
-            props.listPhuCap.splice(index, 1);
-            console.log('Đã xóa vi phạm:', item);
+const btnDeletePhuCap_click = async (item) => {
+    Swal.fire({
+        title: t('configuration.allowance.delete_click.question.title'),
+        text: t('configuration.allowance.delete_click.question.text'),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: t('configuration.allowance.delete_click.button.delete'),
+        cancelButtonText: t('configuration.allowance.delete_click.button.cancel'),
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                const response = await del(`/api/v1/allowance/${item.maPhuCap}`)
+                if (response.success) {
+                    Swal.fire({
+                        title: t('configuration.allowance.delete_click.success.title'),
+                        text: t('configuration.allowance.delete_click.success.text'),
+                        icon: 'success',
+                        timer: 1500,
+                    }).then(() => {
+                        props.getPhuCap();
+                    })
+                } else {
+                    Swal.fire({
+                        title: t('configuration.allowance.delete_click.fail.title'),
+                        text: t('configuration.allowance.delete_click.fail.text'),
+                        icon: 'error',
+                        timer: 1500,
+                    })
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: t('configuration.error.title'),
+                    text: t('configuration.error.text'),
+                    icon: 'error',
+                    timer: 1500,
+                })
+            }
         }
-    }
-};
-
-//------------Validate-------------//
-const { validateForm } = useValidation()
-
-const error = reactive({
-    tenPhuCap: '',
-    soTien: ''
-})
-
-const validate = () => {
-    const formRule = {
-        tenPhuCap: {
-            required: true,
-        },
-        soTien: {
-            required: true,
-            number: selectedItem.soTien
-        }
-    }
-    const formData = {
-        tenPhuCap: selectedItem.tenPhuCap,
-        soTien: selectedItem.soTien
-    }
-    Object.assign(error, validateForm(formRule, formData))
-    for (let key in error) {
-        if (error[key] !== false) return false
-    }
-    return true
+    });
 }
-//--------------------------------------------------------------//
-
 </script>
 
 <template>
@@ -101,61 +79,12 @@ const validate = () => {
                     <td>{{ item.tenPhuCap }}</td>
                     <td>{{ item.soTien }}</td>
                     <td>
-                        <button class="btn btn-warning me-1" @click="openPopup(item)"><i
-                                class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn btn-danger" @click="deleteItem(item)"><i
+                        <button class="btn btn-danger" @click="btnDeletePhuCap_click(item)"><i
                                 class="fa-solid fa-trash-can"></i></button>
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div :class="['popup', { show: showPopup }]" tabindex="-1">
-        <div class="popup-content modal-dialog">
-            <div class="modal-content p-4">
-                <h2 class="modal-title border-bottom mb-4">{{ $t('configuration.allowance.title_update') }}</h2>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="mb-3">
-                            <label for="maPhuCap" class="form-label">
-                                {{ $t('configuration.allowance.table.allowance_id') }}
-                            </label>
-                            <input v-model="selectedItem.maPhuCap" type="text" id="maPhuCap" class="form-control"
-                                readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="tenPhuCap" class="form-label">
-                                {{ $t('configuration.allowance.table.allowance_name') }}
-                            </label>
-                            <input v-model="selectedItem.tenPhuCap" type="text" id="tenPhuCap" class="form-control"
-                                :class="{ 'is-invalid': error.tenPhuCap }" />
-                            <div class="invalid-feedback">
-                                {{ $t('configuration.allowance.validate.name') }}
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="soTien" class="form-label">
-                                {{ $t('configuration.allowance.table.amount') }}
-                            </label>
-                            <input v-model="selectedItem.soTien" type="text" id="soTien"
-                                class="form-control" :class="{ 'is-invalid': error.soTien }" />
-                            <div class="invalid-feedback">
-                                {{ $t('configuration.allowance.validate.amount') }}
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-end">
-                            <button @click="saveUpdate" class="btn btn-warning">
-                                {{ $t('configuration.allowance.update') }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer d-flex justify-content-end align-items-end">
-                    <i @click="showPopup = false" class="text-danger fs-3 fa-solid fa-circle-xmark"></i>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 

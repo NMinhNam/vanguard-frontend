@@ -33,7 +33,7 @@
             <div class="modal-content p-4">
                 <h2 class="modal-title border-bottom mb-4">{{ $t('configuration.allowance.title_new') }}</h2>
                 <div class="modal-body">
-                    <AddAllowancePopup />
+                    <AddAllowancePopup :getPhuCap="getPhuCap"/>
                 </div>
                 <div class="modal-footer d-flex justify-content-end align-items-end">
                     <i @click="showPopup = false" class="text-danger fs-3 fa-solid fa-circle-xmark"></i>
@@ -64,6 +64,7 @@ const props = defineProps({
         type: Number,
         default: 1,
     },
+    getPhuCap: Function
 })
 </script>
 

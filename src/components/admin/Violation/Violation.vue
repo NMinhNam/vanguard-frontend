@@ -1,23 +1,24 @@
 <script setup>
+import { get } from '@/stores/https';
 import HeadMenu from './HeadMenu.vue'
 import ViolationTable from './ViolationTable.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
-const listViPham = ref([
-    {
-        maViPham: "VP01",
-        tenViPham: "Di lam muon",
-        soTien: 100000
-    },
-    {
-        maViPham: "VP02",
-        tenViPham: "Nghi khong phep",
-        soTien: 500000
-    },
-]);
+const listViPham = ref([]);
+
+// Hàm gọi API để lấy danh sách phụ cấp
+const getViPham = async () => {
+    try {
+        const response = await get('/api/v1/violations');
+        listViPham.value = response.data;
+        filteredViolation.value = listViPham.value;
+    } catch (error) {
+        console.error('Lỗi khi gọi API getPhuCap:', error);
+    }
+};
 
 const currentPage = ref(1);
-const pageSize = ref(1); // Số lượng dòng hiển thị trên mỗi trang
+const pageSize = ref(5); // Số lượng dòng hiển thị trên mỗi trang
 const filteredViolation = ref(listViPham.value); // Dữ liệu sau khi tìm kiếm
 
 // Tính tổng số trang
@@ -60,17 +61,21 @@ const filterViolationBySearchQuery = (query) => {
     }
     currentPage.value = 1; // Reset về trang đầu tiên
 };
+
+onMounted(async() => {
+    await getViPham()
+})
 </script>
 <template>
     <div class="container-fluid mt-3" style="overflow-x: auto">
         <div class="row">
             <!-- Header -->
             <HeadMenu :currentPage="currentPage" :totalPages="totalPages" @prevPage="prevPage" @nextPage="nextPage"
-                @search="filterViolationBySearchQuery" />
+                @search="filterViolationBySearchQuery" :getViPham="getViPham"/>
 
             <!-- Table -->
             <div class="col-12 mt-3" style="overflow-x: auto">
-                <ViolationTable :listViPham="paginatedData" :currentPage="currentPage" :pageSize="pageSize" />
+                <ViolationTable :listViPham="paginatedData" :currentPage="currentPage" :pageSize="pageSize" :getViPham="getViPham"/>
             </div>
         </div>
     </div>

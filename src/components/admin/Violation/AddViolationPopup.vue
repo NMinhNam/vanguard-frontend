@@ -2,45 +2,35 @@
     <div class="container-fluid">
         <div class="mb-3">
             <label for="tenViPham" class="form-label me-2 text-nowrap" style="width: 12rem">
-                {{ $t('configuration.violation.table.violation_name')}}
+                {{ $t('configuration.violation.table.violation_name') }}
             </label>
-            <input
-                v-model="viPhamInfo.tenViPham"
-                type="text"
-                class="form-control"
-                id="tenViPham"
-                :class="{ 'is-invalid': error.tenViPham }"
-            />
+            <input v-model="viPhamInfo.tenViPham" type="text" class="form-control" id="tenViPham"
+                :class="{ 'is-invalid': error.tenViPham }" />
             <div class="invalid-feedback">
-                {{ $t('configuration.violation.validate.name')}}
+                {{ $t('configuration.violation.validate.name') }}
             </div>
         </div>
         <div class="mb-3">
-            <label for="soTien" class="form-label me-2 text-nowrap" style="width: 12rem">
-                {{ $t('configuration.violation.table.amount')}}
+            <label for="soTienViPham" class="form-label me-2 text-nowrap" style="width: 12rem">
+                {{ $t('configuration.violation.table.amount') }}
             </label>
-            <input
-                v-model="viPhamInfo.soTien"
-                type="text"
-                class="form-control"
-                id="soTien"
-                :class="{ 'is-invalid': error.soTien }"
-            />
+            <input v-model="viPhamInfo.soTienViPham" type="text" class="form-control" id="soTienViPham"
+                :class="{ 'is-invalid': error.soTienViPham }" />
             <div class="invalid-feedback">
-                {{ $t('configuration.violation.validate.amount')}}
+                {{ $t('configuration.violation.validate.amount') }}
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            <button @click="saveDepartment()" class="btn btn-success">
-                {{ $t('configuration.violation.save')}}
+            <button @click="btnSaveViPham_click()" class="btn btn-success">
+                {{ $t('configuration.violation.save') }}
             </button>
         </div>
     </div>
 </template>
-    
-  <script setup>
-import { onMounted, reactive, ref } from 'vue'
-import { get, post } from '@/stores/https'
+
+<script setup>
+import { reactive } from 'vue'
+import { post } from '@/stores/https'
 import { useValidation } from '@/stores/mixin/validate_form'
 import { useI18n } from 'vue-i18n'
 
@@ -48,13 +38,14 @@ const { t, locale } = useI18n()
 
 const viPhamInfo = reactive({
     tenViPham: '',
-    soTien: ''
+    soTienViPham: ''
 })
 
-onMounted(async () => {
-})
+const props = defineProps({
+    getViPham: Function
+});
 
-const saveDepartment = async () => {
+const btnSaveViPham_click = async () => {
     if (!validate()) {
         Swal.fire({
             title: t('configuration.violation.validate.error.title'),
@@ -65,22 +56,26 @@ const saveDepartment = async () => {
         return
     }
 
+    console.log(viPhamInfo)
+
     try {
-        
-        if (true) {
+        const response = await post('/api/v1/violations', viPhamInfo)
+        if (response.success) {
             Swal.fire({
-            title: t('configuration.violation.validate.success.title'),
-            text: t('configuration.violation.validate.success.text'),
-            icon: 'success',
-            timer: 1500,
-        })
+                title: t('configuration.violation.save_click.success.title'),
+                text: t('configuration.violation.save_click.success.text'),
+                icon: 'success',
+                timer: 1500,
+            }).then(() => {
+                props.getViPham();
+            })
         } else {
             Swal.fire({
-            title: t('configuration.violation.validate.fail.title'),
-            text: t('configuration.violation.validate.fail.text'),
-            icon: 'error',
-            timer: 1500,
-        })
+                title: t('configuration.violation.save_click.fail.title'),
+                text: t('configuration.violation.save_click.fail.text'),
+                icon: 'error',
+                timer: 1500,
+            })
         }
     } catch (error) {
         Swal.fire({
@@ -98,7 +93,7 @@ const { validateForm } = useValidation()
 
 const error = reactive({
     tenViPham: '',
-    soTien: ''
+    soTienViPham: ''
 })
 
 const validate = () => {
@@ -106,14 +101,14 @@ const validate = () => {
         tenViPham: {
             required: true,
         },
-        soTien: {
+        soTienViPham: {
             required: true,
-            number: viPhamInfo.soTien
+            number: viPhamInfo.soTienViPham
         }
     }
     const formData = {
         tenViPham: viPhamInfo.tenViPham,
-        soTien: viPhamInfo.soTien
+        soTienViPham: viPhamInfo.soTienViPham
     }
     Object.assign(error, validateForm(formRule, formData))
     for (let key in error) {
@@ -123,6 +118,5 @@ const validate = () => {
 }
 //--------------------------------------------------------------//
 </script>
-    
-<style>
-</style>
+
+<style></style>

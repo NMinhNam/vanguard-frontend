@@ -75,7 +75,8 @@ onMounted(async () => {
                 :totalPages="totalPages" 
                 @prevPage="prevPage" 
                 @nextPage="nextPage"
-                @search="filterAlowanceBySearchQuery" 
+                @search="filterAlowanceBySearchQuery"
+                :getPhuCap="getPhuCap" 
             />
 
             <!-- Table -->
@@ -84,6 +85,7 @@ onMounted(async () => {
                     :listPhuCap="paginatedData" 
                     :currentPage="currentPage" 
                     :pageSize="pageSize" 
+                    :getPhuCap="getPhuCap"
                 />
             </div>
         </div>
