@@ -38,13 +38,4 @@ const getAllContract = async () => {
         console.error('Error fetching contract data:', error)
     }
 }
-// const applyFilters = () => {
-//     filteredRecruitments.value = listRecruitment.value.filter((recruitment) => {
-//         const matchesQuery =
-//             searchQuery.value === '' ||
-//             (recruitment.tenViTri && recruitment.tenViTri.toLowerCase().includes(searchQuery.value.toLowerCase())) ||
-//             (recruitment.moTa && recruitment.moTa.toLowerCase().includes(searchQuery.value.toLowerCase()))
-//         return matchesQuery
-//     })
-// }
 </script>

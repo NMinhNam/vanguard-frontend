@@ -29,13 +29,13 @@
                         </div>
                     </td>
                     <td>{{ approve.loaiDon }}</td>
-                    <td>{{ approve.ngayTao }}</td>
+                    <td>{{ formatDate(approve.ngayTao) }}</td>
                     <td>
                         <div class="d-flex align-items-center">
                             <p class="mb-0">{{ approve.hoTenNguoiPheDuyet }}</p>
                         </div>
                     </td>
-                    <td>{{ approve.ngayPheDuyet }}</td>
+                    <td>{{ formatDate(approve.ngayPheDuyet) }}</td>
                     <td>
                         <span v-if="approve.trangThai === 1" class="badge bg-warning">Đã gửi</span>
                         <span v-if="approve.trangThai === 2" class="badge bg-success">Đã phê duyệt</span>
@@ -78,6 +78,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+const emit = defineEmits(['setTrangThaiApprove', 'updatePage'])
 
 const props = defineProps({
     listApprove: Array,
@@ -93,15 +94,52 @@ const props = defineProps({
         type: Number,
         default: 2,
     },
+    filterDate: {
+        type: Array,
+        default: [],
+    },
+    statusSelected: {
+        type: String,
+        default: '',
+    },
 })
-
 const filteredApprove = computed(() => {
     let approves = props.listApprove
+
+    // Lọc theo searchQuery nếu có
     if (props.searchQuery) {
         approves = approves.filter((approve) => approve.maDon.toLowerCase().includes(props.searchQuery.toLowerCase()))
     }
+
+    if (props.filterDate && props.filterDate.length === 2) {
+        const startDate = new Date(props.filterDate[0])
+        const endDate = new Date(props.filterDate[1])
+        approves = approves.filter((approve) => {
+            const approveDate = new Date(approve.ngayTao)
+            return approveDate >= startDate && approveDate <= endDate
+        })
+    }
+
+    if (props.statusSelected) {
+        approves = approves.filter((approve) => approve.trangThai == Number(props.statusSelected))
+        console.log(props.statusSelected)
+    }
+
     return approves
 })
+
+function formatDate(date) {
+    // Tạo một đối tượng Date từ input (nếu không phải kiểu Date)
+    const d = new Date(date)
+
+    // Lấy ngày, tháng, năm
+    const day = d.getDate().toString().padStart(2, '0') // Đảm bảo ngày có 2 chữ số
+    const month = (d.getMonth() + 1).toString().padStart(2, '0') // Tháng bắt đầu từ 0, cộng thêm 1
+    const year = d.getFullYear()
+
+    // Trả về chuỗi theo định dạng dd/MM/yyyy
+    return `${day}/${month}/${year}`
+}
 
 const paginatedApproves = computed(() => {
     const start = (props.currentPage - 1) * props.pageSize
@@ -112,8 +150,6 @@ const paginatedApproves = computed(() => {
 const totalPages = computed(() => {
     return Math.ceil(filteredApprove.value.length / props.pageSize)
 })
-
-const emit = defineEmits(['updatePage'])
 
 const goToPage = (page) => {
     emit('updatePage', page)

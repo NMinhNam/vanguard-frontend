@@ -108,7 +108,7 @@ const props = defineProps({
     display: flex;
     justify-content: center;
     align-items: start;
-    z-index: 10;
+    z-index: 100;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;

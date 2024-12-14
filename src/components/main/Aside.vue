@@ -15,6 +15,11 @@ const authStore = useAuthStore()
 const currentFeature = ref([])
 const featureAdmin = [
     {
+        path: '/admin/calendar',
+        icon: 'fa-calendar-days',
+        text: 'home.menu_item_admin.calendar',
+    },
+    {
         path: '/admin/staff',
         icon: 'fa-user',
         text: 'home.menu_item_admin.staff',
@@ -59,6 +64,11 @@ const featureAdmin = [
         icon: 'fa-solid fa-circle-user',
         text: 'home.menu_item_admin.account',
     },
+    {
+        path: '/admin/meeting',
+        icon: 'fa fa-file-contract',
+        text: 'home.menu_item_admin.meeting',
+    }
 ]
 const featureManager = [
     {

@@ -63,6 +63,9 @@ const renderChart = () => {
         movable: OrgChart.movable.node,
         layout: OrgChart.normal,
         template: 'isla',
+        collapse: {
+            level: 2,
+        },
         editForm: {
             generateElementsFromFields: false,
             elements: [

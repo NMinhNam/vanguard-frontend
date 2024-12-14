@@ -1,7 +1,9 @@
 <template>
     <div class="vh-100 p2 border-0 border-end border-secondary-subtle rounded-0 mx-0 p-1">
         <div class="list-group">
-            <h6 class="mt-3 ms-2 text-uppercase fw-bold"><i class="fas fa-users"></i>{{ $t('staffManagement.items.department') }}</h6>
+            <h6 class="mt-3 ms-2 text-uppercase fw-bold">
+                <i class="fas fa-users"></i>{{ $t('staffManagement.items.department') }}
+            </h6>
             <select
                 id="phongBanSelect"
                 v-model="departmentSelected"

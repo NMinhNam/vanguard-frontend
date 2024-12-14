@@ -7,6 +7,7 @@
         <div class="m-3">
             <Resume :staff="staff" v-if="activeTab === 'resume'" />
             <Infomation :error="error" :staff="staff" v-if="activeTab === 'infomation'" />
+            <Contract :error="error" v-if="activeTab === 'contract'" />
         </div>
     </div>
 </template>
@@ -21,6 +22,7 @@ import { ref, onMounted, reactive, onUnmounted } from 'vue'
 import { get, post } from '@/stores/https'
 import router from '@/router'
 import { useValidation } from '@/stores/mixin/validate_form'
+import Contract from './Contract.vue'
 
 const staff = ref({})
 const activeTab = ref('infomation')

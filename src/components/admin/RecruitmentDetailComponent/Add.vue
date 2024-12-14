@@ -19,7 +19,7 @@
                 </button>
                 <h5 class="mb-0 me-2">Candidate</h5>
             </div>
-            <div class="tab-container ms-auto">
+            <div class="tab-container ms-auto" v-if="ungVien.maUngVien">
                 <button
                     class="tab-button"
                     :class="{ active: ungVien.trangThai === 1 }"
@@ -125,7 +125,6 @@
                 <label for="address" class="col-sm-4 col-form-label">Địa chỉ</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="address" v-model="ungVien.diaChi" />
-                    <span class="text-danger" v-if="error.diaChi">{{ error.diaChi }}</span>
                 </div>
             </div>
 
@@ -133,7 +132,6 @@
                 <label for="dob" class="col-sm-4 col-form-label">Ngày sinh</label>
                 <div class="col-sm-8">
                     <input type="date" class="form-control" id="dob" v-model="ungVien.ngaySinh" />
-                    <span class="text-danger" v-if="error.ngaySinh">{{ error.ngaySinh }}</span>
                 </div>
             </div>
 
@@ -152,14 +150,7 @@
                         <label class="form-check-label" for="nam">Nam</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input
-                            v-model="ungVien.gioiTinh"
-                            class="form-check-input"
-                            type="radio"
-                            name="gioiTinh"
-                            id="nu"
-                            :value="false"
-                        />
+                        <input class="form-check-input" type="radio" name="gioiTinh" id="nu" :value="false" />
                         <label class="form-check-label" for="nu">Nữ</label>
                     </div>
                 </div>
@@ -178,6 +169,7 @@ const maUngVien = ref('')
 const listTuyenDung = ref([])
 
 const saveUngVien = async (trangThai) => {
+    if (!validateUngVien()) return
     try {
         ungVien.value.trangThai = trangThai
         const response = await post('/api/v1/candidates', ungVien.value)
@@ -242,8 +234,6 @@ const error = reactive({
     dienThoai: '',
     email: '',
     cccd: '',
-    diaChi: '',
-    ngaySinh: '',
     maViTriTuyenDung: '',
 })
 
@@ -251,22 +241,17 @@ const validateUngVien = () => {
     const validationRules = {
         hoTen: { required: true, message: 'Họ và tên không được để trống.' },
         dienThoai: {
-            required: true,
             pattern: /^[0-9]{10}$/,
             message: 'Số điện thoại phải gồm 10 chữ số.',
         },
         email: {
-            required: true,
             pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             message: 'Email không đúng định dạng.',
         },
         cccd: {
-            required: true,
             pattern: /^[0-9]{12}$/,
             message: 'CCCD phải đủ 12 số.',
         },
-        diaChi: { required: true, message: 'Địa chỉ không được để trống.' },
-        ngaySinh: { required: true, message: 'Ngày sinh không được để trống.' },
         maViTriTuyenDung: { required: true, message: 'Vui lòng chọn vị trí tuyển dụng.' },
     }
 
@@ -274,18 +259,16 @@ const validateUngVien = () => {
     Object.keys(validationRules).forEach((key) => {
         const rule = validationRules[key]
         const value = ungVien.value[key]
-
         if (rule.required && !value) {
             error[key] = rule.message
             isValid = false
-        } else if (rule.pattern && !rule.pattern.test(value)) {
+        } else if (value && rule.pattern && !rule.pattern.test(value)) {
             error[key] = rule.message
             isValid = false
         } else {
             error[key] = ''
         }
     })
-
     return isValid
 }
 </script>

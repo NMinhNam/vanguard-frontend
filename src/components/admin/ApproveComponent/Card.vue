@@ -116,12 +116,16 @@
 
 <script setup>
 import { computed } from 'vue'
-
+const emits = defineEmits(['setTrangThaiApprove','updatePage']); 
 const props = defineProps({
     listApprove: {
         type: Array,
     },
     searchQuery: {
+        type: String,
+        default: '',
+    },
+    dateSelected: {
         type: String,
         default: '',
     },
@@ -131,6 +135,10 @@ const filteredApprove = computed(() => {
     let approves = props.listApprove
     if (props.searchQuery) {
         approves = approves.filter((approve) => approve.maDon.toLowerCase().includes(props.searchQuery.toLowerCase()))
+    }
+
+    if (props.dateSelected) {
+        approves = approves.filter((approve) => approve.ngayTao === props.dateSelected)
     }
     return approves
 })

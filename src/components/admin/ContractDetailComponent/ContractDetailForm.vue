@@ -1,12 +1,4 @@
 <template>
-    <div class="p-4 border-0 border-bottom border-secondary-subtle">
-        <div class="head-menu col-12 d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <h5 class="mb-0 me-2">Chi tiết hợp đồng</h5>
-            </div>
-        </div>
-    </div>
-
     <div class="card custom-card border-0">
         <div class="row">
             <div class="col-md-6">
@@ -16,18 +8,6 @@
                     id="tenNhanVien"
                     class="form-control"
                     :value="getTenNhanVien(Contract.maNhanVien)"
-                    readonly
-                />
-            </div>
-
-            <div class="col-md-6">
-                <label for="soHopDong" class="col-sm-4 col-form-label">Số hợp đồng</label>
-                <input
-                    type="text"
-                    id="soHopDong"
-                    class="form-control"
-                    v-model="Contract.soHopDong"
-                    placeholder="Nhập số hợp đồng"
                     readonly
                 />
             </div>
@@ -45,7 +25,7 @@
                         class="form-control"
                         v-model="Contract.noiDung"
                         placeholder="Nhập nội dung hợp đồng"
-                        readonly
+                        
                     ></textarea>
                 </div>
             </div>
@@ -53,20 +33,20 @@
             <div class="row mb-3">
                 <label for="ngayBatDau" class="col-sm-4 col-form-label">Ngày bắt đầu</label>
                 <div class="col-sm-8">
-                    <input type="date" id="ngayBatDau" class="form-control" v-model="Contract.ngayBatDau" readonly />
+                    <input type="date" id="ngayBatDau" class="form-control" v-model="Contract.ngayBatDau"  />
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label for="ngayKetThuc" class="col-sm-4 col-form-label">Ngày kết thúc</label>
                 <div class="col-sm-8">
-                    <input type="date" id="ngayKetThuc" class="form-control" v-model="Contract.ngayKetThuc" readonly />
+                    <input type="date" id="ngayKetThuc" class="form-control" v-model="Contract.ngayKetThuc"  />
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="luongCoBan" class="col-sm-4 col-form-label">Lương cơ bản</label>
                 <div class="col-sm-8">
-                    <input type="text" id="luongCoBan" class="form-control" v-model="Contract.luongCoBan" readonly />
+                    <input type="text" id="luongCoBan" class="form-control" v-model="Contract.luongCoBan"  />
                 </div>
             </div>
         </div>
@@ -76,20 +56,20 @@
             <div class="row mb-3">
                 <label for="ngayKy" class="col-sm-4 col-form-label">Ngày ký</label>
                 <div class="col-sm-8">
-                    <input type="date" id="ngayKy" class="form-control" v-model="Contract.ngayKy" readonly />
+                    <input type="date" id="ngayKy" class="form-control" v-model="Contract.ngayKy"  />
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="thoiHan" class="col-sm-4 col-form-label">Thời hạn</label>
                 <div class="col-sm-8 d-flex align-items-center">
-                    <input type="text" id="thoiHan" class="form-control me-2" v-model="Contract.thoiHan" readonly />
+                    <input type="text" id="thoiHan" class="form-control me-2" v-model="Contract.thoiHan"  />
                     <span class="input-group-text">Năm</span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="heSoLuong" class="col-sm-4 col-form-label">Hệ số lương</label>
                 <div class="col-sm-8">
-                    <input type="text" id="heSoLuong" class="form-control" v-model="Contract.heSoLuong" readonly />
+                    <input type="text" id="heSoLuong" class="form-control" v-model="Contract.heSoLuong"  />
                 </div>
             </div>
         </div>
@@ -103,6 +83,7 @@ const props = defineProps({
     Contract: Object,
 })
 const listNhanVien = ref([])
+const nhanVien = ref({})
 
 const getNhanVien = async () => {
     try {
@@ -115,14 +96,19 @@ const getNhanVien = async () => {
 
 onMounted(async () => {
     await getNhanVien()
-    console.log(sessionStorage.getItem('cccdStaff'))
+    const cccd = sessionStorage.getItem('cccdStaff')
+    if (cccd) {
+        const response = await get(`/api/v1/employees/cccd/${cccd}`)
+        nhanVien.value = response.data
+        props.Contract.maNhanVien = nhanVien.value.maNhanVien
+    }
+    console.log(nhanVien.value)
 })
 
 onUnmounted(() => {
-    sessionStorage.removeItem('soHopDong')
+    sessionStorage.removeItem('cccdStaff')
 })
 
-// Hàm lấy tên nhân viên từ mã nhân viên (maNhanVien)
 const getTenNhanVien = (maNhanVien) => {
     const nhanVien = listNhanVien.value.find((nv) => nv.maNhanVien === maNhanVien)
     return nhanVien ? nhanVien.hoTen : 'Không xác định' // Trả về tên hoặc giá trị mặc định

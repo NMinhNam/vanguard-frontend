@@ -40,6 +40,21 @@
                     v-model="searchQuery"
                 />
             </div>
+
+            <div class="select-filter">
+                <select
+                    id="position-filter"
+                    class="form-select"
+                    v-model="selectedPosition"
+                    @change="$emit('filter-change', selectedPosition)"
+                >
+                    <option value="">Chức vụ</option>
+                    <option v-for="position in positions" :key="position.maChucVu" :value="position.maChucVu">
+                        {{ position.tenChucVu }}
+                    </option>
+                </select>
+            </div>
+
             <div class="pagination d-flex justify-content-center align-items-center">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -83,31 +98,18 @@
             </div>
         </div>
     </div>
-
-    <!-- <div :class="['popup', { show: showPopup }]" tabindex="-1">
-        <div class="popup-content modal-dialog">
-            <div class="modal-content p-4">
-                <h2 class="modal-title">Add staff by excel</h2>
-                <div class="modal-body">
-                    
-                </div>
-                <div class="modal-footer d-flex justify-content-end mt-2 me-2">
-                    <button class="btn btn-danger" @click="showPopup = false">Đóng</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </template>
 
 <script setup>
 import AddStaffByFileExcel from '../AddStaffByFileExcelComponent/AddStaffByFileExcel.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { get } from '@/stores/https'
 const { t, locale } = useI18n()
 const searchQuery = ref('')
 const showPopup = ref(false)
 
-const emit = defineEmits(['tab-change', 'prevPage', 'nextPage', 'search'])
+const emit = defineEmits(['tab-change', 'prevPage', 'nextPage', 'search', 'filter-change'])
 
 const props = defineProps({
     activeTab: {
@@ -123,6 +125,19 @@ const props = defineProps({
         default: 1,
     },
 })
+
+const positions = ref([])
+
+const selectedPosition = ref('')
+
+onMounted(async () => {
+    await getAllViTri()
+})
+
+const getAllViTri = async () => {
+    const response = await get('/api/v1/positions')
+    positions.value = response.data
+}
 </script>
 
 <style scoped>
@@ -146,7 +161,7 @@ const props = defineProps({
     display: flex;
     justify-content: center;
     align-items: start;
-    z-index: 10;
+    z-index: 100;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;

@@ -2,10 +2,9 @@
     <div class="head-menu border-0 border-bottom border-secondary-subtle col-12">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-                <button class="btn btn-primary me-2" @click="showPopup = true">New</button>
-                <h5 class="mb-0">Departments</h5>
+                <button @click="showPopup = true" class="btn btn-primary me-2">New</button>
+                <h5 class="mb-0">Position</h5>
             </div>
-
             <div class="form-group fs has-search me-2">
                 <span class="material-symbols-outlined form-control-feedback">search</span>
                 <input
@@ -16,7 +15,23 @@
                     v-model="searchQuery"
                 />
             </div>
-
+            <div class="pagination d-flex justify-content-center align-items-center">
+                <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+                <button
+                    class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center"
+                    :disabled="currentPage === 1"
+                    @click="$emit('prevPage')"
+                >
+                    <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
+                </button>
+                <button
+                    class="btn btn-secondary rounded-0 d-flex align-items-center"
+                    :disabled="currentPage === totalPages"
+                    @click="$emit('nextPage')"
+                >
+                    <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
+                </button>
+            </div>
             <div class="pagination d-flex justify-content-center align-items-center">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -46,15 +61,19 @@
             </div>
         </div>
     </div>
+
+    <!-- Popup hiển thị form AddRecruitment khi showPopup = true -->
     <div :class="['popup', { show: showPopup }]" tabindex="-1">
         <div class="popup-content modal-dialog">
             <div class="modal-content p-4">
-                <h2 class="modal-title border-bottom mb-4">Add Department</h2>
-                <div class="modal-body">
-                    <AddDepartmentPopup />
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h2 class="modal-title border-bottom mb-0">Add Position</h2>
+                    <button @click="showPopup = false" class="close-btn" aria-label="Close">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
                 </div>
-                <div class="modal-footer d-flex justify-content-end align-items-end">
-                    <i @click="showPopup = false" class="text-danger fs-3 fa-solid fa-circle-xmark"></i>
+                <div class="modal-body">
+                    <AddPosition />
                 </div>
             </div>
         </div>
@@ -62,8 +81,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import AddDepartmentPopup from './AddDepartmentPopup.vue'
+import { ref } from 'vue'
+import AddPosition from './AddPosition.vue';
+
 const searchQuery = ref('')
 const showPopup = ref(false)
 const emit = defineEmits(['tab-change', 'search'])
@@ -72,6 +92,14 @@ const props = defineProps({
     activeTab: {
         type: String,
         required: true,
+    },
+    currentPage: {
+        type: Number,
+        default: 1,
+    },
+    totalPages: {
+        type: Number,
+        default: 1,
     },
 })
 </script>
@@ -97,7 +125,7 @@ const props = defineProps({
     display: flex;
     justify-content: center;
     align-items: start;
-    z-index: 100;
+    z-index: 10;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;

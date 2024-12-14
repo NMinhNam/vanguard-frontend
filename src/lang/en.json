@@ -63,6 +63,8 @@
         "menu_item_admin": {
             "staff": "Staff",
             "activitive": "Activities",
+            "position": "Position",
+            "calendar" : "Calendar",
             "payroll": "Payroll",
             "departments": "Departments",
             "approve": "Approve",
@@ -75,7 +77,8 @@
             "holiday": "Holiday",
             "work_type": "Job Type",
             "configuration": "Configuration",
-            "account": "Account Management"
+            "account": "Account Management",
+            "meeting": "Meeting"
         },
         "menu_item_user": {
             "information": "Profile",
