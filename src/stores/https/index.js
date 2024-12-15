@@ -5,10 +5,10 @@ import router from '@/router'
 const url = [{ dev: 'http://localhost:1688' }, { prod: 'https://vanguardhrm.io.vn' }, { test: '' }]
 
 const env = [{ 1: 'dev' }, { 2: 'prod' }, { 3: 'test' }]
-const environment = 1
+const environment = 2
 
 const https = axios.create({
-    baseURL: 'http://localhost:1688',
+    baseURL: 'http://157.66.26.146:1688',
     timeout: 20000
 })
 
