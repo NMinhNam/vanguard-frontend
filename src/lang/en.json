@@ -78,7 +78,8 @@
             "work_type": "Job Type",
             "configuration": "Configuration",
             "account": "Account Management",
-            "meeting": "Meeting"
+            "meeting": "Meeting",
+            "home" : "Home"
         },
         "menu_item_user": {
             "information": "Profile",

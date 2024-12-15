@@ -15,6 +15,11 @@ const authStore = useAuthStore()
 const currentFeature = ref([])
 const featureAdmin = [
     {
+        path: '/admin/dashboard',
+        icon: 'fa-house',
+        text: 'home.menu_item_admin.home',
+    },
+    {
         path: '/admin/calendar',
         icon: 'fa-calendar-days',
         text: 'home.menu_item_admin.calendar',
@@ -131,11 +136,8 @@ onMounted(() => {
                     <span class="slogan text-white">HRM - Final project</span>
                 </div>
             </div>
-            <i
-                class="fa-solid fa-arrow-left toggle"
-                :class="{ 'fa-rotate-180': !isShow }"
-                @click="btnControlSidebar_Click"
-            ></i>
+            <i class="fa-solid fa-arrow-left toggle" :class="{ 'fa-rotate-180': !isShow }"
+                @click="btnControlSidebar_Click"></i>
         </header>
         <main>
             <div class="menu">
@@ -155,7 +157,7 @@ onMounted(() => {
                             <i class="fa-solid fa-right-from-bracket"></i>
                             <span class="text nav-text" @click="authStore.clearToken">{{
                                 $t('home.buttons.logout')
-                            }}</span>
+                                }}</span>
                         </router-link>
                     </li>
                 </ul>
@@ -238,23 +240,30 @@ aside main {
 }
 
 aside main .menu {
-    overflow-y: auto; /* Thêm thanh cuộn dọc */
+    overflow-y: auto;
+    /* Thêm thanh cuộn dọc */
     overflow-x: hidden;
-    scrollbar-width: thin; /* Tùy chọn: Thanh cuộn nhỏ gọn (Firefox) */
-    scrollbar-color: #bbbdc0 transparent; /* Tùy chọn: Màu sắc thanh cuộn (Firefox) */
+    scrollbar-width: thin;
+    /* Tùy chọn: Thanh cuộn nhỏ gọn (Firefox) */
+    scrollbar-color: #bbbdc0 transparent;
+    /* Tùy chọn: Màu sắc thanh cuộn (Firefox) */
 }
 
 aside main .menu::-webkit-scrollbar {
-    width: 6px; /* Độ rộng thanh cuộn (Chrome, Edge) */
+    width: 6px;
+    /* Độ rộng thanh cuộn (Chrome, Edge) */
 }
 
 aside main .menu::-webkit-scrollbar-thumb {
-    background-color: #bbbdc0; /* Màu thanh cuộn */
-    border-radius: 4px; /* Làm tròn góc */
+    background-color: #bbbdc0;
+    /* Màu thanh cuộn */
+    border-radius: 4px;
+    /* Làm tròn góc */
 }
 
 aside main .menu::-webkit-scrollbar-track {
-    background: transparent; /* Màu nền thanh cuộn */
+    background: transparent;
+    /* Màu nền thanh cuộn */
 }
 
 aside main ul li {
@@ -330,6 +339,7 @@ aside.close main .menu ul li .router-link-active::before {
     .nav-text {
         display: none;
     }
+
     aside {
         width: 85px;
     }

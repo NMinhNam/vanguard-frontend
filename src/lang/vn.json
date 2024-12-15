@@ -77,7 +77,8 @@
             "work_type": "Loại công",
             "configuration": "Cấu hình",
             "account": "Quản lý tài khoản",
-            "meeting": "Cuộc họp"
+            "meeting": "Cuộc họp",
+            "home": "Trang chủ"
         },
         "menu_item_user": {
             "information": "Thông tin nhân viên",
