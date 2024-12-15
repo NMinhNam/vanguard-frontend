@@ -36,6 +36,8 @@ const error = reactive({
     email: '',
     maPhongBan: '',
     maChucVu: '',
+    ngaySinh: '',
+    cccd: '',
 })
 
 onMounted(async () => {
@@ -74,13 +76,19 @@ const mapToNhanVien = (candidate) => {
 const validate = () => {
     const formRule = {
         hoTen: { required: true },
-        dienThoai: { pattern: /^[0-9]{10}$/ },
+        dienThoai: { pattern: /^0[0-9]{9}$/ },
         email: { required: true, pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ },
         maPhongBan: { required: true },
         maChucVu: { required: true },
+        ngaySinh: { required: true },
+        cccd: {
+            required: true,
+            pattern: /^\d{9,12}$/,
+        },
     }
 
     Object.assign(error, validateForm(formRule, staff.value))
+
     for (let key in error) {
         if (error[key] !== false) return false
     }

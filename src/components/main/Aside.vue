@@ -16,8 +16,8 @@ const currentFeature = ref([])
 const featureAdmin = [
     {
         path: '/admin/dashboard',
-        icon: 'fa-house',
-        text: 'home.menu_item_admin.home',
+        icon: 'fa-chart-simple',
+        text: 'home.menu_item_admin.dashboard',
     },
     {
         path: '/admin/calendar',
@@ -51,7 +51,7 @@ const featureAdmin = [
     },
     {
         path: '/admin/recruitment',
-        icon: 'fa fa-users',
+        icon: 'fa fa-user-plus',
         text: 'home.menu_item_admin.recruitment',
     },
     {
@@ -71,14 +71,14 @@ const featureAdmin = [
     },
     {
         path: '/admin/meeting',
-        icon: 'fa fa-file-contract',
+        icon: 'fa-solid fa-users',
         text: 'home.menu_item_admin.meeting',
     },
     {
         path: '/admin/position',
-        icon: 'fa fa-file-contract',
+        icon: 'fa-solid fa-briefcase',
         text: 'home.menu_item_admin.position',
-    }
+    },
 ]
 const featureManager = [
     {
@@ -136,8 +136,11 @@ onMounted(() => {
                     <span class="slogan text-white">HRM - Final project</span>
                 </div>
             </div>
-            <i class="fa-solid fa-arrow-left toggle" :class="{ 'fa-rotate-180': !isShow }"
-                @click="btnControlSidebar_Click"></i>
+            <i
+                class="fa-solid fa-arrow-left toggle"
+                :class="{ 'fa-rotate-180': !isShow }"
+                @click="btnControlSidebar_Click"
+            ></i>
         </header>
         <main>
             <div class="menu">
@@ -157,7 +160,7 @@ onMounted(() => {
                             <i class="fa-solid fa-right-from-bracket"></i>
                             <span class="text nav-text" @click="authStore.clearToken">{{
                                 $t('home.buttons.logout')
-                                }}</span>
+                            }}</span>
                         </router-link>
                     </li>
                 </ul>

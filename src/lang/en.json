@@ -61,6 +61,7 @@
             "logout": "Logout"
         },
         "menu_item_admin": {
+            "dashboard": "Dashboard",
             "staff": "Staff",
             "activitive": "Activities",
             "position": "Position",

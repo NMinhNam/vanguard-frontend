@@ -61,6 +61,7 @@
             "logout": "Đăng xuất"
         },
         "menu_item_admin": {
+            "dashboard": "Thống kê",
             "staff": "Nhân viên",
             "departments": "Phòng ban",
             "calendar": "Lịch",
