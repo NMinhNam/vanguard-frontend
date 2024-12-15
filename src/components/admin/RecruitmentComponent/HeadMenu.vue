@@ -2,8 +2,8 @@
     <div class="head-menu border-0 border-bottom border-secondary-subtle col-12">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-                <button @click="showPopup = true" class="btn btn-primary me-2">New</button>
-                <h5 class="mb-0">Recruitment</h5>
+                <button @click="showPopup = true" class="btn btn-primary me-2">{{ t('recruitment.new') }}</button>
+                <h5 class="mb-0">{{ t('recruitment.title') }}</h5>
             </div>
             <div class="form-group fs has-search me-2">
                 <span class="material-symbols-outlined form-control-feedback">search</span>
@@ -11,7 +11,7 @@
                     type="search"
                     class="form-control"
                     @input="$emit('search', searchQuery)"
-                    placeholder="Search"
+                    :placeholder="t('recruitment.search')"
                     v-model="searchQuery"
                 />
             </div>
@@ -49,7 +49,7 @@
     <div :class="['popup', { show: showPopup }]" tabindex="-1">
         <div class="popup-content modal-dialog">
             <div class="modal-content p-4">
-                <h2 class="modal-title border-bottom mb-4">Add Recruitment</h2>
+                <h2 class="modal-title border-bottom mb-4">{{ t('recruitment.add.title') }}</h2>
                 <div class="modal-body">
                     <AddRecruitment />
                 </div>
