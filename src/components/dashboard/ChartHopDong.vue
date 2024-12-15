@@ -2,17 +2,17 @@
     <div class="text-center fw-bolder card pt-3">
         <div class="col-sm-12 row m-0 mb-3">
             <div class="col-sm-4">
-                <div class="item card justify-content-center" style="background-color: #91d5ff;">
+                <div class="item card justify-content-center" style="background-color: #91d5ff">
                     <span>Tổng số hợp đồng: {{ listHopDong.length }}</span>
                 </div>
             </div>
             <div class="col-sm-3 p-0">
-                <div class="item card justify-content-center" style="background-color: #ffe58f;">
+                <div class="item card justify-content-center" style="background-color: #ffe58f">
                     <span>Hợp đồng mới: {{ listHopDongMoi.length }}</span>
                 </div>
             </div>
             <div class="col-sm-5">
-                <div class="item card justify-content-center" style="background-color: #ffadd2;">
+                <div class="item card justify-content-center" style="background-color: #ffadd2">
                     <span>Hợp đồng sắp hết hạn: {{ listHopDongCu.length }}</span>
                 </div>
             </div>
@@ -22,9 +22,9 @@
     </div>
 </template>
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-import * as echarts from 'echarts';
-import { get } from '@/stores/https';
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import * as echarts from 'echarts'
+import { get } from '@/stores/https'
 
 const listHopDong = ref([])
 const listHopDongMoi = ref([])
@@ -37,11 +37,11 @@ const getListHopDong = async () => {
     const response = await get('/api/v1/contracts')
     listHopDong.value = response.data
 
-    const currentYear = new Date().getFullYear();
+    const currentYear = new Date().getFullYear()
 
-    listHopDong.value.forEach(item => {
-        const ngayBatDau = new Date(item.ngayBatDau);
-        const ngayKetThuc = new Date(item.ngayKetThuc);
+    listHopDong.value.forEach((item) => {
+        const ngayBatDau = new Date(item.ngayBatDau)
+        const ngayKetThuc = new Date(item.ngayKetThuc)
         if (ngayBatDau === currentYear) {
             listHopDongMoi.value.push(item)
         }
@@ -49,9 +49,9 @@ const getListHopDong = async () => {
             listNu.value.push(item)
         }
 
-        if(item.thoiHan === 1) {
+        if (item.thoiHan === 1) {
             listHopDong1Nam.value.push(item)
-        } else if(item.thoiHan === 2) {
+        } else if (item.thoiHan === 2) {
             listHopDong2Nam.value.push(item)
         } else {
             listHopDong3Nam.value.push(item)
@@ -59,13 +59,13 @@ const getListHopDong = async () => {
     })
 }
 
-const chart = ref(null);
-let chartInstance = null;
+const chart = ref(null)
+let chartInstance = null
 
 const initChart = () => {
-    if (!chart.value) return;
+    if (!chart.value) return
 
-    chartInstance = echarts.init(chart.value);
+    chartInstance = echarts.init(chart.value)
 
     const option = {
         tooltip: {
@@ -102,33 +102,33 @@ const initChart = () => {
                 ],
             },
         ],
-    };
+    }
 
-    chartInstance.setOption(option);
-};
+    chartInstance.setOption(option)
+}
 
 const resizeChart = () => {
     if (chartInstance) {
-        chartInstance.resize();
+        chartInstance.resize()
     }
-};
+}
 
 onMounted(async () => {
     await getListHopDong()
-    initChart();
-    window.addEventListener('resize', resizeChart);
-});
+    initChart()
+    window.addEventListener('resize', resizeChart)
+})
 
 onBeforeUnmount(() => {
     if (chartInstance) {
-        chartInstance.dispose();
+        chartInstance.dispose()
     }
-    window.removeEventListener('resize', resizeChart);
-});
+    window.removeEventListener('resize', resizeChart)
+})
 </script>
 <style>
 .item {
     height: 50px;
-    color: #2c2c2c ;
+    color: #2c2c2c;
 }
 </style>

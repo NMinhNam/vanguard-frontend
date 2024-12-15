@@ -61,9 +61,10 @@
             "logout": "Đăng xuất"
         },
         "menu_item_admin": {
+            "dashboard": "Thống kê",
             "staff": "Nhân viên",
             "departments": "Phòng ban",
-            "calendar" : "Lịch",
+            "calendar": "Lịch",
             "approve": "Phê duyệt",
             "position": "Chức vụ",
             "payroll": "Bảng lương",
@@ -362,13 +363,13 @@
             "text": "Đã xảy ra lỗi với hệ thống. Vui lòng thử lại trong thời gian ngắn."
         },
         "tabs": {
-            "work_type":"Loại công",
+            "work_type": "Loại công",
             "holiday": "Ngày lễ",
             "allowance": "Phụ cấp",
-            "violation":"Vi phạm"
+            "violation": "Vi phạm"
         },
         "work_type": {
-            "new": "Thêm mới" ,
+            "new": "Thêm mới",
             "title_new": "Thêm loại công",
             "update": "Cập nhật",
             "title_update": "Sửa loại công",
@@ -475,7 +476,7 @@
             "validate": {
                 "name": "Tên ngày lễ không được để trống",
                 "start_day": "Ngày bắt đầu không hợp lệ",
-                "end_day":"Ngày kết thúc không hợp lệ",
+                "end_day": "Ngày kết thúc không hợp lệ",
                 "error": {
                     "title": "Có trường không hợp lệ",
                     "text": "Vui lòng kiểm tra lại"

@@ -21,32 +21,43 @@
                 <label for="noiDung" class="col-sm-4 col-form-label">Nội dung</label>
                 <div class="col-sm-8">
                     <textarea
+                        :class="{ 'is-invalid': error.noiDung }"
                         id="noiDung"
                         class="form-control"
                         v-model="Contract.noiDung"
                         placeholder="Nhập nội dung hợp đồng"
-                        
                     ></textarea>
+                    <div class="invalid-feedback" v-if="error.noiDung">Nội dung không được để trống</div>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label for="ngayBatDau" class="col-sm-4 col-form-label">Ngày bắt đầu</label>
                 <div class="col-sm-8">
-                    <input type="date" id="ngayBatDau" class="form-control" v-model="Contract.ngayBatDau"  />
+                    <input
+                        :class="{ 'is-invalid': error.ngayBatDau }"
+                        type="date"
+                        id="ngayBatDau"
+                        class="form-control"
+                        v-model="Contract.ngayBatDau"
+                    />
+                    <div class="invalid-feedback" v-if="error.ngayBatDau">Ngày bắt đầu không được để trống</div>
                 </div>
             </div>
-
             <div class="row mb-3">
-                <label for="ngayKetThuc" class="col-sm-4 col-form-label">Ngày kết thúc</label>
-                <div class="col-sm-8">
-                    <input type="date" id="ngayKetThuc" class="form-control" v-model="Contract.ngayKetThuc"  />
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="luongCoBan" class="col-sm-4 col-form-label">Lương cơ bản</label>
-                <div class="col-sm-8">
-                    <input type="text" id="luongCoBan" class="form-control" v-model="Contract.luongCoBan"  />
+                <label for="thoiHan" class="col-sm-4 col-form-label">Thời hạn</label>
+                <div class="col-sm-8 d-flex align-items-center">
+                    <input
+                        :class="{ 'is-invalid': error.thoiHan }"
+                        type="text"
+                        id="thoiHan"
+                        class="form-control me-2"
+                        v-model="Contract.thoiHan"
+                    />
+                    <div class="invalid-feedback" v-if="error.thoiHan">
+                        Thời hạn phải được nhập và phải là số nguyên
+                    </div>
+                    <span class="input-group-text">Năm</span>
                 </div>
             </div>
         </div>
@@ -56,20 +67,43 @@
             <div class="row mb-3">
                 <label for="ngayKy" class="col-sm-4 col-form-label">Ngày ký</label>
                 <div class="col-sm-8">
-                    <input type="date" id="ngayKy" class="form-control" v-model="Contract.ngayKy"  />
+                    <input
+                        :class="{ 'is-invalid': error.ngayKy }"
+                        type="date"
+                        id="ngayKy"
+                        class="form-control"
+                        v-model="Contract.ngayKy"
+                    />
+                    <div class="invalid-feedback" v-if="error.ngayKy">Ngày ký không được để trống</div>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="thoiHan" class="col-sm-4 col-form-label">Thời hạn</label>
-                <div class="col-sm-8 d-flex align-items-center">
-                    <input type="text" id="thoiHan" class="form-control me-2" v-model="Contract.thoiHan"  />
-                    <span class="input-group-text">Năm</span>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="heSoLuong" class="col-sm-4 col-form-label">Hệ số lương</label>
+                <label for="ngayKetThuc" class="col-sm-4 col-form-label">Ngày kết thúc</label>
                 <div class="col-sm-8">
-                    <input type="text" id="heSoLuong" class="form-control" v-model="Contract.heSoLuong"  />
+                    <input
+                        :class="{ 'is-invalid': error.ngayKetThuc }"
+                        type="date"
+                        id="ngayKetThuc"
+                        class="form-control"
+                        v-model="Contract.ngayKetThuc"
+                    />
+                    <div class="invalid-feedback" v-if="error.ngayKetThuc">Ngày kết thúc không được để trống</div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="luongCoBan" class="col-sm-4 col-form-label">Lương cơ bản</label>
+                <div class="col-sm-8">
+                    <input
+                        :class="{ 'is-invalid': error.luongCoBan }"
+                        type="text"
+                        id="luongCoBan"
+                        class="form-control"
+                        v-model="Contract.luongCoBan"
+                    />
+                    <div class="invalid-feedback" v-if="error.luongCoBan">
+                        Lương cơ bản không được để trống và phải là số
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,6 +115,7 @@ import { get } from '@/stores/https'
 
 const props = defineProps({
     Contract: Object,
+    error: Object,
 })
 const listNhanVien = ref([])
 const nhanVien = ref({})
@@ -102,7 +137,6 @@ onMounted(async () => {
         nhanVien.value = response.data
         props.Contract.maNhanVien = nhanVien.value.maNhanVien
     }
-    console.log(nhanVien.value)
 })
 
 onUnmounted(() => {

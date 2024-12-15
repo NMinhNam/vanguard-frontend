@@ -1,18 +1,74 @@
 <template>
-    <div ref="chart" style="width: 100%; height: 400px"></div>
+    <div class="chart-container fw-bolder d-flex flex-column align-items-start">
+        <div class="row w-100">
+            <div class="col-1 col-md-1 col-lg-1">
+                <select class="mt-2 ms-2 form-select form-select-sm" v-model="selectedYear" @change="onYearChange">
+                    <option v-for="year in availableYears" :key="year" :value="year">
+                        {{ year }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <span class="mx-auto text-center">Thống kê biến động nhân sự từng tháng</span>
+        <div ref="chart" style="width: 100%; height: 300px"></div>
+    </div>
 </template>
   
   <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { get } from '@/stores/https'
 import * as echarts from 'echarts'
-import { data } from 'jquery'
 
 const chart = ref(null)
 let chartInstance = null
 
-const chartData = {
-    title: 'Thống kê nhân sự theo tháng cho từng chức vụ',
-    thang: [
+const getDataChart = async () => {
+    const response = await get('/api/v1/statistic/employee-movement-by-department')
+    chartData.value = response.data
+    console.log(chartData.value)
+}
+const chartData = ref([])
+const availableYears = ref([])
+const selectedYear = ref({})
+onMounted(async () => {
+    await getDataChart()
+    availableYears.value = [...new Set(chartData.value.map((item) => new Date(item.ngayKy).getFullYear()))]
+    selectedYear.value = availableYears.value[0]
+    initChart()
+    window.addEventListener('resize', resizeChart)
+})
+
+const processedData = (year) => {
+    return chartData.value.reduce((acc, item) => {
+        const month = new Date(item.ngayKy).getMonth() + 1
+        const itemYear = new Date(item.ngayKy).getFullYear()
+
+        if (itemYear !== year) return acc
+
+        if (!acc[month]) {
+            acc[month] = {}
+        }
+
+        if (!acc[month][item.tenPhongBan]) {
+            acc[month][item.tenPhongBan] = 0
+        }
+
+        acc[month][item.tenPhongBan] += item.soLuongNhanVien
+
+        return acc
+    }, {})
+}
+
+const onYearChange = () => {
+    initChart()
+}
+
+const initChart = () => {
+    if (!chart.value) return
+
+    chartInstance = echarts.init(chart.value)
+
+    const months = [
         'Tháng 1',
         'Tháng 2',
         'Tháng 3',
@@ -25,72 +81,58 @@ const chartData = {
         'Tháng 10',
         'Tháng 11',
         'Tháng 12',
-    ],
-    dataChucVu: {
-        'Quản lý': [5, 6, 5, 7, 6, 8, 9, 8, 7, 8, 9, 10],
-        'Nhân viên kỹ thuật': [1.2, 7, 11, 13, 14, 15, 6, 17, 18, 19, 20, 21],
-        'Nhân viên hành chính': [7, 8, 9, 8, 9, 10, 11, 10, 9, 10, 6, 12],
-    },
-}
+    ]
+    const departments = [...new Set(chartData.value.map((item) => item.tenPhongBan))]
 
-const colors = ['#FF5733', '#33FF57', '#3357FF', '#F39C12', '#8E44AD', '#FF5733', '#33FF57', '#3357FF', '#F39C12']
-
-const initChart = () => {
-    if (!chart.value) return
-
-    chartInstance = echarts.init(chart.value)
-
-    const seriesData = Object.keys(chartData.dataChucVu).map((role, index) => ({
-        name: role,
-        type: 'line',
-        data: chartData.dataChucVu[role],
-        color: colors[index],
-        smooth: true,
-        itemStyle: {
-            color: colors[index],
-        },
-        emphasis: {
-            focus: 'series',
-        },
-    }))
+    const dataForSelectedYear = processedData(selectedYear.value)
 
     const options = {
-        title: {
-            text: chartData.title,
-        },
         tooltip: {
             trigger: 'axis',
         },
         legend: {
-            data: chartData.chucVu,
-        },
-        toolbox: {
-            feature: {
-                saveAsImage: {},
-            },
+            data: departments,
         },
         grid: {
-            left: '3%',
+            left: '10%',
             right: '4%',
             bottom: '3%',
             containLabel: true,
         },
-        xAxis: [
-            {
-                type: 'category',
-                boundaryGap: false,
-                data: chartData.thang,
-            },
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                axisLabel: {
-                    formatter: '{value}',
+        toolbox: {
+            show: true,
+            top: '0%',
+            feature: {
+                saveAsImage: {
+                    show: true,
+                    title: 'Save as Image',
                 },
             },
-        ],
-        series: seriesData,
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: months,
+        },
+        yAxis: {
+            type: 'value',
+            name: 'Nhân viên',
+            nameLocation: 'middle',
+            nameRotate: 90,
+            nameGap: 25,
+        },
+        series: departments.map((department) => ({
+            name: department,
+            type: 'line',
+            stack: 'Total',
+            data: months.map((month, index) => {
+                const key = index + 1
+                return dataForSelectedYear[key]?.[department] || 0
+            }),
+            label: {
+                show: true,
+            },
+        })),
     }
 
     chartInstance.setOption(options)
@@ -102,11 +144,6 @@ const resizeChart = () => {
     }
 }
 
-onMounted(() => {
-    initChart()
-    window.addEventListener('resize', resizeChart)
-})
-
 onBeforeUnmount(() => {
     if (chartInstance) {
         chartInstance.dispose()
@@ -116,5 +153,9 @@ onBeforeUnmount(() => {
 </script>
   
   <style scoped>
+select {
+    margin-bottom: 10px;
+    padding: 5px;
+}
 </style>
   

@@ -95,8 +95,9 @@
                             v-model="props.staff.maPhongBan"
                             :class="{ 'is-invalid': error.maPhongBan }"
                             class="form-select"
+                            placeholder="Chọn phòng ban"
                         >
-                            <option value="">Chọn phòng ban</option>
+                            <option selected value="">Chọn phòng ban</option>
                             <option
                                 v-for="phongBan in listPhongBan"
                                 :key="phongBan.maPhongBan"
@@ -157,13 +158,16 @@ import { ref, onMounted } from 'vue'
 import { get } from '@/stores/https'
 import SlimSelect from 'slim-select'
 import { useI18n } from 'vue-i18n'
+import { type } from 'jquery'
 const { t, locale } = useI18n()
 const listPhongBan = ref([])
 const listViTri = ref([])
 const listStaff = ref([])
 const slimSelectInstance = ref('')
 const props = defineProps({
-    staff: Object,
+    staff: {
+        type: Object,
+    },
     error: Object,
 })
 

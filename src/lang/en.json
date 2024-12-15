@@ -61,10 +61,11 @@
             "logout": "Logout"
         },
         "menu_item_admin": {
+            "dashboard": "Dashboard",
             "staff": "Staff",
             "activitive": "Activities",
             "position": "Position",
-            "calendar" : "Calendar",
+            "calendar": "Calendar",
             "payroll": "Payroll",
             "departments": "Departments",
             "approve": "Approve",
@@ -79,7 +80,7 @@
             "configuration": "Configuration",
             "account": "Account Management",
             "meeting": "Meeting",
-            "home" : "Home"
+            "home": "Home"
         },
         "menu_item_user": {
             "information": "Profile",
@@ -507,7 +508,7 @@
                 "no": "No.",
                 "holiday_id": "Holiday id",
                 "holiday_name": "Holiday name",
-                "start_day" : "Start day",
+                "start_day": "Start day",
                 "end_day": "End day",
                 "tools": "Tools"
             },
@@ -572,7 +573,7 @@
                 "no": "No.",
                 "violation_id": "Violation id",
                 "violation_name": "Violation name",
-                "amount" : "Violation amount",
+                "amount": "Violation amount",
                 "tools": "Tools"
             },
             "validate": {

@@ -1,13 +1,13 @@
 <template>
-    <div class="text-center fw-bolder w-50">
+    <div class="chart-container pt-3 text-center fw-bolder">
         <span>Tỷ lệ trạng thái đơn trong tháng</span>
-        <div ref="chart" style="width: 100%; height: 400px"></div>
+        <div ref="chart" style="width: 100%; height: 350px"></div>
     </div>
 </template>
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-import * as echarts from 'echarts';
-import { get } from '@/stores/https';
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import * as echarts from 'echarts'
+import { get } from '@/stores/https'
 
 const listDonYeuCau = ref([])
 const listDonYeuCauDaGui = ref([])
@@ -15,12 +15,11 @@ const listChuaDuyet = ref([])
 const listDaDuyet = ref([])
 const listTuChoi = ref([])
 
-
 const getAllYeuCau = async () => {
     const response = await get('/api/v1/statistic/leave-requests')
     listDonYeuCau.value = response.data
 
-    listDonYeuCau.value.forEach(item => {
+    listDonYeuCau.value.forEach((item) => {
         if (item.trangThai === 1) {
             listChuaDuyet.value.push(item)
         } else if (item.trangThai === 2) {
@@ -35,17 +34,27 @@ const getAllYeuCau = async () => {
     })
 }
 
-const chart = ref(null);
-let chartInstance = null;
+const chart = ref(null)
+let chartInstance = null
 
 const initChart = () => {
-    if (!chart.value) return;
+    if (!chart.value) return
 
-    chartInstance = echarts.init(chart.value);
+    chartInstance = echarts.init(chart.value)
 
     const option = {
         tooltip: {
             trigger: 'item',
+        },
+        toolbox: {
+            show: true,
+            top: '0%',
+            feature: {
+                saveAsImage: {
+                    show: true,
+                    title: 'Save as Image',
+                },
+            },
         },
         legend: {
             top: '5%',
@@ -78,27 +87,27 @@ const initChart = () => {
                 ],
             },
         ],
-    };
+    }
 
-    chartInstance.setOption(option);
-};
+    chartInstance.setOption(option)
+}
 
 const resizeChart = () => {
     if (chartInstance) {
-        chartInstance.resize();
+        chartInstance.resize()
     }
-};
+}
 
 onMounted(async () => {
     await getAllYeuCau()
-    initChart();
-    window.addEventListener('resize', resizeChart);
-});
+    initChart()
+    window.addEventListener('resize', resizeChart)
+})
 
 onBeforeUnmount(() => {
     if (chartInstance) {
-        chartInstance.dispose();
+        chartInstance.dispose()
     }
-    window.removeEventListener('resize', resizeChart);
-});
+    window.removeEventListener('resize', resizeChart)
+})
 </script>

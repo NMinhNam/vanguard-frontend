@@ -1,13 +1,13 @@
 <template>
-    <div class="text-center fw-bolder">
+    <div class="text-center fw-bolder chart-container pt-2">
         <span>Tỷ lệ nhân viên theo giới tính</span>
-        <div ref="chart" style="width: 100%; height: 400px"></div>
+        <div ref="chart" style="width: 100%; height: 300px"></div>
     </div>
 </template>
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-import * as echarts from 'echarts';
-import { get } from '@/stores/https';
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import * as echarts from 'echarts'
+import { get } from '@/stores/https'
 
 const listNhanVien = ref([])
 const listNam = ref([])
@@ -17,27 +17,36 @@ const getListNhanVien = async () => {
     const response = await get('/api/v1/employees')
     listNhanVien.value = response.data
 
-    listNhanVien.value.forEach(item => {
+    listNhanVien.value.forEach((item) => {
         if (item.gioiTinh === true) {
             listNam.value.push(item)
-        }
-        else {
+        } else {
             listNu.value.push(item)
         }
     })
 }
 
-const chart = ref(null);
-let chartInstance = null;
+const chart = ref(null)
+let chartInstance = null
 
 const initChart = () => {
-    if (!chart.value) return;
+    if (!chart.value) return
 
-    chartInstance = echarts.init(chart.value);
+    chartInstance = echarts.init(chart.value)
 
     const option = {
         tooltip: {
             trigger: 'item',
+        },
+        toolbox: {
+            show: true,
+            top: '0%',
+            feature: {
+                saveAsImage: {
+                    show: true,
+                    title: 'Save as Image',
+                },
+            },
         },
         legend: {
             top: '5%',
@@ -69,27 +78,27 @@ const initChart = () => {
                 ],
             },
         ],
-    };
+    }
 
-    chartInstance.setOption(option);
-};
+    chartInstance.setOption(option)
+}
 
 const resizeChart = () => {
     if (chartInstance) {
-        chartInstance.resize();
+        chartInstance.resize()
     }
-};
+}
 
 onMounted(async () => {
     await getListNhanVien()
-    initChart();
-    window.addEventListener('resize', resizeChart);
-});
+    initChart()
+    window.addEventListener('resize', resizeChart)
+})
 
 onBeforeUnmount(() => {
     if (chartInstance) {
-        chartInstance.dispose();
+        chartInstance.dispose()
     }
-    window.removeEventListener('resize', resizeChart);
-});
+    window.removeEventListener('resize', resizeChart)
+})
 </script>
