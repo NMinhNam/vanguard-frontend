@@ -65,6 +65,9 @@
 <script setup>
 import { onMounted, ref, reactive } from 'vue'
 import { get, post } from '@/stores/https'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const listPhongBan = ref([])
 

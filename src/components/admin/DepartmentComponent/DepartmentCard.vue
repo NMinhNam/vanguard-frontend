@@ -10,7 +10,7 @@
                                 <span class="status-indicator">:</span>
                             </div>
                             <div>
-                                <button class="btn btn-primary mb-3">{{ department.soLuongNhanVien }} nhân viên</button>
+                                <button class="btn btn-primary mb-3">{{ department.soLuongNhanVien }} {{ $t('department.table.staff') }}</button>
                             </div>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
             >
                 <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
             </button>
-            <span>Trang {{ props.currentPage }} / {{ totalPages }}</span>
+            <span>{{ $t('department.page') }} {{ props.currentPage }} / {{ totalPages }}</span>
             <button
                 class="btn btn-secondary rounded-0 d-flex align-items-center"
                 :disabled="props.currentPage === totalPages"
@@ -39,6 +39,9 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const props = defineProps({
     departments: {

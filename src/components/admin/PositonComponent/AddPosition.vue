@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="d-flex align-items-center mb-2">
-            <label for="tenChucVu" class="form-label me-2 text-nowrap label-width">Chức Vụ Mới</label>
+            <label for="tenChucVu" class="form-label me-2 text-nowrap label-width">{{ t('position.new_position') }}</label>
             <input
                 v-model="info.tenChucVu "
                 type="text"
@@ -10,7 +10,7 @@
                 placeholder="Chức Vụ"
             />
             <div class="d-flex justify-content-end">
-                <button class="btn btn-success" @click="savePosition()">Save</button>
+                <button class="btn btn-success" @click="savePosition()">{{ t('position.save') }}</button>
             </div>
         </div>
     </div>
@@ -19,6 +19,9 @@
 <script setup>
 import {  reactive } from 'vue'
 import { post } from '@/stores/https'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const info = reactive({
     tenChucVu: '',
@@ -29,16 +32,16 @@ const savePosition = async () => {
         const response = await post('/api/v1/positions', info)
         if (response) {
             Swal.fire({
-                title: 'Thành công',
-                text: 'Thêm vị trí tuyển dụng thành công',
+                title: t('position.swal.save.success.title'),
+                text: t('position.swal.save.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
         }
     } catch (error) {
         Swal.fire({
-            title: 'Thất bại',
-            text: 'Thêm vị trí tuyển dụng thất bại',
+            title: t('position.swal.save.fail.title'),
+            text: t('position.swal.save.fail.text'),
             icon: 'error',
             timer: 1500,
         })

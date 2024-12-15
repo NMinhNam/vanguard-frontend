@@ -3,15 +3,15 @@
         <table class="table table-hover align-middle table-responsive">
             <thead class="table-light">
                 <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">Tên phòng ban</th>
-                    <th scope="col">Quản lý</th>
-                    <th scope="col">Nhân viên</th>
+                    <th scope="col">{{ t('department.table.no') }}</th>
+                    <th scope="col">{{ t('department.table.name') }}</th>
+                    <th scope="col">{{ t('department.table.manage') }}</th>
+                    <th scope="col">{{ t('department.table.staff') }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-if="departments.length === 0" style="text-align: center; font-style: italic">
-                    <td colspan="10">Không tìm thấy phòng ban</td>
+                    <td colspan="10">{{ t('department.table.search') }}</td>
                 </tr>
 
                 <tr v-for="(department, index) in paginatedDepartments" :key="department.maPhongBan">
@@ -32,7 +32,7 @@
             >
                 <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
             </button>
-            <span>Trang {{ props.currentPage }} / {{ totalPages }}</span>
+            <span>{{ t('department.page') }} {{ props.currentPage }} / {{ totalPages }}</span>
             <button
                 class="btn btn-secondary rounded-0 d-flex align-items-center"
                 :disabled="props.currentPage === totalPages"
@@ -46,6 +46,9 @@
 
 <script setup>
 import { computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const props = defineProps({
     departments: Array,

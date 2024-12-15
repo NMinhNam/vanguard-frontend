@@ -3,15 +3,15 @@
         <table class="table table-hover align-middle text-center">
             <thead class="table-light">
                 <tr class="text-center">
-                    <th scope="col">STT</th>
-                    <th scope="col">Mã phê duyệt</th>
-                    <th scope="col">Người yêu cầu</th>
-                    <th scope="col">Danh mục</th>
-                    <th scope="col">Ngày yêu cầu</th>
-                    <th scope="col">Người phê duyệt</th>
-                    <th scope="col">Ngày xác nhận</th>
-                    <th scope="col">Trạng thái</th>
-                    <th scope="col">Hành động</th>
+                    <th scope="col">{{ t('approve.table.no') }}</th>
+                    <th scope="col">{{ t('approve.table.approvedid') }}</th>
+                    <th scope="col">{{ t('approve.table.ordercreater') }}</th>
+                    <th scope="col">{{ t('approve.table.reason') }}</th>
+                    <th scope="col">{{ t('approve.table.datesend') }}</th>
+                    <th scope="col">{{ t('approve.table.reviewer') }}</th>
+                    <th scope="col">{{ t('approve.table.approvaldate') }}</th>
+                    <th scope="col">{{ t('approve.table.status') }}</th>
+                    <th scope="col">{{ t('approve.table.act') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,10 +46,10 @@
                             class="btn btn-success me-2"
                             @click.stop="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
                         >
-                            <i class="fa-regular fa-circle-check me-2"></i>Xác nhận
+                            <i class="fa-regular fa-circle-check me-2"></i>{{ t('approve.buttons.accept') }}
                         </button>
                         <button class="btn btn-danger" @click.stop="$emit('setTrangThaiApprove', approve.maDon, 3, '')">
-                            <i class="fa-regular fa-circle-xmark me-2"></i>Từ chối
+                            <i class="fa-regular fa-circle-xmark me-2"></i>{{ t('approve.buttons.refuse') }}
                         </button>
                     </td>
                 </tr>
@@ -64,7 +64,7 @@
         >
             <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
         </button>
-        <span>Trang {{ props.currentPage }} / {{ totalPages }}</span>
+        <span>{{ t('approve.page') }} {{ props.currentPage }} / {{ totalPages }}</span>
         <button
             class="btn btn-secondary rounded-0 d-flex align-items-center"
             :disabled="props.currentPage === totalPages"
@@ -78,6 +78,9 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const emit = defineEmits(['setTrangThaiApprove', 'updatePage'])
 
 const props = defineProps({

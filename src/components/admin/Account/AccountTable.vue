@@ -44,8 +44,8 @@ const saveUpdate = async () => {
         const response = await put('/api/v1/users/updateRole', formData)
         if (response.success) {
             Swal.fire({
-                title: 'Thành công',
-                text: 'Thay đổi thành công',
+                title: t('account.Swal.role.success.title'),
+                text: t('account.Swal.role.success.text'),
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
@@ -53,16 +53,16 @@ const saveUpdate = async () => {
             })
         } else {
             Swal.fire({
-                title: 'Thất bại',
-                text: 'Thay đổi thất bại',
+                title: t('account.Swal.role.fail.title'),
+                text: t('account.Swal.role.fail.text'),
                 icon: 'error',
                 timer: 1500,
             })
         }
     } catch (error) {
         Swal.fire({
-            title: t('configuration.allowance.validate.error.title'),
-            text: t('configuration.allowance.validate.error.text'),
+            title: t('account.Swal.error.title'),
+            text: t('account.Swal.error.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -83,27 +83,26 @@ const btnChangeStatus_click = async (item) => {
 
         })
 
-        console.log(formData)
         const response = await put('/api/v1/users/updateStatus', formData)
         if (response.success) {
             Swal.fire({
-                title: "Thành công",
-                text: t('configuration.allowance.validate.error.text'),
+                title: t('account.Swal.status.success.title'),
+                text: t('account.Swal.status.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
         } else {
             Swal.fire({
-                title: 'Thất bại',
-                text: t('configuration.allowance.validate.error.text'),
+                title: t('account.Swal.status.fail.title'),
+                text: t('account.Swal.status.dail.text'),
                 icon: 'error',
                 timer: 1500,
             })
         }
     } catch (error) {
         Swal.fire({
-            title: t('configuration.allowance.validate.error.title'),
-            text: t('configuration.allowance.validate.error.text'),
+            title: t('account.Swal.error.title'),
+            text: t('account.Swal.error.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -122,19 +121,19 @@ onMounted(async () => {
             <thead class="">
                 <!-- Tiêu đề bảng -->
                 <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">User name</th>
-                    <th scope="col">Mã nhân viên</th>
-                    <th scope="col">Tên nhân viên</th>
-                    <th scope="col">Điện thoại</th>
-                    <th scope="col">Role Name</th>
-                    <th scope="col">Enable</th>
-                    <th scope="col">{{ $t('configuration.allowance.table.tools') }}</th>
+                    <th scope="col">{{ $t('account.table.no') }}</th>
+                    <th scope="col">{{ $t('account.table.username') }}</th>
+                    <th scope="col">{{ $t('account.table.staffid') }}</th>
+                    <th scope="col">{{ $t('account.table.fullname') }}</th>
+                    <th scope="col">{{ $t('account.table.phone') }}</th>
+                    <th scope="col">{{ $t('account.table.role') }}</th>
+                    <th scope="col">{{ $t('account.table.status') }}</th>
+                    <th scope="col">{{ $t('account.table.tool') }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-if="listTaiKhoan.length === 0" style="text-align: center; font-style: italic">
-                    <td colspan="9">{{ $t('configuration.allowance.search') }}</td>
+                    <td colspan="9">{{ $t('account.table.search') }}</td>
                 </tr>
                 <!-- Dữ liệu bảng -->
                 <tr class="align-middle" v-for="(item, index) in listTaiKhoan" :key="index">
@@ -153,7 +152,7 @@ onMounted(async () => {
                     <td>
                         <button class="btn btn-warning me-1" @click="openPopup(item)">
                             <i class="fa-solid fa-pen-to-square"></i>
-                            Edit Role
+                            {{ $t('account.editrole') }}
                         </button>
                     </td>
                 </tr>
@@ -163,19 +162,21 @@ onMounted(async () => {
     <div :class="['popup', { show: showPopup }]" tabindex="-1">
         <div class="popup-content modal-dialog">
             <div class="modal-content p-4">
-                <h2 class="modal-title border-bottom mb-4">Cập nhật Role</h2>
+                <h2 class="modal-title border-bottom mb-4">
+                    {{ $t('account.title_update') }}
+                </h2>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="mb-3">
                             <label for="userName" class="form-label">
-                                User name
+                                {{ $t('account.table.username') }}
                             </label>
                             <input v-model="selectedItem.userName" type="text" id="userName" class="form-control"
                                 readonly />
                         </div>
                         <div class="mb-3">
                             <label for="roleSelect1" class="form-label">
-                                Role Name
+                                {{ $t('account.table.role') }}
                             </label>
                             <div class="w-100">
                                 <select v-model="selectedItem.roleId" id="roleSelect1" class="form-select">

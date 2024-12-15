@@ -37,6 +37,9 @@
 <script setup>
 import { onMounted, ref, reactive } from 'vue'
 import { get, put } from '@/stores/https'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 import Card from './Card.vue'
 import HeadMenu from './HeadMenu.vue'
@@ -84,8 +87,8 @@ const updateApprove = async () => {
         const response = await put('/api/v1/approvals', approveInfo)
         if (response) {
             Swal.fire({
-                title: 'Thành công',
-                text: 'Cập nhật phê duyệt thành công',
+                title: t('approve.swal.success.title'),
+                text: t('approve.swal.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
@@ -93,8 +96,8 @@ const updateApprove = async () => {
         }
     } catch (error) {
         Swal.fire({
-            title: 'Thất bại',
-            text: 'Cập nhật phê duyệt thất bại',
+            title: t('approve.swal.fail.title'),
+            text: t('approve.swal.fail.text'),
             icon: 'error',
             timer: 1500,
         })

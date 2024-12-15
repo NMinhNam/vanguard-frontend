@@ -11,15 +11,18 @@
         >
             <span v-if="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
             <i v-if="!loading" class="fa-solid fa-save me-2"></i>
-            Save
+            {{ t('contract.save_btn') }}
         </button>
-                    <h5 class="mb-0">Contract</h5>
+                    <h5 class="ms-2 mb-0">{{ t('contract.title') }}</h5>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 defineProps(['saveContract', 'loading'])
 </script>
 <style scoped>  

@@ -2,7 +2,7 @@
     <div class="head-menu border-0 border-bottom border-secondary-subtle col-12">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-                <h5 class="mb-0">Approve manager</h5>
+                <h5 class="mb-0">{{ t('approve.title') }}</h5>
             </div>
             <div class="form-group fs has-search me-2">
                 <span class="material-symbols-outlined form-control-feedback">search</span>
@@ -10,7 +10,7 @@
                     type="search"
                     class="form-control"
                     @input="$emit('search', searchQuery)"
-                    placeholder="Search"
+                    :placeholder="t('approve.search')"
                     v-model="searchQuery"
                 />
             </div>
@@ -18,7 +18,7 @@
                 <DatePicker
                     v-model="dateSelected"
                     :range="{ partialRange: false }"
-                    placeholder="Chọn khoảng ngày"
+                    :placeholder="t('approve.selectdate')"
                     auto-apply
                     :teleport="true"
                     :auto-position="true"
@@ -75,6 +75,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const emit = defineEmits(['tab-change', 'prevPage', 'nextPage', 'search', 'filterDate', 'filterStatus'])
 const searchQuery = ref('')
 const selectedStatus = ref('')

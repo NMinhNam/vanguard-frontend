@@ -2,7 +2,7 @@
     <div class="card custom-card border-0">
         <div class="row">
             <div class="col-md-9">
-                <h5 class="card-title">Tiêu đề phê duyệt</h5>
+                <h5 class="card-title">{{ t('approve.detail') }}</h5>
                 <input type="text" readonly :value="approveDetail.loaiDon" class="fs-2" />
             </div>
         </div>
@@ -10,7 +10,7 @@
             <div class="col-md-6">
                 <div>
                     <div class="row mb-3">
-                        <label for="nguoiYeuCau" class="col-3 col-form-label">Người yêu cầu</label>
+                        <label for="nguoiYeuCau" class="col-3 col-form-label">{{ t('approve.table.ordercreater') }}</label>
                         <div class="col-9">
                             <input
                                 type="text"
@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="danhMuc" class="col-3 col-form-label">Danh mục</label>
+                        <label for="danhMuc" class="col-3 col-form-label">{{ t('approve.table.reason') }}</label>
                         <div class="col-9">
                             <input
                                 type="text"
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="ngayTao" class="col-3 col-form-label">Ngày tạo</label>
+                        <label for="ngayTao" class="col-3 col-form-label">{{ t('approve.table.datesend') }}</label>
                         <div class="col-9">
                             <input
                                 type="text"
@@ -53,7 +53,7 @@
             <div class="col-md-6">
                 <div>
                     <div class="row mb-3">
-                        <label for="nguoiYeuCau" class="col-3 col-form-label">Người phê duyệt</label>
+                        <label for="nguoiYeuCau" class="col-3 col-form-label">{{ t('approve.table.reviewer') }}</label>
                         <div class="col-9">
                             <input type="text" id="nguoiYeuCau" class="form-control" :value="approveDetail.hoTenNguoiPheDuyet" readonly />
                         </div>
@@ -62,17 +62,17 @@
 
                 <div>
                     <div class="row mb-3">
-                        <label for="nguoiYeuCau" class="col-3 col-form-label">Trạng thái</label>
+                        <label for="nguoiYeuCau" class="col-3 col-form-label">{{ t('approve.table.status') }}</label>
                         <div class="col-9">
-                            <span v-if="approveDetail.trangThai === 1" class="badge bg-warning">Đã gửi</span>
-                            <span v-if="approveDetail.trangThai === 2" class="badge bg-success">Đã xác nhận</span>
-                            <span v-if="approveDetail.trangThai === 3" class="badge bg-danger">Đã từ chối</span>
+                            <span v-if="approveDetail.trangThai === 1" class="badge bg-warning">{{ t('approve.status.summited') }}</span>
+                            <span v-if="approveDetail.trangThai === 2" class="badge bg-success">{{ t('approve.status.approved') }}</span>
+                            <span v-if="approveDetail.trangThai === 3" class="badge bg-danger">{{ t('approve.status.rejected') }}</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="row mb-3">
-                    <label for="ghiChu" class="col-3 col-form-label">Ghi chú</label>
+                    <label for="ghiChu" class="col-3 col-form-label">{{ t('approve.note') }}</label>
                     <div class="col-9">
                         <input type="text" id="ghiChu" class="form-control" v-model="approveDetail.ghiChu" />
                     </div>
@@ -84,6 +84,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const props = defineProps({
     approveDetail: Object,

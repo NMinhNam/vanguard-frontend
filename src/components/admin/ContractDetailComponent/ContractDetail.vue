@@ -11,6 +11,9 @@ import { get, post } from '@/stores/https'
 import router from '@/router'
 import HeadMenu from './HeadMenu.vue'
 import ContractDetailForm from './ContractDetailForm.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const Contract = ref({})
 const loading = ref(false)
 
@@ -30,8 +33,8 @@ const getInfoBysoHopDong = async (id) => {
         }
     } catch (error) {
         Swal.fire({
-            title: 'Thất bại',
-            text: 'Không thể tải lên dữ liệu hợp đồng',
+            title: t('contract.swal.getInfo.error.title'),
+            text: t('contract.swal.getInfo.error.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -45,8 +48,8 @@ const saveContract = async () => {
         const response = await post('/api/v1/contracts', Contract.value)
         if (response && response.data) {
             Swal.fire({
-                title: 'Thành công',
-                text: 'Hợp đồng đã được lưu thành công!',
+                title: t('contract.swal.save.success.title'),
+                text: t('contract.swal.save.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
@@ -55,8 +58,8 @@ const saveContract = async () => {
         }
     } catch (error) {
         Swal.fire({
-            title: 'Thất bại',
-            text: 'Không thể lưu hợp đồng. Vui lòng kiểm tra lại!',
+            title: t('contract.swal.save.fail.title'),
+            text: t('contract.swal.save.fail.text'),
             icon: 'error',
             timer: 2000,
         })

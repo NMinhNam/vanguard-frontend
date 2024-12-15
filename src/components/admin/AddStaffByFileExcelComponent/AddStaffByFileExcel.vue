@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-success" @click="saveStaffs">Save</button>
+                    <button class="btn btn-success" @click="saveStaffs">{{ $t('addstaffbyfileexcelcomponent.buttons.save') }}</button>
                 </div>
             </div>
         </div>
@@ -26,7 +26,9 @@ import { onMounted, ref } from 'vue'
 import { get } from '@/stores/https'
 import axios from 'axios'
 import * as XLSX from 'xlsx'
+import { useI18n } from 'vue-i18n'
 
+const { t, locale } = useI18n()
 const loading = ref(false)
 const fileInput = ref(null)
 const data = ref([])
@@ -46,8 +48,8 @@ const handleFileUpload = (event) => {
     const file = event.target.files[0]
     if (file.size > MAX_FILE_SIZE) {
         Swal.fire({
-            title: 'File quá lớn',
-            text: `Dung lượng file không được vượt quá ${MAX_FILE_SIZE / (1024 * 1024)} MB.`,
+            title: t('addstaffbyfileexcelcomponent.swal.big_file.title'),
+            text: `${t('addstaffbyfileexcelcomponent.swal.big_file.text')} ${MAX_FILE_SIZE / (1024 * 1024)} MB.`,
             icon: 'warning',
             timer: 2000,
         })
@@ -99,16 +101,16 @@ const saveStaffs = async () => {
         try {
             const responseData = await axios.post('http://localhost:1688/api/v1/upload-file/employees', formData)
             Swal.fire({
-                title: 'Save staff',
-                text: 'Save staff successfully',
+                title: t('addstaffbyfileexcelcomponent.swal.save.success.title'),
+                text: t('addstaffbyfileexcelcomponent.swal.save.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
         } catch (error) {
             console.error(error)
             Swal.fire({
-                title: 'Save staff',
-                text: 'Save staff failed',
+                title: t('addstaffbyfileexcelcomponent.swal.save.fail.title'),
+                text: t('addstaffbyfileexcelcomponent.swal.save.fail.text'),
                 icon: 'error',
                 timer: 1500,
             })
@@ -118,8 +120,8 @@ const saveStaffs = async () => {
         }
     } else {
         Swal.fire({
-            title: 'Select file',
-            text: 'please select a file',
+            title: t('addstaffbyfileexcelcomponent.swal.save.error.title'),
+            text: t('addstaffbyfileexcelcomponent.swal.save.error.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -134,8 +136,8 @@ const isExist = async () => {
         console.log(duplicateRecords)
         console.log(staffCCCDSet)
         Swal.fire({
-            title: 'Nhân viên tồn tại',
-            text: `Nhân viên trong file excel đã tồn tại`,
+            title: t('addstaffbyfileexcelcomponent.swal.isExist.title'),
+            text: t('addstaffbyfileexcelcomponent.swal.isExist.text'),
             icon: 'warning',
             timer: 2000,
         })
@@ -159,8 +161,8 @@ const isExistInExcel = () => {
 
     if (isDuplicateInExcel) {
         Swal.fire({
-            title: 'Dữ liệu trùng lặp',
-            text: 'Dữ liệu trong file excel bị trùng lặp',
+            title: t('addstaffbyfileexcelcomponent.swal.isDuplicateInExcel.title'),
+            text: t('addstaffbyfileexcelcomponent.swal.isDuplicateInExcel.text'),
             icon: 'warning',
             timer: 2000,
         })

@@ -1,4 +1,7 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const props = defineProps({
   listBangLuong: Array,
   currentPage: Number,
@@ -7,33 +10,27 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="table-responsive">
+  <div class="table-responsive mt-3">
     <table class="table table-striped table-bordered text-center text-nowrap" cellspacing="0">
       <thead class="">
         <!-- Tiêu đề bảng -->
         <tr>
-          <th scope="col" rowspan="2" class="align-middle">STT</th>
-          <th scope="col" rowspan="2" class="align-middle">Mã nhân viên</th>
-          <th scope="col" rowspan="2" class="align-middle">Họ tên</th>
-          <th scope="col" rowspan="2" class="align-middle">Chức vụ</th>
-          <th scope="col" rowspan="2" class="align-middle">Lương cơ bản</th>
-          <th scope="col" rowspan="2" class="align-middle">Hệ số lương</th>
-          <th scope="col" rowspan="2" class="align-middle">Số công</th>
-          <th scope="col" rowspan="2" class="align-middle">Lương thưởng</th>
-          <th scope="colgroup" colspan="3">Phụ cấp</th>
-          <th scope="col" rowspan="2" class="align-middle">Vi phạm</th>
-          <th scope="col" rowspan="2" class="align-middle">Tạm ứng</th>
-          <th scope="col" rowspan="2" class="align-middle">Thực lãnh</th>
-        </tr>
-        <tr>
-          <th scope="col">Tiền ăn trưa</th>
-          <th scope="col">Tiền xăng</th>
-          <th scope="col">Tiền điện thoại</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.no') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.id') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.name') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.position') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.salary') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.salary_coefficient') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.number') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.bonus') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.allowance') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.violation') }}</th>
+          <th scope="col" class="align-middle">{{ t('payroll.table.real') }}</th>
         </tr>
       </thead>
       <tbody>
         <tr v-if="listBangLuong.length === 0" style="text-align: center; font-style: italic">
-                    <td colspan="16">Không tìm thấy nhân viên</td>
+                    <td colspan="11">{{ t('payroll.table.search') }}</td>
                 </tr>
         <!-- Dữ liệu bảng -->
         <tr v-for="(item, index) in listBangLuong" :key="index">
@@ -46,10 +43,7 @@ const props = defineProps({
           <td>{{ item.soCong }}</td>
           <td>{{ item.luongThuong }}</td>
           <td>{{ item.phuCap.tienAnTrua }}</td>
-          <td>{{ item.phuCap.tienXang }}</td>
-          <td>{{ item.phuCap.tienDienThoai }}</td>
           <td>{{ item.khauTru.viPham }}</td>
-          <td>{{ item.khauTru.tamUng }}</td>
           <td>{{ item.thucLanh }}</td>
         </tr>
       </tbody>

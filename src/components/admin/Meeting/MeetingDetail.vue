@@ -2,7 +2,7 @@
     <div class="container mt-4 p-4">
         <!-- Tiêu đề -->
         <div class="mb-4">
-            <h4 class="text-center text-primary">Thông Tin Cuộc Họp</h4>
+            <h4 class="text-center text-primary">{{ t('meeting.title') }}</h4>
         </div>
 
         <!-- Nội dung chính (2 cột) -->
@@ -11,13 +11,13 @@
             <div class="col-md-6">
                 <!-- Tiêu đề cuộc họp -->
                 <div class="mb-3">
-                    <label for="meetingTitle" class="form-label fw-bold">Tiêu đề cuộc họp</label>
+                    <label for="meetingTitle" class="form-label fw-bold">{{ t('meeting.meeting_title') }}</label>
                     <input type="text" class="form-control" id="meetingTitle" v-model="formData.tenCuocHop" />
                 </div>
 
                 <!-- Thời gian bắt đầu -->
                 <div class="mb-3">
-                    <label for="start" class="form-label fw-bold">Thời gian bắt đầu</label>
+                    <label for="start" class="form-label fw-bold">{{ t('meeting.start') }}</label>
                     <DatePicker
                         id="start"
                         v-model="formData.thoiGianBatDau"
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="meetingParticipantsSelect" class="form-label fw-bold">Người tham gia</label>
+                    <label for="meetingParticipantsSelect" class="form-label fw-bold">{{ t('meeting.participants') }}</label>
                     <select
                         id="meetingParticipantsSelect"
                         class="slim-select"
@@ -50,7 +50,7 @@
             <div class="col-md-6">
                 <!-- Người tổ chức -->
                 <div class="mb-3">
-                    <label for="nguoiToChuc" class="form-label fw-bold">Người tổ chức</label>
+                    <label for="nguoiToChuc" class="form-label fw-bold">{{ t('meeting.organizer') }}</label>
                     <input
                         type="text"
                         readonly
@@ -62,7 +62,7 @@
 
                 <!-- Thời gian kết thúc -->
                 <div class="mb-3">
-                    <label for="end" class="form-label fw-bold">Thời gian kết thúc</label>
+                    <label for="end" class="form-label fw-bold">{{ t('meeting.end') }}</label>
                     <DatePicker
                         id="end"
                         v-model="formData.thoiGianKetThuc"
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="meetingPosition" class="form-label fw-bold">Vị trí họp</label>
+                    <label for="meetingPosition" class="form-label fw-bold">{{ t('meeting.location') }}</label>
                     <input type="text" class="form-control" id="meetingPosition" v-model="formData.viTri" />
                 </div>
             </div>
@@ -85,7 +85,7 @@
         <!-- Đường dẫn cuộc họp -->
         <div class="row mb-3">
             <div class="col-md-10">
-                <label for="linkMeeting" class="form-label fw-bold">Đường dẫn họp</label>
+                <label for="linkMeeting" class="form-label fw-bold">{{ t('meeting.path') }}</label>
                 <input type="text" class="form-control" id="linkMeeting" v-model="formData.videoCallUrl" />
             </div>
             <div class="col-md-2 d-flex align-items-end">
@@ -93,7 +93,7 @@
                     <button class="btn btn-primary w-100" :disabled="!formData.videoCallUrl" @click="openMeeting">
                         <span class="d-flex align-items-center">
                             <span class="material-symbols-outlined" style="margin-right: 8px">videocam</span>
-                            Tham gia
+                            {{ t('meeting.join') }}
                         </span>
                     </button>
                 </div>
@@ -105,7 +105,7 @@
             <button class="btn btn-success" @click="saveMeeting">
                 <span class="d-flex align-items-center">
                     <span class="material-symbols-outlined" style="margin-right: 8px">save</span>
-                    Lưu
+                    {{ t('meeting.save') }}
                 </span>
             </button>
         </div>
@@ -122,6 +122,9 @@ import DatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 const emit = defineEmits(['reloadData'])
 import { format } from 'date-fns'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const props = defineProps({
     event: {
@@ -293,8 +296,8 @@ const createMeeting = async () => {
 
         if (response) {
             Swal.fire({
-                title: 'Thành công',
-                text: 'Tạo cuộc họp thành công',
+                title: t('meeting.swal.save.success.title'),
+                text: t('meeting.swal.save.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
@@ -302,8 +305,8 @@ const createMeeting = async () => {
     } catch (error) {
         console.error('Lỗi khi tạo cuộc họp:', error)
         Swal.fire({
-            title: 'Thất bại',
-            text: 'Tạo cuộc họp thất bại',
+            title: t('meeting.swal.save.fail.title'),
+            text: t('meeting.swal.save.fail.text'),
             icon: 'error',
             timer: 1500,
         })
@@ -331,8 +334,8 @@ const updateMeeting = async () => {
         }
         if (response) {
             Swal.fire({
-                title: 'Thành công',
-                text: 'Cập nhật cuộc họp thành công',
+                title: t('meeting.swal.update.success.title'),
+                text: t('meeting.swal.update.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
@@ -340,8 +343,8 @@ const updateMeeting = async () => {
     } catch (error) {
         console.error(error)
         Swal.fire({
-            title: 'Thất bại',
-            text: 'Cập nhật cuộc họp thất bại',
+            title: t('meeting.swal.update.fail.title'),
+            text: t('meeting.swal.update.fail.text'),
             icon: 'error',
             timer: 1500,
         })

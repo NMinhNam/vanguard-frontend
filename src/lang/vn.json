@@ -63,7 +63,7 @@
         "menu_item_admin": {
             "staff": "Nhân viên",
             "departments": "Phòng ban",
-            "calendar" : "Lịch",
+            "calendar": "Lịch",
             "approve": "Phê duyệt",
             "position": "Chức vụ",
             "payroll": "Bảng lương",
@@ -362,13 +362,13 @@
             "text": "Đã xảy ra lỗi với hệ thống. Vui lòng thử lại trong thời gian ngắn."
         },
         "tabs": {
-            "work_type":"Loại công",
+            "work_type": "Loại công",
             "holiday": "Ngày lễ",
             "allowance": "Phụ cấp",
-            "violation":"Vi phạm"
+            "violation": "Vi phạm"
         },
         "work_type": {
-            "new": "Thêm mới" ,
+            "new": "Thêm mới",
             "title_new": "Thêm loại công",
             "update": "Cập nhật",
             "title_update": "Sửa loại công",
@@ -475,7 +475,7 @@
             "validate": {
                 "name": "Tên ngày lễ không được để trống",
                 "start_day": "Ngày bắt đầu không hợp lệ",
-                "end_day":"Ngày kết thúc không hợp lệ",
+                "end_day": "Ngày kết thúc không hợp lệ",
                 "error": {
                     "title": "Có trường không hợp lệ",
                     "text": "Vui lòng kiểm tra lại"
@@ -580,6 +580,321 @@
                 "button": {
                     "delete": "Xóa",
                     "cancel": "Hủy"
+                }
+            }
+        }
+    },
+    "addstaffbyfileexcelcomponent": {
+        "buttons": {
+            "save": "Lưu"
+        },
+        "swal": {
+            "big_file": {
+                "title": "File quá lơn",
+                "text": "Kích thước file không được vượt quá"
+            },
+            "save": {
+                "success": {
+                    "title": "Lưu thành công",
+                    "text": "Lưu nhân viên thành công"
+                },
+                "fail": {
+                    "title": "Lưu không thành công",
+                    "text": "Không thể lưu nhân viên. Hãy thử lại"
+                },
+                "error": {
+                    "title": "Chưa chọn file",
+                    "text": "Vui lòng chọn file"
+                }
+            },
+            "isExit": {
+                "title": "Nhân viên đã tồn tại",
+                "text": "Nhân viên trong file excel đã tồn tại."
+            },
+            "isDuplicateInExcel": {
+                "title": "Trùng lặp dữ liệu",
+                "text": "Dữ liệu trong file excel bị trùng."
+            }
+        }
+    },
+    "account": {
+        "title": "Quản lý tài khoản",
+        "title_update": "Cập nhật quyền",
+        "btnEdit": "Cập nhật",
+        "editrole": "Phân quyền",
+        "search": "Tìm kiếm",
+        "page": "Trang",
+        "table": {
+            "no": "STT",
+            "username": "Tên đăng nhập",
+            "staffid": "Mã nhân viên",
+            "fullname": "Tên nhân viên",
+            "phone": "Số điện thoại",
+            "role": "Quyền",
+            "status": "Trạng thái",
+            "tool": "Công cụ",
+            "search": "Không tìm thấy"
+        },
+        "Swal": {
+            "error": {
+                "title": "Lỗi hệ thống",
+                "text": "Đã xảy ra lỗi với hệ thống. Vui lòng thử lại trong thời gian ngắn."
+            },
+            "status": {
+                "success": {
+                    "title": "Thay đổi thành công",
+                    "text": "Đã cập nhật trạng thái"
+                },
+                "fail": {
+                    "title": "Thay đổi thất bại",
+                    "text": "Cập nhật thất bại. Vui lòng thử lại"
+                }
+            },
+            "role": {
+                "success": {
+                    "title": "Thay đổi thành công",
+                    "text": "Quyền đã được thay đổi"
+                },
+                "fail": {
+                    "title": "Thay đổi không thành công",
+                    "text": "Vui lòng thử lại lại"
+                }
+            }
+        }
+    },
+    "approve": {
+        "title": "Quản lý phê duyệt",
+        "detail": "Chi tiết đơn",
+        "search": "Tìm kiếm",
+        "selectdate": "Chọn khoảng ngày",
+        "page": "Trang",
+        "note": "Ghi chú",
+        "status": {
+            "summited": "Đã gửi",
+            "approved": "Đã duyệt",
+            "rejected": "Đã từ chối"
+        },
+        "table": {
+            "no": "STT",
+            "approvedid": "Mã phê duyệt",
+            "ordercreater": "Người tạo",
+            "reason": "Lý do",
+            "datesend": "Ngày gửi",
+            "reviewer": "Người duyệt",
+            "approvaldate": "Ngày duyệt",
+            "status": "Trạng thái",
+            "act": "Hành động"
+        },
+        "buttons": {
+            "accept": "Chấp nhận",
+            "refuse": "Từ chối",
+            "back": "Quay lại"
+        },
+        "card": {
+            "title1": "Chờ phê duyệt",
+            "title2": "Đã phê duyệt",
+            "title3": "Từ chối"
+        },
+        "swal": {
+            "success": {
+                "title": "Thành công",
+                "text": "Cập nhật phê duyệt thành công"
+            },
+            "fail": {
+                "title": "Thất bại",
+                "text": "Cập nhật phê duyệt thất bại"
+            }
+        }
+    },
+    "contract": {
+        "title": "Hợp đồng",
+        "search": "Tìm kiếm",
+        "page": "Trang",
+        "save_btn": "Lưu",
+        "table": {
+            "no": "STT",
+            "fullname": "Tên nhân viên",
+            "content": "Nội dung hợp đồng",
+            "start_day": "Ngày bắt đầu",
+            "end_day": "Ngày kết thúc",
+            "salary": "Lương cơ bản"
+        },
+        "detail": {
+            "fullname": "Họ và tên",
+            "contract_information": "Thông tin hợp dồng",
+            "content": "Nội dung",
+            "additional_information": "Thông tin bổ sung",
+            "date_signed": "Ngày ký",
+            "contract_term": "Thời hạn hợp đồng",
+            "year": "Năm",
+            "salary_coefficient": "Hệ số lương"
+        },
+        "swal": {
+            "getInfo": {
+                "erorr": {
+                    "title": "Thất bại",
+                    "text": "Không thể tải lên dữ liệu hợp đồng"
+                }
+            },
+            "save": {
+                "success": {
+                    "title": "Thành công",
+                    "text": "Hợp đồng đã được lưu thành công!"
+                },
+                "fail": {
+                    "title": "Thất bại",
+                    "text": "Không thể lưu hợp đồng. Vui lòng kiểm tra lại!"
+                }
+            }
+        }
+    },
+    "department": {
+        "title": "Phòng ban",
+        "search": "Tìm kiếm",
+        "page": "Trang",
+        "save_btn": "Lưu",
+        "new_btn": "Thêm mới",
+        "new_title": "Thêm phòng ban",
+        "table": {
+            "search": "Không tìm thấy",
+            "no": "STT",
+            "name": "Tên phòng ban",
+            "manage": "Quản lý",
+            "staff": "Nhân viên"
+        },
+        "add": {
+            "name": "Tên phòng ban",
+            "superior_department": "Phòng ban cấp trên",
+            "head": "Trưởng phòng"
+        },
+        "swal": {
+            "save": {
+                "success": {
+                    "title": "Thành công",
+                    "text": "Thêm phòng ban thành công"
+                },
+                "fail": {
+                    "title": "Thất bại",
+                    "text": "Thêm phòng ban thất bại"
+                }
+            }
+        }
+    },
+    "meeting": {
+        "title": "Thông tin cuộc họp",
+        "meeting_title": "Tiêu đề cuộc họp",
+        "organizer": "Người tổ chức",
+        "start": "Thời gian bắt đầu",
+        "end": "Thời gian kết thúc",
+        "participants": "Người tham gia",
+        "location": "Vị trí họp",
+        "path": "Đường dẫn họp",
+        "join": "Tham gia",
+        "save": "Lưu",
+        "swal": {
+            "save": {
+                "success": {
+                    "title": "Thành công",
+                    "text": "Tạo cuộc họp thành công"
+                },
+                "fail": {
+                    "title": "Thất bại",
+                    "text": "Tạo cuộc họp thất bại"
+                }
+            },
+            "update": {
+                "success": {
+                    "title": "Thành công",
+                    "text": "Cập nhật cuộc họp thành công"
+                },
+                "fail": {
+                    "title": "Thất bại",
+                    "text": "Cập nhật cuộc họp thất bại"
+                }
+            }
+        }
+    },
+    "payroll": {
+        "title": "Bảng lương theo tháng",
+        "search": "Tìm kiếm",
+        "page": "Trang",
+        "table": {
+            "no": "STT",
+            "id": "Mã nhân viên",
+            "name": "Tên nhân viên",
+            "position": "Chức vụ",
+            "salary":"Lương cơ bản",
+            "salary_coefficient":"Hệ số lương",
+            "number": "Số công",
+            "bonus":"Lương thưởng",
+            "allowance":"Phụ cấp",
+            "violation":"Vi phạm",
+            "real": "Thực lãnh",
+            "search":"Không tìm thấy"
+        }
+    },
+    "position": {
+        "title": "Chức vụ",
+        "search": "Tìm kiếm",
+        "page": "Trang",
+        "new":"Thêm mới",
+        "new_position": "Chức vụ mới",
+        "save":"Lưu",
+        "save_title": "Thêm chức vụ",
+        "table": {
+            "no":"STT",
+            "id": "Mã chức vụ",
+            "name": "Tên chức vụ"
+        },
+        "swal": {
+            "save": {
+                "success": {
+                    "title": "Thành công",
+                    "text": "Thêm chức vụ thành công"
+                },
+                "fail": {
+                    "title": "Thất bại",
+                    "text": "Thêm chức vụ thất bại"
+                }
+            }
+        }
+    },
+    "recruitment": {
+        "title": "Tuyển dụng",
+        "search": "Tìm kiếm",
+        "page": "Trang",
+        "new":"Thêm mới",
+        "save": "Lưu",
+        "add": {
+            "title": "Thêm tuyển dụng",
+            "position": "Vị trí tuyển dụng",
+            "department": "Tên phòng ban",
+            "number": "Số lượng tuyển",
+            "describe": "Mô tả",
+            "request": "Yêu cầu"
+        },
+        "table": {
+            "no":"STT",
+            "name": "Tên vị trí",
+            "id": "Mã phòng ban",
+            "number":"Số lượng tuyển",
+            "application": "Số lượng ứng tuyển",
+            "status":"Trạng thái",
+            "describe": "Mô tả",
+            "request": "Yêu cầu",
+            "full": "Đã đầy",
+            "isfull": "Còn chỗ",
+            "cv": "Hồ sơ ứng tuyển mới"
+        },
+        "swal": {
+            "save": {
+                "success": {
+                    "title": "Thành công",
+                    "text": "Thêm tuyển dụng thành công"
+                },
+                "fail": {
+                    "title": "Thất bại",
+                    "text": "Thêm tuyển dụng thất bại"
                 }
             }
         }

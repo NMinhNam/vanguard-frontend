@@ -2,7 +2,7 @@
     <div class="mt-3">
         <div class="row row-cols-md-3s g-4">
             <div class="col">
-                <h4>Chờ phê duyệt</h4>
+                <h4>{{ t('approve.card.title1') }}</h4>
                 <hr />
                 <div class="mb-3" v-for="approve in filteredApprove" :key="approve.maDon">
                     <div
@@ -17,8 +17,8 @@
                                     <span class="status-indicator"></span>
                                 </div>
                                 <div class="mb-2">
-                                    <p class="m-0">Danh mục: {{ approve.loaiDon }}</p>
-                                    <p class="m-0">Ngày yêu cầu: {{ approve.ngayTao }}</p>
+                                    <p class="m-0">{{ t('approve.table.reason') }}: {{ approve.loaiDon }}</p>
+                                    <p class="m-0">{{ t('approve.table.datesend') }}: {{ approve.ngayTao }}</p>
                                 </div>
                                 <div class="row">
                                     <div class="col-8 d-flex justify-content-start fs-4">
@@ -26,13 +26,13 @@
                                             class="btn btn-success me-2"
                                             @click="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
                                         >
-                                            <i class="fa-regular fa-circle-check me-2"></i>Xác nhận
+                                            <i class="fa-regular fa-circle-check me-2"></i>{{ t('approve.buttons.accept') }}
                                         </button>
                                         <button
                                             class="btn btn-danger"
                                             @click="$emit('setTrangThaiApprove', approve.maDon, 3, '')"
                                         >
-                                            <i class="fa-regular fa-circle-xmark me-2"></i>Từ chối
+                                            <i class="fa-regular fa-circle-xmark me-2"></i>{{ t('approve.buttons.refuse') }}
                                         </button>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
             </div>
 
             <div class="col">
-                <h4>Đã phê duyệt</h4>
+                <h4>{{ t('approve.card.title2') }}</h4>
                 <hr />
                 <div class="mb-3" v-for="approve in filteredApprove" :key="approve.maDon">
                     <div
@@ -58,8 +58,8 @@
                                     <span class="status-indicator">:</span>
                                 </div>
                                 <div class="mb-2">
-                                    <p class="m-0">Danh mục: {{ approve.loaiDon }}</p>
-                                    <p class="m-0">Ngày yêu cầu: {{ approve.ngayTao }}</p>
+                                    <p class="m-0">{{ t('approve.table.reason') }}: {{ approve.loaiDon }}</p>
+                                    <p class="m-0">{{ t('approve.table.ordercreater') }}: {{ approve.ngayTao }}</p>
                                 </div>
                                 <div class="row">
                                     <div class="col-8 d-flex justify-content-start fs-4">
@@ -67,7 +67,7 @@
                                             class="btn btn-danger"
                                             @click="$emit('setTrangThaiApprove', approve.maDon, 3, '')"
                                         >
-                                            <i class="fa-regular fa-circle-xmark me-2"></i>Từ chối
+                                            <i class="fa-regular fa-circle-xmark me-2"></i>{{ t('approve.buttons.refuse') }}
                                         </button>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="col">
-                <h4>Từ chối</h4>
+                <h4>{{ t('approve.card.title3') }}</h4>
                 <hr />
                 <div class="mb-3" v-for="approve in filteredApprove" :key="approve.maDon">
                     <div
@@ -92,8 +92,8 @@
                                     <span class="status-indicator">:</span>
                                 </div>
                                 <div class="mb-2">
-                                    <p class="m-0">Danh mục: {{ approve.loaiDon }}</p>
-                                    <p class="m-0">Ngày yêu cầu: {{ approve.ngayTao }}</p>
+                                    <p class="m-0">{{ t('approve.table.reason') }}: {{ approve.loaiDon }}</p>
+                                    <p class="m-0">{{ t('approve.table.ordercreater') }}: {{ approve.ngayTao }}</p>
                                 </div>
                                 <div class="row">
                                     <div class="col-8 d-flex justify-content-start fs-4">
@@ -101,7 +101,7 @@
                                             class="btn btn-success me-2"
                                             @click="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
                                         >
-                                            <i class="fa-regular fa-circle-check me-2"></i>Xác nhận
+                                            <i class="fa-regular fa-circle-check me-2"></i>{{ t('approve.buttons.accept') }}
                                         </button>
                                     </div>
                                 </div>
@@ -116,6 +116,10 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
+
 const emits = defineEmits(['setTrangThaiApprove','updatePage']); 
 const props = defineProps({
     listApprove: {

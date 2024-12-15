@@ -2,7 +2,7 @@
     <div class="card custom-card border-0">
         <div class="row">
             <div class="col-md-6">
-                <label for="tenNhanVien" class="col-sm-4 col-form-label">Họ và tên</label>
+                <label for="tenNhanVien" class="col-sm-4 col-form-label">{{ t('contract.detail.fullname') }}</label>
                 <input
                     type="text"
                     id="tenNhanVien"
@@ -16,9 +16,9 @@
 
     <div class="row mt-4">
         <div class="col-md-6">
-            <h5 class="section-title">Thông tin hợp đồng</h5>
+            <h5 class="section-title">{{ t('contract.detail.contract_information') }}</h5>
             <div class="row mb-3">
-                <label for="noiDung" class="col-sm-4 col-form-label">Nội dung</label>
+                <label for="noiDung" class="col-sm-4 col-form-label">{{ t('contract.detail.content') }}</label>
                 <div class="col-sm-8">
                     <textarea
                         id="noiDung"
@@ -31,20 +31,20 @@
             </div>
 
             <div class="row mb-3">
-                <label for="ngayBatDau" class="col-sm-4 col-form-label">Ngày bắt đầu</label>
+                <label for="ngayBatDau" class="col-sm-4 col-form-label">{{ t('contract.table.start_day') }}</label>
                 <div class="col-sm-8">
                     <input type="date" id="ngayBatDau" class="form-control" v-model="Contract.ngayBatDau"  />
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="ngayKetThuc" class="col-sm-4 col-form-label">Ngày kết thúc</label>
+                <label for="ngayKetThuc" class="col-sm-4 col-form-label">{{ t('contract.table.end_day') }}</label>
                 <div class="col-sm-8">
                     <input type="date" id="ngayKetThuc" class="form-control" v-model="Contract.ngayKetThuc"  />
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="luongCoBan" class="col-sm-4 col-form-label">Lương cơ bản</label>
+                <label for="luongCoBan" class="col-sm-4 col-form-label">{{ t('contract.table.salary') }}</label>
                 <div class="col-sm-8">
                     <input type="text" id="luongCoBan" class="form-control" v-model="Contract.luongCoBan"  />
                 </div>
@@ -52,22 +52,22 @@
         </div>
 
         <div class="col-md-6">
-            <h5 class="section-title">Thông tin bổ sung</h5>
+            <h5 class="section-title">{{ t('contract.detail.additional_information') }}</h5>
             <div class="row mb-3">
-                <label for="ngayKy" class="col-sm-4 col-form-label">Ngày ký</label>
+                <label for="ngayKy" class="col-sm-4 col-form-label">{{ t('contract.detail.date_signed') }}</label>
                 <div class="col-sm-8">
                     <input type="date" id="ngayKy" class="form-control" v-model="Contract.ngayKy"  />
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="thoiHan" class="col-sm-4 col-form-label">Thời hạn</label>
+                <label for="thoiHan" class="col-sm-4 col-form-label">{{ t('contract.detail.contract_term') }}</label>
                 <div class="col-sm-8 d-flex align-items-center">
                     <input type="text" id="thoiHan" class="form-control me-2" v-model="Contract.thoiHan"  />
-                    <span class="input-group-text">Năm</span>
+                    <span class="input-group-text">{{ t('contract.detail.year') }}</span>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="heSoLuong" class="col-sm-4 col-form-label">Hệ số lương</label>
+                <label for="heSoLuong" class="col-sm-4 col-form-label">{{ t('contract.detail.salary_coefficient') }}</label>
                 <div class="col-sm-8">
                     <input type="text" id="heSoLuong" class="form-control" v-model="Contract.heSoLuong"  />
                 </div>
@@ -78,6 +78,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { get } from '@/stores/https'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const props = defineProps({
     Contract: Object,

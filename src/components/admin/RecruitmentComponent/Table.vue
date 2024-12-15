@@ -3,14 +3,14 @@
         <table class="table table-hover align-middle text-center">
             <thead class="table-light">
                 <tr class="text-center">
-                    <th scope="col">STT</th>
-                    <th scope="col">Tên vị trí</th>
-                    <th scope="col">Mã phòng ban</th>
-                    <th scope="col">Số lượng tuyển</th>
-                    <th scope="col">Số lượng ứng tuyển</th>
-                    <th scope="col">Trạng thái</th>
-                    <th scope="col">Mô tả</th>
-                    <th scope="col">Yêu cầu</th>
+                    <th scope="col">{{ t('recruitment.table.no') }}</th>
+                    <th scope="col">{{ t('recruitment.table.name') }}</th>
+                    <th scope="col">{{ t('recruitment.table.id') }}</th>
+                    <th scope="col">{{ t('recruitment.table.number') }}</th>
+                    <th scope="col">{{ t('recruitment.table.application') }}</th>
+                    <th scope="col">{{ t('recruitment.table.status') }}</th>
+                    <th scope="col">{{ t('recruitment.table.describe') }}</th>
+                    <th scope="col">{{ t('recruitment.table.request') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,9 +27,9 @@
                     <td>{{ Recruitment.soLuongUngTuyen }}</td>
                     <td>
                         <span v-if="Recruitment.soLuongUngTuyen >= Recruitment.soLuongTuyen" class="text-danger">
-                            Đã đầy
+                            {{ t('recruitment.table.full') }}
                         </span>
-                        <span v-else class="text-success"> Còn chỗ </span>
+                        <span v-else class="text-success"> {{ t('recruitment.table.isfull') }} </span>
                     </td>
                     <td>{{ Recruitment.moTa }}</td>
                     <td>{{ Recruitment.yeuCau }}</td>
@@ -45,7 +45,7 @@
         >
             <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
         </button>
-        <span>Trang {{ props.currentPage }} / {{ totalPages }}</span>
+        <span>{{ t('recruitment.page') }} {{ props.currentPage }} / {{ totalPages }}</span>
         <button
             class="btn btn-secondary rounded-0 d-flex align-items-center"
             :disabled="props.currentPage === totalPages"
@@ -58,6 +58,9 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const props = defineProps({
     listRecruitment: Array,
     searchQuery: {
