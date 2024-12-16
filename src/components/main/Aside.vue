@@ -114,13 +114,38 @@ const featureUser = [
         text: 'home.menu_item_user.payroll',
     },
 ]
+const featureHR = [
+    {
+        path: '/hr/staff',
+        icon: 'fa-user',
+        text: 'home.menu_item_admin.staff',
+    },
+    {
+        path: '/hr/departments',
+        icon: 'fa-building',
+        text: 'home.menu_item_admin.departments',
+    },
+    {
+        path: '/hr/recruitment',
+        icon: 'fa fa-user-plus',
+        text: 'home.menu_item_admin.recruitment',
+    },
+    {
+        path: '/hr/contract',
+        icon: 'fa fa-file-contract',
+        text: 'home.menu_item_admin.contract',
+    }
+]
 onMounted(() => {
     if (sessionStorage.getItem('role') === 'ADMIN') {
         currentFeature.value = featureAdmin
     } else if (sessionStorage.getItem('role') === 'MANAGER') {
         currentFeature.value = featureManager
-    } else {
+    } else if (sessionStorage.getItem('role') === 'USER') {
         currentFeature.value = featureUser
+    }
+    else {
+        currentFeature.value = featureHR
     }
 })
 </script>
@@ -136,11 +161,8 @@ onMounted(() => {
                     <span class="slogan text-white">HRM - Final project</span>
                 </div>
             </div>
-            <i
-                class="fa-solid fa-arrow-left toggle"
-                :class="{ 'fa-rotate-180': !isShow }"
-                @click="btnControlSidebar_Click"
-            ></i>
+            <i class="fa-solid fa-arrow-left toggle" :class="{ 'fa-rotate-180': !isShow }"
+                @click="btnControlSidebar_Click"></i>
         </header>
         <main>
             <div class="menu">
@@ -158,7 +180,7 @@ onMounted(() => {
                     <li class="nav-link-sidebar">
                         <router-link :to="{ path: '/' }">
                             <i class="fa-solid fa-right-from-bracket"></i>
-                            <span class="text nav-text" @click="authStore.clearToken">{{
+                            <span class="text nav-text" @click="authStore.clearToken()">{{
                                 $t('home.buttons.logout')
                             }}</span>
                         </router-link>
