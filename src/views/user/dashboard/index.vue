@@ -8,7 +8,7 @@
             <!--  Start Main  -->
             <main :class="{ close: !isShow }">
                 <div class="row m-0 g-1">
-                   <ManagerDashboard />
+                    <DashBoardUser />
                 </div>
             </main>
             <!--  End Main  -->
@@ -20,7 +20,7 @@
 <script setup>
 import Header from '@/components/main/Header.vue'
 import Aside from '@/components/main/Aside.vue'
-import ManagerDashboard from '@/components/manager/Dashboard/ManagerDashboard.vue';
+import DashBoardUser from '@/components/user/Dashboard/DashBoardUser.vue'
 import { ref } from 'vue'
 
 const isShow = ref(true)

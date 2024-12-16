@@ -36,9 +36,14 @@ const showPopup = ref(false)
 const listMeeting = ref([])
 
 onMounted(async () => {
+    calendarOptions.value.locale = locale.value === 'vn' ? vn : en
     await getUserLogin()
     await getMeetings()
 })
+
+const reloadPage = () => {
+    // window.location.reload()
+}
 
 const getUserLogin = async () => {
     try {

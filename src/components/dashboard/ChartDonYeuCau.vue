@@ -1,7 +1,7 @@
 <template>
-    <div class="chart-container fw-bolder text-center pt-2">
-        <span>Thống kê đơn yêu cầu trong năm</span>
-        <div class="col-sm-12 row mt-3 mb-3">
+    <div class="fw-bolder text-center pt-2">
+        <span>Thống kê đơn yêu cầu nghỉ phép trong năm</span>
+        <div class="col-sm-12 row mt-3 ps-3 mb-3">
             <div class="col-sm-3">
                 <div class="item card justify-content-center" style="background-color: #91d5ff">
                     <span>Tổng số đơn: {{ listDonYeuCauDaGui.length }}</span>
@@ -25,7 +25,7 @@
         </div>
 
         <!-- Sử dụng ref để liên kết -->
-        <div ref="chart" style="width: 100%; height: 300px"></div>
+        <div ref="chart" style="width: 100%; height: 400px"></div>
     </div>
 </template>
 

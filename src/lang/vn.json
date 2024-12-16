@@ -86,7 +86,8 @@
             "checkin": "Chấm công",
             "timeoff": "Nghỉ phép",
             "rewar_discipline": "Khen thưởng/Kỷ luật",
-            "payroll": "Bảng lương"
+            "payroll": "Bảng lương",
+            "dashboard": "Thống kê"
         }
     },
     "profile": {
