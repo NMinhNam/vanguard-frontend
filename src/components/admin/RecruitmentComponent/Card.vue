@@ -27,18 +27,18 @@
                             <div class="d-flex justify-content-between align-items-start mt-2">
                                 <h5 class="card-title">{{ Recruitment.tenViTri }}</h5>
                                 <span v-if="Recruitment.soLuongUngTuyen >= Recruitment.soLuongTuyen" class="badge bg-danger">
-                                    Đã đầy
+                                    {{ t('recruitment.table.full') }}
                                 </span>
                                 <span v-else class="badge bg-success">
-                                    Còn chỗ
+                                    {{ t('recruitment.table.isfull') }}
                                 </span>
                             </div>
                             <p class="card-text">
-                                <i class="bi bi-people"></i> Số lượng tuyển: {{ Recruitment.soLuongTuyen }}
+                                <i class="bi bi-people"></i> {{ t('recruitment.table.number') }}: {{ Recruitment.soLuongTuyen }}
                             </p>
                             <p class="card-text">
                                 <button class="btn btn-primary oe_kanban_action oe_kanban_action_button" type="action">
-                                    <span>{{ Recruitment.soLuongUngTuyen }}</span> Các hồ sơ ứng viên mới
+                                    <span>{{ Recruitment.soLuongUngTuyen }}</span> {{ t('recruitment.table.cv') }}
                                 </button>
                             </p>
                         </div>
@@ -54,7 +54,7 @@
             >
                 <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
             </button>
-            <span>Trang {{ props.currentPage }} / {{ totalPages }}</span>
+            <span>{{ t('recruitment.page') }} {{ props.currentPage }} / {{ totalPages }}</span>
             <button
                 class="btn btn-secondary rounded-0 d-flex align-items-center"
                 :disabled="props.currentPage === totalPages"
@@ -68,6 +68,9 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const props = defineProps({
     listRecruitment: Array,

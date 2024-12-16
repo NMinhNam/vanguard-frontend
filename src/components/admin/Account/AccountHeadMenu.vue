@@ -3,16 +3,16 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
                 <h5 class="mb-0 fw-bolder">
-                    Quản lý tài khoản
+                    {{ $t('account.title') }}
                 </h5>
             </div>
             <div class="form-group fs has-search me-2">
                 <span class="material-symbols-outlined form-control-feedback">search</span>
-                <input type="search" class="form-control" @input="$emit('search', searchQuery)" placeholder="Search"
+                <input type="search" class="form-control" @input="$emit('search', searchQuery)" :placeholder="$t('account.search')"
                     v-model="searchQuery" />
             </div>
             <div class="pagination d-flex justify-content-center align-items-center">
-                <span>{{ $t('configuration.allowance.page') }} {{ currentPage }} / {{ totalPages }}</span>
+                <span>{{ $t('account.page') }} {{ currentPage }} / {{ totalPages }}</span>
                 <button class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center" :disabled="currentPage === 1"
                     @click="$emit('prevPage')">
                     <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>

@@ -624,5 +624,320 @@
                 }
             }
         }
+    },
+    "addstaffbyfileexcelcomponent": {
+        "buttons": {
+            "save": "Save"
+        },
+        "swal": {
+            "big_file": {
+                "title": "File too large",
+                "text": "File size must not exceed"
+            },
+            "save": {
+                "success": {
+                    "title": "Save successful",
+                    "text": "Save staff successfully"
+                },
+                "fail": {
+                    "title": "Save failed",
+                    "text": "Save staff failed"
+                },
+                "error": {
+                    "title": "No file selected",
+                    "text": "Please select a file"
+                }
+            },
+            "isExit": {
+                "title": "Staff already exists",
+                "text": "The staff in the excel file already exists."
+            },
+            "isDuplicateInExcel": {
+                "title": "Duplicate data",
+                "text": "Data in excel file is duplicated."
+            }
+        }
+    },
+    "account": {
+        "title": "Account Management",
+        "title_update": "Update Permissions",
+        "btnEdit": "Update",
+        "editrole": "Edit role",
+        "search": "Search",
+        "page": "Page",
+        "table": {
+            "no": "No.",
+            "username": "Username",
+            "staffid": "Staff ID",
+            "fullname": "Full Name",
+            "phone": "Phone Number",
+            "role": "Role",
+            "status": "Status",
+            "tool": "Tools",
+            "search": "No data found"
+        },
+        "Swal": {
+            "error": {
+                "title": "System Error",
+                "text": "An error occurred with the system. Please try again shortly."
+            },
+            "status": {
+                "success": {
+                    "title": "Update Successful",
+                    "text": "The status has been updated."
+                },
+                "fail": {
+                    "title": "Update Failed",
+                    "text": "Update failed. Please try again."
+                }
+            },
+            "role": {
+                "success": {
+                    "title": "Role Change Successful",
+                    "text": "The role has been changed."
+                },
+                "fail": {
+                    "title": "Role Change Failed",
+                    "text": "Please try again."
+                }
+            }
+        }
+    },
+    "approve": {
+        "title": "Approval Management",
+        "detail": "Order Details",
+        "search": "Search",
+        "selectdate": "Select Date Range",
+        "page": "Page",
+        "note": "Note",
+        "status": {
+            "summited": "Submitted",
+            "approved": "Approved",
+            "rejected": "Rejected"
+        },
+        "table": {
+            "no": "No.",
+            "approvedid": "Approval ID",
+            "ordercreater": "Creator",
+            "reason": "Reason",
+            "datesend": "Date Sent",
+            "reviewer": "Reviewer",
+            "approvaldate": "Approval Date",
+            "status": "Status",
+            "act": "Action"
+        },
+        "buttons": {
+            "accept": "Accept",
+            "refuse": "Refuse",
+            "back": "Back"
+        },
+        "card": {
+            "title1": "Pending Approval",
+            "title2": "Approved",
+            "title3": "Refused"
+        },
+        "swal": {
+            "success": {
+                "title": "Success",
+                "text": "Approval update successful"
+            },
+            "fail": {
+                "title": "Failed",
+                "text": "Approval update failed"
+            }
+        }
+    },
+    "contract": {
+        "title": "Contract",
+        "search": "Search",
+        "page": "Page",
+        "save_btn": "Save",
+        "table": {
+            "no": "No.",
+            "fullname": "Employee Name",
+            "content": "Contract Content",
+            "start_day": "Start Date",
+            "end_day": "End Date",
+            "salary": "Base Salary"
+        },
+        "detail": {
+            "fullname": "Full Name",
+            "contract_information": "Contract Information",
+            "content": "Content",
+            "additional_information": "Additional Information",
+            "date_signed": "Date Signed",
+            "contract_term": "Contract Term",
+            "year": "Year",
+            "salary_coefficient": "Salary Coefficient"
+        },
+        "swal": {
+            "getInfo": {
+                "error": {
+                    "title": "Failed",
+                    "text": "Unable to load contract data"
+                }
+            },
+            "save": {
+                "success": {
+                    "title": "Success",
+                    "text": "The contract has been successfully saved!"
+                },
+                "fail": {
+                    "title": "Failed",
+                    "text": "Unable to save the contract. Please check again!"
+                }
+            }
+        }
+    },
+    "department": {
+        "title": "Department",
+        "search": "Search",
+        "page": "Page",
+        "save_btn": "Save",
+        "new_btn": "Add New",
+        "new_title": "Add Department",
+        "table": {
+            "search": "No data found",
+            "no": "No.",
+            "name": "Department Name",
+            "manage": "Manager",
+            "staff": "Staff"
+        },
+        "add": {
+            "name": "Department Name",
+            "superior_department": "Parent Department",
+            "head": "Department Head"
+        },
+        "swal": {
+            "save": {
+                "success": {
+                    "title": "Success",
+                    "text": "Department added successfully"
+                },
+                "fail": {
+                    "title": "Failed",
+                    "text": "Failed to add department"
+                }
+            }
+        }
+    },
+    "meeting": {
+        "title": "Meeting Information",
+        "meeting_title": "Meeting Title",
+        "organizer": "Organizer",
+        "start": "Start Time",
+        "end": "End Time",
+        "participants": "Participants",
+        "location": "Meeting Location",
+        "path": "Meeting Link",
+        "join": "Join",
+        "save": "Save",
+        "swal": {
+            "save": {
+                "success": {
+                    "title": "Success",
+                    "text": "Meeting created successfully"
+                },
+                "fail": {
+                    "title": "Failed",
+                    "text": "Failed to create meeting"
+                }
+            },
+            "update": {
+                "success": {
+                    "title": "Success",
+                    "text": "Meeting updated successfully"
+                },
+                "fail": {
+                    "title": "Failed",
+                    "text": "Failed to update meeting"
+                }
+            }
+        }
+    },
+    "payroll": {
+        "title": "Monthly Payroll",
+        "search": "Search",
+        "page": "Page",
+        "table": {
+            "no": "No.",
+            "id": "Employee ID",
+            "name": "Employee Name",
+            "position": "Position",
+            "salary": "Base Salary",
+            "salary_coefficient": "Salary Coefficient",
+            "number": "Work Days",
+            "bonus": "Bonus",
+            "allowance": "Allowance",
+            "violation": "Violation",
+            "real": "Net Salary",
+            "search": "No results found"
+        }
+    },
+    "position": {
+        "title": "Position",
+        "search": "Search",
+        "page": "Page",
+        "new": "Add New",
+        "new_position": "New Position",
+        "save": "Save",
+        "save_title": "Add Position",
+        "table": {
+            "no": "No.",
+            "id": "Position ID",
+            "name": "Position Name"
+        },
+        "swal": {
+            "save": {
+                "success": {
+                    "title": "Success",
+                    "text": "Position added successfully"
+                },
+                "fail": {
+                    "title": "Failed",
+                    "text": "Failed to add position"
+                }
+            }
+        }
+    },
+    "recruitment": {
+        "title": "Recruitment",
+        "search": "Search",
+        "page": "Page",
+        "new": "Add New",
+        "save": "Save",
+        "add": {
+            "title": "Add Recruitment",
+            "position": "Recruitment Position",
+            "department": "Department Name",
+            "number": "Number of Vacancies",
+            "describe": "Description",
+            "request": "Requirements"
+        },
+        "table": {
+            "no": "No.",
+            "name": "Position Name",
+            "id": "Department ID",
+            "number": "Number of Vacancies",
+            "application": "Number of Applications",
+            "status": "Status",
+            "describe": "Description",
+            "request": "Requirements",
+            "full": "Full",
+            "isfull": "Available",
+            "cv": "New Application"
+        },
+        "swal": {
+            "save": {
+                "success": {
+                    "title": "Success",
+                    "text": "Recruitment added successfully"
+                },
+                "fail": {
+                    "title": "Failed",
+                    "text": "Failed to add recruitment"
+                }
+            }
+        }
     }
 }

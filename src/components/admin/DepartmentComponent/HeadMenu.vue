@@ -2,8 +2,8 @@
     <div class="head-menu border-0 border-bottom border-secondary-subtle col-12">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-                <button class="btn btn-primary me-2" @click="showPopup = true">New</button>
-                <h5 class="mb-0">Departments</h5>
+                <button class="btn btn-primary me-2" @click="showPopup = true">{{ t('department.new_btn') }}</button>
+                <h5 class="mb-0">{{ t('department.title') }}</h5>
             </div>
 
             <div class="form-group fs has-search me-2">
@@ -12,7 +12,7 @@
                     type="search"
                     class="form-control"
                     @input="$emit('search', searchQuery)"
-                    placeholder="Search"
+                    :placeholder="t('department.search')"
                     v-model="searchQuery"
                 />
             </div>
@@ -49,7 +49,7 @@
     <div :class="['popup', { show: showPopup }]" tabindex="-1">
         <div class="popup-content modal-dialog">
             <div class="modal-content p-4">
-                <h2 class="modal-title border-bottom mb-4">Add Department</h2>
+                <h2 class="modal-title border-bottom mb-4">{{ t('department.new_title') }}</h2>
                 <div class="modal-body">
                     <AddDepartmentPopup />
                 </div>
@@ -64,6 +64,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import AddDepartmentPopup from './AddDepartmentPopup.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const searchQuery = ref('')
 const showPopup = ref(false)
 const emit = defineEmits(['tab-change', 'search'])

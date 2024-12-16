@@ -28,13 +28,13 @@
                                 <h5 class="card-title">{{ getTenNhanVien(Contract.maNhanVien)}}</h5>
                             </div>
                             <p class="card-text">
-                                <i class="bi bi-people"></i> Lương cơ bản: {{ Contract.luongCoBan }}
+                                <i class="bi bi-people"></i> {{ t('contract.table.salary') }}: {{ Contract.luongCoBan }}
                             </p>
                             <p class="card-text">
-                                <i class="bi bi-people"></i> Ngày bắt đầu: {{ Contract.ngayBatDau }}
+                                <i class="bi bi-people"></i> {{ t('contract.table.start_day') }}: {{ Contract.ngayBatDau }}
                             </p>
                             <p class="card-text">
-                                <i class="bi bi-people"></i> Ngày kết thúc: {{ Contract.ngayKetThuc }}
+                                <i class="bi bi-people"></i> {{ t('contract.table.end_day') }}: {{ Contract.ngayKetThuc }}
                             </p>
                         </div>
                     </div>
@@ -47,6 +47,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { get } from '@/stores/https';
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const listNhanVien = ref([]);
 const props = defineProps({
     listContract: Array,

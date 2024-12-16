@@ -3,9 +3,9 @@
         <table class="table table-hover align-middle table-responsive text-center">
             <thead class="table-light">
                 <tr class="text-center">
-                    <th scope="col">STT</th>
-                    <th scope="col">Mã chức vụ</th>
-                    <th scope="col">Tên chức vụ</th>
+                    <th scope="col">{{ t('position.table.no') }}</th>
+                    <th scope="col">{{ t('position.table.id') }}</th>
+                    <th scope="col">{{ t('position.table.name') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +23,9 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const props = defineProps({
     listPositon: Array,
 })

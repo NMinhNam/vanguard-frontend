@@ -1,19 +1,19 @@
 <template>
     <div class="container-fluid">
         <div class="d-flex align-items-center mb-2">
-            <label for="viTriTuyenDUng" class="form-label me-2 text-nowrap label-width">Vị trí tuyển dụng</label>
+            <label for="viTriTuyenDUng" class="form-label me-2 text-nowrap label-width">{{ t('recruitment.add.position') }}</label>
             <input
                 v-model="info.tenViTri"
                 type="text"
                 class="form-control"
                 id="viTriTuyenDUng"
-                placeholder="Vị trí tuyển dụng"
+                :placeholder="t('recruitment.add.position')"
             />
         </div>
 
         <div class="row">
             <div class="d-flex align-items-center mb-2">
-                <label for="phongBanSelect" class="form-label me-2 text-nowrap label-width">Tên phòng ban</label>
+                <label for="phongBanSelect" class="form-label me-2 text-nowrap label-width">{{ t('recruitment.add.department') }}</label>
                 <div class="w-100">
                     <select id="phongBanSelect" class="form-select" v-model="info.maPhongBan">
                         <option value="">Chọn phòng ban</option>
@@ -30,33 +30,35 @@
 
             <div class="row mb-3">
                 <div class="d-flex align-items-center">
-                    <label class="form-label me-2 text-nowrap label-width">Số lượng tuyển</label>
+                    <label class="form-label me-2 text-nowrap label-width">{{ t('recruitment.add.number') }}</label>
                     <input
                         v-model="info.soLuongTuyen"
                         type="text"
                         class="form-control"
                         id="soLuongTuyen"
-                        placeholder="Số lượng tuyển"
+                        :placeholder="t('recruitment.add.position')"
                     />
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="d-flex align-items-center">
-                    <label class="form-label me-2 text-nowrap label-width">Mô tả</label>
-                    <input v-model="info.moTa" type="text" class="form-control" id="moTa" placeholder="Mô tả" />
+                    <label class="form-label me-2 text-nowrap label-width">{{ t('recruitment.add.describe') }}</label>
+                    <input v-model="info.moTa" type="text" class="form-control" id="moTa" :placeholder="t('recruitment.add.describe')" />
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="d-flex align-items-center">
-                    <label class="form-label me-2 text-nowrap label-width">Yêu cầu</label>
-                    <input v-model="info.yeuCau" type="text" class="form-control" id="yeuCau" placeholder="Yêu cầu" />
+                    <label class="form-label me-2 text-nowrap label-width">{{ t('recruitment.add.request') }}</label>
+                    <input v-model="info.yeuCau" type="text" class="form-control" id="yeuCau" :placeholder="t('recruitment.add.request')" />
                 </div>
             </div>
 
             <div class="d-flex justify-content-end">
-                <button class="btn btn-success" @click="saveRecruitment()">Save</button>
+                <button class="btn btn-success" @click="saveRecruitment()">
+                    {{ t('recruitment.save') }}
+                </button>
             </div>
         </div>
     </div>
@@ -65,6 +67,9 @@
 <script setup>
 import { onMounted, ref, reactive } from 'vue'
 import { get, post } from '@/stores/https'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const listPhongBan = ref([])
 

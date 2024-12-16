@@ -64,9 +64,8 @@ const filterAccountBySearchQuery = (query) => {
     if (query) {
         filteredAccount.value = listTaiKhoan.value.filter((item) =>
             item.maNhanVien.toLowerCase().includes(query.toLowerCase()) ||
-            item.hoTen.toLowerCase().includes(query.toLowerCase()) ||
-            item.user.userName.toLowerCase().includes(query.toLowerCase()) ||
-            item.user.role.roleName.toLowerCase().includes(query.toLowerCase())
+            item.tenNhanVien.toLowerCase().includes(query.toLowerCase()) ||
+            item.userName.toLowerCase().includes(query.toLowerCase())
         );
     } else {
         filteredAccount.value = listTaiKhoan.value;

@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="d-flex align-items-center mb-2">
-            <label for="tenPhongBan" class="form-label me-2 text-nowrap" style="width: 12rem"> Tên phòng ban </label>
+            <label for="tenPhongBan" class="form-label me-2 text-nowrap" style="width: 12rem"> {{ t('department.add.name') }} </label>
             <input
                 v-model="phongBanInfo.tenPhongBan"
                 type="text"
@@ -14,7 +14,7 @@
         <div class="row mb-3">
             <div class="d-flex align-items-center">
                 <label for="superiorDepartmentSelect" class="form-label me-2 text-nowrap" style="width: 9rem">
-                    Phòng ban cấp trên
+                    {{ t('department.add.superior_department') }}
                 </label>
                 <div class="w-100">
                     <select v-model="phongBanInfo.maPhongBanCapTren" id="superiorDepartmentSelect" class="slim-select">
@@ -33,7 +33,7 @@
         <div class="row mb-3">
             <div class="d-flex align-items-center">
                 <label for="truongPhongSelect" class="form-label me-2 text-nowrap" style="width: 9rem">
-                    Tên trưởng phòng
+                    {{ t('department.add.head') }}
                 </label>
                 <div class="w-100">
                     <select v-model="phongBanInfo.truongPhong" id="truongPhongSelect" class="slim-select">
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            <button @click="saveDepartment()" class="btn btn-success">Save</button>
+            <button @click="saveDepartment()" class="btn btn-success">{{ t('department.save_btn') }}</button>
         </div>
     </div>
 </template>
@@ -58,6 +58,9 @@
 import { onMounted, reactive, ref } from 'vue'
 import { get, post } from '@/stores/https'
 import SlimSelect from 'slim-select'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const listLeadStaff = ref([])
 const slimSelectInstance = ref('')
@@ -80,16 +83,16 @@ const saveDepartment = async () => {
         const response = await post('/api/v1/departments', phongBanInfo)
         if (response) {
             Swal.fire({
-                title: 'Thành công',
-                text: 'Thêm phòng ban thành công',
+                title: t('department.swal.save.success.title'),
+                text: t('department.swal.save.success.text'),
                 icon: 'success',
                 timer: 1500,
             })
         }
     } catch (error) {
         Swal.fire({
-            title: 'Thất bại',
-            text: 'Thêm phòng ban thất bại',
+            title: t('department.swal.save.fail.title'),
+            text: t('department.swal.save.fail.text'),
             icon: 'error',
             timer: 1500,
         })

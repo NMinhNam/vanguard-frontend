@@ -3,11 +3,11 @@
         <table class="table table-hover align-middle text-center">
             <thead class="table-light">
                 <tr class="text-center">
-                    <th scope="col">STT</th>
-                    <th scope="col">Tên nhân viên</th>
-                    <th scope="col">Nội dung</th>
-                    <th scope="col">Ngày bắt đầu</th>
-                    <th scope="col">Ngày kết thúc</th>
+                    <th scope="col">{{ t('contract.table.no') }}</th>
+                    <th scope="col">{{ t('contract.table.fullname') }}</th>
+                    <th scope="col">{{ t('contract.table.content') }}</th>
+                    <th scope="col">{{ t('contract.table.start_day') }}</th>
+                    <th scope="col">{{ t('contract.table.end_day') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +31,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { get } from '@/stores/https'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const listNhanVien = ref([])
 const props = defineProps({
     listContract: Array,
