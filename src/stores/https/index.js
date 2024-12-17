@@ -8,7 +8,7 @@ const env = [{ 1: 'dev' }, { 2: 'prod' }, { 3: 'test' }]
 const environment = 2
 
 const https = axios.create({
-    baseURL: 'http://157.66.26.244:1688',
+    baseURL: 'http://157.66.26.146:1688',
     timeout: 20000
 })
 
