@@ -129,10 +129,10 @@
                             </div>
                         </div>
                         <div class="tab-pane container p-0" id="menu2">
-                            <div class="p-3"  v-for="item in listHistory_Works">
+                            <div class="p-3"  v-for="item in listEducations">
                                 <div class="row align-items-center mb-3">
                                         <div class="p-0 ps-1">
-                                            <b class="border border-2 rounded-2 p-2">{{ $t('profile.items_edu.from') }} {{ formatDate(item.thoiGianBatDau) }} - {{ $t('profile.items_edu.to') }} {{ formatDate(item.thoiGianKetThuc) }}</b>
+                                            <b class="border border-2 rounded-2 p-2">Năm tốt nghiệp: {{ item.namTotNghiep }}</b>
                                         </div>
                                 </div>
                                 <div class="row align-items-center">
@@ -140,7 +140,7 @@
                                         <h6 class="mb-0">{{ $t('profile.items_edu.school_name') }}:</h6>
                                     </div>
                                     <div class="col-sm-9 text-body-secondary">
-                                        {{ item.tenCongTy }}
+                                        {{ item.coSoGiaoDuc }}
                                     </div>
                                 </div>
                                 <hr>
@@ -149,16 +149,7 @@
                                         <h6 class="mb-0">{{ $t('profile.items_edu.major') }}:</h6>
                                     </div>
                                     <div class="col-sm-9 text-body-secondary">
-                                        {{ item.viTri }}
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row align-items-center">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">{{ $t('profile.items_edu.type_of_education') }}:</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-body-secondary">
-                                        {{ item.viTri }}
+                                        {{ item.chuyenNganh }}
                                     </div>
                                 </div>
                                 <hr>
@@ -167,16 +158,66 @@
                                         <h6 class="mb-0">{{ $t('profile.items_edu.education_level') }}:</h6>
                                     </div>
                                     <div class="col-sm-9 text-body-secondary">
-                                        {{ item.viTri }}
+                                        {{ item.tenTrinhDo }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="tab-pane container p-0" id="menu3">
+                            <div class="p-3"  v-for="item in listHopDong">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Số hợp đồng: </h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.soHopDong }}
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row align-items-center">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">{{ $t('profile.items_edu.classification') }}:</h6>
+                                        <h6 class="mb-0">Ngày bắt đầu:</h6>
                                     </div>
                                     <div class="col-sm-9 text-body-secondary">
-                                        {{ item.moTaCongViec }}
+                                        {{ formatDate(item.ngayBatDau) }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Ngày kết thúc:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ formatDate(item.ngayKetThuc) }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Ngày ký:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ formatDate(item.ngayKy) }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Thời hạn:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.thoiHan }} Năm
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Nội dung:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-body-secondary">
+                                        {{ item.noiDung }}
                                     </div>
                                 </div>
                                 <hr>
@@ -198,6 +239,7 @@ import { get } from '@/stores/https'
 const infoNV = ref({})
 const listHistory_Works = ref([])
 const listEducations = ref([])
+const listHopDong = ref([])
 
 //Lấy thông tin user
 const loadInfoUser = async () => {
@@ -251,8 +293,17 @@ const getHistory_Works = async () => {
     const response = await get('/api/v1/work-histories', {maNhanVien: sessionStorage.getItem('maNhanVien')})
     listHistory_Works.value = response.data
     listHistory_Works.value.sort((a, b) => new Date(b.thoiGianBatDau) - new Date(a.thoiGianBatDau));
-    console.log(listHistory_Works.value)
+}
 
+const getEdu = async() => {
+    const response = await get('/api/v1/educations')
+    listEducations.value = response.data
+    listEducations.value.sort((a,b) => new Date(b.namTotNghiep) - new Date(a.namTotNghiep));
+}
+
+const getHopDong = async() => {
+    const response = await get(`/api/v1/contracts/employee/${sessionStorage.getItem('maNhanVien')}`)
+    listHopDong.value = response.data
 }
 
 const formatDate = (dateString) => {
@@ -266,6 +317,8 @@ const formatDate = (dateString) => {
 onMounted(async () => {
     await loadInfoUser()
     await getHistory_Works()
+    await getEdu()
+    await getHopDong()
 })
 </script>
 
