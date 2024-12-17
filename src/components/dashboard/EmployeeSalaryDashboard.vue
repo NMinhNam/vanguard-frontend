@@ -65,7 +65,7 @@ const initChart = () => {
             orient: 'horizontal',
             left: 'center',
             min: Math.min(...chartData.value.map((item) => item.soNhanVien)),
-            max: 1000,
+            max: 10,
             text: ['Nhiều nhân viên', 'Ít nhân viên'],
             dimension: 0,
             inRange: {

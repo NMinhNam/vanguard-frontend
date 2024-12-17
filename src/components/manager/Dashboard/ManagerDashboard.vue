@@ -8,27 +8,24 @@
 
         <div class="row d-flex justify-content-center mt-3">
             <div class="col-6">
-                <SalaryByDepartmentDashboard />
+                <div class="chart-container h-100"><ChartDonYeuCau /></div>
             </div>
             <div class="col-6">
-                <EmployeeByDepartmentDashboard />
+                <div class="chart-container h-100"><ChartDonYeuCauThang /></div>
             </div>
         </div>
 
         <div class="row d-flex justify-content-center mt-3">
             <div class="col-6">
-                <ChartDonYeuCau />
+                <div class="chart-container h-100"><EducationLevelEmployeeDashboard /></div>
             </div>
             <div class="col-6">
-                <ChartDonYeuCauThang />
+                <div class="chart-container h-100"><ChartGender /></div>
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-3">
-            <div class="col-6">
-                <ChartGender />
-            </div>
-            <div class="col-6">
-                <EmployeeSalaryDashboard />
+            <div class="col-12">
+                <div class="chart-container h-100"><EmployeeByDepartmentDashboard/></div>
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-3">
@@ -37,22 +34,6 @@
             </div>
             <div class="col-6">
                 <NewStaff />
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center mt-3">
-            <div class="col-6">
-                <EducationLevelEmployeeDashboard />
-            </div>
-            <div class="col-6">
-                <PersonnelDynamicsDashboard />
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center mt-3">
-            <div class="col-6">
-                <SalaryOfEmployeeInYear />
-            </div>
-            <div class="col-6">
-                <ChartHopDong />
             </div>
         </div>
     </div>

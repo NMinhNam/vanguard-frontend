@@ -27,7 +27,7 @@
                     <td>{{ staff.hoTen }}</td>
                     <td>{{ staff.dienThoai }}</td>
                     <td>{{ staff.email }}</td>
-                    <td>
+                    <td class="text-center">
                         <span
                             class="material-symbols-outlined"
                             :class="index % 2 == 0 && !index % 3 == 0 ? 'text-danger' : 'text-success'"

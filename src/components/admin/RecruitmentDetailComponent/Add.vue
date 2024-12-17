@@ -23,7 +23,7 @@
                 <button
                     class="tab-button"
                     :class="{ active: ungVien.trangThai === 1 }"
-                    :disabled="ungVien.trangThai === 1"
+                    :disabled="ungVien.trangThai >= 1"
                 >
                     Chờ duyệt
                 </button>
@@ -31,7 +31,7 @@
                     @click="saveUngVien(2)"
                     class="tab-button"
                     :class="{ active: ungVien.trangThai === 2 }"
-                    :disabled="ungVien.trangThai === 2"
+                    :disabled="ungVien.trangThai >= 2"
                 >
                     Phỏng vấn lần 1
                 </button>
@@ -39,7 +39,7 @@
                     @click="saveUngVien(3)"
                     class="tab-button"
                     :class="{ active: ungVien.trangThai === 3 }"
-                    :disabled="ungVien.trangThai === 3"
+                    :disabled="ungVien.trangThai >= 3"
                 >
                     Phỏng vấn lần 2
                 </button>
@@ -47,7 +47,7 @@
                     @click="saveUngVien(4)"
                     class="tab-button"
                     :class="{ active: ungVien.trangThai === 4 }"
-                    :disabled="ungVien.trangThai === 4"
+                    :disabled="ungVien.trangThai >= 4"
                 >
                     Đạt yêu cầu
                 </button>
@@ -55,7 +55,7 @@
                     @click="saveUngVien(5)"
                     class="tab-button"
                     :class="{ active: ungVien.trangThai === 5 }"
-                    :disabled="ungVien.trangThai === 5"
+                    :disabled="ungVien.trangThai >= 4"
                 >
                     Từ chối
                 </button>
@@ -88,6 +88,19 @@
                 </select>
                 <span class="text-danger" v-if="error.maViTriTuyenDung">{{ error.maViTriTuyenDung }}</span>
             </div>
+
+            <div class="col-md-6 mt-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" v-model="ungVien.email" />
+                <span class="text-danger" v-if="error.email">{{ error.email }}</span>
+            </div>
+
+            <div class="col-md-6 mt-3">
+                <label for="phone" class="form-label">Số điện thoại</label>
+
+                <input type="text" class="form-control" id="phone" v-model="ungVien.dienThoai" />
+                <span class="text-danger" v-if="error.dienThoai">{{ error.dienThoai }}</span>
+            </div>
         </div>
     </div>
 
@@ -95,38 +108,29 @@
         <div class="col-md-6">
             <h5 class="section-title">Thông tin cá nhân</h5>
             <div class="row mb-3">
-                <label for="phone" class="col-sm-4 col-form-label">Số điện thoại</label>
+                <label for="ngayPhongVan" class="col-sm-4 col-form-label">Ngày phỏng vấn</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="phone" v-model="ungVien.dienThoai" />
-                    <span class="text-danger" v-if="error.dienThoai">{{ error.dienThoai }}</span>
+                    <input type="date" class="form-control" id="ngayPhongVan" v-model="ungVien.ngayPhongVan" />
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="email" class="col-sm-4 col-form-label">Email</label>
+                <label for="ngayBatDauLam" class="col-sm-4 col-form-label">Ngày bắt đầu làm</label>
                 <div class="col-sm-8">
-                    <input type="email" class="form-control" id="email" v-model="ungVien.email" />
-                    <span class="text-danger" v-if="error.email">{{ error.email }}</span>
+                    <input type="date" class="form-control" id="ngayBatDauLam" v-model="ungVien.ngayBatDauLam" />
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="cccd" class="col-sm-4 col-form-label">CCCD</label>
+                <label for="address" class="col-sm-4 col-form-label">Địa điểm phỏng vấn</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="cccd" v-model="ungVien.cccd" />
-                    <span class="text-danger" v-if="error.cccd">{{ error.cccd }}</span>
+                    <input type="text" class="form-control" id="address" v-model="ungVien.diaDiemPhongVan" />
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
             <h5 class="section-title">Thông tin bổ sung</h5>
-            <div class="row mb-3">
-                <label for="address" class="col-sm-4 col-form-label">Địa chỉ</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="address" v-model="ungVien.diaChi" />
-                </div>
-            </div>
 
             <div class="row mb-3">
                 <label for="dob" class="col-sm-4 col-form-label">Ngày sinh</label>
@@ -155,6 +159,19 @@
                     </div>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="address" class="col-sm-4 col-form-label">Địa chỉ cá nhân</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="address" v-model="ungVien.diaChi" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="cccd" class="col-sm-4 col-form-label">CCCD</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="cccd" v-model="ungVien.cccd" />
+                    <span class="text-danger" v-if="error.cccd">{{ error.cccd }}</span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -169,6 +186,8 @@ const maUngVien = ref('')
 const listTuyenDung = ref([])
 
 const saveUngVien = async (trangThai) => {
+    console.log(ungVien.value)
+
     if (!validateUngVien()) return
     try {
         ungVien.value.trangThai = trangThai
@@ -201,6 +220,8 @@ onMounted(async () => {
     maUngVien.value = router.currentRoute.value.params.id
     if (maUngVien.value) {
         ungVien.maUngVien = maUngVien.value
+        console.log(ungVien.value)
+
         await getInfoByMaUngVien(ungVien.maUngVien)
     }
 })
