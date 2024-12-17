@@ -15,23 +15,6 @@
                 />
             </div>
             <div class="pagination d-flex justify-content-center align-items-center">
-                <span>{{ t('contract.page') }} {{ currentPage }} / {{ totalPages }}</span>
-                <button
-                    class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center"
-                    :disabled="currentPage === 1"
-                    @click="$emit('prevPage')"
-                >
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-                </button>
-                <button
-                    class="btn btn-secondary rounded-0 d-flex align-items-center"
-                    :disabled="currentPage === totalPages"
-                    @click="$emit('nextPage')"
-                >
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
-                </button>
-            </div>
-            <div class="pagination d-flex justify-content-center align-items-center">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a
@@ -60,8 +43,6 @@
             </div>
         </div>
     </div>
-
-
 </template>
 
 <script setup>

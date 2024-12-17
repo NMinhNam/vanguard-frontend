@@ -1,7 +1,9 @@
 <template>
     <div class="container-fluid">
         <div class="d-flex align-items-center mb-2">
-            <label for="tenPhongBan" class="form-label me-2 text-nowrap" style="width: 12rem"> {{ t('department.add.name') }} </label>
+            <label for="tenPhongBan" class="form-label me-2 text-nowrap" style="width: 12rem">
+                {{ t('department.add.name') }}
+            </label>
             <input
                 v-model="phongBanInfo.tenPhongBan"
                 type="text"
@@ -60,6 +62,11 @@ import { get, post } from '@/stores/https'
 import SlimSelect from 'slim-select'
 import { useI18n } from 'vue-i18n'
 
+const props = defineProps({
+    showPopup: Boolean,
+    getDepartment: Function,
+})
+
 const { t, locale } = useI18n()
 
 const listLeadStaff = ref([])
@@ -98,6 +105,13 @@ const saveDepartment = async () => {
         })
         console.error(error)
     }
+    loadData()
+}
+
+const emit = defineEmits(['closePopup'])
+const loadData = () => {
+    props.getDepartment()
+    emit('closePopup')
 }
 
 const createSlimSelect = () => {
