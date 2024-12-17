@@ -4,6 +4,7 @@
             <div class="col-md-6">
                 <label for="tenNhanVien" class="col-sm-4 col-form-label">{{ t('contract.detail.fullname') }}</label>
                 <input
+                    :disabled="role === 'USER'"
                     type="text"
                     id="tenNhanVien"
                     class="form-control"
@@ -21,6 +22,7 @@
                 <label for="noiDung" class="col-sm-4 col-form-label">{{ t('contract.detail.content') }}</label>
                 <div class="col-sm-8">
                     <textarea
+                        :disabled="role === 'USER'"
                         :class="{ 'is-invalid': error.noiDung }"
                         id="noiDung"
                         class="form-control"
@@ -35,6 +37,7 @@
                 <label for="ngayBatDau" class="col-sm-4 col-form-label">{{ t('contract.table.start_day') }}</label>
                 <div class="col-sm-8">
                     <input
+                        :disabled="role === 'USER'"
                         :class="{ 'is-invalid': error.ngayBatDau }"
                         type="date"
                         id="ngayBatDau"
@@ -42,20 +45,26 @@
                         v-model="Contract.ngayBatDau"
                     />
                     <div class="invalid-feedback" v-if="error.ngayBatDau">Ngày bắt đầu không được để trống</div>
-                    <input type="date" id="ngayBatDau" class="form-control" v-model="Contract.ngayBatDau"  />
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label for="ngayKetThuc" class="col-sm-4 col-form-label">{{ t('contract.table.end_day') }}</label>
                 <div class="col-sm-8">
-                    <input type="date" id="ngayKetThuc" class="form-control" v-model="Contract.ngayKetThuc"  />
+                    <input
+                        :disabled="role === 'USER'"
+                        type="date"
+                        id="ngayKetThuc"
+                        class="form-control"
+                        v-model="Contract.ngayKetThuc"
+                    />
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="thoiHan" class="col-sm-4 col-form-label">Thời hạn</label>
                 <div class="col-sm-8 d-flex align-items-center">
                     <input
+                        :disabled="role === 'USER'"
                         :class="{ 'is-invalid': error.thoiHan }"
                         type="text"
                         id="thoiHan"
@@ -66,9 +75,6 @@
                         Thời hạn phải được nhập và phải là số nguyên
                     </div>
                     <span class="input-group-text">Năm</span>
-                <label for="luongCoBan" class="col-sm-4 col-form-label">{{ t('contract.table.salary') }}</label>
-                <div class="col-sm-8">
-                    <input type="text" id="luongCoBan" class="form-control" v-model="Contract.luongCoBan"  />
                 </div>
             </div>
         </div>
@@ -79,6 +85,7 @@
                 <label for="ngayKy" class="col-sm-4 col-form-label">{{ t('contract.detail.date_signed') }}</label>
                 <div class="col-sm-8">
                     <input
+                        :disabled="role === 'USER'"
                         :class="{ 'is-invalid': error.ngayKy }"
                         type="date"
                         id="ngayKy"
@@ -92,6 +99,7 @@
                 <label for="ngayKetThuc" class="col-sm-4 col-form-label">Ngày kết thúc</label>
                 <div class="col-sm-8">
                     <input
+                        :disabled="role === 'USER'"
                         :class="{ 'is-invalid': error.ngayKetThuc }"
                         type="date"
                         id="ngayKetThuc"
@@ -99,18 +107,28 @@
                         v-model="Contract.ngayKetThuc"
                     />
                     <div class="invalid-feedback" v-if="error.ngayKetThuc">Ngày kết thúc không được để trống</div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
                 <label for="thoiHan" class="col-sm-4 col-form-label">{{ t('contract.detail.contract_term') }}</label>
                 <div class="col-sm-8 d-flex align-items-center">
-                    <input type="text" id="thoiHan" class="form-control me-2" v-model="Contract.thoiHan"  />
+                    <input
+                        :disabled="role === 'USER'"
+                        type="text"
+                        id="thoiHan"
+                        class="form-control me-2"
+                        v-model="Contract.thoiHan"
+                    />
                     <span class="input-group-text">{{ t('contract.detail.year') }}</span>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="luongCoBan" class="col-sm-4 col-form-label">Lương cơ bản</label>
-                <label for="heSoLuong" class="col-sm-4 col-form-label">{{ t('contract.detail.salary_coefficient') }}</label>
+                <label for="luongCoBan" class="col-sm-4 col-form-label">{{ t('contract.table.salary') }}</label>
                 <div class="col-sm-8">
                     <input
+                        :disabled="role === 'USER'"
                         :class="{ 'is-invalid': error.luongCoBan }"
                         type="text"
                         id="luongCoBan"
@@ -125,6 +143,7 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { get } from '@/stores/https'
@@ -137,7 +156,6 @@ const props = defineProps({
     error: Object,
 })
 const listNhanVien = ref([])
-const nhanVien = ref({})
 
 const getNhanVien = async () => {
     try {
@@ -148,13 +166,15 @@ const getNhanVien = async () => {
     }
 }
 
+const role = ref('')
+
 onMounted(async () => {
+    role.value = sessionStorage.getItem('role')
     await getNhanVien()
     const cccd = sessionStorage.getItem('cccdStaff')
     if (cccd) {
         const response = await get(`/api/v1/employees/cccd/${cccd}`)
-        nhanVien.value = response.data
-        props.Contract.maNhanVien = nhanVien.value.maNhanVien
+        props.Contract.maNhanVien = response.data.maNhanVien
     }
 })
 

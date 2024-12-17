@@ -1,7 +1,7 @@
 <template>
-    <div class="chart-container pt-3 text-center fw-bolder">
-        <span>Tỷ lệ trạng thái đơn trong tháng</span>
-        <div ref="chart" style="width: 100%; height: 350px"></div>
+    <div class="pt-3 text-center fw-bolder">
+        <span>Thống kê trạng thái đơn trong tháng</span>
+        <div ref="chart" style="width: 100%; height: 400px"></div>
     </div>
 </template>
 <script setup>

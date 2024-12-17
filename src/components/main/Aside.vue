@@ -113,6 +113,11 @@ const featureUser = [
         icon: 'fa-dollar-sign',
         text: 'home.menu_item_user.payroll',
     },
+    {
+        path: '/user/dashboard',
+        icon: 'fa-chart-simple',
+        text: 'home.menu_item_user.dashboard',
+    },
 ]
 const featureHR = [
     {

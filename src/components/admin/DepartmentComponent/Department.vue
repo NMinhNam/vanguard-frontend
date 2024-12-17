@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid mt-3" style="overflow-x: auto">
         <div class="row">
-            <HeadMenu @tab-change="setActiveTab" :activeTab="activeTab" @search="handleSearch" />
+            <HeadMenu :getDepartment="getDepartments" @tab-change="setActiveTab" :activeTab="activeTab" @search="handleSearch" />
             <div class="col-12" style="overflow-x: auto">
                 <div>
                     <DepartmentTable
