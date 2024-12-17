@@ -28,6 +28,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import vn from '@fullcalendar/core/locales/vi'
 import en from '@fullcalendar/core/locales/en-gb'
 import { useI18n } from 'vue-i18n'
+import { format } from 'date-fns'
 const { locale } = useI18n()
 
 const user = ref(sessionStorage.getItem('user'))
@@ -36,6 +37,7 @@ const showPopup = ref(false)
 const listMeeting = ref([])
 
 onMounted(async () => {
+    calendarOptions.value.locale = locale.value === 'vn' ? vn : en
     await getUserLogin()
     await getMeetings()
 })
@@ -63,8 +65,11 @@ const getMeetings = async () => {
 }
 
 const selectedEvent = ref({
+    tenNguoiToChuc: null,
+    nguoiToChuc: null,
     maCuocHop: null,
     thoiGianBatDau: null,
+    userLogin: null,
 })
 
 const calendarEvents = computed(() =>
@@ -100,7 +105,6 @@ const calendarOptions = ref({
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth,timeGridFourDay',
     },
-    editable: true,
     views: {
         timeGridFourDay: {
             type: 'timeGrid',
@@ -114,12 +118,14 @@ const calendarOptions = ref({
             maCuocHop: info.event.id,
         }
         info.jsEvent.preventDefault()
-        console.log(selectedEvent.value)
     },
     dateClick: function (info) {
         showPopup.value = true
         selectedEvent.value = {
+            tenNguoiToChuc: userLogin.value.hoTen,
+            nguoiToChuc: userLogin.value.maNhanVien,
             thoiGianBatDau: info.dateStr,
+            userLogin: userLogin.value.maNhanVien,
         }
     },
     events: calendarEvents.value,

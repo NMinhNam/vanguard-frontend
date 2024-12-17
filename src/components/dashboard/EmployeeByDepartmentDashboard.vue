@@ -1,5 +1,5 @@
 <template>
-    <div class="chart-container text-center pt-2 fw-bolder">
+    <div class="text-center pt-2 fw-bolder">
         <span>Thống kê nhân viên theo phòng ban</span>
         <div class="mb-2" ref="chart" style="width: 100%; height: 300px"></div>
     </div>
@@ -21,7 +21,7 @@ onMounted(async () => {
 })
 
 const getDataChart = async () => {
-    const response = await get('/api/v1/statistic/departments')
+    const response = await get('/api/v1/statistic/employees-by-departments')
     chartData.value = response.data
 }
 const initChart = () => {

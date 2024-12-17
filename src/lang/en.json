@@ -87,7 +87,8 @@
             "checkin": "Timekeeping",
             "timeoff": "Leave Application",
             "rewar_discipline": "Rewar/Discipline",
-            "payroll": "Payroll"
+            "payroll": "Payroll",
+            "dashboard": "Dashboard"
         }
     },
     "profile": {

@@ -1,10 +1,10 @@
 <template>
-    <div class="chart-container pt-3 text-center fw-bolder">
-        <span>Mức lương theo phòng ban</span>
+    <div class="text-center fw-bolder pt-2">
+        <span>Trình độ học vấn</span>
         <div ref="chart" style="width: 100%; height: 300px"></div>
     </div>
 </template>
-  
+
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { get } from '@/stores/https'
@@ -20,21 +20,22 @@ onMounted(async () => {
 })
 
 const getDataChart = async () => {
-    const response = await get('api/v1/statistic/salary-by-department')
+    const response = await get('/api/v1/statistic/education-by-employee')
     chartData.value = response.data
 }
 const chartData = ref([])
 
 const initChart = () => {
     if (!chart.value) return
-    const departments = chartData.value.map((item) => item.tenPhongBan)
-    const employeeCounts = chartData.value.map((item) => item.tongLuong)
-
     chartInstance = echarts.init(chart.value)
+    const dataMap = chartData.value.map((item) => ({
+        value: item.soLuongNhanVien,
+        name: item.tenTrinhDo,
+    }))
 
     const options = {
         tooltip: {
-            trigger: 'axis',
+            trigger: 'item',
         },
         toolbox: {
             show: true,
@@ -46,36 +47,22 @@ const initChart = () => {
                 },
             },
         },
-        xAxis: {
-            type: 'category',
-            data: departments,
-            name: 'Phòng ban',
-            nameLocation: 'middle',
-            nameGap: 25,
-            axisLabel: {
-                show: true,
-                textStyle: {
-                    fontSize: 10,
-                },
-                formatter: function (value) {
-                    return value.length > 10 ? value.substring(0, 10) + '...' : value
-                },
-            },
-        },
-        yAxis: {
-            type: 'value',
-            name: 'Lương',
-            axisLabel: {
-                rotate: 45, // Xoay chữ 45 độ nếu cần thiết
-                interval: 0, // Đảm bảo mỗi nhãn đều được hiển thị
-            },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
         },
         series: [
             {
-                data: employeeCounts,
-                type: 'bar',
-                itemStyle: {
-                    color: '#4CAF50',
+                name: 'Nhân viên',
+                type: 'pie',
+                radius: '50%',
+                data: dataMap,
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                    },
                 },
             },
         ],
@@ -97,7 +84,6 @@ onBeforeUnmount(() => {
     window.removeEventListener('resize', resizeChart)
 })
 </script>
-  
-  <style scoped>
+
+<style scoped>
 </style>
-  

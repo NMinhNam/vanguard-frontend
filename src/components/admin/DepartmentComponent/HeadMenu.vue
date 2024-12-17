@@ -51,7 +51,7 @@
             <div class="modal-content p-4">
                 <h2 class="modal-title border-bottom mb-4">{{ t('department.new_title') }}</h2>
                 <div class="modal-body">
-                    <AddDepartmentPopup />
+                    <AddDepartmentPopup @closePopup="showPopup = false" :getDepartment="getDepartment" />
                 </div>
                 <div class="modal-footer d-flex justify-content-end align-items-end">
                     <i @click="showPopup = false" class="text-danger fs-3 fa-solid fa-circle-xmark"></i>
@@ -65,6 +65,7 @@
 import { ref, computed } from 'vue'
 import AddDepartmentPopup from './AddDepartmentPopup.vue'
 import { useI18n } from 'vue-i18n'
+import { get } from 'jquery'
 
 const { t, locale } = useI18n()
 const searchQuery = ref('')
@@ -75,6 +76,9 @@ const props = defineProps({
     activeTab: {
         type: String,
         required: true,
+    },
+    getDepartment: {
+        type: Function,
     },
 })
 </script>

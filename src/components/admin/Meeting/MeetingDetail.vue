@@ -1,24 +1,24 @@
 <template>
     <div class="container mt-4 p-4">
-        <!-- Tiêu đề -->
         <div class="mb-4">
             <h4 class="text-center text-primary">{{ t('meeting.title') }}</h4>
         </div>
-
-        <!-- Nội dung chính (2 cột) -->
         <div class="row">
-            <!-- Cột trái -->
             <div class="col-md-6">
-                <!-- Tiêu đề cuộc họp -->
                 <div class="mb-3">
                     <label for="meetingTitle" class="form-label fw-bold">{{ t('meeting.meeting_title') }}</label>
-                    <input type="text" class="form-control" id="meetingTitle" v-model="formData.tenCuocHop" />
+                    <input
+                        :disabled="role == 'USER'"
+                        type="text"
+                        class="form-control"
+                        id="meetingTitle"
+                        v-model="formData.tenCuocHop"
+                    />
                 </div>
-
-                <!-- Thời gian bắt đầu -->
                 <div class="mb-3">
                     <label for="start" class="form-label fw-bold">{{ t('meeting.start') }}</label>
                     <DatePicker
+                        :disabled="role == 'USER'"
                         id="start"
                         v-model="formData.thoiGianBatDau"
                         placeholder="Thời gian bắt đầu"
@@ -32,8 +32,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="meetingParticipantsSelect" class="form-label fw-bold">{{ t('meeting.participants') }}</label>
+                    <label for="meetingParticipantsSelect" class="form-label fw-bold">{{
+                        t('meeting.participants')
+                    }}</label>
                     <select
+                        :disabled="role == 'USER'"
                         id="meetingParticipantsSelect"
                         class="slim-select"
                         v-model="formData.danhSachThamGia"
@@ -45,18 +48,17 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Cột phải -->
             <div class="col-md-6">
-                <!-- Người tổ chức -->
                 <div class="mb-3">
                     <label for="nguoiToChuc" class="form-label fw-bold">{{ t('meeting.organizer') }}</label>
                     <input
+                        :disabled="role == 'USER'"
                         type="text"
                         readonly
                         class="form-control bg-light"
                         id="nguoiToChuc"
-                        v-model="formData.nguoiToChuc"
+                        :value="formData.tenNguoiToChuc"
+                        @focus="$event.target.blur()"
                     />
                 </div>
 
@@ -64,6 +66,7 @@
                 <div class="mb-3">
                     <label for="end" class="form-label fw-bold">{{ t('meeting.end') }}</label>
                     <DatePicker
+                        :disabled="role == 'USER'"
                         id="end"
                         v-model="formData.thoiGianKetThuc"
                         placeholder="Thời gian kết thúc"
@@ -77,7 +80,13 @@
 
                 <div class="mb-3">
                     <label for="meetingPosition" class="form-label fw-bold">{{ t('meeting.location') }}</label>
-                    <input type="text" class="form-control" id="meetingPosition" v-model="formData.viTri" />
+                    <input
+                        :disabled="role == 'USER'"
+                        type="text"
+                        class="form-control"
+                        id="meetingPosition"
+                        v-model="formData.viTri"
+                    />
                 </div>
             </div>
         </div>
@@ -86,14 +95,19 @@
         <div class="row mb-3">
             <div class="col-md-10">
                 <label for="linkMeeting" class="form-label fw-bold">{{ t('meeting.path') }}</label>
-                <input type="text" class="form-control" id="linkMeeting" v-model="formData.videoCallUrl" />
+                <input
+                    :disabled="role == 'USER'"
+                    type="text"
+                    class="form-control"
+                    id="linkMeeting"
+                    v-model="formData.videoCallUrl"
+                />
             </div>
             <div class="col-md-2 d-flex align-items-end">
                 <div>
                     <button class="btn btn-primary w-100" :disabled="!formData.videoCallUrl" @click="openMeeting">
                         <span class="d-flex align-items-center">
-                            <span class="material-symbols-outlined" style="margin-right: 8px">videocam</span>
-                            {{ t('meeting.join') }}
+                            <span class="material-symbols-outlined">videocam</span>
                         </span>
                     </button>
                 </div>
@@ -101,8 +115,8 @@
         </div>
 
         <!-- Nút lưu -->
-        <div class="text-end">
-            <button class="btn btn-success" @click="saveMeeting">
+        <div class="text-start">
+            <button class="btn btn-success" @click="saveMeeting" v-if="role != 'USER'">
                 <span class="d-flex align-items-center">
                     <span class="material-symbols-outlined" style="margin-right: 8px">save</span>
                     {{ t('meeting.save') }}
@@ -135,20 +149,24 @@ const props = defineProps({
 const listStaff = ref([])
 const slimSelectInstance = ref('')
 const meetingDetail = ref({})
+const role = ref('')
 
 const formData = reactive({
     maCuocHop: '',
     ghiChu: '',
     nguoiToChuc: '',
+    tenNguoiToChuc: '',
     tenCuocHop: '',
     thoiGianBatDau: '',
     thoiGianKetThuc: '',
     viTri: '',
     videoCallUrl: '',
-    danhSachThamGia: [],
+    danhSachThamGia: ['NV01'],
 })
 
 onMounted(async () => {
+    role.value = sessionStorage.getItem('role')
+    setDataforFormData(props.event)
     if (props.event.maCuocHop) {
         await getMeetingByMeetingId(props.event.maCuocHop)
     }
@@ -159,16 +177,21 @@ onMounted(async () => {
 const setDataforFormData = (data) => {
     formData.maCuocHop = data.maCuocHop
     formData.ghiChu = data.ghiChu || ''
-    formData.nguoiToChuc = data.nguoiToChuc || ''
+    formData.nguoiToChuc = data.nguoiToChuc
     formData.tenCuocHop = data.tenCuocHop || ''
-    formData.thoiGianBatDau = data.thoiGianBatDau
+    formData.thoiGianBatDau = data.thoiGianBatDau || props.event.thoiGianBatDau || ''
     formData.thoiGianKetThuc = data.thoiGianKetThuc
     formData.viTri = data.viTri || ''
     formData.videoCallUrl = data.videoCallUrl
+    formData.tenNguoiToChuc = data.tenNguoiToChuc || props.event.tenNguoiToChuc || ''
     if (data.danhSachThamGia) {
-        formData.danhSachThamGia = data.danhSachThamGia.split(',').map((item) => item.trim())
+        formData.danhSachThamGia = data.danhSachThamGia
+            .split(',')
+            .map((item) => item.trim())
+            .put(props.event.maNhanVien)
         setSlimSelectValues(formData.danhSachThamGia)
     }
+    console.log(formData)
 }
 
 const getMeetingByMeetingId = async (maCuocHop) => {
@@ -180,7 +203,6 @@ const getMeetingByMeetingId = async (maCuocHop) => {
         } catch (error) {
             console.error(error)
         }
-        console.log(meetingDetail.value)
     }
 }
 
@@ -229,21 +251,12 @@ const setSlimSelectValues = (values) => {
     } else {
         console.error('SlimSelect instance chưa được khởi tạo!')
     }
+    console.log(values)
 }
 
 const getListStaff = async () => {
     const response = await get('/api/v1/employees')
     listStaff.value = response.data
-}
-function convertToUTC(localTime) {
-    const localDate = new Date(localTime)
-    const timezoneOffset = localDate.getTimezoneOffset() * 60000
-
-    // Điều chỉnh thời gian để chuyển về UTC mà không thay đổi giá trị giờ
-    const utcDate = new Date(localDate.getTime() - timezoneOffset)
-
-    // Trả về thời gian UTC dưới dạng ISO (chuỗi định dạng chuẩn)
-    return utcDate.toISOString()
 }
 
 const validate = (data) => {
