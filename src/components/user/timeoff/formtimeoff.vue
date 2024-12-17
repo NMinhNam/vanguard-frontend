@@ -44,6 +44,9 @@
                         {{ $t('create_onleave.validate.reason') }}
                     </div>
                 </div>
+                <div class="col-md-6 d-flex align-items-end">
+                    <span class="p-2">Số ngày nghỉ phép năm còn: {{ nghiPhepNam }} ngày</span>
+                </div>
             </div>
             <div class="row py-2">
                 <div class="col-md-6">
