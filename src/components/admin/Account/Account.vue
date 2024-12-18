@@ -30,7 +30,6 @@ const getTaiKhoan = async () => {
 const getAllRole = async() => {
     const response  = await get('/api/v1/role')
     listRole.value = response.data
-    console.log(listRole.value)
 }
 
 const totalPages = computed(() => {

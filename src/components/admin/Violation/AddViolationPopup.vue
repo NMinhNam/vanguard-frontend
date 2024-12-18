@@ -55,9 +55,6 @@ const btnSaveViPham_click = async () => {
         })
         return
     }
-
-    console.log(viPhamInfo)
-
     try {
         const response = await post('/api/v1/violations', viPhamInfo)
         if (response.success) {

@@ -834,6 +834,7 @@
         "path": "Meeting Link",
         "join": "Join",
         "save": "Save",
+        "delete": "Delete",
         "swal": {
             "save": {
                 "success": {
@@ -853,6 +854,16 @@
                 "fail": {
                     "title": "Failed",
                     "text": "Failed to update meeting"
+                }
+            },
+            "delete": {
+                "success": {
+                    "title": "Success",
+                    "text": "Meeting deleted successfully"
+                },
+                "fail": {
+                    "title": "Failed",
+                    "text": "Failed to delete meeting"
                 }
             }
         }

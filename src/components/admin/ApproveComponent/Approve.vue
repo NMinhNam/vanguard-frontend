@@ -59,8 +59,6 @@ const handleSearch = (query) => {
 
 const handleFilterDate = (data) => {
     filterDate.value = data
-    console.log(filterDate.value)
-    console.log(data)
 }
 
 const handleFilterStatus = (status) => {

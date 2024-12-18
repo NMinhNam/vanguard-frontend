@@ -74,7 +74,6 @@ const getIPAddress = async () => {
     try {
         const response = await axios.get("https://api.ipify.org?format=json");
         ip.value = response.data.ip;
-        console.log(ip.value)
     } catch (error) {
         console.error("Lỗi khi lấy IP:", error);
     }
@@ -87,9 +86,7 @@ const btnCheckIn_Click = async () => {
         publicIp: ip.value
     })
     try {
-        const response = await post('/api/v1/attendances/checkin', formData.value)
-        console.log
-
+        const response = await post('/api/v1/attendances/checkin', formData.value)        
         if (response.success) {
             Swal.fire({
                 title: t('checkin.check_in.success.title'),
@@ -151,7 +148,6 @@ const btnCheckOut_Click = async () => {
             icon: 'error',
             timer: 1500,
         })
-        console.log("Lỗi: ", error)
     }
 }
 

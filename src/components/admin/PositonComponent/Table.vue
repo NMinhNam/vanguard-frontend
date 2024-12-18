@@ -67,12 +67,10 @@ const props = defineProps({
 const getPostionById = async (maChucVu) => {
     const response = await get('/api/v1/positions/id', { maChucVu })
     positionDetail.value = response.data
-    console.log(positionDetail.value)
     emit('getPostionById', positionDetail.value)
 }
 
 const filteredPositions = computed(() => {
-    console.log(props.searchQuery)
     let positons = props.listPositon
     if (props.searchQuery) {
         positons = positons.filter((positon) =>

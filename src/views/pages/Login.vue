@@ -26,9 +26,14 @@
                                 <label for="username" class="form-label fw-bold">{{
                                     $t('login.input_text.username')
                                 }}</label>
-                                <input type="text" class="form-control" :class="{ 'is-invalid': error.username }"
-                                    id="username" v-model="username"
-                                    :placeholder="$t('login.input_text.username_placeholder')" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': error.username }"
+                                    id="username"
+                                    v-model="username"
+                                    :placeholder="$t('login.input_text.username_placeholder')"
+                                />
                                 <div class="invalid-feedback">
                                     {{ $t('login.messages.validate.username_required') }}
                                 </div>
@@ -38,8 +43,12 @@
                                     $t('login.input_text.password')
                                 }}</label>
                                 <div class="input-group">
-                                    <input :type="showPassword ? 'text' : 'password'" class="form-control"
-                                        :class="{ 'is-invalid': error.password }" id="password" v-model="password"
+                                    <input
+                                        :type="showPassword ? 'text' : 'password'"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': error.password }"
+                                        id="password"
+                                        v-model="password"
                                         :placeholder="$t('login.input_text.password_placeholder')"
                                         @keypress.enter="btnLogin_Click"
                                     />
@@ -51,7 +60,6 @@
                                         <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                                     </button>
                                 </div>
-
 
                                 <div class="invalid-feedback">
                                     {{ $t('login.messages.validate.password_required') }}
@@ -124,10 +132,11 @@ const btnLogin_Click = async () => {
         const response = await post('/api/v1/auth/login', loginInfo)
         if (response.success) {
             sessionStorage.setItem('user', username.value)
-            await getUserLogin()
-            sessionStorage.setItem('maNhanVien', userLogin.value.maNhanVien)
             authStore.setToken(response.data.accessToken, response.data.refreshToken)
             authStore.setRole(response.data.role)
+            await getUserLogin()
+            console.log(userLogin.value)
+            sessionStorage.setItem('maNhanVien', userLogin.value.maNhanVien)
             Swal.fire({
                 title: t('login.messages.login_success.title'),
                 text: t('login.messages.login_success.text'),
@@ -137,10 +146,10 @@ const btnLogin_Click = async () => {
             response.data.role === 'ADMIN'
                 ? router.push('/admin/dashboard')
                 : response.data.role === 'MANAGER'
-                    ? router.push('/manager')
-                    : response.data.role === 'USER'
-                        ? router.push('/user/information')
-                        : router.push('/hr')
+                ? router.push('/manager')
+                : response.data.role === 'USER'
+                ? router.push('/user/information')
+                : router.push('/hr')
         } else {
             Swal.fire({
                 title: t('login.messages.login_fail.title'),
@@ -150,13 +159,36 @@ const btnLogin_Click = async () => {
             })
         }
     } catch (error) {
-        await Swal.fire({
-            title: t('login.messages.login_fail_server.title'),
-            text: t('login.messages.login_fail_server.text'),
-            icon: 'error',
-            timer: 1500,
-        })
-        console.error('Error during login:', error)
+        if (error.data.status === 1000) {
+            Swal.fire({
+                title: 'Đăng nhập không thành công',
+                text: 'Tài khoản không tồn tại',
+                icon: 'error',
+                timer: 1500,
+            })
+        } else if (error.data.status === 1003) {
+            Swal.fire({
+                title: 'Đăng nhập không thành công',
+                text: 'Tài khoản đã bị vô hiệu hóa',
+                icon: 'error',
+                timer: 1500,
+            })
+        } else if (error.data.status === 9999) {
+            Swal.fire({
+                title: 'Đăng nhập không thành công',
+                text: 'Tài khoản hoặc mật khẩu không đúng',
+                icon: 'error',
+                timer: 1500,
+            })
+        } else {
+            await Swal.fire({
+                title: t('login.messages.login_fail_server.title'),
+                text: t('login.messages.login_fail_server.text'),
+                icon: 'error',
+                timer: 1500,
+            })
+            console.error('Error during login:', error)
+        }
     }
 }
 const getUserLogin = async () => {
@@ -205,18 +237,11 @@ onMounted(() => {
     transform: translateY(-50%);
     background: none;
     border: none;
-    right: 0px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
     cursor: pointer;
 }
 
 .eye_icon:hover {
     background: none;
     color: black;
-}
-</style>
 }
 </style>

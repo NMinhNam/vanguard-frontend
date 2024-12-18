@@ -795,6 +795,7 @@
         "path": "Đường dẫn họp",
         "join": "Tham gia",
         "save": "Lưu",
+        "delete": "Xóa",
         "swal": {
             "save": {
                 "success": {
@@ -815,6 +816,18 @@
                     "title": "Thất bại",
                     "text": "Cập nhật cuộc họp thất bại"
                 }
+            },
+            "delete": {
+                "success": {
+                    "title": "Thành công",
+                    "text": "Xóa cuộc họp thành công"
+                },
+                "fail": {
+                    "title": "Thất bại",
+                    "text": "Xóa cuộc họp thất bại"
+                },
+                "confirm": {
+                    "title": "Xóa cuộc họp"}
             }
         }
     },

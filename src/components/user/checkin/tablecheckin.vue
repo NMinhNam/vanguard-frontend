@@ -96,7 +96,6 @@ const getCheckInOut = (day) => {
 
 const handleDayClick = (day) => {
     if (!day) return;
-    console.log(`Ngày được chọn: ${day}-${props.month}-${props.year}`);
 };
 
 onMounted(async () => {

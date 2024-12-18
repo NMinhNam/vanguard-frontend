@@ -133,8 +133,6 @@ const isExist = async () => {
     const staffCCCDSet = new Set(listStaff.value.map((staff) => staff.cccd))
     const duplicateRecords = data.value.filter((record) => staffCCCDSet.has(record.CCCD))
     if (duplicateRecords.length > 0) {
-        console.log(duplicateRecords)
-        console.log(staffCCCDSet)
         Swal.fire({
             title: t('addstaffbyfileexcelcomponent.swal.isExist.title'),
             text: t('addstaffbyfileexcelcomponent.swal.isExist.text'),

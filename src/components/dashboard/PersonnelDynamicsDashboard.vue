@@ -25,7 +25,6 @@ let chartInstance = null
 const getDataChart = async () => {
     const response = await get('/api/v1/statistic/employee-movement-by-department')
     chartData.value = response.data
-    console.log(chartData.value)
 }
 const chartData = ref([])
 const availableYears = ref([])

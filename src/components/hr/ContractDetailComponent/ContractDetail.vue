@@ -75,7 +75,7 @@ const saveContract = async () => {
                 timer: 1500,
             })
 
-            router.push('/admin/contract') // Điều hướng về danh sách hợp đồng
+            router.push('/admin/contract')
         }
     } catch (error) {
         Swal.fire({
@@ -99,13 +99,10 @@ const validate = () => {
         luongCoBan: { required: true, pattern: /^\d+(\.\d{1,2})?$/ },
     }
 
-    // Kiểm tra lỗi bằng validateForm
     Object.assign(error, validateForm(formRule, Contract.value))
-    console.log(error) // Kiểm tra cấu trúc của error
+    console.log(error) 
 
-    // Kiểm tra tất cả các lỗi
     for (let key in error) {
-        // Nếu có lỗi thì return false
         if (error[key] !== false) {
             return false
         }

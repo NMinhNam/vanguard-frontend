@@ -101,7 +101,6 @@ const saveStaffs = async () => {
         const formData = new FormData()
         formData.append('file', file)
         try {
-            console.log(formData)
             const responseData = await axios.post('http://localhost:1688/api/v1/upload-file/employees', formData)
             Swal.fire({
                 title: t('addstaffbyfileexcelcomponent.swal.save.success.title'),
@@ -139,8 +138,6 @@ const isExist = async () => {
         .filter((record) => record?.CCCD) // Lọc bỏ các bản ghi không có CCCD
         .filter((record) => staffCCCDSet.has(String(record.CCCD).trim()))
     if (duplicateRecords.length > 0) {
-        console.log(duplicateRecords)
-        console.log(staffCCCDSet)
         Swal.fire({
             title: t('addstaffbyfileexcelcomponent.swal.isExist.title'),
             text: t('addstaffbyfileexcelcomponent.swal.isExist.text'),

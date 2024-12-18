@@ -54,14 +54,11 @@ const getUserLogin = async () => {
 const getMeetings = async () => {
     try {
         const maNhanVien = userLogin.value.maNhanVien
-        console.log(maNhanVien)
-
         const response = await get(`/api/v1/meetings/employee/${maNhanVien}`)
         listMeeting.value = response.data
     } catch (error) {
         console.error(error)
     }
-    console.log(listMeeting.value)
     showPopup.value = false
 }
 
@@ -120,7 +117,6 @@ const calendarOptions = ref({
             maCuocHop: info.event.id,
             maNhanVien: maNhanVien.value,
         }
-        console.log(selectedEvent.value)
         info.jsEvent.preventDefault()
     },
     dateClick: function (info) {
@@ -132,7 +128,6 @@ const calendarOptions = ref({
             userLogin: userLogin.value.maNhanVien,
             maNhanVien: maNhanVien.value,
         }
-        console.log(selectedEvent.value)
     },
     events: calendarEvents.value,
 })

@@ -191,8 +191,6 @@ const maUngVien = ref('')
 const listTuyenDung = ref([])
 
 const saveUngVien = async (trangThai) => {
-    console.log(ungVien.value)
-
     if (!validateUngVien()) return
     try {
         ungVien.value.trangThai = trangThai
@@ -230,7 +228,6 @@ onMounted(async () => {
     maUngVien.value = router.currentRoute.value.params.id
     if (maUngVien.value) {
         ungVien.maUngVien = maUngVien.value
-        console.log(ungVien.value)
         await getInfoByMaUngVien(ungVien.maUngVien)
     }
 })
@@ -239,7 +236,6 @@ const getInfoByMaUngVien = async (maUngVien) => {
         const response = await get('/api/v1/candidates/id', { maUngVien })
         if (response && response.data) {
             ungVien.value = response.data
-            console.log(ungVien.value)
         }
     } catch (error) {
         Swal.fire({

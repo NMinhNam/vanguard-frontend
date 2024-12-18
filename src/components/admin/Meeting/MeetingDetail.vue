@@ -61,8 +61,6 @@
                         @focus="$event.target.blur()"
                     />
                 </div>
-
-                <!-- Thời gian kết thúc -->
                 <div class="mb-3">
                     <label for="end" class="form-label fw-bold">{{ t('meeting.end') }}</label>
                     <DatePicker
@@ -90,8 +88,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Đường dẫn cuộc họp -->
         <div class="row mb-3">
             <div class="col-md-10">
                 <label for="linkMeeting" class="form-label fw-bold">{{ t('meeting.path') }}</label>
@@ -122,6 +118,12 @@
                     {{ t('meeting.save') }}
                 </span>
             </button>
+            <button class="btn btn-danger ms-2" @click="deleteMeeting()" v-if="role != 'USER' && event.maCuocHop">
+                <span class="d-flex align-items-center">
+                    <span class="material-symbols-outlined" style="margin-right: 8px">delete</span>
+                    {{ t('meeting.delete') }}
+                </span>
+            </button>
         </div>
     </div>
 </template>
@@ -130,7 +132,7 @@
 
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
-import { get, post, put } from '@/stores/https'
+import { get, post, put, del } from '@/stores/https'
 import SlimSelect from 'slim-select'
 import DatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -188,14 +190,9 @@ const setDataforFormData = (data) => {
     formData.tenNguoiToChuc = data.tenNguoiToChuc || props.event.tenNguoiToChuc || ''
     if (data.danhSachThamGia) {
         formData.danhSachThamGia = data.danhSachThamGia.split(',').map((item) => item.trim())
-
-        // Thêm phần tử props.event.maNhanVien vào danh sách
         formData.danhSachThamGia.push(props.event.maNhanVien)
-
-        // Cập nhật giá trị SlimSelect
         setSlimSelectValues(formData.danhSachThamGia)
     }
-    console.log(formData)
 }
 
 const getMeetingByMeetingId = async (maCuocHop) => {
@@ -212,7 +209,38 @@ const getMeetingByMeetingId = async (maCuocHop) => {
 
 const saveSuccess = () => {
     emit('reloadData')
-    console.log('loadData')
+}
+const deleteMeeting = async () => {
+    try {
+        const confirmResult = await Swal.fire({
+            title: 'Xác nhận xóa cuộc họp!',
+            text: 'Bạn đồng ý xóa cuộc họp này?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Hủy bỏ',
+        })
+        if (confirmResult.isConfirmed) {
+            const response = await del(`/api/v1/meetings/${props.event.maCuocHop}`)
+            if (response) {
+                Swal.fire({
+                    title: t('meeting.swal.delete.success.title'),
+                    text: t('meeting.swal.delete.success.text'),
+                    icon: 'success',
+                }).then(() => {
+                    emit('reloadData')
+                })
+            }
+        }
+    } catch (error) {
+        Swal.fire({
+            title: t('meeting.swal.delete.fail.title'),
+            text: t('meeting.swal.delete.fail.text'),
+            icon: 'error',
+        })
+        console.error(error)
+    }
+    saveSuccess()
 }
 
 // watchEffect(() => {
@@ -248,14 +276,12 @@ const createSlimSelect = () => {
         placeholder: 'Chọn người tham gia...',
     })
 }
-
 const setSlimSelectValues = (values) => {
     if (slimSelectInstance.value) {
         slimSelectInstance.value.setSelected(values)
     } else {
         console.error('SlimSelect instance chưa được khởi tạo!')
     }
-    console.log(values)
 }
 
 const getListStaff = async () => {
@@ -283,6 +309,7 @@ const saveMeeting = async () => {
     } else {
         createMeeting()
     }
+    saveSuccess()
 }
 
 const createMeeting = async () => {
@@ -301,11 +328,8 @@ const createMeeting = async () => {
                 tenCuocHop: formData.tenCuocHop,
                 danhSachMaNhanVien: formData.danhSachThamGia,
             }
-            console.log(chiTietCuocHop)
-
             try {
                 const chiTietResponse = await post('/api/v1/chi-tiet-cuoc-hop', chiTietCuocHop)
-                console.log('Chi tiết cuộc họp đã được tạo:', chiTietResponse)
             } catch (error) {
                 console.error('Lỗi khi tạo chi tiết cuộc họp cho nhân viên', chiTietCuocHop.maNhanVien, error)
             }
@@ -330,7 +354,6 @@ const createMeeting = async () => {
     saveSuccess()
 }
 const updateMeeting = async () => {
-    console.log(formData)
     if (validate(formData)) {
         return
     }
@@ -345,11 +368,8 @@ const updateMeeting = async () => {
                 tenCuocHop: formData.tenCuocHop,
                 danhSachMaNhanVien: formData.danhSachThamGia,
             }
-            console.log(chiTietCuocHop)
-
             try {
                 const chiTietResponse = await post('/api/v1/chi-tiet-cuoc-hop', chiTietCuocHop)
-                console.log('Chi tiết cuộc họp đã được tạo:', chiTietResponse)
             } catch (error) {
                 console.error('Lỗi khi tạo chi tiết cuộc họp cho nhân viên', chiTietCuocHop.maNhanVien, error)
             }
