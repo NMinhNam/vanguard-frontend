@@ -12,7 +12,7 @@ onMounted(async () => {
 
 const getBangLuongs = async () => {
     try {
-        const response = await get('/api/v1/salary/employee/NV01')
+        const response = await get('/api/v1/salary')
         listBangLuong.value = response.data
         console.log(listBangLuong.value)
     } catch (error) {
