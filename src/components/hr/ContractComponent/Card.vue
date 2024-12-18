@@ -4,7 +4,7 @@
             <div
                 v-for="(Contract, index) in listContract"
                 :key="Contract.soHopDong || index"
-                @click="$router.push(`/admin/contract/${Contract.soHopDong}`)"
+                @click="$router.push(`/hr/contract/${Contract.soHopDong}`)"
                 style="cursor: pointer"
             >
                 <div class="card h-100 p-0">

@@ -75,7 +75,7 @@ const saveContract = async () => {
                 timer: 1500,
             })
 
-            router.push('/admin/contract')
+            router.push('/hr/contract')
         }
     } catch (error) {
         Swal.fire({

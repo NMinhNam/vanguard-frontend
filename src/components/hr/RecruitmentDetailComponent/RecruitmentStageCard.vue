@@ -8,7 +8,7 @@
                     class="mb-3"
                     v-for="candidate in listCandidate"
                     :key="candidate.maUngVien"
-                    @click="$router.push(`/admin/recruitmentstage/${candidate.maUngVien}`)"
+                    @click="$router.push(`/hr/recruitmentstage/${candidate.maUngVien}`)"
                 >
                     <div class="card p-2 h-100 position-relative" v-if="candidate.trangThai === 1">
                         <div class="card-body d-flex p-0">
@@ -39,7 +39,7 @@
                     class="mb-3"
                     v-for="candidate in listCandidate"
                     :key="candidate.maUngVien"
-                    @click="$router.push(`/admin/recruitmentstage/${candidate.maUngVien}`)"
+                    @click="$router.push(`/hr/recruitmentstage/${candidate.maUngVien}`)"
                 >
                     <div class="card p-2 h-100 position-relative" v-if="candidate.trangThai === 2">
                         <div class="card-body d-flex p-0">
@@ -69,7 +69,7 @@
                     class="mb-3"
                     v-for="candidate in listCandidate"
                     :key="candidate.maUngVien"
-                    @click="$router.push(`/admin/recruitmentstage/${candidate.maUngVien}`)"
+                    @click="$router.push(`/hr/recruitmentstage/${candidate.maUngVien}`)"
                 >
                     <div class="card p-2 h-100 position-relative" v-if="candidate.trangThai === 3">
                         <div class="card-body d-flex p-0">
@@ -99,7 +99,7 @@
                     class="mb-3"
                     v-for="candidate in listCandidate"
                     :key="candidate.maUngVien"
-                    @click="$router.push(`/admin/recruitmentstage/${candidate.maUngVien}`)"
+                    @click="$router.push(`/hr/recruitmentstage/${candidate.maUngVien}`)"
                 >
                     <div class="card p-2 h-100 position-relative" v-if="candidate.trangThai === 4">
                         <div class="card-body d-flex p-0">
@@ -140,7 +140,7 @@ const router = useRouter()
 
 const navigateToAddStaff = (candidate) => {
     sessionStorage.setItem('selectedCandidate', JSON.stringify(candidate)) // Lưu vào sessionStorage
-    router.push('/admin/staff/addstaff')
+    router.push('/hr/staff/addstaff')
 }
 
 const props = defineProps({

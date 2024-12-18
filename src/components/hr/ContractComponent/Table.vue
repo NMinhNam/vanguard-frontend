@@ -14,7 +14,7 @@
                 <tr
                     v-for="(Contract, index) in listContract"
                     :key="Contract.soHopDong || index"
-                    @click="$router.push(`/admin/contract/${Contract.soHopDong}`)"
+                    @click="$router.push(`/hr/contract/${Contract.soHopDong}`)"
                     style="cursor: pointer"
                 >
                     <td>{{ index + 1 }}</td>

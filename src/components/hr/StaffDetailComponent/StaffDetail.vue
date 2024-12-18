@@ -165,7 +165,7 @@ const saveStaff = async () => {
 
 const navigateToAddContract = (cccd) => {
     sessionStorage.setItem('cccdStaff', cccd)
-    router.push('/admin/contract/addcontract')
+    router.push('/hr/contract/addcontract')
 }
 
 const setStaffInfo = () => {
