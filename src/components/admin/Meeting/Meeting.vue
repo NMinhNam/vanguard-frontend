@@ -5,7 +5,6 @@
             <div class="popup-content modal-dialog">
                 <div class="modal-content p-4">
                     <div class="modal-body">
-                        <!-- Component Chi Tiết -->
                         <MeetingDetail :event="selectedEvent" @reloadData="getMeetings" />
                     </div>
                     <div class="modal-footer d-flex justify-content-end align-items-end">
