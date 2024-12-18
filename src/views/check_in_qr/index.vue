@@ -12,8 +12,6 @@
 </template>
 
 <script setup>
-import Header from '@/components/main/Header.vue'
-import Aside from '@/components/main/Aside.vue'
 import { ref } from 'vue'
 import CheckInQR from '@/components/check_in_qr/CheckInQR.vue'
 

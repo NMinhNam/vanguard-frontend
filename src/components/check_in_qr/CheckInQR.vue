@@ -102,7 +102,7 @@ const startScanner = async () => {
 const checkInQr = async (maNhanVien) => {
     await getIPAddress()
     const formData = ref({
-        maNhanVien: sessionStorage.getItem('maNhanVien'),
+        maNhanVien: maNhanVien,
         publicIp: ip.value,
     })
 
