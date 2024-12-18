@@ -338,7 +338,7 @@
                 "title": "Check-in thành công",
                 "text": "Check-in"
             },
-            "fali": {
+            "fail": {
                 "title": "Check-in không thành công",
                 "text": "Có sự cố khi bạn check-in. Vui lòng thử lại."
             }

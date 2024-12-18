@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, onMounted } from 'vue';
+import { reactive, ref, onMounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n'
 import { put } from '@/stores/https';
 import SlimSelect from 'slim-select'
@@ -18,7 +18,12 @@ const openPopup = (item) => {
     showPopup.value = true;
 };
 
-
+const filteredAccounts = computed(() => {
+    const currentUser = sessionStorage.getItem('user'); 
+    return (props.listTaiKhoan || []).filter(
+        (item) => item.userName !== currentUser
+    );
+});
 
 const props = defineProps({
     listTaiKhoan: Array,
@@ -136,7 +141,7 @@ onMounted(async () => {
                     <td colspan="9">{{ $t('account.table.search') }}</td>
                 </tr>
                 <!-- Dữ liệu bảng -->
-                <tr class="align-middle" v-for="(item, index) in listTaiKhoan" :key="index">
+                <tr class="align-middle" v-for="(item, index) in filteredAccounts" :key="index">
                     <td>{{ (currentPage - 1) * pageSize + index + 1 }}</td>
                     <td>{{ item.userName }}</td>
                     <td>{{ item.maNhanVien }}</td>

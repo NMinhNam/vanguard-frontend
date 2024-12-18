@@ -86,14 +86,15 @@ const btnCheckIn_Click = async () => {
         maNhanVien: sessionStorage.getItem('maNhanVien'),
         publicIp: ip.value
     })
+    console.log(formData.value)
     try {
         const response = await post('/api/v1/attendances/checkin', formData.value)
-        console.log
+
 
         if (response.success) {
             Swal.fire({
                 title: t('checkin.check_in.success.title'),
-                text:  `${t('checkin.check_in.success.text')}: ${currentDateTime}`,
+                text: `${t('checkin.check_in.success.text')}: ${currentDateTime}`,
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
@@ -108,13 +109,23 @@ const btnCheckIn_Click = async () => {
             })
         }
     } catch (error) {
-        Swal.fire({
-            title: t('checkin.erorr.title'),
-            text: t('checkin.erorr.text'),
-            icon: 'error',
-            timer: 1500,
-        })
-        console.log("Lỗi: ", error)
+        if (error.data.status === 1003) {
+            Swal.fire({
+                title: t('checkin.check_in.fail.title'),
+                text: t('checkin.check_in.fail.text'),
+                icon: 'error',
+                timer: 1500,
+            })
+        } else {
+            Swal.fire({
+                title: t('checkin.error.title'),
+                text: t('checkin.error.text'),
+                icon: 'error',
+                timer: 1500,
+            })
+            console.log("Lỗi: ", error)
+        }
+
     }
 }
 
@@ -130,7 +141,7 @@ const btnCheckOut_Click = async () => {
         if (response.success) {
             Swal.fire({
                 title: t('checkin.check_out.success.title'),
-                text:  `${t('checkin.check_out.success.text')}: ${currentDateTime}`,
+                text: `${t('checkin.check_out.success.text')}: ${currentDateTime}`,
                 icon: 'success',
                 timer: 1500,
             }).then(() => {

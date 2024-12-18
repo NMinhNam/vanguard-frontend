@@ -19,6 +19,11 @@
                                     <i class="fa-solid fa-phone"></i>
                                     <span class="p-2">{{ infoNV.dienThoai }}</span>
                                 </div>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="btn btn-success" @click="downloadPDF()">
+                                        Xuất file PDF
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -234,7 +239,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { get } from '@/stores/https'
+import { get, getPDF } from '@/stores/https'
 
 const infoNV = ref({})
 const listHistory_Works = ref([])
@@ -287,6 +292,14 @@ const loadInfoUser = async () => {
         })
         console.error('Error during login:', error)
     }
+}
+
+const downloadPDF = async () => {
+  try {
+    await getPDF('/api/v1/employees/generate-employee-card-pdf', { employeeCode: sessionStorage.getItem('maNhanVien')})
+  } catch (error) {
+    console.error('Lỗi khi tải PDF:', error)
+  }
 }
 
 const getHistory_Works = async () => {

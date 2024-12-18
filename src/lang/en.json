@@ -339,7 +339,7 @@
                 "title": "Check-in Successful",
                 "text": "Check-in"
             },
-            "fali": {
+            "fail": {
                 "title": "Check-in Failed",
                 "text": "There was an issue with your check-in. Please try again later."
             }
