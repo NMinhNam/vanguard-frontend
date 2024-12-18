@@ -189,11 +189,14 @@ const fileInput = ref(null)
 
 const file = ref(null)
 
+const isImageChanged = ref(false)
+
 const uploadImage = (event) => {
     file.value = event.target.files[0]
     if (file.value) {
         //Cho người dùng xem trước ảnh tải lên
         previewImage.value = URL.createObjectURL(file.value)
+        isImageChanged.value = true
     }
 }
 
@@ -249,7 +252,12 @@ const btnUpdateInfo_Click = async () => {
         const formData = new FormData()
         formData.append('file', file.value)
 
-        const taiAnh = await post('/api/v1/upload-file/image', formData)
+        if (isImageChanged && file.value) {
+            const formData = new FormData()
+            formData.append('file', file.value)
+            const response = await post('/api/v1/upload-file/image', formData)
+            infoNV.hinhAnh = response.data
+        }
 
         const updateInfo = {
             maNhanVien: infoNV.maNhanVien,
@@ -260,7 +268,7 @@ const btnUpdateInfo_Click = async () => {
             email: infoNV.email,
             cccd: infoNV.cccd,
             diaChi: infoNV.diaChi,
-            hinhAnh: taiAnh.data,
+            hinhAnh: infoNV.hinhAnh,
         }
 
         Object.assign(infoNV, updateInfo)
