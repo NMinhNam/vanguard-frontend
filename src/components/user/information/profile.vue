@@ -324,7 +324,7 @@ const getHistory_Works = async () => {
 }
 
 const getEdu = async () => {
-    const response = await get('/api/v1/educations')
+    const response = await get(`/api/v1/educations/${sessionStorage.getItem('maNhanVien')}`)
     listEducations.value = response.data
     listEducations.value.sort((a, b) => new Date(b.namTotNghiep) - new Date(a.namTotNghiep))
 }
