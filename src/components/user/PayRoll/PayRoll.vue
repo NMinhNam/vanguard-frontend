@@ -1,7 +1,7 @@
 <script setup>
 import HeaderPayRoll from './HeaderPayRoll.vue'
 import Content from './ContentPayRoll.vue'
-import tablePayroll from './tablePayroll.vue'
+import tablePayroll from './TablePayroll.vue'
 import { ref } from 'vue'
 const activeTab = ref('card')
 const setActiveTab = (newTab) => {
