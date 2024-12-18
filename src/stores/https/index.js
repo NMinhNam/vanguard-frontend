@@ -3,14 +3,13 @@ import { useAuthStore } from '../auth'
 import router from '@/router'
 
 const url = [{ dev: 'http://localhost:1688' }, { prod: 'https://vanguardhrm.io.vn' }, { test: '' }]
-
 const env = [{ 1: 'dev' }, { 2: 'prod' }, { 3: 'test' }]
-const environment = 1
+const environment = 2
 
 const https = axios.create({
-    baseURL: 'http://localhost:1688',
-    timeout: 20000,
-})
+    baseURL: url[environment - 1][env[environment - 1][environment]],
+    timeout: 20000
+});
 
 let isRefreshing = false
 let failedQueue = []
