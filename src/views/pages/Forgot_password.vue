@@ -93,6 +93,7 @@ const validatePass = () => {
     const formRule = {
         newPass: {
             required: true,
+            minLength: 6
         },
     }
     const formData = {
