@@ -33,13 +33,14 @@ onMounted(async () => {
     selectedYear.value = availableYears.value[0]
     initChart()
     window.addEventListener('resize', resizeChart)
+    console.log(chartData.value)
 })
 
-const maNhanVien = router.currentRoute.value.params.maNhanVien
+const maNhanVien = ref(sessionStorage.getItem('maNhanVien'))
 
 const getDataChart = async () => {
     try {
-        const response = await get(`/api/v1/statistic/salary/employee/${maNhanVien}`)
+        const response = await get(`/api/v1/statistic/salary/employee/${maNhanVien.value}`)
         chartData.value = response.data
     } catch (error) {
         console.log(error)
