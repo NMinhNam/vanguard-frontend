@@ -47,19 +47,6 @@
                     <div class="invalid-feedback" v-if="error.ngayBatDau">Ngày bắt đầu không được để trống</div>
                 </div>
             </div>
-
-            <div class="row mb-3">
-                <label for="ngayKetThuc" class="col-sm-4 col-form-label">{{ t('contract.table.end_day') }}</label>
-                <div class="col-sm-8">
-                    <input
-                        :disabled="role === 'USER'"
-                        type="date"
-                        id="ngayKetThuc"
-                        class="form-control"
-                        v-model="Contract.ngayKetThuc"
-                    />
-                </div>
-            </div>
             <div class="row mb-3">
                 <label for="thoiHan" class="col-sm-4 col-form-label">Thời hạn</label>
                 <div class="col-sm-8 d-flex align-items-center">
@@ -109,21 +96,6 @@
                     <div class="invalid-feedback" v-if="error.ngayKetThuc">Ngày kết thúc không được để trống</div>
                 </div>
             </div>
-
-            <div class="row mb-3">
-                <label for="thoiHan" class="col-sm-4 col-form-label">{{ t('contract.detail.contract_term') }}</label>
-                <div class="col-sm-8 d-flex align-items-center">
-                    <input
-                        :disabled="role === 'USER'"
-                        type="text"
-                        id="thoiHan"
-                        class="form-control me-2"
-                        v-model="Contract.thoiHan"
-                    />
-                    <span class="input-group-text">{{ t('contract.detail.year') }}</span>
-                </div>
-            </div>
-
             <div class="row mb-3">
                 <label for="luongCoBan" class="col-sm-4 col-form-label">{{ t('contract.table.salary') }}</label>
                 <div class="col-sm-8">
