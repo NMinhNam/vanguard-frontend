@@ -52,6 +52,9 @@
                                         :placeholder="$t('login.input_text.password_placeholder')"
                                         @keypress.enter="btnLogin_Click"
                                     />
+                                    <div class="invalid-feedback">
+                                        {{ $t('login.messages.validate.password_required') }}
+                                    </div>
                                     <button
                                         type="button"
                                         class="btn btn-outline-secondary eye_icon"
