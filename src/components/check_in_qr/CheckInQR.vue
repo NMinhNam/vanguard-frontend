@@ -19,6 +19,7 @@
 <script setup>
 import { post } from '@/stores/https'
 import { ref, onBeforeUnmount } from 'vue'
+import axios from 'axios'
 
 const qrCodeData = ref(null)
 const videoElement = ref(null)
@@ -34,12 +35,14 @@ const getIPAddress = async () => {
     try {
         const response = await axios.get('https://api.ipify.org?format=json')
         ip.value = response.data.ip
+        console.log(ip.value)
     } catch (error) {
         console.error('Lỗi khi lấy IP:', error)
     }
 }
 
 const startScanner = async () => {
+    await getIPAddress()
     if (!videoElement.value) {
         console.error('Video element not mounted!')
         return
@@ -59,7 +62,7 @@ const startScanner = async () => {
                         publicIp: ip.value,
                     })
                     const response = post('http://localhost:1688/api/v1/attendances/checkin', formData.value)
-                    if (response.status == 200) {
+                    if (response) {
                         Swal.fire({
                             title: 'Thành công',
                             text: 'Check-in thành công',
