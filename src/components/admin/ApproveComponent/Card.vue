@@ -5,11 +5,8 @@
                 <h4>{{ t('approve.card.title1') }}</h4>
                 <hr />
                 <div class="mb-3" v-for="approve in filteredApprove" :key="approve.maDon">
-                    <div
-                        class="card h-100"
-                        v-if="approve.trangThai === 1"
-                        @dblclick="$router.push(`/admin/approve/${approve.maDon}`)"
-                    >
+                    <div class="card h-100" v-if="approve.trangThai === 1"
+                        @dblclick="$router.push(`/admin/approve/${approve.maDon}`)">
                         <div class="card-body d-flex p-0">
                             <div class="px-3 py-2 flex-grow-1 p-3">
                                 <div class="d-flex justify-content-between align-items-start">
@@ -22,17 +19,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-8 d-flex justify-content-start fs-4">
-                                        <button
-                                            class="btn btn-success me-2"
-                                            @click="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
-                                        >
-                                            <i class="fa-regular fa-circle-check me-2"></i>{{ t('approve.buttons.accept') }}
+                                        <button class="btn btn-success me-2"
+                                            @click="$emit('setTrangThaiApprove', approve.maDon, 2, '')">
+                                            <i class="fa-regular fa-circle-check me-2"></i>{{
+                                            t('approve.buttons.accept') }}
                                         </button>
-                                        <button
-                                            class="btn btn-danger"
-                                            @click="$emit('setTrangThaiApprove', approve.maDon, 3, '')"
-                                        >
-                                            <i class="fa-regular fa-circle-xmark me-2"></i>{{ t('approve.buttons.refuse') }}
+                                        <button class="btn btn-danger"
+                                            @click="$emit('setTrangThaiApprove', approve.maDon, 3, '')">
+                                            <i class="fa-regular fa-circle-xmark me-2"></i>{{
+                                            t('approve.buttons.refuse') }}
                                         </button>
                                     </div>
                                 </div>
@@ -46,11 +41,8 @@
                 <h4>{{ t('approve.card.title2') }}</h4>
                 <hr />
                 <div class="mb-3" v-for="approve in filteredApprove" :key="approve.maDon">
-                    <div
-                        class="card h-100"
-                        v-if="approve.trangThai === 2"
-                        @dblclick="$router.push(`/admin/approve/${approve.maDon}`)"
-                    >
+                    <div class="card h-100" v-if="approve.trangThai === 2"
+                        @dblclick="$router.push(`/admin/approve/${approve.maDon}`)">
                         <div class="card-body d-flex p-0">
                             <div class="px-3 py-2 flex-grow-1 p-3">
                                 <div class="d-flex justify-content-between align-items-start">
@@ -60,16 +52,6 @@
                                 <div class="mb-2">
                                     <p class="m-0">{{ t('approve.table.reason') }}: {{ approve.loaiDon }}</p>
                                     <p class="m-0">{{ t('approve.table.ordercreater') }}: {{ approve.ngayTao }}</p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-8 d-flex justify-content-start fs-4">
-                                        <button
-                                            class="btn btn-danger"
-                                            @click="$emit('setTrangThaiApprove', approve.maDon, 3, '')"
-                                        >
-                                            <i class="fa-regular fa-circle-xmark me-2"></i>{{ t('approve.buttons.refuse') }}
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -80,11 +62,8 @@
                 <h4>{{ t('approve.card.title3') }}</h4>
                 <hr />
                 <div class="mb-3" v-for="approve in filteredApprove" :key="approve.maDon">
-                    <div
-                        class="card h-100"
-                        v-if="approve.trangThai === 3"
-                        @dblclick="$router.push(`/admin/approve/${approve.maDon}`)"
-                    >
+                    <div class="card h-100" v-if="approve.trangThai === 3"
+                        @dblclick="$router.push(`/admin/approve/${approve.maDon}`)">
                         <div class="card-body d-flex p-0">
                             <div class="px-3 py-2 flex-grow-1 p-3">
                                 <div class="d-flex justify-content-between align-items-start">
@@ -94,16 +73,6 @@
                                 <div class="mb-2">
                                     <p class="m-0">{{ t('approve.table.reason') }}: {{ approve.loaiDon }}</p>
                                     <p class="m-0">{{ t('approve.table.ordercreater') }}: {{ approve.ngayTao }}</p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-8 d-flex justify-content-start fs-4">
-                                        <button
-                                            class="btn btn-success me-2"
-                                            @click="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
-                                        >
-                                            <i class="fa-regular fa-circle-check me-2"></i>{{ t('approve.buttons.accept') }}
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +89,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
 
-const emits = defineEmits(['setTrangThaiApprove','updatePage']); 
+const emits = defineEmits(['setTrangThaiApprove', 'updatePage']);
 const props = defineProps({
     listApprove: {
         type: Array,

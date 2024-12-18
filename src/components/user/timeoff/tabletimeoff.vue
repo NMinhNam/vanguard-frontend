@@ -274,8 +274,7 @@
         </div>
 
         <!-- Sửa thông đơn -->
-        <div class="modal fade" id="changeTimeOffModal" tabindex="-1" aria-labelledby="timeOffModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="changeTimeOffModal" tabindex="-1" aria-labelledby="timeOffModalLabel">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-fullscreen-md-down">
                     <div class="modal-header">
@@ -358,8 +357,7 @@
         </div>
 
         <!-- Modal gửi người duyệt -->
-        <div class="modal fade" id="timeOffModalDuyet" tabindex="-1" aria-labelledby="timeOffModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="timeOffModalDuyet" tabindex="-1" aria-labelledby="timeOffModalLabel">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-fullscreen-md-down">
                     <div class="modal-header">

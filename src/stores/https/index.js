@@ -103,9 +103,31 @@ export const get = (url, params = {}) => {
     return https.get(url, { params })
 }
 
-export const post = (url, data) => {
-    return https.post(url, data)
-}
+// export const post = (url, data) => {
+//     return https.post(url, data)
+// }
+
+export const post = async (url, data) => {
+    try {
+        const response = await https.post(url, data);
+        return response; // Trả về kết quả khi thành công
+    } catch (error) {
+        // Kiểm tra lỗi phản hồi từ server
+        if (error.response) {
+            // Bắt status và lỗi từ server trả về
+            return Promise.reject({
+                status: error.response.status,
+                data: error.response.data,
+            });
+        } else {
+            // Lỗi mạng hoặc lỗi khác
+            return Promise.reject({
+                message: 'Unexpected error occurred',
+                error,
+            });
+        }
+    }
+};
 
 export const put = (url, data) => {
     return https.put(url, data)

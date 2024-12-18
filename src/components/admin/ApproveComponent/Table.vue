@@ -37,11 +37,11 @@
                     </td>
                     <td>{{ formatDate(approve.ngayPheDuyet) }}</td>
                     <td>
-                        <span v-if="approve.trangThai === 1" class="badge bg-warning">Đã gửi</span>
+                        <span v-if="approve.trangThai === 1" class="badge bg-warning">Chờ phê duyệt</span>
                         <span v-if="approve.trangThai === 2" class="badge bg-success">Đã phê duyệt</span>
                         <span v-if="approve.trangThai === 3" class="badge bg-danger">Đã Từ chối</span>
                     </td>
-                    <td>
+                    <td v-if="approve.trangThai === 1">
                         <button
                             class="btn btn-success me-2"
                             @click.stop="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
