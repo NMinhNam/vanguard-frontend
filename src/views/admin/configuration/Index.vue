@@ -10,16 +10,24 @@
                 <div class="container">
                     <ul class="p-2 nav nav-tabs border-0">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#loaiCongTab">{{ $t('configuration.tabs.work_type') }}</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#loaiCongTab">{{
+                                $t('configuration.tabs.work_type')
+                            }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#ngayLeTab">{{ $t('configuration.tabs.holiday') }}</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#ngayLeTab">{{
+                                $t('configuration.tabs.holiday')
+                            }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#phuCapTab">{{ $t('configuration.tabs.allowance') }}</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#phuCapTab">{{
+                                $t('configuration.tabs.allowance')
+                            }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#viPhamTab">{{ $t('configuration.tabs.violation') }}</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#viPhamTab">{{
+                                $t('configuration.tabs.violation')
+                            }}</a>
                         </li>
                     </ul>
 

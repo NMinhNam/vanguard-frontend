@@ -26,13 +26,15 @@
                                             class="btn btn-success me-2"
                                             @click="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
                                         >
-                                            <i class="fa-regular fa-circle-check me-2"></i>{{ t('approve.buttons.accept') }}
+                                            <i class="fa-regular fa-circle-check me-2"></i
+                                            >{{ t('approve.buttons.accept') }}
                                         </button>
                                         <button
                                             class="btn btn-danger"
                                             @click="$emit('setTrangThaiApprove', approve.maDon, 3, '')"
                                         >
-                                            <i class="fa-regular fa-circle-xmark me-2"></i>{{ t('approve.buttons.refuse') }}
+                                            <i class="fa-regular fa-circle-xmark me-2"></i
+                                            >{{ t('approve.buttons.refuse') }}
                                         </button>
                                     </div>
                                 </div>
@@ -61,16 +63,6 @@
                                     <p class="m-0">{{ t('approve.table.reason') }}: {{ approve.loaiDon }}</p>
                                     <p class="m-0">{{ t('approve.table.ordercreater') }}: {{ approve.ngayTao }}</p>
                                 </div>
-                                <div class="row">
-                                    <div class="col-8 d-flex justify-content-start fs-4">
-                                        <button
-                                            class="btn btn-danger"
-                                            @click="$emit('setTrangThaiApprove', approve.maDon, 3, '')"
-                                        >
-                                            <i class="fa-regular fa-circle-xmark me-2"></i>{{ t('approve.buttons.refuse') }}
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -95,16 +87,6 @@
                                     <p class="m-0">{{ t('approve.table.reason') }}: {{ approve.loaiDon }}</p>
                                     <p class="m-0">{{ t('approve.table.ordercreater') }}: {{ approve.ngayTao }}</p>
                                 </div>
-                                <div class="row">
-                                    <div class="col-8 d-flex justify-content-start fs-4">
-                                        <button
-                                            class="btn btn-success me-2"
-                                            @click="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
-                                        >
-                                            <i class="fa-regular fa-circle-check me-2"></i>{{ t('approve.buttons.accept') }}
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -120,7 +102,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
 
-const emits = defineEmits(['setTrangThaiApprove','updatePage']); 
+const emits = defineEmits(['setTrangThaiApprove', 'updatePage'])
 const props = defineProps({
     listApprove: {
         type: Array,

@@ -14,13 +14,15 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-success" @click="saveStaffs">{{ $t('addstaffbyfileexcelcomponent.buttons.save') }}</button>
+                    <button class="btn btn-success" @click="saveStaffs">
+                        {{ $t('addstaffbyfileexcelcomponent.buttons.save') }}
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script setup>
 import { onMounted, ref } from 'vue'
 import { get } from '@/stores/https'
@@ -133,8 +135,6 @@ const isExist = async () => {
     const staffCCCDSet = new Set(listStaff.value.map((staff) => staff.cccd))
     const duplicateRecords = data.value.filter((record) => staffCCCDSet.has(record.CCCD))
     if (duplicateRecords.length > 0) {
-        console.log(duplicateRecords)
-        console.log(staffCCCDSet)
         Swal.fire({
             title: t('addstaffbyfileexcelcomponent.swal.isExist.title'),
             text: t('addstaffbyfileexcelcomponent.swal.isExist.text'),

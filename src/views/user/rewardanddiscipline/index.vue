@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Aside @toggle-sidebar="handleToggleSidebar"/>
+        <Aside @toggle-sidebar="handleToggleSidebar" />
         <article>
             <!--  Start Header  -->
             <Header />
@@ -15,16 +15,16 @@
     </div>
 </template>
 <script setup>
-import Header from '@/components/main/Header.vue';
-import Aside from '@/components/main/Aside.vue';
-import Table from '@/components/user/RewardAndDiscipline/Table.vue';
-import { ref } from 'vue';
+import Header from '@/components/main/Header.vue'
+import Aside from '@/components/main/Aside.vue'
+import Table from '@/components/user/RewardAndDiscipline/Table.vue'
+import { ref } from 'vue'
 
-const isShow = ref(true);
+const isShow = ref(true)
 
 const handleToggleSidebar = (show) => {
-    isShow.value = show;
-};
+    isShow.value = show
+}
 </script>
 <style scoped>
 main {

@@ -6,5 +6,4 @@
 import recruitmentStage from '../recruitmentStage/index.vue'
 </script>
 
-<style scope>
-</style>
+<style scope></style>

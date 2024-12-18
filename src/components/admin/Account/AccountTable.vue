@@ -1,24 +1,29 @@
 <script setup>
-import { reactive, ref, onMounted } from 'vue';
+import { reactive, ref, onMounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n'
-import { put } from '@/stores/https';
+import { put } from '@/stores/https'
 import SlimSelect from 'slim-select'
 
 const { t, locale } = useI18n()
 
-const showPopup = ref(false);
+const showPopup = ref(false)
 const slimSelectInstance = ref('')
-const selectedItem = reactive({});
+const selectedItem = reactive({})
 
 const openPopup = (item) => {
-    selectedItem.userName = item.userName;
-    selectedItem.roleName = item.role.roleName;
-    selectedItem.roleId = item.role.roleId;
+    selectedItem.userName = item.userName
+    selectedItem.roleName = item.role.roleName
+    selectedItem.roleId = item.role.roleId
 
     showPopup.value = true;
 };
 
-
+const filteredAccounts = computed(() => {
+    const currentUser = sessionStorage.getItem('user'); 
+    return (props.listTaiKhoan || []).filter(
+        (item) => item.userName !== currentUser
+    );
+});
 
 const props = defineProps({
     listTaiKhoan: Array,
@@ -26,7 +31,7 @@ const props = defineProps({
     pageSize: Number,
     listRole: Array,
     getTaiKhoan: Function,
-});
+})
 
 const createSlimSelect = () => {
     slimSelectInstance.value = new SlimSelect({
@@ -39,7 +44,7 @@ const saveUpdate = async () => {
     try {
         const formData = reactive({
             username: selectedItem.userName,
-            roleId: selectedItem.roleId
+            roleId: selectedItem.roleId,
         })
         const response = await put('/api/v1/users/updateRole', formData)
         if (response.success) {
@@ -49,7 +54,7 @@ const saveUpdate = async () => {
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
-                props.getTaiKhoan();
+                props.getTaiKhoan()
             })
         } else {
             Swal.fire({
@@ -67,20 +72,17 @@ const saveUpdate = async () => {
             timer: 1500,
         })
     }
-};
-
+}
 
 const closePopup = () => {
-    showPopup.value = false;
-};
-
+    showPopup.value = false
+}
 
 const btnChangeStatus_click = async (item) => {
     try {
         const formData = reactive({
             username: item.userName,
-            enabled: item.enabled
-
+            enabled: item.enabled,
         })
 
         const response = await put('/api/v1/users/updateStatus', formData)
@@ -112,7 +114,6 @@ const btnChangeStatus_click = async (item) => {
 onMounted(async () => {
     createSlimSelect()
 })
-
 </script>
 
 <template>
@@ -136,7 +137,7 @@ onMounted(async () => {
                     <td colspan="9">{{ $t('account.table.search') }}</td>
                 </tr>
                 <!-- Dữ liệu bảng -->
-                <tr class="align-middle" v-for="(item, index) in listTaiKhoan" :key="index">
+                <tr class="align-middle" v-for="(item, index) in filteredAccounts" :key="index">
                     <td>{{ (currentPage - 1) * pageSize + index + 1 }}</td>
                     <td>{{ item.userName }}</td>
                     <td>{{ item.maNhanVien }}</td>
@@ -144,9 +145,15 @@ onMounted(async () => {
                     <td>{{ item.dienThoai }}</td>
                     <td>{{ item.role.roleName }}</td>
                     <td>
-                        <div class="form-check form-switch d-flex justify-content-center ">
-                            <input class="form-check-input" type="checkbox" role="switch" :checked="item.enabled"
-                                v-model="item.enabled" @change="btnChangeStatus_click(item)">
+                        <div class="form-check form-switch d-flex justify-content-center">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                role="switch"
+                                :checked="item.enabled"
+                                v-model="item.enabled"
+                                @change="btnChangeStatus_click(item)"
+                            />
                         </div>
                     </td>
                     <td>
@@ -171,8 +178,13 @@ onMounted(async () => {
                             <label for="userName" class="form-label">
                                 {{ $t('account.table.username') }}
                             </label>
-                            <input v-model="selectedItem.userName" type="text" id="userName" class="form-control"
-                                readonly />
+                            <input
+                                v-model="selectedItem.userName"
+                                type="text"
+                                id="userName"
+                                class="form-control"
+                                readonly
+                            />
                         </div>
                         <div class="mb-3">
                             <label for="roleSelect1" class="form-label">
@@ -222,7 +234,9 @@ onMounted(async () => {
     z-index: 10;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 .popup.show {

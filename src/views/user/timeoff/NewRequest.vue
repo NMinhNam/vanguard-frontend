@@ -6,7 +6,7 @@
             <Header />
             <!--  End Header  -->
             <!--  Start Main  -->
-            <main class="container-fluid" :class="{ close: !isShow }" >
+            <main class="container-fluid" :class="{ close: !isShow }">
                 <Form />
             </main>
             <!--  End Main  -->
@@ -15,16 +15,16 @@
     </div>
 </template>
 <script setup>
-import Header from '@/components/main/Header.vue';
-import Aside from '@/components/main/Aside.vue';
+import Header from '@/components/main/Header.vue'
+import Aside from '@/components/main/Aside.vue'
 import Form from '@/components/user/timeoff/formtimeoff.vue'
 import { ref } from 'vue'
 
-const isShow = ref(true);
+const isShow = ref(true)
 
 const handleToggleSidebar = (show) => {
-    isShow.value = show;
-};
+    isShow.value = show
+}
 </script>
 <style scoped>
 main {

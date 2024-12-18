@@ -37,11 +37,11 @@
                     </td>
                     <td>{{ formatDate(approve.ngayPheDuyet) }}</td>
                     <td>
-                        <span v-if="approve.trangThai === 1" class="badge bg-warning">Đã gửi</span>
+                        <span v-if="approve.trangThai === 1" class="badge bg-warning">Chờ phê duyệt</span>
                         <span v-if="approve.trangThai === 2" class="badge bg-success">Đã phê duyệt</span>
                         <span v-if="approve.trangThai === 3" class="badge bg-danger">Đã Từ chối</span>
                     </td>
-                    <td>
+                    <td v-if="approve.trangThai === 1">
                         <button
                             class="btn btn-success me-2"
                             @click.stop="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
@@ -75,7 +75,6 @@
     </div>
 </template>
 
-
 <script setup>
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -108,8 +107,6 @@ const props = defineProps({
 })
 const filteredApprove = computed(() => {
     let approves = props.listApprove
-
-    // Lọc theo searchQuery nếu có
     if (props.searchQuery) {
         approves = approves.filter((approve) => approve.maDon.toLowerCase().includes(props.searchQuery.toLowerCase()))
     }
@@ -125,22 +122,17 @@ const filteredApprove = computed(() => {
 
     if (props.statusSelected) {
         approves = approves.filter((approve) => approve.trangThai == Number(props.statusSelected))
-        console.log(props.statusSelected)
     }
 
     return approves
 })
 
 function formatDate(date) {
-    // Tạo một đối tượng Date từ input (nếu không phải kiểu Date)
     const d = new Date(date)
 
-    // Lấy ngày, tháng, năm
-    const day = d.getDate().toString().padStart(2, '0') // Đảm bảo ngày có 2 chữ số
-    const month = (d.getMonth() + 1).toString().padStart(2, '0') // Tháng bắt đầu từ 0, cộng thêm 1
+    const day = d.getDate().toString().padStart(2, '0')
+    const month = (d.getMonth() + 1).toString().padStart(2, '0')
     const year = d.getFullYear()
-
-    // Trả về chuỗi theo định dạng dd/MM/yyyy
     return `${day}/${month}/${year}`
 }
 

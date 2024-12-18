@@ -4,8 +4,13 @@
             <label for="tenViPham" class="form-label me-2 text-nowrap" style="width: 12rem">
                 {{ $t('configuration.violation.table.violation_name') }}
             </label>
-            <input v-model="viPhamInfo.tenViPham" type="text" class="form-control" id="tenViPham"
-                :class="{ 'is-invalid': error.tenViPham }" />
+            <input
+                v-model="viPhamInfo.tenViPham"
+                type="text"
+                class="form-control"
+                id="tenViPham"
+                :class="{ 'is-invalid': error.tenViPham }"
+            />
             <div class="invalid-feedback">
                 {{ $t('configuration.violation.validate.name') }}
             </div>
@@ -14,8 +19,13 @@
             <label for="soTienViPham" class="form-label me-2 text-nowrap" style="width: 12rem">
                 {{ $t('configuration.violation.table.amount') }}
             </label>
-            <input v-model="viPhamInfo.soTienViPham" type="text" class="form-control" id="soTienViPham"
-                :class="{ 'is-invalid': error.soTienViPham }" />
+            <input
+                v-model="viPhamInfo.soTienViPham"
+                type="text"
+                class="form-control"
+                id="soTienViPham"
+                :class="{ 'is-invalid': error.soTienViPham }"
+            />
             <div class="invalid-feedback">
                 {{ $t('configuration.violation.validate.amount') }}
             </div>
@@ -38,12 +48,12 @@ const { t, locale } = useI18n()
 
 const viPhamInfo = reactive({
     tenViPham: '',
-    soTienViPham: ''
+    soTienViPham: '',
 })
 
 const props = defineProps({
-    getViPham: Function
-});
+    getViPham: Function,
+})
 
 const btnSaveViPham_click = async () => {
     if (!validate()) {
@@ -55,9 +65,6 @@ const btnSaveViPham_click = async () => {
         })
         return
     }
-
-    console.log(viPhamInfo)
-
     try {
         const response = await post('/api/v1/violations', viPhamInfo)
         if (response.success) {
@@ -67,7 +74,7 @@ const btnSaveViPham_click = async () => {
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
-                props.getViPham();
+                props.getViPham()
             })
         } else {
             Swal.fire({
@@ -93,7 +100,7 @@ const { validateForm } = useValidation()
 
 const error = reactive({
     tenViPham: '',
-    soTienViPham: ''
+    soTienViPham: '',
 })
 
 const validate = () => {
@@ -103,12 +110,12 @@ const validate = () => {
         },
         soTienViPham: {
             required: true,
-            number: viPhamInfo.soTienViPham
-        }
+            number: viPhamInfo.soTienViPham,
+        },
     }
     const formData = {
         tenViPham: viPhamInfo.tenViPham,
-        soTienViPham: viPhamInfo.soTienViPham
+        soTienViPham: viPhamInfo.soTienViPham,
     }
     Object.assign(error, validateForm(formRule, formData))
     for (let key in error) {

@@ -209,7 +209,6 @@ const getInfoByMaUngVien = async (maUngVien) => {
         const response = await get('/api/v1/candidates/id', { maUngVien })
         if (response && response.data) {
             ungVien.value = response.data
-            console.log(ungVien.value)
         }
     } catch (error) {
         Swal.fire({

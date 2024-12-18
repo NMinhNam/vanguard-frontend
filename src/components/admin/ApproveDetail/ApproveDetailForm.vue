@@ -10,7 +10,9 @@
             <div class="col-md-6">
                 <div>
                     <div class="row mb-3">
-                        <label for="nguoiYeuCau" class="col-3 col-form-label">{{ t('approve.table.ordercreater') }}</label>
+                        <label for="nguoiYeuCau" class="col-3 col-form-label">{{
+                            t('approve.table.ordercreater')
+                        }}</label>
                         <div class="col-9">
                             <input
                                 type="text"
@@ -55,7 +57,13 @@
                     <div class="row mb-3">
                         <label for="nguoiYeuCau" class="col-3 col-form-label">{{ t('approve.table.reviewer') }}</label>
                         <div class="col-9">
-                            <input type="text" id="nguoiYeuCau" class="form-control" :value="approveDetail.hoTenNguoiPheDuyet" readonly />
+                            <input
+                                type="text"
+                                id="nguoiYeuCau"
+                                class="form-control"
+                                :value="approveDetail.hoTenNguoiPheDuyet"
+                                readonly
+                            />
                         </div>
                     </div>
                 </div>
@@ -64,9 +72,15 @@
                     <div class="row mb-3">
                         <label for="nguoiYeuCau" class="col-3 col-form-label">{{ t('approve.table.status') }}</label>
                         <div class="col-9">
-                            <span v-if="approveDetail.trangThai === 1" class="badge bg-warning">{{ t('approve.status.summited') }}</span>
-                            <span v-if="approveDetail.trangThai === 2" class="badge bg-success">{{ t('approve.status.approved') }}</span>
-                            <span v-if="approveDetail.trangThai === 3" class="badge bg-danger">{{ t('approve.status.rejected') }}</span>
+                            <span v-if="approveDetail.trangThai === 1" class="badge bg-warning">{{
+                                t('approve.status.summited')
+                            }}</span>
+                            <span v-if="approveDetail.trangThai === 2" class="badge bg-success">{{
+                                t('approve.status.approved')
+                            }}</span>
+                            <span v-if="approveDetail.trangThai === 3" class="badge bg-danger">{{
+                                t('approve.status.rejected')
+                            }}</span>
                         </div>
                     </div>
                 </div>

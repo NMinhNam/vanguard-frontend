@@ -10,17 +10,28 @@
             </div>
             <div class="form-group fs has-search me-2">
                 <span class="material-symbols-outlined form-control-feedback">search</span>
-                <input type="search" class="form-control" @input="$emit('search', searchQuery)" placeholder="Search"
-                    v-model="searchQuery" />
+                <input
+                    type="search"
+                    class="form-control"
+                    @input="$emit('search', searchQuery)"
+                    placeholder="Search"
+                    v-model="searchQuery"
+                />
             </div>
             <div class="pagination d-flex justify-content-center align-items-center">
                 <span>{{ $t('configuration.violation.page') }} {{ currentPage }} / {{ totalPages }}</span>
-                <button class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center" :disabled="currentPage === 1"
-                    @click="$emit('prevPage')">
+                <button
+                    class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center"
+                    :disabled="currentPage === 1"
+                    @click="$emit('prevPage')"
+                >
                     <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
                 </button>
-                <button class="btn btn-secondary rounded-0 d-flex align-items-center"
-                    :disabled="currentPage === totalPages" @click="$emit('nextPage')">
+                <button
+                    class="btn btn-secondary rounded-0 d-flex align-items-center"
+                    :disabled="currentPage === totalPages"
+                    @click="$emit('nextPage')"
+                >
                     <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
                 </button>
             </div>
@@ -31,7 +42,7 @@
             <div class="modal-content p-4">
                 <h2 class="modal-title border-bottom mb-4">{{ $t('configuration.violation.title_new') }}</h2>
                 <div class="modal-body">
-                    <AddViolationPopup :getViPham="getViPham"/>
+                    <AddViolationPopup :getViPham="getViPham" />
                 </div>
                 <div class="modal-footer d-flex justify-content-end align-items-end">
                     <i @click="showPopup = false" class="text-danger fs-3 fa-solid fa-circle-xmark"></i>
@@ -59,7 +70,7 @@ const props = defineProps({
         type: Number,
         default: 1,
     },
-    getViPham: Function
+    getViPham: Function,
 })
 </script>
 
@@ -87,7 +98,9 @@ const props = defineProps({
     z-index: 10;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 .popup.show {

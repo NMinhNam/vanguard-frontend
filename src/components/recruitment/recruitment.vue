@@ -160,8 +160,8 @@
         </div>
     </div>
 </template>
-  
-  <script setup>
+
+<script setup>
 import { ref, onMounted, reactive } from 'vue'
 import { get, post } from '@/stores/https'
 import { useValidation } from '@/stores/mixin/validate_form'
@@ -257,8 +257,8 @@ const saveUngVien = async () => {
     }
 }
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .card {
     border-radius: 8px;
     border: none;

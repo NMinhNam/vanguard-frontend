@@ -310,7 +310,8 @@
             "gender": "Giới tính",
             "birthday": "Ngày sinh",
             "status": "Trạng thái",
-            "manager": "Quản lý"
+            "manager": "Quản lý",
+            "tool": "Hành động"
         },
         "header": {
             "personal_infomation": "Thông tin cá nhân",
@@ -338,7 +339,7 @@
                 "title": "Check-in thành công",
                 "text": "Check-in"
             },
-            "fali": {
+            "fail": {
                 "title": "Check-in không thành công",
                 "text": "Có sự cố khi bạn check-in. Vui lòng thử lại."
             }
@@ -762,7 +763,8 @@
             "no": "STT",
             "name": "Tên phòng ban",
             "manage": "Quản lý",
-            "staff": "Nhân viên"
+            "staff": "Nhân viên",
+            "tool": "Hành động"
         },
         "add": {
             "name": "Tên phòng ban",
@@ -793,6 +795,7 @@
         "path": "Đường dẫn họp",
         "join": "Tham gia",
         "save": "Lưu",
+        "delete": "Xóa",
         "swal": {
             "save": {
                 "success": {
@@ -813,6 +816,19 @@
                     "title": "Thất bại",
                     "text": "Cập nhật cuộc họp thất bại"
                 }
+            },
+            "delete": {
+                "success": {
+                    "title": "Thành công",
+                    "text": "Xóa cuộc họp thành công"
+                },
+                "fail": {
+                    "title": "Thất bại",
+                    "text": "Xóa cuộc họp thất bại"
+                },
+                "confirm": {
+                    "title": "Xóa cuộc họp"
+                }
             }
         }
     },
@@ -825,26 +841,29 @@
             "id": "Mã nhân viên",
             "name": "Tên nhân viên",
             "position": "Chức vụ",
-            "salary":"Lương cơ bản",
-            "salary_coefficient":"Hệ số lương",
+            "salary": "Lương cơ bản",
+            "salary_coefficient": "Hệ số lương",
             "number": "Số công",
-            "bonus":"Lương thưởng",
-            "allowance":"Phụ cấp",
-            "violation":"Vi phạm",
+            "bonus": "Lương thưởng",
+            "allowance": "Phụ cấp",
+            "violation": "Vi phạm",
             "real": "Thực lãnh",
-            "search":"Không tìm thấy"
+            "search": "Không tìm thấy",
+            "month": "Tháng",
+            "year": "Năm",
+            "total_salary": "Tổng lương"
         }
     },
     "position": {
         "title": "Chức vụ",
         "search": "Tìm kiếm",
         "page": "Trang",
-        "new":"Thêm mới",
+        "new": "Thêm mới",
         "new_position": "Chức vụ mới",
-        "save":"Lưu",
+        "save": "Lưu",
         "save_title": "Thêm chức vụ",
         "table": {
-            "no":"STT",
+            "no": "STT",
             "id": "Mã chức vụ",
             "name": "Tên chức vụ"
         },
@@ -865,7 +884,7 @@
         "title": "Tuyển dụng",
         "search": "Tìm kiếm",
         "page": "Trang",
-        "new":"Thêm mới",
+        "new": "Thêm mới",
         "save": "Lưu",
         "add": {
             "title": "Thêm tuyển dụng",
@@ -876,12 +895,12 @@
             "request": "Yêu cầu"
         },
         "table": {
-            "no":"STT",
+            "no": "STT",
             "name": "Tên vị trí",
             "id": "Mã phòng ban",
-            "number":"Số lượng tuyển",
+            "number": "Số lượng tuyển",
             "application": "Số lượng ứng tuyển",
-            "status":"Trạng thái",
+            "status": "Trạng thái",
             "describe": "Mô tả",
             "request": "Yêu cầu",
             "full": "Đã đầy",

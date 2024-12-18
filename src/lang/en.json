@@ -311,7 +311,8 @@
             "gender": "Gender",
             "birthday": "Birthday",
             "status": "Status",
-            "manager": "Manager"
+            "manager": "Manager",
+            "tool": "Acction"
         },
         "header": {
             "personal_infomation": "Personal information",
@@ -339,7 +340,7 @@
                 "title": "Check-in Successful",
                 "text": "Check-in"
             },
-            "fali": {
+            "fail": {
                 "title": "Check-in Failed",
                 "text": "There was an issue with your check-in. Please try again later."
             }
@@ -801,7 +802,8 @@
             "no": "No.",
             "name": "Department Name",
             "manage": "Manager",
-            "staff": "Staff"
+            "staff": "Staff",
+            "tool": "Acction"
         },
         "add": {
             "name": "Department Name",
@@ -832,6 +834,7 @@
         "path": "Meeting Link",
         "join": "Join",
         "save": "Save",
+        "delete": "Delete",
         "swal": {
             "save": {
                 "success": {
@@ -852,6 +855,16 @@
                     "title": "Failed",
                     "text": "Failed to update meeting"
                 }
+            },
+            "delete": {
+                "success": {
+                    "title": "Success",
+                    "text": "Meeting deleted successfully"
+                },
+                "fail": {
+                    "title": "Failed",
+                    "text": "Failed to delete meeting"
+                }
             }
         }
     },
@@ -871,7 +884,10 @@
             "allowance": "Allowance",
             "violation": "Violation",
             "real": "Net Salary",
-            "search": "No results found"
+            "search": "No results found",
+            "month": "Month",
+            "year": "Year",
+            "total_salary": "Total Salary"
         }
     },
     "position": {

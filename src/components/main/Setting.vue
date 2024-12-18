@@ -9,16 +9,16 @@
         </div>
         <div class="modal-body">
             <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="language" class="col-form-label fw-bold">{{ $t('common.select_lang') }}</label>
+                <div class="col-auto">
+                    <label for="language" class="col-form-label fw-bold">{{ $t('common.select_lang') }}</label>
+                </div>
+                <div class="col-auto">
+                    <select class="form-select" id="language" v-model="language">
+                        <option value="vn" selected>Tiếng Việt</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-auto">
-                <select class="form-select" id="language" v-model="language">
-                    <option value="vn" selected>Tiếng Việt</option>
-                    <option value="en">English</option>
-                </select>
-            </div>
-        </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
@@ -33,7 +33,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useCookie } from '@/stores/mixin/cookie'
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'vue-i18n'
 
 const { getCookie, setCookie } = useCookie()
 const { locale } = useI18n()

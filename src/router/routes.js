@@ -69,6 +69,6 @@ const routes = pages
             ...(children.length && { children }),
         }
     })
-    .concat([{ path: '/:catchAll(.*)', redirect: '/pages/404error' }]); // Thêm dòng này cho route catch-all
+    .concat([{ path: '/:catchAll(.*)', redirect: '/pages/404error' }]) // Thêm dòng này cho route catch-all
 
 export default routes

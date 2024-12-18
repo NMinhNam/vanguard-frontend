@@ -11,7 +11,6 @@ const https = axios.create({
     timeout: 20000
 });
 
-
 let isRefreshing = false
 let failedQueue = []
 
@@ -103,8 +102,30 @@ export const get = (url, params = {}) => {
     return https.get(url, { params })
 }
 
-export const post = (url, data) => {
-    return https.post(url, data)
+// export const post = (url, data) => {
+//     return https.post(url, data)
+// }
+
+export const post = async (url, data) => {
+    try {
+        const response = await https.post(url, data)
+        return response // Trả về kết quả khi thành công
+    } catch (error) {
+        // Kiểm tra lỗi phản hồi từ server
+        if (error.response) {
+            // Bắt status và lỗi từ server trả về
+            return Promise.reject({
+                status: error.response.status,
+                data: error.response.data,
+            })
+        } else {
+            // Lỗi mạng hoặc lỗi khác
+            return Promise.reject({
+                message: 'Unexpected error occurred',
+                error,
+            })
+        }
+    }
 }
 
 export const put = (url, data) => {
@@ -114,3 +135,31 @@ export const put = (url, data) => {
 export const del = (url) => {
     return https.delete(url)
 }
+
+export const getPDF = async (url, params = {}) => {
+    try {
+        // Gửi yêu cầu API để tải file PDF với phản hồi kiểu blob
+        const response = await https.get(url, {
+            params,
+            responseType: 'blob', // Quan trọng: Đảm bảo phản hồi là kiểu blob để xử lý file
+        });
+
+        // Tạo một URL tạm thời cho file PDF
+        const pdfBlob = new Blob([response], { type: 'application/pdf' });
+        const pdfUrl = window.URL.createObjectURL(pdfBlob);
+
+        // Tạo một liên kết và kích hoạt tải xuống
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.setAttribute('download', 'Thongtinnhanvien.pdf'); // Đặt tên file khi tải về
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // Xóa liên kết sau khi tải xong
+
+        return response;
+    } catch (error) {
+        console.error('Có lỗi khi tải PDF:', error);
+        throw error; // Ném lỗi để có thể xử lý nếu cần
+    }
+};
+

@@ -1,6 +1,11 @@
 <template>
     <div class="container-fluid mt-3" style="overflow-x: auto">
-        <HeadMenu @search="handleSearch" @tab-change="setActiveTab" :activeTab="activeTab" />
+        <HeadMenu
+            :positionDetail="positionDetail"
+            @search="handleSearch"
+            @tab-change="setActiveTab"
+            :activeTab="activeTab"
+        />
         <div class="row">
             <div>
                 <Card
@@ -13,6 +18,7 @@
                 />
                 <Table
                     v-if="activeTab === 'table'"
+                    @getPostionById="handlePostionDetail"
                     :searchQuery="searchQuery"
                     :currentPage="currentPage"
                     :pageSize="pageSize"
@@ -35,8 +41,13 @@ import Table from './Table.vue'
 const activeTab = ref('table')
 const listPositon = ref([])
 const currentPage = ref(1)
-const pageSize = ref(2)
+const pageSize = ref(10)
 const searchQuery = ref('')
+const positionDetail = ref({})
+
+const handlePostionDetail = (detail) => {
+    positionDetail.value = detail
+}
 
 const setActiveTab = (tab) => {
     activeTab.value = tab
@@ -57,14 +68,5 @@ const getAllPostion = async () => {
     } catch (error) {
         console.error('Error fetching position data:', error)
     }
-}
-const applyFilters = () => {
-    filteredRecruitments.value = listRecruitment.value.filter((recruitment) => {
-        const matchesQuery =
-            searchQuery.value === '' ||
-            (recruitment.tenViTri && recruitment.tenViTri.toLowerCase().includes(searchQuery.value.toLowerCase())) ||
-            (recruitment.moTa && recruitment.moTa.toLowerCase().includes(searchQuery.value.toLowerCase()))
-        return matchesQuery
-    })
 }
 </script>

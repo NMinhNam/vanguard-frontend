@@ -16,7 +16,8 @@
         <div class="card-body">
             <div class="col-sm-12 row m-0">
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-secondary rounded-2 fw-bolder">{{ $t('leave.table.not_submitted')
+                    <label class="p-2 text-bg-secondary rounded-2 fw-bolder">{{
+                        $t('leave.table.not_submitted')
                         }}</label>
                     <!-- Card Item with Modal Trigger -->
                     <div v-for="item in listChuaGui" :key="item.maDon" class="card p-2 my-2">
@@ -26,7 +27,7 @@
                                 <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
-                            <div class="fw-medium text-end text-secondary"> <i class="fa-solid fa-circle-dot"></i></div>
+                            <div class="fw-medium text-end text-secondary"><i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2" data-bs-toggle="modal" data-bs-target="#timeOffModal"
                             @click="openModal(item)">
@@ -65,7 +66,8 @@
                     </div>
                 </div>
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-primary  rounded-2 fw-bolder">{{ $t('leave.table.pending_approval')
+                    <label class="p-2 text-bg-primary rounded-2 fw-bolder">{{
+                        $t('leave.table.pending_approval')
                         }}</label>
                     <!-- Card Item with Modal Trigger -->
                     <div v-for="item in listChoDuyet" :key="item.maDon" class="card p-2 my-2">
@@ -74,7 +76,7 @@
                                 <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
-                            <div class="fw-medium text-end text-primary"> <i class="fa-solid fa-circle-dot"></i></div>
+                            <div class="fw-medium text-end text-primary"><i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2">
                             <label class="w-100">
@@ -107,7 +109,8 @@
                     </div>
                 </div>
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-success text-white rounded-2 fw-bolder">{{ $t('leave.table.approved')
+                    <label class="p-2 text-bg-success text-white rounded-2 fw-bolder">{{
+                        $t('leave.table.approved')
                         }}</label>
                     <!-- Card Item with Modal Trigger -->
                     <div v-for="item in listDaDuyet" :key="item.maDon" class="card p-2 my-2">
@@ -116,7 +119,7 @@
                                 <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
-                            <div class="fw-medium text-end text-success"> <i class="fa-solid fa-circle-dot"></i></div>
+                            <div class="fw-medium text-end text-success"><i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2">
                             <label class="w-100">
@@ -157,7 +160,7 @@
                                 <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
-                            <div class="fw-medium text-end text-danger"> <i class="fa-solid fa-circle-dot"></i></div>
+                            <div class="fw-medium text-end text-danger"><i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2">
                             <label class="w-100">
@@ -208,13 +211,13 @@
                                     <label for="maNhanVien" class="form-label disabled">{{
                                         $t('create_onleave.items.employee_id') }}:</label>
                                     <input type="text" id="maNhanVien" class="bg-active form-control"
-                                        :value="userInfo.maNhanVien" disabled>
+                                        :value="userInfo.maNhanVien" disabled />
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
                                     <label for="hoTen" class="form-label">{{ $t('create_onleave.items.full_name')
                                         }}:</label>
                                     <input type="text" id="hoTen" class="bg-active form-control" :value="userInfo.hoTen"
-                                        disabled>
+                                        disabled />
                                 </div>
                             </div>
                             <div class="row py-2">
@@ -222,38 +225,38 @@
                                     <label for="chucVu" class="form-label">{{ $t('create_onleave.items.position')
                                         }}:</label>
                                     <input type="text" id="chucVu" class="bg-active form-control"
-                                        :value="userInfo.tenChucVu" disabled>
+                                        :value="userInfo.tenChucVu" disabled />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="phongBan" class="form-label disabled">{{
                                         $t('create_onleave.items.department') }}:</label>
                                     <input type="text" id="phongBan" class="bg-active form-control"
-                                        :value="userInfo.tenPhongBan" disabled>
+                                        :value="userInfo.tenPhongBan" disabled />
                                 </div>
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="truongPhong" class="form-label">{{ $t('create_onleave.items.approver')
                                     }}:</label>
                                 <input type="text" id="truongPhong" class="bg-active form-control" value="Phạm Hoàng Hà"
-                                    disabled>
+                                    disabled />
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="lydo" class="form-label">{{ $t('create_onleave.items.reason') }}:</label>
                                 <input type="text" id="lydo" class="bg-active form-control"
-                                    :value="selectedItem.loaiDon" disabled>
+                                    :value="selectedItem.loaiDon" disabled />
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-6">
                                     <label for="batdau" class="form-label">{{ $t('create_onleave.items.from_day')
                                         }}:</label>
                                     <input type="text" id="batdau" class="bg-active form-control"
-                                        :value="formatDate(selectedItem.ngayBatDau)" disabled>
+                                        :value="formatDate(selectedItem.ngayBatDau)" disabled />
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
                                     <label for="ketthuc" class="form-label">{{ $t('create_onleave.items.to_day')
                                         }}:</label>
                                     <input type="text" id="ketthuc" class="bg-active form-control"
-                                        :value="formatDate(selectedItem.ngayKetThuc)" disabled>
+                                        :value="formatDate(selectedItem.ngayKetThuc)" disabled />
                                 </div>
                             </div>
                             <div class="row py-2">
@@ -266,16 +269,16 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
-                            $t('create_onleave.buttons.close') }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            {{ $t('create_onleave.buttons.close') }}
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Sửa thông đơn -->
-        <div class="modal fade" id="changeTimeOffModal" tabindex="-1" aria-labelledby="timeOffModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="changeTimeOffModal" tabindex="-1" aria-labelledby="timeOffModalLabel">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-fullscreen-md-down">
                     <div class="modal-header">
@@ -290,13 +293,13 @@
                                     <label for="maNhanVien" class="form-label disabled">{{
                                         $t('create_onleave.items.employee_id') }}:</label>
                                     <input type="text" id="maNhanVien" class="bg-active form-control"
-                                        :value="userInfo.maNhanVien" disabled>
+                                        :value="userInfo.maNhanVien" disabled />
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
                                     <label for="hoTen" class="form-label">{{ $t('create_onleave.items.full_name')
                                         }}:</label>
                                     <input type="text" id="hoTen" class="bg-active form-control" :value="userInfo.hoTen"
-                                        disabled>
+                                        disabled />
                                 </div>
                             </div>
                             <div class="row py-2">
@@ -319,19 +322,21 @@
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="batdau" class="form-label">{{ $t('create_onleave.items.from_day')
+                                    <label for="batdau" class="form-label">{{
+                                        $t('create_onleave.items.from_day')
                                         }}</label>
                                     <input type="date" v-model="selectedItem.ngayBatDau" id="batdau"
-                                        class="form-control" :class="{ 'is-invalid': errorChange.ngayBatDau }">
+                                        class="form-control" :class="{ 'is-invalid': errorChange.ngayBatDau }" />
                                     <div class="invalid-feedback">
                                         {{ $t('create_onleave.validate.from_day') }}
                                     </div>
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="ketthuc" class="form-label">{{ $t('create_onleave.items.to_day')
+                                    <label for="ketthuc" class="form-label">{{
+                                        $t('create_onleave.items.to_day')
                                         }}</label>
                                     <input type="date" v-model="selectedItem.ngayKetThuc" id="ketthuc"
-                                        class="form-control" :class="{ 'is-invalid': errorChange.ngayKetThuc }">
+                                        class="form-control" :class="{ 'is-invalid': errorChange.ngayKetThuc }" />
                                     <div class="invalid-feedback">
                                         {{ $t('create_onleave.validate.to_day') }}
                                     </div>
@@ -350,16 +355,16 @@
                         <button type="button" class="btn btn-warning" @click="btnChangeYeuCau_click(selectedItem)">
                             {{ $t('create_onleave.buttons.save') }}
                         </button>
-                        <button type="button text-end" class="btn btn-secondary" data-bs-dismiss="modal">{{
-                            $t('create_onleave.buttons.close') }}</button>
+                        <button type="button text-end" class="btn btn-secondary" data-bs-dismiss="modal">
+                            {{ $t('create_onleave.buttons.close') }}
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Modal gửi người duyệt -->
-        <div class="modal fade" id="timeOffModalDuyet" tabindex="-1" aria-labelledby="timeOffModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="timeOffModalDuyet" tabindex="-1" aria-labelledby="timeOffModalLabel">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-fullscreen-md-down">
                     <div class="modal-header">
@@ -370,11 +375,12 @@
                         <!-- Reusable Card Structure Inside Modal -->
                         <div class="py-2 card card-body">
                             <div class="col-md-12">
-                                <label for="truongPhong" class="form-label">{{ $t('create_onleave.items.approver')
+                                <label for="truongPhong" class="form-label">{{
+                                    $t('create_onleave.items.approver')
                                     }}</label>
                                 <select id="nhanVienSelect" v-model="nhanVienSelect" singer class="slim-select"
                                     :class="{ 'is-invalid': error.nhanVienSelect }">
-                                    <option v-for="staff in dataAllStaff" :key="staff.maNhanVien"
+                                    <option v-for="staff in filteredAccounts" :key="staff.maNhanVien"
                                         :value="staff.maNhanVien">
                                         {{ staff.maNhanVien }} - {{ staff.hoTen }}
                                     </option>
@@ -390,21 +396,22 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" @click="guiDuyetYeuCau(selectedItem.maDon)">{{
-                            $t('create_onleave.buttons.send') }}</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
-                            $t('create_onleave.buttons.close') }}</button>
+                        <button type="button" class="btn btn-success" @click="guiDuyetYeuCau(selectedItem.maDon)">
+                            {{ $t('create_onleave.buttons.send') }}
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            {{ $t('create_onleave.buttons.close') }}
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup>
-import { del, get, post, put } from '@/stores/https';
-import { onMounted, ref, reactive } from 'vue'
+import { del, get, post, put } from '@/stores/https'
+import { onMounted, ref, reactive, computed } from 'vue'
 import { useValidation } from '@/stores/mixin/validate_form'
 import SlimSelect from 'slim-select'
 import { useI18n } from 'vue-i18n'
@@ -430,12 +437,24 @@ const ghiChu = ref('')
 const getAllStaff = async () => {
     const response = await get('/api/v1/employees')
     dataAllStaff.value = response.data
+    dataAllStaff.value.sort((a, b) => {
+        if (a.maNhanVien < b.maNhanVien) return -1
+        if (a.maNhanVien > b.maNhanVien) return 1
+        return 0
+    })
 }
+
+const filteredAccounts = computed(() => {
+    const currentUser = sessionStorage.getItem('maNhanVien');
+    return (dataAllStaff.value || []).filter(
+        (item) => item.maNhanVien !== currentUser
+    );
+});
 
 const { validateForm } = useValidation()
 
 const error = reactive({
-    nhanVienSelect: ''
+    nhanVienSelect: '',
 })
 
 const guiDuyetYeuCau = async (maDon) => {
@@ -443,7 +462,7 @@ const guiDuyetYeuCau = async (maDon) => {
         const formData = ref({
             maDon: maDon,
             maNhanVien: nhanVienSelect.value,
-            ghiChu: ghiChu.value
+            ghiChu: ghiChu.value,
         })
         const response = await post('/api/v1/approvals', formData.value)
         if (response.success) {
@@ -476,7 +495,7 @@ const createSlimSelect = () => {
     slimSelectInstance.value = new SlimSelect({
         select: '#nhanVienSelect',
         closeOnSelect: false,
-    });
+    })
 }
 
 //Định dạng ngày theo dạng dd-mm-yyyy
@@ -500,11 +519,10 @@ const loadYeuCau = async () => {
         listTuChoi.value = []
 
         //Phân các list theo các trạng thái tương ứng: 1-chờ duyệt, 2-đã duyệt, 3-từ chối
-        listYeuCau.value.forEach(item => {
+        listYeuCau.value.forEach((item) => {
             if (item.trangThai === 0) {
                 listChuaGui.value.push(item)
-            }
-            else if (item.trangThai === 1) {
+            } else if (item.trangThai === 1) {
                 listChoDuyet.value.push(item)
             } else if (item.trangThai === 2) {
                 listDaDuyet.value.push(item)
@@ -513,10 +531,9 @@ const loadYeuCau = async () => {
             }
         })
 
-        listChoDuyet.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao));
-        listDaDuyet.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao));
-        listTuChoi.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao));
-
+        listChoDuyet.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao))
+        listDaDuyet.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao))
+        listTuChoi.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao))
     } catch (error) {
         Swal.fire({
             title: t('create_onleave.error.title'),
@@ -538,7 +555,7 @@ const loadInfoUser = async () => {
             tenChucVu: response.data.tenChucVu,
             tenBoPhan: response.data.tenBoPhan,
             tenPhongBan: response.data.tenPhongBan,
-            hinhAnh: response.data.hinhAnh
+            hinhAnh: response.data.hinhAnh,
         }
     } catch (error) {
         Swal.fire({
@@ -553,27 +570,27 @@ const loadInfoUser = async () => {
 const errorChange = reactive({
     loaiDon: '',
     ngayBatDau: '',
-    ngayKetThuc: ''
+    ngayKetThuc: '',
 })
 
 const validateChange = (item) => {
     const formRule = {
         loaiDon: {
-            required: true
+            required: true,
         },
         ngayBatDau: {
             required: true,
-            compareDate: `>= ${new Date().toISOString().split('T')[0]}`
+            compareDate: `>= ${new Date().toISOString().split('T')[0]}`,
         },
         ngayKetThuc: {
             required: true,
-            compareDate: `>= ${item.ngayBatDau}`
-        }
+            compareDate: `>= ${item.ngayBatDau}`,
+        },
     }
     const validationData = {
         loaiDon: item.loaiDon,
         ngayBatDau: item.ngayBatDau,
-        ngayKetThuc: item.ngayKetThuc
+        ngayKetThuc: item.ngayKetThuc,
     }
     Object.assign(errorChange, validateForm(formRule, validationData))
     for (let key in errorChange) {
@@ -626,10 +643,10 @@ const btnDeleteDonYeuCau_click = async (maDon) => {
         Swal.fire({
             title: t('create_onleave.delete_request.question.title'),
             text: t('create_onleave.delete_request.question.text'),
-            icon: "warning",
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
             confirmButtonText: t('create_onleave.delete_request.button.delete'),
             cancelButtonText: t('create_onleave.delete_request.button.cancel'),
         }).then(async (result) => {
@@ -637,19 +654,19 @@ const btnDeleteDonYeuCau_click = async (maDon) => {
                 const response = await del(`/api/v1/don-yeu-cau/${maDon}`)
                 if (response.success) {
                     // Xóa item khỏi listYeuCau
-                    listYeuCau.value = listYeuCau.value.filter(item => item.maDon !== maDon)
+                    listYeuCau.value = listYeuCau.value.filter((item) => item.maDon !== maDon)
 
                     // Xóa item khỏi các danh sách phân loại
-                    listChoDuyet.value = listChoDuyet.value.filter(item => item.maDon !== maDon)
-                    listDaDuyet.value = listDaDuyet.value.filter(item => item.maDon !== maDon)
-                    listTuChoi.value = listTuChoi.value.filter(item => item.maDon !== maDon)
+                    listChoDuyet.value = listChoDuyet.value.filter((item) => item.maDon !== maDon)
+                    listDaDuyet.value = listDaDuyet.value.filter((item) => item.maDon !== maDon)
+                    listTuChoi.value = listTuChoi.value.filter((item) => item.maDon !== maDon)
                     Swal.fire({
                         title: t('create_onleave.delete_request.success.title'),
                         text: t('create_onleave.delete_request.success.text'),
                         icon: 'success',
                         timer: 1500,
                     }).then(() => {
-                        location.reload();
+                        location.reload()
                     })
                 } else {
                     Swal.fire({
@@ -660,7 +677,7 @@ const btnDeleteDonYeuCau_click = async (maDon) => {
                     })
                 }
             }
-        });
+        })
     } catch (error) {
         Swal.fire({
             title: t('create_onleave.error.title'),

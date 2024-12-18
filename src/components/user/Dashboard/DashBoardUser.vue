@@ -15,7 +15,7 @@
         </div>
     </div>
 </template>
-  
+
 <script setup>
 import BirthDay from '@/components/dashboard/BirthDay.vue'
 import NewStaff from '@/components/dashboard/NewStaff.vue'

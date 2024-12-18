@@ -2,47 +2,67 @@
     <div class="container-fluid">
         <div class="mb-3">
             <label for="tenLoaiCong" class="form-label me-2 text-nowrap" style="width: 12rem">
-                {{ $t('configuration.work_type.table.work_type_name')}}
+                {{ $t('configuration.work_type.table.work_type_name') }}
             </label>
-            <input v-model="loaiCongInfo.tenLoaiCong" type="text" class="form-control" id="tenLoaiCong"
-                :class="{ 'is-invalid': error.tenLoaiCong }" />
+            <input
+                v-model="loaiCongInfo.tenLoaiCong"
+                type="text"
+                class="form-control"
+                id="tenLoaiCong"
+                :class="{ 'is-invalid': error.tenLoaiCong }"
+            />
             <div class="invalid-feedback">
-                {{ $t('configuration.work_type.validate.name')}}
+                {{ $t('configuration.work_type.validate.name') }}
             </div>
         </div>
         <div class="mb-3">
             <label for="gioBatDau" class="form-label me-2 text-nowrap" style="width: 12rem">
-                {{ $t('configuration.work_type.table.start_time')}}
+                {{ $t('configuration.work_type.table.start_time') }}
             </label>
-            <input v-model="loaiCongInfo.gioBatDau" type="time" class="form-control" id="gioBatDau"
-                :class="{ 'is-invalid': error.gioBatDau }" />
+            <input
+                v-model="loaiCongInfo.gioBatDau"
+                type="time"
+                class="form-control"
+                id="gioBatDau"
+                :class="{ 'is-invalid': error.gioBatDau }"
+            />
             <div class="invalid-feedback">
-                {{ $t('configuration.work_type.validate.start')}}
+                {{ $t('configuration.work_type.validate.start') }}
             </div>
         </div>
         <div class="mb-3">
             <label for="gioKetThuc" class="form-label me-2 text-nowrap" style="width: 12rem">
-                {{ $t('configuration.work_type.table.end_time')}}
+                {{ $t('configuration.work_type.table.end_time') }}
             </label>
-            <input v-model="loaiCongInfo.gioKetThuc" type="time" class="form-control" id="gioKetThuc"
-                :class="{ 'is-invalid': error.gioKetThuc }" />
+            <input
+                v-model="loaiCongInfo.gioKetThuc"
+                type="time"
+                class="form-control"
+                id="gioKetThuc"
+                :class="{ 'is-invalid': error.gioKetThuc }"
+            />
             <div class="invalid-feedback">
-               {{ $t('configuration.work_type.validate.end')}}
+                {{ $t('configuration.work_type.validate.end') }}
             </div>
         </div>
         <div class="mb-3">
             <label for="heSo" class="form-label me-2 text-nowrap" style="width: 12rem">
-                {{ $t('configuration.work_type.table.salary_coefficient')}}
+                {{ $t('configuration.work_type.table.salary_coefficient') }}
             </label>
-            <input v-model="loaiCongInfo.heSo" type="text" class="form-control" id="heSo"
-                :class="{ 'is-invalid': error.heSo }" />
+            <input
+                v-model="loaiCongInfo.heSo"
+                type="text"
+                class="form-control"
+                id="heSo"
+                :class="{ 'is-invalid': error.heSo }"
+            />
             <div class="invalid-feedback">
-                {{ $t('configuration.work_type.validate.salary')}}
+                {{ $t('configuration.work_type.validate.salary') }}
             </div>
         </div>
         <div class="d-flex justify-content-end">
             <button @click="btnLuuLoaiCong_click()" class="btn btn-success">
-                {{ $t('configuration.work_type.save')}}
+                {{ $t('configuration.work_type.save') }}
             </button>
         </div>
     </div>
@@ -58,15 +78,15 @@ const { t, locale } = useI18n()
 const props = defineProps({
     getLoaiCong: {
         type: Function,
-        required: true
-    }
+        required: true,
+    },
 })
 
 const loaiCongInfo = reactive({
     tenLoaiCong: '',
     gioBatDau: '',
     gioKetThuc: '',
-    soTien: ''
+    soTien: '',
 })
 
 const btnLuuLoaiCong_click = async () => {
@@ -89,7 +109,7 @@ const btnLuuLoaiCong_click = async () => {
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
-                props.getLoaiCong();
+                props.getLoaiCong()
             })
         } else {
             Swal.fire({
@@ -117,7 +137,7 @@ const error = reactive({
     tenLoaiCong: '',
     gioBatDau: '',
     gioKetThuc: '',
-    heSo: ''
+    heSo: '',
 })
 
 const validate = () => {
@@ -133,14 +153,14 @@ const validate = () => {
         },
         heSo: {
             required: true,
-            number: loaiCongInfo.heSo
-        }
+            number: loaiCongInfo.heSo,
+        },
     }
     const formData = {
         tenLoaiCong: loaiCongInfo.tenLoaiCong,
         gioBatDau: loaiCongInfo.gioBatDau,
         gioKetThuc: loaiCongInfo.gioKetThuc,
-        heSo: loaiCongInfo.heSo
+        heSo: loaiCongInfo.heSo,
     }
     Object.assign(error, validateForm(formRule, formData))
     for (let key in error) {
@@ -150,10 +170,7 @@ const validate = () => {
 }
 //--------------------------------------------------------------//
 
-onMounted(async () => {
-    
-})
+onMounted(async () => {})
 </script>
 
-<style>
-</style>
+<style></style>

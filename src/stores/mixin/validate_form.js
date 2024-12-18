@@ -68,10 +68,10 @@ export const useValidation = () => {
             //     compareDate(value, rule, valueCompare) ? null : (error[field] = 'compareDate')
             // }
             if (fieldsRule.compareDate) {
-                const [rule, , valueCompare = fieldsRule.compareDate.split(' ')[1]] = fieldsRule.compareDate.split(' ');
-                compareDate(value, rule, valueCompare) ? null : (error[field] = 'compareDate');
+                const [rule, , valueCompare = fieldsRule.compareDate.split(' ')[1]] = fieldsRule.compareDate.split(' ')
+                compareDate(value, rule, valueCompare) ? null : (error[field] = 'compareDate')
             }
-            
+
             if (!error[field]) {
                 error[field] = false
             }
@@ -118,18 +118,18 @@ export const useValidation = () => {
         // }
         // Điều chỉnh số ngày của tháng 2 nếu là năm nhuận
         if (month === 2 && isLeapYear) {
-            daysInMonth[1] = 29;
+            daysInMonth[1] = 29
         }
 
         // Kiểm tra ngày có hợp lệ không
         if (day < 1 || day > daysInMonth[month - 1]) {
-            return false;
+            return false
         }
         return true
     }
     const compareDate = (value, rule, valueCompare) => {
         const d1 = new Date(value).getTime()
-        const d2 = (valueCompare == 'today') ? new Date(valueCompare).getTime() : new Date(valueCompare).getTime()
+        const d2 = valueCompare == 'today' ? new Date(valueCompare).getTime() : new Date(valueCompare).getTime()
         switch (rule) {
             case '>':
                 return d1 > d2

@@ -1,13 +1,13 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
-import routes from './routes';
+import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
+import routes from './routes'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: routes,
 })
 
-const permitURL = ['/', '/pages/login', '/pages/autherror', '/pages/404error', '/recruitment', '/pages/forgot_password']
+const permitURL = ['/', '/pages/login', '/pages/autherror', '/pages/404error', '/recruitment', '/check_in_qr', '/pages/forgot_password']
 
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore()

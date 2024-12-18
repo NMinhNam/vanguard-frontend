@@ -43,7 +43,7 @@
     </div>
 </template>
 <script setup>
-import Setting from './Setting.vue';
+import Setting from './Setting.vue'
 </script>
 <style scoped>
 article {

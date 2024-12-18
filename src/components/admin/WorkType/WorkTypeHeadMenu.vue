@@ -4,25 +4,36 @@
             <div class="d-flex align-items-center">
                 <button class="btn btn-primary me-2" @click="showPopup = true">
                     <i class="fa-solid fa-plus me-1"></i>
-                    {{ $t('configuration.work_type.new')}}
+                    {{ $t('configuration.work_type.new') }}
                 </button>
                 <h5 class="mb-0 fw-bolder">
-                    {{ $t('configuration.work_type.title')}}
+                    {{ $t('configuration.work_type.title') }}
                 </h5>
             </div>
             <div class="form-group fs has-search me-2">
                 <span class="material-symbols-outlined form-control-feedback">search</span>
-                <input type="search" class="form-control" @input="$emit('search', searchQuery)" placeholder="Search"
-                    v-model="searchQuery" />
+                <input
+                    type="search"
+                    class="form-control"
+                    @input="$emit('search', searchQuery)"
+                    placeholder="Search"
+                    v-model="searchQuery"
+                />
             </div>
             <div class="pagination d-flex justify-content-center align-items-center">
-                <span>{{ $t('configuration.work_type.page')}} {{ currentPage }} / {{ totalPages }}</span>
-                <button class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center" :disabled="currentPage === 1"
-                    @click="$emit('prevPage')">
+                <span>{{ $t('configuration.work_type.page') }} {{ currentPage }} / {{ totalPages }}</span>
+                <button
+                    class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center"
+                    :disabled="currentPage === 1"
+                    @click="$emit('prevPage')"
+                >
                     <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
                 </button>
-                <button class="btn btn-secondary rounded-0 d-flex align-items-center"
-                    :disabled="currentPage === totalPages" @click="$emit('nextPage')">
+                <button
+                    class="btn btn-secondary rounded-0 d-flex align-items-center"
+                    :disabled="currentPage === totalPages"
+                    @click="$emit('nextPage')"
+                >
                     <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
                 </button>
             </div>
@@ -32,7 +43,7 @@
         <div class="popup-content modal-dialog">
             <div class="modal-content p-4">
                 <h2 class="modal-title border-bottom mb-4">
-                    {{ $t('configuration.work_type.title_new')}}
+                    {{ $t('configuration.work_type.title_new') }}
                 </h2>
                 <div class="modal-body">
                     <AddWorkTypePopup :getLoaiCong="getLoaiCong" />
@@ -94,7 +105,9 @@ const props = defineProps({
     z-index: 10;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 .popup.show {

@@ -25,16 +25,18 @@
                         </div>
                         <div class="recruitment-info px-3 py-0 flex-grow-1">
                             <div class="d-flex justify-content-between align-items-start mt-2">
-                                <h5 class="card-title">{{ getTenNhanVien(Contract.maNhanVien)}}</h5>
+                                <h5 class="card-title">{{ getTenNhanVien(Contract.maNhanVien) }}</h5>
                             </div>
                             <p class="card-text">
                                 <i class="bi bi-people"></i> {{ t('contract.table.salary') }}: {{ Contract.luongCoBan }}
                             </p>
                             <p class="card-text">
-                                <i class="bi bi-people"></i> {{ t('contract.table.start_day') }}: {{ Contract.ngayBatDau }}
+                                <i class="bi bi-people"></i> {{ t('contract.table.start_day') }}:
+                                {{ Contract.ngayBatDau }}
                             </p>
                             <p class="card-text">
-                                <i class="bi bi-people"></i> {{ t('contract.table.end_day') }}: {{ Contract.ngayKetThuc }}
+                                <i class="bi bi-people"></i> {{ t('contract.table.end_day') }}:
+                                {{ Contract.ngayKetThuc }}
                             </p>
                         </div>
                     </div>
@@ -45,12 +47,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { get } from '@/stores/https';
+import { ref, onMounted } from 'vue'
+import { get } from '@/stores/https'
 import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
-const listNhanVien = ref([]);
+const listNhanVien = ref([])
 const props = defineProps({
     listContract: Array,
 })
@@ -67,20 +69,20 @@ const getStatusClass = (status) => {
 }
 const getNhanVien = async () => {
     try {
-        const response = await get('/api/v1/employees'); // URL API danh sách nhân viên
-        listNhanVien.value = response.data;
+        const response = await get('/api/v1/employees') // URL API danh sách nhân viên
+        listNhanVien.value = response.data
     } catch (error) {
-        console.error('Lỗi khi fetch danh sách nhân viên:', error);
+        console.error('Lỗi khi fetch danh sách nhân viên:', error)
     }
-};
+}
 
 onMounted(() => {
-    getNhanVien(); // Lấy dữ liệu ngay khi component được mount
-});
+    getNhanVien() // Lấy dữ liệu ngay khi component được mount
+})
 const getTenNhanVien = (maNhanVien) => {
-    const nhanVien = listNhanVien.value.find((nv) => nv.maNhanVien === maNhanVien);
-    return nhanVien ? nhanVien.hoTen : 'Không xác định'; // Trả về tên hoặc giá trị mặc định
-};
+    const nhanVien = listNhanVien.value.find((nv) => nv.maNhanVien === maNhanVien)
+    return nhanVien ? nhanVien.hoTen : 'Không xác định' // Trả về tên hoặc giá trị mặc định
+}
 </script>
 
 <style scoped>

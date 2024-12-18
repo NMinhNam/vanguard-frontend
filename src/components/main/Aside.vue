@@ -103,11 +103,11 @@ const featureUser = [
         icon: 'fa-tasks',
         text: 'home.menu_item_user.timeoff',
     },
-    {
-        path: '/user/rewardanddiscipline',
-        icon: 'fa-bookmark',
-        text: 'home.menu_item_user.rewar_discipline',
-    },
+    // {
+    //     path: '/user/rewardanddiscipline',
+    //     icon: 'fa-bookmark',
+    //     text: 'home.menu_item_user.rewar_discipline',
+    // },
     {
         path: '/user/payroll',
         icon: 'fa-dollar-sign',
@@ -139,7 +139,7 @@ const featureHR = [
         path: '/hr/contract',
         icon: 'fa fa-file-contract',
         text: 'home.menu_item_admin.contract',
-    }
+    },
 ]
 onMounted(() => {
     if (sessionStorage.getItem('role') === 'ADMIN') {
@@ -148,8 +148,7 @@ onMounted(() => {
         currentFeature.value = featureManager
     } else if (sessionStorage.getItem('role') === 'USER') {
         currentFeature.value = featureUser
-    }
-    else {
+    } else {
         currentFeature.value = featureHR
     }
 })
@@ -166,8 +165,11 @@ onMounted(() => {
                     <span class="slogan text-white">HRM - Final project</span>
                 </div>
             </div>
-            <i class="fa-solid fa-arrow-left toggle" :class="{ 'fa-rotate-180': !isShow }"
-                @click="btnControlSidebar_Click"></i>
+            <i
+                class="fa-solid fa-arrow-left toggle"
+                :class="{ 'fa-rotate-180': !isShow }"
+                @click="btnControlSidebar_Click"
+            ></i>
         </header>
         <main>
             <div class="menu">

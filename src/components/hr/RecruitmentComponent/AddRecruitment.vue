@@ -1,7 +1,9 @@
 <template>
     <div class="container-fluid">
         <div class="d-flex align-items-center mb-2">
-            <label for="viTriTuyenDUng" class="form-label me-2 text-nowrap label-width">{{ t('recruitment.add.position') }}</label>
+            <label for="viTriTuyenDUng" class="form-label me-2 text-nowrap label-width">{{
+                t('recruitment.add.position')
+            }}</label>
             <input
                 v-model="info.tenViTri"
                 type="text"
@@ -13,7 +15,9 @@
 
         <div class="row">
             <div class="d-flex align-items-center mb-2">
-                <label for="phongBanSelect" class="form-label me-2 text-nowrap label-width">{{ t('recruitment.add.department') }}</label>
+                <label for="phongBanSelect" class="form-label me-2 text-nowrap label-width">{{
+                    t('recruitment.add.department')
+                }}</label>
                 <div class="w-100">
                     <select id="phongBanSelect" class="form-select" v-model="info.maPhongBan">
                         <option value="">Chọn phòng ban</option>
@@ -44,14 +48,26 @@
             <div class="row mb-3">
                 <div class="d-flex align-items-center">
                     <label class="form-label me-2 text-nowrap label-width">{{ t('recruitment.add.describe') }}</label>
-                    <input v-model="info.moTa" type="text" class="form-control" id="moTa" :placeholder="t('recruitment.add.describe')" />
+                    <input
+                        v-model="info.moTa"
+                        type="text"
+                        class="form-control"
+                        id="moTa"
+                        :placeholder="t('recruitment.add.describe')"
+                    />
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="d-flex align-items-center">
                     <label class="form-label me-2 text-nowrap label-width">{{ t('recruitment.add.request') }}</label>
-                    <input v-model="info.yeuCau" type="text" class="form-control" id="yeuCau" :placeholder="t('recruitment.add.request')" />
+                    <input
+                        v-model="info.yeuCau"
+                        type="text"
+                        class="form-control"
+                        id="yeuCau"
+                        :placeholder="t('recruitment.add.request')"
+                    />
                 </div>
             </div>
 

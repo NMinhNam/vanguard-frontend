@@ -1,7 +1,7 @@
 <script setup></script>
 <template>
     <div class="col-sm-12 gap-2 flex-row m-0 mt-2 card border-0">
-        <div class="col-sm-4 card-body border my-2 rounded-3 ">
+        <div class="col-sm-4 card-body border my-2 rounded-3">
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <p>{{ $t('pay_roll.items.total_income') }}</p>
@@ -20,7 +20,7 @@
             <div class="mb-4">
                 <p>{{ $t('pay_roll.items.allowance') }}</p>
                 <b>0 VNĐ</b>
-                <hr>
+                <hr />
             </div>
             <div class="mb-4">
                 <p>{{ $t('pay_roll.items.net_pay') }}</p>

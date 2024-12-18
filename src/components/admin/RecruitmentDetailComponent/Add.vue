@@ -67,14 +67,14 @@
         <!-- Row chung: Họ và tên + Vị trí tuyển dụng -->
         <div class="row mb-3">
             <!-- Cột: Họ và tên -->
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="hoTen" class="form-label">Họ và tên</label>
                 <input type="text" id="hoTen" v-model="ungVien.hoTen" class="form-control" />
                 <span class="text-danger" v-if="error.hoTen">{{ error.hoTen }}</span>
             </div>
 
             <!-- Cột: Vị trí tuyển dụng -->
-            <div class="col-md-6">
+            <div class="col-md-6 mt-3">
                 <label for="position" class="form-label">Vị trí tuyển dụng</label>
                 <select id="position" class="form-select" v-model="ungVien.maViTriTuyenDung">
                     <option value="">Chọn vị trí tuyển dụng</option>
@@ -90,14 +90,7 @@
             </div>
 
             <div class="col-md-6 mt-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" v-model="ungVien.email" />
-                <span class="text-danger" v-if="error.email">{{ error.email }}</span>
-            </div>
-
-            <div class="col-md-6 mt-3">
                 <label for="phone" class="form-label">Số điện thoại</label>
-
                 <input type="text" class="form-control" id="phone" v-model="ungVien.dienThoai" />
                 <span class="text-danger" v-if="error.dienThoai">{{ error.dienThoai }}</span>
             </div>
@@ -106,7 +99,15 @@
 
     <div class="row mt-4">
         <div class="col-md-6">
-            <h5 class="section-title">Thông tin cá nhân</h5>
+            <h5 class="section-title">Thông tin ứng tuyển</h5>
+
+            <div class="row mb-3">
+                <label for="email" class="col-sm-4 col-form-label">Email</label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="email" v-model="ungVien.email" />
+                    <span class="text-danger" v-if="error.email">{{ error.email }}</span>
+                </div>
+            </div>
             <div class="row mb-3">
                 <label for="ngayPhongVan" class="col-sm-4 col-form-label">Ngày phỏng vấn</label>
                 <div class="col-sm-8">
@@ -130,12 +131,13 @@
         </div>
 
         <div class="col-md-6">
-            <h5 class="section-title">Thông tin bổ sung</h5>
+            <h5 class="section-title">Thông tin cá nhân</h5>
 
             <div class="row mb-3">
                 <label for="dob" class="col-sm-4 col-form-label">Ngày sinh</label>
                 <div class="col-sm-8">
                     <input type="date" class="form-control" id="dob" v-model="ungVien.ngaySinh" />
+                    <span class="text-danger" v-if="error.ngaySinh">{{ error.ngaySinh }}</span>
                 </div>
             </div>
 
@@ -157,12 +159,15 @@
                         <input class="form-check-input" type="radio" name="gioiTinh" id="nu" :value="false" />
                         <label class="form-check-label" for="nu">Nữ</label>
                     </div>
+                    <br />
+                    <span class="text-danger" v-if="error.gioiTinh">{{ error.gioiTinh }}</span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="address" class="col-sm-4 col-form-label">Địa chỉ cá nhân</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="address" v-model="ungVien.diaChi" />
+                    <span class="text-danger" v-if="error.diaChi">{{ error.diaChi }}</span>
                 </div>
             </div>
             <div class="row mb-3">
@@ -186,8 +191,6 @@ const maUngVien = ref('')
 const listTuyenDung = ref([])
 
 const saveUngVien = async (trangThai) => {
-    console.log(ungVien.value)
-
     if (!validateUngVien()) return
     try {
         ungVien.value.trangThai = trangThai
@@ -202,6 +205,12 @@ const saveUngVien = async (trangThai) => {
             if (ungVien.value.trangThai === 5) {
                 router.go(-1)
             }
+            if (!ungVien.value.maUngVien) {
+                router.go(-1)
+            }
+            if (ungVien.maUngVien) {
+                await getInfoByMaUngVien(ungVien.value.maUngVien)
+            }
         }
     } catch (error) {
         const errorMessage = error.response?.data?.message || 'Cập nhật phê duyệt thất bại'
@@ -213,15 +222,12 @@ const saveUngVien = async (trangThai) => {
         })
         console.error('Error in saveUngVien:', error)
     }
-    await getInfoByMaUngVien(ungVien.maUngVien)
 }
 
 onMounted(async () => {
     maUngVien.value = router.currentRoute.value.params.id
     if (maUngVien.value) {
         ungVien.maUngVien = maUngVien.value
-        console.log(ungVien.value)
-
         await getInfoByMaUngVien(ungVien.maUngVien)
     }
 })
@@ -230,7 +236,6 @@ const getInfoByMaUngVien = async (maUngVien) => {
         const response = await get('/api/v1/candidates/id', { maUngVien })
         if (response && response.data) {
             ungVien.value = response.data
-            console.log(ungVien.value)
         }
     } catch (error) {
         Swal.fire({
@@ -244,7 +249,7 @@ const getInfoByMaUngVien = async (maUngVien) => {
 }
 const getAllViTri = async () => {
     const response = await get('/api/v1/recruitment-positions')
-    listTuyenDung.value = response.data
+    listTuyenDung.value = response.data.filter((item) => item.trangThai === true || item.trangThai === 'true')
 }
 
 onMounted(async () => {
@@ -256,24 +261,33 @@ const error = reactive({
     email: '',
     cccd: '',
     maViTriTuyenDung: '',
+    diaChi: '',
+    gioiTinh: '',
+    ngaySinh: '',
 })
 
 const validateUngVien = () => {
     const validationRules = {
         hoTen: { required: true, message: 'Họ và tên không được để trống.' },
         dienThoai: {
+            required: true,
             pattern: /^[0-9]{10}$/,
             message: 'Số điện thoại phải gồm 10 chữ số.',
         },
         email: {
+            required: true,
             pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             message: 'Email không đúng định dạng.',
         },
         cccd: {
+            required: true,
             pattern: /^[0-9]{12}$/,
             message: 'CCCD phải đủ 12 số.',
         },
         maViTriTuyenDung: { required: true, message: 'Vui lòng chọn vị trí tuyển dụng.' },
+        diaChi: { required: true, message: 'Địa chỉ không được để trống.' },
+        gioiTinh: { required: true, message: 'Giới tính không được để trống.' },
+        ngaySinh: { required: true, message: 'Ngày sinh không được để trống.' },
     }
 
     let isValid = true

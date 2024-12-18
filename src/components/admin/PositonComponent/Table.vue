@@ -9,7 +9,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(Position, index) in paginatedPositions" :key="Position.maChucVu || index">
+                <tr
+                    v-for="(Position, index) in paginatedPositions"
+                    @dblclick="getPostionById(Position.maChucVu)"
+                    :key="Position.maChucVu || index"
+                >
                     <td>{{ index + 1 }}</td>
                     <td>{{ Position.maChucVu }}</td>
                     <td>{{ Position.tenChucVu }}</td>
@@ -38,8 +42,11 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { get } from '@/stores/https'
 const { t, locale } = useI18n()
+const positionDetail = ref({})
+
 const props = defineProps({
     listPositon: Array,
     searchQuery: {
@@ -56,14 +63,19 @@ const props = defineProps({
     },
 })
 
+const getPostionById = async (maChucVu) => {
+    const response = await get('/api/v1/positions/id', { maChucVu })
+    positionDetail.value = response.data
+    emit('getPostionById', positionDetail.value)
+}
+
 const filteredPositions = computed(() => {
-    console.log(props.searchQuery)
     let positons = props.listPositon
-    // if (props.searchQuery) {
-    //     departments = departments.filter((department) =>
-    //         department.tenPhongBan.toLowerCase().includes(props.searchQuery.toLowerCase()),
-    //     )
-    // }
+    if (props.searchQuery) {
+        positons = positons.filter((positon) =>
+            positon.tenChucVu.toLowerCase().includes(props.searchQuery.toLowerCase()),
+        )
+    }
     return positons
 })
 
@@ -76,7 +88,7 @@ const totalPages = computed(() => {
     return Math.ceil(filteredPositions.value.length / props.pageSize)
 })
 
-const emit = defineEmits(['updatePage'])
+const emit = defineEmits(['updatePage', 'getPostionById'])
 
 const goToPage = (page) => {
     emit('updatePage', page)
