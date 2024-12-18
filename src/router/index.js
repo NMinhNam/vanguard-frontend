@@ -7,7 +7,7 @@ const router = createRouter({
     routes: routes,
 })
 
-const permitURL = ['/', '/pages/login', '/pages/autherror', '/pages/404error', '/recruitment', '/pages/forgot_password']
+const permitURL = ['/', '/pages/login', '/pages/autherror', '/pages/404error', '/recruitment', '/check_in_qr', '/pages/forgot_password']
 
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore()

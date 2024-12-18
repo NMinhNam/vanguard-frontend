@@ -106,37 +106,47 @@ const props = defineProps({
 })
 
 const btnDeleteNhanVien_click = async (maNhanVien) => {
-    try {
-        const response = await del(`/api/v1/employees/${maNhanVien}`)
-        if (response.status === 200) {
+    const result = await Swal.fire({
+        title: 'Bạn thật muốn xóa nhân viên này?',
+        text: 'Bạn thật sự muốn xóa nhân viên này?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Xác nhận',
+        cancelButtonText: 'Hủy bỏ',
+        reverseButtons: true,
+    })
+
+    if (result.isConfirmed) {
+        try {
+            const response = await del(`/api/v1/employees/${maNhanVien}`)
+            if (response.status === 200) {
+                Swal.fire({
+                    title: 'Xóa nhân viên!',
+                    text: 'Xóa nhân viên thành công.',
+                    icon: 'success',
+                    timer: 1500,
+                })
+            }
+        } catch (e) {
             Swal.fire({
-                title: 'Save staff',
-                text: 'Delete staff successfully',
-                icon: 'success',
+                title: 'Error!',
+                text: 'Failed to delete staff member.',
+                icon: 'error',
                 timer: 1500,
             })
+            console.error(e)
         }
-    } catch (e) {
-        Swal.fire({
-            title: 'Save staff',
-            text: 'Delete staff fail',
-            icon: 'error',
-            timer: 1500,
-        })
-        console.error(e)
+        props.getAllStaff()
     }
-    props.getAllStaff()
 }
 
 const filteredStaffs = computed(() => {
     let staffs = props.listStaff
 
-    // Lọc theo từ khóa
     if (props.searchQuery) {
         staffs = staffs.filter((staff) => staff.hoTen.toLowerCase().includes(props.searchQuery.toLowerCase()))
     }
 
-    // Lọc theo phòng ban
     if (props.departmentSelected.length > 0) {
         staffs = staffs.filter((staff) => props.departmentSelected.includes(staff.maPhongBan))
     }
