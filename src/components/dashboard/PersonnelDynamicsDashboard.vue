@@ -1,5 +1,5 @@
 <template>
-    <div class="chart-container fw-bolder d-flex flex-column align-items-start">
+    <div class="fw-bolder d-flex flex-column align-items-start">
         <div class="row w-100">
             <div class="col-1 col-md-1 col-lg-1">
                 <select class="mt-2 ms-2 form-select form-select-sm" v-model="selectedYear" @change="onYearChange">

@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center fw-bolder chart-container pt-2">
+    <div class="text-center fw-bolder pt-2">
         <span>Thống kê nhân viên theo mức lương</span>
         <div ref="chart" style="width: 100%; height: 300px"></div>
     </div>

@@ -34,11 +34,11 @@ const featureAdmin = [
         icon: 'fa-building',
         text: 'home.menu_item_admin.departments',
     },
-    {
-        path: '/admin/approve',
-        icon: 'fa-person-circle-check',
-        text: 'home.menu_item_admin.approve',
-    },
+    // {
+    //     path: '/admin/approve',
+    //     icon: 'fa-person-circle-check',
+    //     text: 'home.menu_item_admin.approve',
+    // },
     {
         path: '/admin/payroll',
         icon: 'fa-dollar-sign',
@@ -49,11 +49,11 @@ const featureAdmin = [
         icon: 'fa-sitemap',
         text: 'home.menu_item_admin.chart',
     },
-    {
-        path: '/admin/recruitment',
-        icon: 'fa fa-user-plus',
-        text: 'home.menu_item_admin.recruitment',
-    },
+    // {
+    //     path: '/admin/recruitment',
+    //     icon: 'fa fa-user-plus',
+    //     text: 'home.menu_item_admin.recruitment',
+    // },
     {
         path: '/admin/contract',
         icon: 'fa fa-file-contract',
@@ -82,9 +82,34 @@ const featureAdmin = [
 ]
 const featureManager = [
     {
-        path: '/manager/staff',
+        path: '/manager/information',
         icon: 'fa-user',
         text: 'Thông tin cá nhân',
+    },
+    {
+        path: '/manager/approve',
+        icon: 'fa-person-circle-check',
+        text: 'home.menu_item_admin.approve',
+    },
+    {
+        path: '/manager/meeting',
+        icon: 'fa-solid fa-users',
+        text: 'home.menu_item_admin.meeting',
+    },
+    {
+        path: '/manager/dashboard',
+        icon: 'fa-chart-simple',
+        text: 'home.menu_item_admin.dashboard',
+    },
+    {
+        path: '/manager/checkin',
+        icon: 'fa-right-to-bracket',
+        text: 'home.menu_item_user.checkin',
+    },
+    {
+        path: '/manager/staff',
+        icon: 'fa-user',
+        text: 'home.menu_item_admin.staff',
     },
 ]
 const featureUser = [
@@ -126,11 +151,6 @@ const featureHR = [
         text: 'home.menu_item_admin.staff',
     },
     {
-        path: '/hr/departments',
-        icon: 'fa-building',
-        text: 'home.menu_item_admin.departments',
-    },
-    {
         path: '/hr/recruitment',
         icon: 'fa fa-user-plus',
         text: 'home.menu_item_admin.recruitment',
@@ -139,6 +159,31 @@ const featureHR = [
         path: '/hr/contract',
         icon: 'fa fa-file-contract',
         text: 'home.menu_item_admin.contract',
+    },
+    {
+        path: '/hr/payroll',
+        icon: 'fa-dollar-sign',
+        text: 'home.menu_item_user.payroll',
+    },
+    {
+        path: '/hr/information',
+        icon: 'fa-user',
+        text: 'home.menu_item_user.information',
+    },
+    {
+        path: '/hr/checkin',
+        icon: 'fa-right-to-bracket',
+        text: 'home.menu_item_user.checkin',
+    },
+    {
+        path: '/hr/meeting',
+        icon: 'fa-solid fa-users',
+        text: 'home.menu_item_admin.meeting',
+    },
+    {
+        path: '/hr/dashboard',
+        icon: 'fa-chart-simple',
+        text: 'home.menu_item_admin.dashboard',
     },
 ]
 onMounted(() => {

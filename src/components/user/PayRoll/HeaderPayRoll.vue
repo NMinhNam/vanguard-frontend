@@ -5,81 +5,43 @@
                 <h5 class="mb-0 fw-bolder">{{ $t('pay_roll.title') }}</h5>
             </div>
             <div class="pagination d-flex justify-content-center align-items-center">
-                <div class="px-2">
-                    <select
-                        v-model="month"
-                        class="form-select mx-2 fw-bold"
-                        style="width: 150px"
-                        @change="onMonthChange"
-                    >
-                        <option v-for="(monthName, index) in monthNames" :value="index + 1" :key="index">
-                            {{ $t('pay_roll.items.month') }} {{ monthName }}
-                        </option>
-                    </select>
-                </div>
-                <div class="px-2">
-                    <select v-model="year" class="form-select mx-2 fw-bold" style="width: 150px" @change="onYearChange">
-                        <option v-for="y in yearRange" :value="y" :key="y">
-                            {{ $t('pay_roll.items.year') }} {{ y }}
-                        </option>
-                    </select>
-                </div>
-                <button class="btn btn-secondary rounded-0 mx-1 d-flex align-items-center" @click="prevMonth()">
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-                </button>
-                <button class="btn btn-secondary rounded-0 d-flex align-items-center ms-2" @click="nextMonth()">
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
-                </button>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            :class="{
+                                'active text-primary': activeTab === 'table',
+                                'text-dark': activeTab !== 'table',
+                            }"
+                            @click.prevent="$emit('tab-change', 'table')"
+                            href="#"
+                        >
+                            <i class="fas fa-table"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            :class="{ 'active text-primary': activeTab === 'card', 'text-dark': activeTab !== 'card' }"
+                            @click.prevent="$emit('tab-change', 'card')"
+                            href="#"
+                        >
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-
-const props = defineProps(['todayTask'])
-const emit = defineEmits(['updateDate'])
-
-const month = ref(new Date().getMonth() + 1)
-const year = ref(new Date().getFullYear())
-const monthNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
-
-// Tạo danh sách các năm (5 năm trước và 5 năm sau)
-const yearRange = Array.from({ length: 11 }, (_, i) => new Date().getFullYear() - 5 + i)
-
-const now = new Date()
-const currentDateTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`
-
-watch([month, year], () => {
-    emit('updateDate', { month: month.value, year: year.value })
+const props = defineProps({
+    activeTab: {
+        type: String,
+        required: true,
+    },
 })
-
-const nextMonth = () => {
-    if (month.value === 12) {
-        month.value = 1
-        year.value++
-    } else {
-        month.value++
-    }
-}
-
-const prevMonth = () => {
-    if (month.value === 1) {
-        month.value = 12
-        year.value--
-    } else {
-        month.value--
-    }
-}
-
-const onMonthChange = () => {
-    console.log(`Tháng được chọn: ${month.value}`)
-}
-
-const onYearChange = () => {
-    console.log(`Năm được chọn: ${year.value}`)
-}
 </script>
 
 <style scoped>
