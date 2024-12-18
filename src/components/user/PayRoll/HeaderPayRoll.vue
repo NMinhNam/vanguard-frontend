@@ -6,16 +6,19 @@
             </div>
             <div class="pagination d-flex justify-content-center align-items-center">
                 <div class="px-2">
-                    <select v-model="month" class="form-select mx-2 fw-bold" style="width: 150px;"
-                        @change="onMonthChange">
+                    <select
+                        v-model="month"
+                        class="form-select mx-2 fw-bold"
+                        style="width: 150px"
+                        @change="onMonthChange"
+                    >
                         <option v-for="(monthName, index) in monthNames" :value="index + 1" :key="index">
                             {{ $t('pay_roll.items.month') }} {{ monthName }}
                         </option>
                     </select>
                 </div>
                 <div class="px-2">
-                    <select v-model="year" class="form-select mx-2 fw-bold" style="width: 150px;"
-                        @change="onYearChange">
+                    <select v-model="year" class="form-select mx-2 fw-bold" style="width: 150px" @change="onYearChange">
                         <option v-for="y in yearRange" :value="y" :key="y">
                             {{ $t('pay_roll.items.year') }} {{ y }}
                         </option>
@@ -32,54 +35,52 @@
     </div>
 </template>
 
-
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch } from 'vue'
 
-const props = defineProps(['todayTask']);
-const emit = defineEmits(['updateDate']);
+const props = defineProps(['todayTask'])
+const emit = defineEmits(['updateDate'])
 
-const month = ref(new Date().getMonth() + 1);
-const year = ref(new Date().getFullYear());
-const monthNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+const month = ref(new Date().getMonth() + 1)
+const year = ref(new Date().getFullYear())
+const monthNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
 
 // Tạo danh sách các năm (5 năm trước và 5 năm sau)
-const yearRange = Array.from({ length: 11 }, (_, i) => new Date().getFullYear() - 5 + i);
+const yearRange = Array.from({ length: 11 }, (_, i) => new Date().getFullYear() - 5 + i)
 
-const now = new Date();
-const currentDateTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+const now = new Date()
+const currentDateTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`
 
 watch([month, year], () => {
-    emit('updateDate', { month: month.value, year: year.value });
-});
+    emit('updateDate', { month: month.value, year: year.value })
+})
 
 const nextMonth = () => {
     if (month.value === 12) {
-        month.value = 1;
-        year.value++;
+        month.value = 1
+        year.value++
     } else {
-        month.value++;
+        month.value++
     }
-};
+}
 
 const prevMonth = () => {
     if (month.value === 1) {
-        month.value = 12;
-        year.value--;
+        month.value = 12
+        year.value--
     } else {
-        month.value--;
+        month.value--
     }
-};
+}
 
 const onMonthChange = () => {
-    console.log(`Tháng được chọn: ${month.value}`);
-};
+    console.log(`Tháng được chọn: ${month.value}`)
+}
 
 const onYearChange = () => {
-    console.log(`Năm được chọn: ${year.value}`);
-};
+    console.log(`Năm được chọn: ${year.value}`)
+}
 </script>
-
 
 <style scoped>
 .head-menu {

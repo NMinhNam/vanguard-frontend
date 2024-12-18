@@ -25,7 +25,7 @@
         </div>
         <div class="row d-flex justify-content-center mt-3">
             <div class="col-12">
-                <div class="chart-container h-100"><EmployeeByDepartmentDashboard/></div>
+                <div class="chart-container h-100"><EmployeeByDepartmentDashboard /></div>
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-3">
@@ -38,7 +38,7 @@
         </div>
     </div>
 </template>
-  
+
 <script setup>
 import ChartDonYeuCau from '@/components/dashboard/ChartDonYeuCau.vue'
 import ChartDonYeuCauThang from '@/components/dashboard/ChartDonYeuCauThang.vue'

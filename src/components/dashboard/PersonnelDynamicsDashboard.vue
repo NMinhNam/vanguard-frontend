@@ -13,8 +13,8 @@
         <div ref="chart" style="width: 100%; height: 300px"></div>
     </div>
 </template>
-  
-  <script setup>
+
+<script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { get } from '@/stores/https'
 import * as echarts from 'echarts'
@@ -150,11 +150,10 @@ onBeforeUnmount(() => {
     window.removeEventListener('resize', resizeChart)
 })
 </script>
-  
-  <style scoped>
+
+<style scoped>
 select {
     margin-bottom: 10px;
     padding: 5px;
 }
 </style>
-  

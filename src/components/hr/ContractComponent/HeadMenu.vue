@@ -60,8 +60,6 @@
             </div>
         </div>
     </div>
-
-
 </template>
 
 <script setup>
@@ -114,7 +112,9 @@ const props = defineProps({
     z-index: 100;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 .popup.show {

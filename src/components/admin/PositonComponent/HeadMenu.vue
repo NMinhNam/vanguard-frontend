@@ -123,7 +123,9 @@ watch(
     z-index: 10;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 .popup.show {

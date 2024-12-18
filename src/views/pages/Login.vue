@@ -146,10 +146,10 @@ const btnLogin_Click = async () => {
             response.data.role === 'ADMIN'
                 ? router.push('/admin/dashboard')
                 : response.data.role === 'MANAGER'
-                ? router.push('/manager')
-                : response.data.role === 'USER'
-                ? router.push('/user/information')
-                : router.push('/hr')
+                  ? router.push('/manager')
+                  : response.data.role === 'USER'
+                    ? router.push('/user/information')
+                    : router.push('/hr')
         } else {
             Swal.fire({
                 title: t('login.messages.login_fail.title'),

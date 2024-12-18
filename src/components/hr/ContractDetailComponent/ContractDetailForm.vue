@@ -42,14 +42,14 @@
                         v-model="Contract.ngayBatDau"
                     />
                     <div class="invalid-feedback" v-if="error.ngayBatDau">Ngày bắt đầu không được để trống</div>
-                    <input type="date" id="ngayBatDau" class="form-control" v-model="Contract.ngayBatDau"  />
+                    <input type="date" id="ngayBatDau" class="form-control" v-model="Contract.ngayBatDau" />
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label for="ngayKetThuc" class="col-sm-4 col-form-label">{{ t('contract.table.end_day') }}</label>
                 <div class="col-sm-8">
-                    <input type="date" id="ngayKetThuc" class="form-control" v-model="Contract.ngayKetThuc"  />
+                    <input type="date" id="ngayKetThuc" class="form-control" v-model="Contract.ngayKetThuc" />
                 </div>
             </div>
             <div class="row mb-3">
@@ -66,59 +66,65 @@
                         Thời hạn phải được nhập và phải là số nguyên
                     </div>
                     <span class="input-group-text">Năm</span>
-                <label for="luongCoBan" class="col-sm-4 col-form-label">{{ t('contract.table.salary') }}</label>
-                <div class="col-sm-8">
-                    <input type="text" id="luongCoBan" class="form-control" v-model="Contract.luongCoBan"  />
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <h5 class="section-title">{{ t('contract.detail.additional_information') }}</h5>
-            <div class="row mb-3">
-                <label for="ngayKy" class="col-sm-4 col-form-label">{{ t('contract.detail.date_signed') }}</label>
-                <div class="col-sm-8">
-                    <input
-                        :class="{ 'is-invalid': error.ngayKy }"
-                        type="date"
-                        id="ngayKy"
-                        class="form-control"
-                        v-model="Contract.ngayKy"
-                    />
-                    <div class="invalid-feedback" v-if="error.ngayKy">Ngày ký không được để trống</div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="ngayKetThuc" class="col-sm-4 col-form-label">Ngày kết thúc</label>
-                <div class="col-sm-8">
-                    <input
-                        :class="{ 'is-invalid': error.ngayKetThuc }"
-                        type="date"
-                        id="ngayKetThuc"
-                        class="form-control"
-                        v-model="Contract.ngayKetThuc"
-                    />
-                    <div class="invalid-feedback" v-if="error.ngayKetThuc">Ngày kết thúc không được để trống</div>
-                <label for="thoiHan" class="col-sm-4 col-form-label">{{ t('contract.detail.contract_term') }}</label>
-                <div class="col-sm-8 d-flex align-items-center">
-                    <input type="text" id="thoiHan" class="form-control me-2" v-model="Contract.thoiHan"  />
-                    <span class="input-group-text">{{ t('contract.detail.year') }}</span>
+                    <label for="luongCoBan" class="col-sm-4 col-form-label">{{ t('contract.table.salary') }}</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="luongCoBan" class="form-control" v-model="Contract.luongCoBan" />
+                    </div>
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <label for="luongCoBan" class="col-sm-4 col-form-label">Lương cơ bản</label>
-                <label for="heSoLuong" class="col-sm-4 col-form-label">{{ t('contract.detail.salary_coefficient') }}</label>
-                <div class="col-sm-8">
-                    <input
-                        :class="{ 'is-invalid': error.luongCoBan }"
-                        type="text"
-                        id="luongCoBan"
-                        class="form-control"
-                        v-model="Contract.luongCoBan"
-                    />
-                    <div class="invalid-feedback" v-if="error.luongCoBan">
-                        Lương cơ bản không được để trống và phải là số
+            <div class="col-md-6">
+                <h5 class="section-title">{{ t('contract.detail.additional_information') }}</h5>
+                <div class="row mb-3">
+                    <label for="ngayKy" class="col-sm-4 col-form-label">{{ t('contract.detail.date_signed') }}</label>
+                    <div class="col-sm-8">
+                        <input
+                            :class="{ 'is-invalid': error.ngayKy }"
+                            type="date"
+                            id="ngayKy"
+                            class="form-control"
+                            v-model="Contract.ngayKy"
+                        />
+                        <div class="invalid-feedback" v-if="error.ngayKy">Ngày ký không được để trống</div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="ngayKetThuc" class="col-sm-4 col-form-label">Ngày kết thúc</label>
+                    <div class="col-sm-8">
+                        <input
+                            :class="{ 'is-invalid': error.ngayKetThuc }"
+                            type="date"
+                            id="ngayKetThuc"
+                            class="form-control"
+                            v-model="Contract.ngayKetThuc"
+                        />
+                        <div class="invalid-feedback" v-if="error.ngayKetThuc">Ngày kết thúc không được để trống</div>
+                        <label for="thoiHan" class="col-sm-4 col-form-label">{{
+                            t('contract.detail.contract_term')
+                        }}</label>
+                        <div class="col-sm-8 d-flex align-items-center">
+                            <input type="text" id="thoiHan" class="form-control me-2" v-model="Contract.thoiHan" />
+                            <span class="input-group-text">{{ t('contract.detail.year') }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="luongCoBan" class="col-sm-4 col-form-label">Lương cơ bản</label>
+                        <label for="heSoLuong" class="col-sm-4 col-form-label">{{
+                            t('contract.detail.salary_coefficient')
+                        }}</label>
+                        <div class="col-sm-8">
+                            <input
+                                :class="{ 'is-invalid': error.luongCoBan }"
+                                type="text"
+                                id="luongCoBan"
+                                class="form-control"
+                                v-model="Contract.luongCoBan"
+                            />
+                            <div class="invalid-feedback" v-if="error.luongCoBan">
+                                Lương cơ bản không được để trống và phải là số
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

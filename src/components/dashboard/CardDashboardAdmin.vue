@@ -79,7 +79,6 @@ const getNhanVienMoi = async () => {
 }
 </script>
 
-
 <style scoped>
 .boder-left-1 {
     border-left: 5px solid #007bff;

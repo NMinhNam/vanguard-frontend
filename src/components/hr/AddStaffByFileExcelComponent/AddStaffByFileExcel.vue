@@ -14,13 +14,15 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-success" @click="saveStaffs">{{ $t('addstaffbyfileexcelcomponent.buttons.save') }}</button>
+                    <button class="btn btn-success" @click="saveStaffs">
+                        {{ $t('addstaffbyfileexcelcomponent.buttons.save') }}
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script setup>
 import { onMounted, ref } from 'vue'
 import { get } from '@/stores/https'

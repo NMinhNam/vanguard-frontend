@@ -100,7 +100,7 @@ const validate = () => {
     }
 
     Object.assign(error, validateForm(formRule, Contract.value))
-    console.log(error) 
+    console.log(error)
 
     for (let key in error) {
         if (error[key] !== false) {

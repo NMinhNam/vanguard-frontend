@@ -9,7 +9,7 @@ const environment = 1
 
 const https = axios.create({
     baseURL: 'http://localhost:1688',
-    timeout: 20000
+    timeout: 20000,
 })
 
 let isRefreshing = false
@@ -109,8 +109,8 @@ export const get = (url, params = {}) => {
 
 export const post = async (url, data) => {
     try {
-        const response = await https.post(url, data);
-        return response; // Trả về kết quả khi thành công
+        const response = await https.post(url, data)
+        return response // Trả về kết quả khi thành công
     } catch (error) {
         // Kiểm tra lỗi phản hồi từ server
         if (error.response) {
@@ -118,16 +118,16 @@ export const post = async (url, data) => {
             return Promise.reject({
                 status: error.response.status,
                 data: error.response.data,
-            });
+            })
         } else {
             // Lỗi mạng hoặc lỗi khác
             return Promise.reject({
                 message: 'Unexpected error occurred',
                 error,
-            });
+            })
         }
     }
-};
+}
 
 export const put = (url, data) => {
     return https.put(url, data)

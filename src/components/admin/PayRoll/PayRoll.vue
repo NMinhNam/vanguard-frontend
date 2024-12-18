@@ -14,8 +14,7 @@ const getBangLuongs = async () => {
     try {
         const response = await get('/api/v1/salary/employee/NV01')
         listBangLuong.value = response.data
-        console.log(listBangLuong.value);
-        
+        console.log(listBangLuong.value)
     } catch (error) {
         console.error(error)
     }
@@ -78,7 +77,7 @@ const totalPages = computed(() => {
 // Dữ liệu cho bảng sau khi phân trang
 const paginatedData = computed(() => {
     const start = (currentPage.value - 1) * pageSize.value
-    const end = start + pageSize.value    
+    const end = start + pageSize.value
     return filteredPayRoll.value.slice(start, end)
 })
 

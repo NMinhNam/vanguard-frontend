@@ -21,6 +21,4 @@ import OrgStaff from './OrgStaff.vue'
 const activeTab = ref('OrgDepartment') // Track the selected component
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,6 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { del } from '@/stores/https';
+import { del } from '@/stores/https'
 
 const { t, locale } = useI18n()
 
@@ -8,17 +8,17 @@ const props = defineProps({
     listPhuCap: Array,
     currentPage: Number,
     pageSize: Number,
-    getPhuCap: Function
-});
+    getPhuCap: Function,
+})
 
 const btnDeletePhuCap_click = async (item) => {
     Swal.fire({
         title: t('configuration.allowance.delete_click.question.title'),
         text: t('configuration.allowance.delete_click.question.text'),
-        icon: "warning",
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
         confirmButtonText: t('configuration.allowance.delete_click.button.delete'),
         cancelButtonText: t('configuration.allowance.delete_click.button.cancel'),
     }).then(async (result) => {
@@ -32,7 +32,7 @@ const btnDeletePhuCap_click = async (item) => {
                         icon: 'success',
                         timer: 1500,
                     }).then(() => {
-                        props.getPhuCap();
+                        props.getPhuCap()
                     })
                 } else {
                     Swal.fire({
@@ -51,7 +51,7 @@ const btnDeletePhuCap_click = async (item) => {
                 })
             }
         }
-    });
+    })
 }
 </script>
 
@@ -79,8 +79,9 @@ const btnDeletePhuCap_click = async (item) => {
                     <td>{{ item.tenPhuCap }}</td>
                     <td>{{ item.soTien }}</td>
                     <td>
-                        <button class="btn btn-danger" @click="btnDeletePhuCap_click(item)"><i
-                                class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn btn-danger" @click="btnDeletePhuCap_click(item)">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -106,7 +107,9 @@ const btnDeletePhuCap_click = async (item) => {
     z-index: 10;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 .popup.show {

@@ -2,9 +2,7 @@
     <div class="container-fluid">
         <!-- Header Section -->
         <div class="border-bottom text-center d-flex align-items-center justify-content-between pb-3 fs-4 mb-3">
-            <h4 class="fw-medium float-start mt-2">
-                Khen thưởng & Kỷ luật
-            </h4>
+            <h4 class="fw-medium float-start mt-2">Khen thưởng & Kỷ luật</h4>
         </div>
         <!-- Main Content Section -->
         <div id="tableRAD" class="">
@@ -44,12 +42,9 @@
             </table>
         </div>
     </div>
-
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style scoped>
 .card-header {

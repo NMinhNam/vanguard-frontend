@@ -22,7 +22,7 @@
         </div>
     </div>
 </template>
-  
+
 <script setup>
 import { onMounted, ref } from 'vue'
 import { get } from '@/stores/https'

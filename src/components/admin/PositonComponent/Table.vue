@@ -63,7 +63,6 @@ const props = defineProps({
     },
 })
 
-
 const getPostionById = async (maChucVu) => {
     const response = await get('/api/v1/positions/id', { maChucVu })
     positionDetail.value = response.data

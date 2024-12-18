@@ -3,7 +3,9 @@
         <div class="head-menu col-12">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <router-link :to="{ path: '/admin/recruitment/add' }" class="btn btn-primary me-2">Add candidates</router-link>
+                    <router-link :to="{ path: '/admin/recruitment/add' }" class="btn btn-primary me-2"
+                        >Add candidates</router-link
+                    >
                     <h5 class="mb-0">Recruitment</h5>
                 </div>
             </div>

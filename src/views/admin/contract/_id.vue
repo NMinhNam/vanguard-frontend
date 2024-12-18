@@ -19,7 +19,7 @@
 import Header from '@/components/main/Header.vue'
 import Aside from '@/components/main/Aside.vue'
 import { ref } from 'vue'
-import ContractDetail from '@/components/admin/ContractDetailComponent/ContractDetail.vue';
+import ContractDetail from '@/components/admin/ContractDetailComponent/ContractDetail.vue'
 
 const isShow = ref(true)
 

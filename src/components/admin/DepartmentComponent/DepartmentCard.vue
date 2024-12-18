@@ -10,7 +10,9 @@
                                 <span class="status-indicator">:</span>
                             </div>
                             <div>
-                                <button class="btn btn-primary mb-3">{{ department.soLuongNhanVien }} {{ $t('department.table.staff') }}</button>
+                                <button class="btn btn-primary mb-3">
+                                    {{ department.soLuongNhanVien }} {{ $t('department.table.staff') }}
+                                </button>
                             </div>
                         </div>
                     </div>

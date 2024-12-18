@@ -98,7 +98,7 @@ const validate = () => {
         luongCoBan: { required: true, pattern: /^\d+(\.\d{1,2})?$/ },
     }
     Object.assign(error, validateForm(formRule, Contract.value))
-    console.log(error) 
+    console.log(error)
 
     for (let key in error) {
         if (error[key] !== false) {

@@ -128,8 +128,6 @@
     </div>
 </template>
 
-
-
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
 import { get, post, put, del } from '@/stores/https'
@@ -401,8 +399,6 @@ const openMeeting = () => {
 }
 </script>
 
-
-    
 <style>
 @import url('https://cdn.jsdelivr.net/npm/slim-select@latest/dist/slimselect.min.css');
 </style>

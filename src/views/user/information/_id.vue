@@ -15,19 +15,19 @@
     </div>
 </template>
 <script setup>
-import editprofile from '@/components/user/information/editprofile.vue';
-import Header from '@/components/main/Header.vue';
-import Aside from '@/components/main/Aside.vue';
-import { ref } from 'vue';
+import editprofile from '@/components/user/information/editprofile.vue'
+import Header from '@/components/main/Header.vue'
+import Aside from '@/components/main/Aside.vue'
+import { ref } from 'vue'
 
-const isShow = ref(true);
+const isShow = ref(true)
 
 const handleToggleSidebar = (show) => {
-    isShow.value = show;
-};
+    isShow.value = show
+}
 </script>
 <style scoped>
-    main {
+main {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 18.5%;
@@ -43,4 +43,3 @@ main.close {
     transition: var(--tran-05);
 }
 </style>
-
