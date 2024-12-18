@@ -274,8 +274,7 @@
         </div>
 
         <!-- Sửa thông đơn -->
-        <div class="modal fade" id="changeTimeOffModal" tabindex="-1" aria-labelledby="timeOffModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="changeTimeOffModal" tabindex="-1" aria-labelledby="timeOffModalLabel">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-fullscreen-md-down">
                     <div class="modal-header">
@@ -299,17 +298,23 @@
                                         disabled>
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-2">
-                                <label for="lydo" class="form-label">{{ $t('create_onleave.items.reason') }}:</label>
-                                <select class="form-select" id="lydo" v-model="selectedItem.loaiDon"
-                                    :class="{ 'is-invalid': errorChange.loaiDon }">
-                                    <option selected disabled>Chọn loại nghỉ phép</option>
-                                    <option v-if="nghiPhepNam">Nghỉ phép năm</option>
-                                    <option>Nghỉ ốm</option>
-                                    <option>Nghỉ thai sản</option>
-                                    <option>Nghỉ không lương</option>
-                                    <option>Khác</option>
-                                </select>
+                            <div class="row py-2">
+                                <div class="col-md-6 mb-2">
+                                    <label for="lydo" class="form-label">{{ $t('create_onleave.items.reason')
+                                        }}:</label>
+                                    <select class="form-select" id="lydo" v-model="selectedItem.loaiDon"
+                                        :class="{ 'is-invalid': errorChange.loaiDon }">
+                                        <option selected disabled>Chọn loại nghỉ phép</option>
+                                        <option v-if="nghiPhepNam">Nghỉ phép năm</option>
+                                        <option>Nghỉ ốm</option>
+                                        <option>Nghỉ thai sản</option>
+                                        <option>Nghỉ không lương</option>
+                                        <option>Khác</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 d-flex align-items-end">
+                                    <span class="p-2 mb-2">Số ngày nghỉ phép năm còn: {{ nghiPhepNam }} ngày</span>
+                                </div>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-6">
@@ -352,8 +357,7 @@
         </div>
 
         <!-- Modal gửi người duyệt -->
-        <div class="modal fade" id="timeOffModalDuyet" tabindex="-1" aria-labelledby="timeOffModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="timeOffModalDuyet" tabindex="-1" aria-labelledby="timeOffModalLabel">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-fullscreen-md-down">
                     <div class="modal-header">
@@ -672,7 +676,7 @@ const openModal = (item) => {
 
 const nghiPhepNam = ref('')
 
-const getNghiPhepNam = async() => {
+const getNghiPhepNam = async () => {
     const response = await get(`/api/v1/annual-leave/employee/${sessionStorage.getItem('maNhanVien')}`)
     nghiPhepNam.value = response.data.tongSoNgayPhepCon
     console.log(nghiPhepNam.value)

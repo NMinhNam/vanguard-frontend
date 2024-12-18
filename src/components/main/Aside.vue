@@ -103,11 +103,11 @@ const featureUser = [
         icon: 'fa-tasks',
         text: 'home.menu_item_user.timeoff',
     },
-    {
-        path: '/user/rewardanddiscipline',
-        icon: 'fa-bookmark',
-        text: 'home.menu_item_user.rewar_discipline',
-    },
+    // {
+    //     path: '/user/rewardanddiscipline',
+    //     icon: 'fa-bookmark',
+    //     text: 'home.menu_item_user.rewar_discipline',
+    // },
     {
         path: '/user/payroll',
         icon: 'fa-dollar-sign',
