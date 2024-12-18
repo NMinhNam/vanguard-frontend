@@ -14,7 +14,10 @@ const router = useRouter()
 const userRole = sessionStorage.getItem('role')?.toLowerCase()
 
 const goHome = () => {
-    router.push(`/${userRole}`)
+    if(userRole) {
+        router.push(`/${userRole}`)
+    }
+    router.push('/')
 }
 </script>
 

@@ -159,12 +159,23 @@ const btnCheckOut_Click = async () => {
             })
         }
     } catch (error) {
-        Swal.fire({
+        if (error.data.status === 1003) {
+            Swal.fire({
+                title: t('checkin.check_out.fail.title'),
+                text: t('checkin.check_out.fail.text'),
+                icon: 'error',
+                timer: 1500,
+            })
+        } else {
+            Swal.fire({
             title: t('checkin.erorr.title'),
             text: t('checkin.erorr.text'),
             icon: 'error',
             timer: 1500,
         })
+        }
+
+        
     }
 }
 </script>
