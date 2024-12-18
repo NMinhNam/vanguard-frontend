@@ -14,7 +14,9 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-success" @click="saveStaffs">{{ $t('addstaffbyfileexcelcomponent.buttons.save') }}</button>
+                    <button class="btn btn-success" @click="saveStaffs">
+                        {{ $t('addstaffbyfileexcelcomponent.buttons.save') }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -99,6 +101,7 @@ const saveStaffs = async () => {
         const formData = new FormData()
         formData.append('file', file)
         try {
+            console.log(formData)
             const responseData = await axios.post('http://localhost:1688/api/v1/upload-file/employees', formData)
             Swal.fire({
                 title: t('addstaffbyfileexcelcomponent.swal.save.success.title'),
@@ -130,8 +133,11 @@ const saveStaffs = async () => {
 
 const isExist = async () => {
     await getAllStaff()
+    data.value = data.value.filter((record) => record?.CCCD)
     const staffCCCDSet = new Set(listStaff.value.map((staff) => staff.cccd))
-    const duplicateRecords = data.value.filter((record) => staffCCCDSet.has(record.CCCD))
+    const duplicateRecords = data.value
+        .filter((record) => record?.CCCD) // Lọc bỏ các bản ghi không có CCCD
+        .filter((record) => staffCCCDSet.has(String(record.CCCD).trim()))
     if (duplicateRecords.length > 0) {
         console.log(duplicateRecords)
         console.log(staffCCCDSet)

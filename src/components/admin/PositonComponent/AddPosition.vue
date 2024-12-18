@@ -1,11 +1,14 @@
 <template>
     <div class="container-fluid">
+        <h5 class="mb-3 fw-bolder text-center">{{ t('position.title') }}</h5>
         <div class="d-flex align-items-center mb-2">
-            <label for="tenChucVu" class="form-label me-2 text-nowrap label-width">{{ t('position.new_position') }}</label>
+            <label for="tenChucVu" class="form-label me-2 text-nowrap label-width">{{
+                t('position.new_position')
+            }}</label>
             <input
-                v-model="info.tenChucVu "
+                v-model="props.positionDetail.tenChucVu"
                 type="text"
-                class="form-control"
+                class="form-control me-2"
                 id="tenChucVu"
                 placeholder="Chức Vụ"
             />
@@ -17,19 +20,21 @@
 </template>
 
 <script setup>
-import {  reactive } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { post } from '@/stores/https'
 import { useI18n } from 'vue-i18n'
 
-const { t, locale } = useI18n()
-
-const info = reactive({
-    tenChucVu: '',
+const props = defineProps({
+    positionDetail: {
+        type: Object,
+    },
 })
+
+const { t, locale } = useI18n()
 
 const savePosition = async () => {
     try {
-        const response = await post('/api/v1/positions', info)
+        const response = await post('/api/v1/positions', props.positionDetail)
         if (response) {
             Swal.fire({
                 title: t('position.swal.save.success.title'),

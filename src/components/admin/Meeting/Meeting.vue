@@ -31,7 +31,7 @@ import { useI18n } from 'vue-i18n'
 import { format } from 'date-fns'
 const { locale } = useI18n()
 
-const user = ref(sessionStorage.getItem('user'))
+const maNhanVien = ref(sessionStorage.getItem('maNhanVien'))
 const userLogin = ref({})
 const showPopup = ref(false)
 const listMeeting = ref([])
@@ -44,8 +44,7 @@ onMounted(async () => {
 
 const getUserLogin = async () => {
     try {
-        const username = user.value
-        const response = await get('/api/v1/employees/me', { username })
+        const response = await get(`/api/v1/employees/${maNhanVien.value}`)
         userLogin.value = response.data
     } catch (error) {
         console.error(error)
@@ -55,6 +54,8 @@ const getUserLogin = async () => {
 const getMeetings = async () => {
     try {
         const maNhanVien = userLogin.value.maNhanVien
+        console.log(maNhanVien)
+
         const response = await get(`/api/v1/meetings/employee/${maNhanVien}`)
         listMeeting.value = response.data
     } catch (error) {
@@ -70,6 +71,7 @@ const selectedEvent = ref({
     maCuocHop: null,
     thoiGianBatDau: null,
     userLogin: null,
+    maNhanVien: null,
 })
 
 const calendarEvents = computed(() =>
@@ -116,7 +118,9 @@ const calendarOptions = ref({
         showPopup.value = true
         selectedEvent.value = {
             maCuocHop: info.event.id,
+            maNhanVien: maNhanVien.value,
         }
+        console.log(selectedEvent.value)
         info.jsEvent.preventDefault()
     },
     dateClick: function (info) {
@@ -126,7 +130,9 @@ const calendarOptions = ref({
             nguoiToChuc: userLogin.value.maNhanVien,
             thoiGianBatDau: info.dateStr,
             userLogin: userLogin.value.maNhanVien,
+            maNhanVien: maNhanVien.value,
         }
+        console.log(selectedEvent.value)
     },
     events: calendarEvents.value,
 })

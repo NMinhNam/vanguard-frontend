@@ -1,11 +1,13 @@
 <template>
     <div class="container-fluid">
+        <h5 class="mb-3 fw-bolder text-center">{{ t('department.title') }}</h5>
+
         <div class="d-flex align-items-center mb-2">
             <label for="tenPhongBan" class="form-label me-2 text-nowrap" style="width: 12rem">
                 {{ t('department.add.name') }}
             </label>
             <input
-                v-model="phongBanInfo.tenPhongBan"
+                v-model="departmentDetail.tenPhongBan"
                 type="text"
                 class="form-control"
                 id="tenPhongBan"
@@ -19,7 +21,11 @@
                     {{ t('department.add.superior_department') }}
                 </label>
                 <div class="w-100">
-                    <select v-model="phongBanInfo.maPhongBanCapTren" id="superiorDepartmentSelect" class="slim-select">
+                    <select
+                        v-model="departmentDetail.maPhongBanCapTren"
+                        id="superiorDepartmentSelect"
+                        class="slim-select"
+                    >
                         <option
                             v-for="department in superiorDepartments"
                             :key="department.maPhongBan"
@@ -38,7 +44,7 @@
                     {{ t('department.add.head') }}
                 </label>
                 <div class="w-100">
-                    <select v-model="phongBanInfo.truongPhong" id="truongPhongSelect" class="slim-select">
+                    <select v-model="departmentDetail.truongPhong" id="truongPhongSelect" class="slim-select">
                         <option
                             v-for="leadStaff in listLeadStaff"
                             :key="leadStaff.maNhanVien"
@@ -63,8 +69,10 @@ import SlimSelect from 'slim-select'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
-    showPopup: Boolean,
     getDepartment: Function,
+    departmentDetail: {
+        type: Object,
+    },
 })
 
 const { t, locale } = useI18n()
@@ -72,12 +80,6 @@ const { t, locale } = useI18n()
 const listLeadStaff = ref([])
 const slimSelectInstance = ref('')
 const superiorDepartments = ref([])
-
-const phongBanInfo = reactive({
-    tenPhongBan: '',
-    truongPhong: '',
-    maPhongBanCapTren: '',
-})
 
 onMounted(async () => {
     await getListLeadStaff()
@@ -87,7 +89,7 @@ onMounted(async () => {
 
 const saveDepartment = async () => {
     try {
-        const response = await post('/api/v1/departments', phongBanInfo)
+        const response = await post('/api/v1/departments', props.departmentDetail)
         if (response) {
             Swal.fire({
                 title: t('department.swal.save.success.title'),

@@ -152,6 +152,7 @@ const meetingDetail = ref({})
 const role = ref('')
 
 const formData = reactive({
+    maNhanVien: '',
     maCuocHop: '',
     ghiChu: '',
     nguoiToChuc: '',
@@ -175,6 +176,7 @@ onMounted(async () => {
 })
 
 const setDataforFormData = (data) => {
+    formData.maNhanVien = data.maNhanVien
     formData.maCuocHop = data.maCuocHop
     formData.ghiChu = data.ghiChu || ''
     formData.nguoiToChuc = data.nguoiToChuc
@@ -185,10 +187,12 @@ const setDataforFormData = (data) => {
     formData.videoCallUrl = data.videoCallUrl
     formData.tenNguoiToChuc = data.tenNguoiToChuc || props.event.tenNguoiToChuc || ''
     if (data.danhSachThamGia) {
-        formData.danhSachThamGia = data.danhSachThamGia
-            .split(',')
-            .map((item) => item.trim())
-            .put(props.event.maNhanVien)
+        formData.danhSachThamGia = data.danhSachThamGia.split(',').map((item) => item.trim())
+
+        // Thêm phần tử props.event.maNhanVien vào danh sách
+        formData.danhSachThamGia.push(props.event.maNhanVien)
+
+        // Cập nhật giá trị SlimSelect
         setSlimSelectValues(formData.danhSachThamGia)
     }
     console.log(formData)
@@ -290,23 +294,22 @@ const createMeeting = async () => {
 
         if (formData.danhSachThamGia.length > 0) {
             const chiTietCuocHop = {
-                maNhanVien: '',
+                maNhanVien: formData.maNhanVien,
+                thoiGianBatDau: formData.thoiGianBatDau,
+                thoiGianKetThuc: formData.thoiGianKetThuc,
                 nguoiToChuc: formData.nguoiToChuc,
                 tenCuocHop: formData.tenCuocHop,
-                thoiGianBatDau: formData.thoiGianBatDau,
+                danhSachMaNhanVien: formData.danhSachThamGia,
             }
+            console.log(chiTietCuocHop)
 
-            for (let i = 0; i < formData.danhSachThamGia.length; i++) {
-                chiTietCuocHop.maNhanVien = formData.danhSachThamGia[i]
-                try {
-                    const chiTietResponse = await post('/api/v1/chi-tiet-cuoc-hop', chiTietCuocHop)
-                    console.log('Chi tiết cuộc họp đã được tạo:', chiTietResponse)
-                } catch (error) {
-                    console.error('Lỗi khi tạo chi tiết cuộc họp cho nhân viên', chiTietCuocHop.maNhanVien, error)
-                }
+            try {
+                const chiTietResponse = await post('/api/v1/chi-tiet-cuoc-hop', chiTietCuocHop)
+                console.log('Chi tiết cuộc họp đã được tạo:', chiTietResponse)
+            } catch (error) {
+                console.error('Lỗi khi tạo chi tiết cuộc họp cho nhân viên', chiTietCuocHop.maNhanVien, error)
             }
         }
-
         if (response) {
             Swal.fire({
                 title: t('meeting.swal.save.success.title'),
@@ -335,14 +338,20 @@ const updateMeeting = async () => {
         const response = await put('/api/v1/meetings', formData)
         if (formData.danhSachThamGia.length > 0) {
             const chiTietCuocHop = {
-                maNhanVien: '',
-                tenCuocHop: formData.tenCuocHop,
-                nguoiToChuc: formData.nguoiToChuc,
+                maNhanVien: formData.maNhanVien,
                 thoiGianBatDau: formData.thoiGianBatDau,
+                thoiGianKetThuc: formData.thoiGianKetThuc,
+                nguoiToChuc: formData.nguoiToChuc,
+                tenCuocHop: formData.tenCuocHop,
+                danhSachMaNhanVien: formData.danhSachThamGia,
             }
-            for (let i = 0; i < formData.danhSachThamGia.length; i++) {
-                chiTietCuocHop.maNhanVien = formData.danhSachThamGia[i]
+            console.log(chiTietCuocHop)
+
+            try {
                 const chiTietResponse = await post('/api/v1/chi-tiet-cuoc-hop', chiTietCuocHop)
+                console.log('Chi tiết cuộc họp đã được tạo:', chiTietResponse)
+            } catch (error) {
+                console.error('Lỗi khi tạo chi tiết cuộc họp cho nhân viên', chiTietCuocHop.maNhanVien, error)
             }
         }
         if (response) {

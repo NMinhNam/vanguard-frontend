@@ -7,6 +7,7 @@
                     <th scope="col">{{ t('department.table.name') }}</th>
                     <th scope="col">{{ t('department.table.manage') }}</th>
                     <th scope="col">{{ t('department.table.staff') }}</th>
+                    <th scope="col">{{ t('department.table.tool') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -14,13 +15,22 @@
                     <td colspan="10">{{ t('department.table.search') }}</td>
                 </tr>
 
-                <tr v-for="(department, index) in paginatedDepartments" :key="department.maPhongBan">
+                <tr
+                    @dblclick="getDepartmentById(department.maPhongBan)"
+                    v-for="(department, index) in paginatedDepartments"
+                    :key="department.maPhongBan"
+                >
                     <td>{{ (props.currentPage - 1) * props.pageSize + index + 1 }}</td>
                     <td>{{ department.tenPhongBan }}</td>
                     <td>
                         {{ department.truongPhong }}
                     </td>
                     <td>{{ department.soLuongNhanVien }}</td>
+                    <td>
+                        <button class="btn btn-danger" @click="btnDeletePhongBan_click(department.maPhongBan)">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -45,11 +55,13 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { get, del } from '@/stores/https'
 
 const { t, locale } = useI18n()
 
+const departmentDetailt = ref({})
 const props = defineProps({
     departments: Array,
     searchQuery: {
@@ -64,7 +76,40 @@ const props = defineProps({
         type: Number,
         default: 9,
     },
+    getDepartment: {
+        type: Function,
+        required: true,
+    },
 })
+
+const btnDeletePhongBan_click = async (maPhongBan) => {
+    try {
+        const response = await del(`/api/v1/departments/${maPhongBan}`)
+        if (response.status === 200) {
+            Swal.fire({
+                title: 'Delete department',
+                text: 'Delete department successfully',
+                icon: 'success',
+                timer: 1500,
+            })
+        }
+    } catch (e) {
+        Swal.fire({
+            title: 'Delete department',
+            text: 'Delete department fail',
+            icon: 'error',
+            timer: 1500,
+        })
+        console.error(e)
+    }
+    props.getDepartment()
+}
+
+const getDepartmentById = async (maPhongBan) => {
+    const response = await get(`/api/v1/departments/${maPhongBan}`)
+    departmentDetailt.value = response.data
+    emit('getDepartmentById', departmentDetailt.value)
+}
 
 const filteredDepartments = computed(() => {
     console.log(props.searchQuery)
@@ -87,7 +132,7 @@ const totalPages = computed(() => {
     return Math.ceil(filteredDepartments.value.length / props.pageSize)
 })
 
-const emit = defineEmits(['updatePage'])
+const emit = defineEmits(['updatePage', 'getDepartmentById'])
 
 const goToPage = (page) => {
     emit('updatePage', page)

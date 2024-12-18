@@ -45,18 +45,15 @@
         </div>
     </div>
 
-    <!-- Popup hiển thị form AddRecruitment khi showPopup = true -->
-    <div :class="['popup', { show: showPopup }]" tabindex="-1">
+    <div v-if="showPopup" class="popup show" tabindex="-1" aria-hidden="false">
         <div class="popup-content modal-dialog">
             <div class="modal-content p-4">
-                <div class="modal-header d-flex justify-content-between align-items-center">
-                    <h2 class="modal-title border-bottom mb-0">{{ t('position.save_title') }}</h2>
-                    <button @click="showPopup = false" class="close-btn" aria-label="Close">
-                        <i class="fa-solid fa-circle-xmark"></i>
-                    </button>
-                </div>
                 <div class="modal-body">
-                    <AddPosition />
+                    <!-- Component Chi Tiết -->
+                    <AddPosition :positionDetail="positionDetail" />
+                </div>
+                <div class="modal-footer d-flex justify-content-end align-items-end">
+                    <i @click="showPopup = false" class="text-danger fs-3 fa-solid fa-circle-xmark"></i>
                 </div>
             </div>
         </div>
@@ -64,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import AddPosition from './AddPosition.vue'
 import { useI18n } from 'vue-i18n'
 
@@ -86,7 +83,20 @@ const props = defineProps({
         type: Number,
         default: 1,
     },
+    positionDetail: {
+        type: Object,
+    },
 })
+
+watch(
+    () => props.positionDetail, // Theo dõi props.positionDetail
+    (newValue, oldValue) => {
+        if (newValue !== oldValue && newValue && oldValue) {
+            showPopup.value = true
+        }
+    },
+    { deep: true, immediate: true },
+)
 </script>
 
 <style scoped>

@@ -52,12 +52,15 @@
                                         :placeholder="$t('login.input_text.password_placeholder')"
                                         @keypress.enter="btnLogin_Click"
                                     />
-                                    <button type="button" class="btn btn-outline-secondary eye_icon"
-                                        @click="togglePasswordVisibility">
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-secondary eye_icon"
+                                        @click="togglePasswordVisibility"
+                                    >
                                         <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                                     </button>
                                 </div>
-                                
+
                                 <div class="invalid-feedback">
                                     {{ $t('login.messages.validate.password_required') }}
                                 </div>
@@ -88,7 +91,7 @@ import { useI18n } from 'vue-i18n'
 import { useValidation } from '@/stores/mixin/validate_form'
 import { useAuthStore } from '@/stores/auth'
 import router from '@/router'
-import { post } from '@/stores/https'
+import { post, get } from '@/stores/https'
 import { useCookie } from '@/stores/mixin/cookie'
 
 const { t, locale } = useI18n()
@@ -100,6 +103,7 @@ const username = ref('')
 const password = ref('')
 const language = ref('vn')
 const showPassword = ref(false)
+const userLogin = ref({})
 
 const togglePasswordVisibility = () => {
     showPassword.value = !showPassword.value
@@ -128,6 +132,8 @@ const btnLogin_Click = async () => {
         const response = await post('/api/v1/auth/login', loginInfo)
         if (response.success) {
             sessionStorage.setItem('user', username.value)
+            await getUserLogin()
+            sessionStorage.setItem('maNhanVien', userLogin.value.maNhanVien)
             authStore.setToken(response.data.accessToken, response.data.refreshToken)
             authStore.setRole(response.data.role)
             Swal.fire({
@@ -159,6 +165,15 @@ const btnLogin_Click = async () => {
             timer: 1500,
         })
         console.error('Error during login:', error)
+    }
+}
+const getUserLogin = async () => {
+    try {
+        const username = sessionStorage.getItem('user')
+        const response = await get('/api/v1/employees/me', { username })
+        userLogin.value = response.data
+    } catch (error) {
+        console.error(error)
     }
 }
 const selectLanguage_Change = () => {
@@ -193,15 +208,16 @@ onMounted(() => {
 <style scoped>
 .eye_icon {
     position: absolute;
-    right: 0px; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    background: none; 
-    border: none; 
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
     cursor: pointer;
 }
 
 .eye_icon:hover {
     background: none;
     color: black;
-}</style>
+}
+</style>

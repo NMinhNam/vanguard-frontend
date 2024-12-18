@@ -12,6 +12,7 @@
                     <th scope="col">{{ $t('staffManagement.items.department') }}</th>
                     <th scope="col">{{ $t('staffManagement.items.position') }}</th>
                     <th scope="col">{{ $t('staffManagement.items.manager') }}</th>
+                    <th class="text-center" scope="col">{{ $t('staffManagement.items.tool') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,11 @@
                             <p class="mb-0">{{ staff.tenQuanLy }}</p>
                         </div>
                     </td>
+                    <td class="text-center">
+                        <button class="btn btn-danger" @click="btnDeleteNhanVien_click(staff.maNhanVien)">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -68,6 +74,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { del } from '@/stores/https'
 const { t, locale } = useI18n()
 const props = defineProps({
     listStaff: {
@@ -94,7 +101,34 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    getAllStaff: {
+        type: Function,
+    },
 })
+
+const btnDeleteNhanVien_click = async (maNhanVien) => {
+    try {
+        const response = await del(`/api/v1/employees/${maNhanVien}`)
+        if (response.status === 200) {
+            Swal.fire({
+                title: 'Save staff',
+                text: 'Delete staff successfully',
+                icon: 'success',
+                timer: 1500,
+            })
+        }
+    } catch (e) {
+        Swal.fire({
+            title: 'Save staff',
+            text: 'Delete staff fail',
+            icon: 'error',
+            timer: 1500,
+        })
+        console.error(e)
+    }
+    props.getAllStaff()
+}
+
 const filteredStaffs = computed(() => {
     let staffs = props.listStaff
 

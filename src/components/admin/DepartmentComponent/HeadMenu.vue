@@ -46,12 +46,16 @@
             </div>
         </div>
     </div>
-    <div :class="['popup', { show: showPopup }]" tabindex="-1">
+
+    <div v-if="showPopup" class="popup show" tabindex="-1" aria-hidden="false">
         <div class="popup-content modal-dialog">
             <div class="modal-content p-4">
-                <h2 class="modal-title border-bottom mb-4">{{ t('department.new_title') }}</h2>
                 <div class="modal-body">
-                    <AddDepartmentPopup @closePopup="showPopup = false" :getDepartment="getDepartment" />
+                    <AddDepartmentPopup
+                        :departmentDetail="departmentDetail"
+                        @closePopup="showPopup = false"
+                        :getDepartment="getDepartment"
+                    />
                 </div>
                 <div class="modal-footer d-flex justify-content-end align-items-end">
                     <i @click="showPopup = false" class="text-danger fs-3 fa-solid fa-circle-xmark"></i>
@@ -62,10 +66,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import AddDepartmentPopup from './AddDepartmentPopup.vue'
 import { useI18n } from 'vue-i18n'
-import { get } from 'jquery'
+import { get } from '@/stores/https'
 
 const { t, locale } = useI18n()
 const searchQuery = ref('')
@@ -80,7 +84,20 @@ const props = defineProps({
     getDepartment: {
         type: Function,
     },
+    departmentDetail: {
+        type: Object,
+    },
 })
+
+watch(
+    () => props.departmentDetail, // Theo dõi props.positionDetail
+    (newValue, oldValue) => {
+        if (newValue !== oldValue && newValue && oldValue) {
+            showPopup.value = true
+        }
+    },
+    { deep: true, immediate: true },
+)
 </script>
 
 <style scoped>
