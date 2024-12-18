@@ -11,7 +11,7 @@
             </div>
         </div>
         <!-- Tiêu đề -->
-        <h1 class="title">Quét QR Check In</h1>
+        <h1 class="title">Quét QR Check Out</h1>
         <!-- Video Camera -->
         <div class="camera-container">
             <video ref="videoElement" class="box-shadow video" autoplay muted playsinline></video>
@@ -41,14 +41,17 @@ const ip = ref('')
 let clockInterval = null
 const updateClock = () => {
     const now = new Date()
+
+    // Cập nhật giờ:phút
     time.value = now.toLocaleTimeString('vi-VN', {
         hour: '2-digit',
         minute: '2-digit',
         hour12: false,
     })
 
+    // Cập nhật ngày, tháng, năm
     date.value = now.toLocaleDateString('vi-VN', {
-        weekday: 'long',
+        weekday: 'long', // Thứ hai, Thứ ba...
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
@@ -89,7 +92,7 @@ const startScanner = async () => {
         qrScanner = new QrScanner(
             videoElement.value,
             (result) => {
-                checkInQr(result.data)
+                CheckOut(result.data)
                 stopScanner()
             },
             {
@@ -99,19 +102,20 @@ const startScanner = async () => {
     }
     qrScanner.start()
 }
-const checkInQr = async (maNhanVien) => {
+
+const CheckOut = async (maNhanVien) => {
     await getIPAddress()
     const formData = ref({
-        maNhanVien: sessionStorage.getItem('maNhanVien'),
+        maNhanVien: maNhanVien,
         publicIp: ip.value,
     })
-
     try {
-        const response = await post('/api/v1/attendances/checkin', formData.value)
-        if (response.data) {
+        const response = await post('/api/v1/attendances/checkout', formData.value)
+
+        if (response.success) {
             Swal.fire({
-                title: t('checkin.check_in.success.title'),
-                text: `${t('checkin.check_in.success.text')}: ${currentDateTime}`,
+                title: t('checkin.check_out.success.title'),
+                text: `${t('checkin.check_out.success.text')}: ${currentDateTime}`,
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
@@ -119,20 +123,19 @@ const checkInQr = async (maNhanVien) => {
             })
         } else {
             Swal.fire({
-                title: t('checkin.check_in.fail.title'),
-                text: t('checkin.check_in.fail.text'),
+                title: t('checkin.check_out.fail.title'),
+                text: t('checkin.check_out.fail.text'),
                 icon: 'error',
                 timer: 1500,
             })
         }
     } catch (error) {
         Swal.fire({
-            title: t('checkin.error.title'),
-            text: t('checkin.error.text'),
+            title: t('checkin.erorr.title'),
+            text: t('checkin.erorr.text'),
             icon: 'error',
             timer: 1500,
         })
-        console.log('Lỗi: ', error)
     }
 }
 

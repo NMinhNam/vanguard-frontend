@@ -50,7 +50,11 @@ const year = ref(new Date().getFullYear())
 const monthNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
 
 const now = new Date()
-const currentDateTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`
+const currentDateTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(
+    now.getDate(),
+).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(
+    now.getSeconds(),
+).padStart(2, '0')}`
 
 watch([month, year], () => {
     emit('updateDate', { month: month.value, year: year.value })
@@ -93,7 +97,6 @@ const btnCheckIn_Click = async () => {
     })
     try {
         const response = await post('/api/v1/attendances/checkin', formData.value)
-
         if (response.success) {
             Swal.fire({
                 title: t('checkin.check_in.success.title'),
@@ -112,23 +115,13 @@ const btnCheckIn_Click = async () => {
             })
         }
     } catch (error) {
-        if (error.data.status === 1003) {
-            Swal.fire({
-                title: t('checkin.check_in.fail.title'),
-                text: t('checkin.check_in.fail.text'),
-                icon: 'error',
-                timer: 1500,
-            })
-        } else {
-            Swal.fire({
-                title: t('checkin.error.title'),
-                text: t('checkin.error.text'),
-                icon: 'error',
-                timer: 1500,
-            })
-            console.log("Lỗi: ", error)
-        }
-
+        Swal.fire({
+            title: t('checkin.erorr.title'),
+            text: t('checkin.erorr.text'),
+            icon: 'error',
+            timer: 1500,
+        })
+        console.log('Lỗi: ', error)
     }
 }
 
@@ -159,23 +152,12 @@ const btnCheckOut_Click = async () => {
             })
         }
     } catch (error) {
-        if (error.data.status === 1003) {
-            Swal.fire({
-                title: t('checkin.check_out.fail.title'),
-                text: t('checkin.check_out.fail.text'),
-                icon: 'error',
-                timer: 1500,
-            })
-        } else {
-            Swal.fire({
+        Swal.fire({
             title: t('checkin.erorr.title'),
             text: t('checkin.erorr.text'),
             icon: 'error',
             timer: 1500,
         })
-        }
-
-        
     }
 }
 </script>
