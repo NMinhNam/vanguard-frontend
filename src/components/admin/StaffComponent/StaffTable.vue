@@ -21,7 +21,7 @@
                 <tr
                     v-for="(staff, index) in paginatedStaffs"
                     :key="staff.maNhanVien"
-                    @dblclick="$router.push('/admin/staff/' + staff.maNhanVien)"
+                    @dblclick="$router.push(`/${role}/staff/` + staff.maNhanVien)"
                 >
                     <td>{{ (props.currentPage - 1) * props.pageSize + index + 1 }}</td>
                     <td>{{ staff.hoTen }}</td>
@@ -75,6 +75,8 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { del } from '@/stores/https'
 const { t, locale } = useI18n()
+const role = sessionStorage.getItem('role').toLowerCase()
+console.log(role)
 const props = defineProps({
     listStaff: {
         type: Array,

@@ -19,6 +19,8 @@ const { t, locale } = useI18n()
 const Contract = ref({})
 const loading = ref(false)
 
+const role = sessionStorage.getItem('role').toLowerCase()
+
 const error = reactive({
     noiDung: '',
     ngayKy: '',
@@ -74,7 +76,7 @@ const saveContract = async () => {
                 timer: 1500,
             })
 
-            router.push('/admin/contract')
+            router.push(`/${role}/contract`)
         }
     } catch (error) {
         Swal.fire({

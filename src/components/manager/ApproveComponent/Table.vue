@@ -41,19 +41,14 @@
                         <span v-if="approve.trangThai === 2" class="badge bg-success">Đã phê duyệt</span>
                         <span v-if="approve.trangThai === 3" class="badge bg-danger">Đã Từ chối</span>
                     </td>
-                    <td>
+                    <td v-if="approve.trangThai === 1">
                         <button
-                            :disabled="approve.trangThai == 2"
                             class="btn btn-success me-2"
                             @click.stop="$emit('setTrangThaiApprove', approve.maDon, 2, '')"
                         >
                             <i class="fa-regular fa-circle-check me-2"></i>{{ t('approve.buttons.accept') }}
                         </button>
-                        <button
-                            :disabled="approve.trangThai == 3"
-                            class="btn btn-danger"
-                            @click.stop="$emit('setTrangThaiApprove', approve.maDon, 3, '')"
-                        >
+                        <button class="btn btn-danger" @click.stop="$emit('setTrangThaiApprove', approve.maDon, 3, '')">
                             <i class="fa-regular fa-circle-xmark me-2"></i>{{ t('approve.buttons.refuse') }}
                         </button>
                     </td>
@@ -85,9 +80,10 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const role = sessionStorage.getItem('role').toLowerCase()
-
 const { t, locale } = useI18n()
 const emit = defineEmits(['setTrangThaiApprove', 'updatePage'])
+
+console.log(sessionStorage.getItem('role').toLowerCase)
 
 const props = defineProps({
     listApprove: Array,

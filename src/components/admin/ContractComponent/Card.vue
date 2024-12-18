@@ -4,7 +4,7 @@
             <div
                 v-for="(Contract, index) in listContract"
                 :key="Contract.soHopDong || index"
-                @click="$router.push(`/admin/contract/${Contract.soHopDong}`)"
+                @click="$router.push(`/${role}/contract/${Contract.soHopDong}`)"
                 style="cursor: pointer"
             >
                 <div class="card h-100 p-0">
@@ -50,6 +50,8 @@
 import { ref, onMounted } from 'vue'
 import { get } from '@/stores/https'
 import { useI18n } from 'vue-i18n'
+
+const role = sessionStorage.getItem('role').toLowerCase()
 
 const { t, locale } = useI18n()
 const listNhanVien = ref([])

@@ -4,7 +4,7 @@
             <div
                 v-for="(Recruitment, index) in paginatedRecruitment"
                 :key="Recruitment.viTriTuyenDung || index"
-                @dblclick="$router.push(`/admin/recruitment/${Recruitment.tenViTri}`)"
+                @dblclick="$router.push(`/${role}/recruitment/${Recruitment.tenViTri}`)"
                 style="cursor: pointer"
             >
                 <div class="card h-100 p-0">
@@ -74,6 +74,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+const role = sessionStorage.getItem('role').toLowerCase()
 const { t, locale } = useI18n()
 
 const props = defineProps({

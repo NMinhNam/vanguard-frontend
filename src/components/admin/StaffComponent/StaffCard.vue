@@ -5,7 +5,7 @@
                 v-for="staff in paginatedStaffs"
                 :key="staff.maNhanVien"
                 class="col"
-                @dblclick="$router.push('/admin/staff/' + staff.maNhanVien)"
+                @dblclick="$router.push(`/${role}/staff/` + staff.maNhanVien)"
             >
                 <div class="card h-100">
                     <div class="card-body d-flex p-0">
@@ -59,6 +59,7 @@
 
 <script setup>
 import { computed } from 'vue'
+const role = sessionStorage.getItem('role').toLowerCase()
 
 const props = defineProps({
     listStaff: {

@@ -24,6 +24,8 @@ import router from '@/router'
 import { useValidation } from '@/stores/mixin/validate_form'
 import Contract from './Contract.vue'
 
+const role = sessionStorage.getItem('role').toLowerCase()
+
 const staff = ref({})
 const activeTab = ref('infomation')
 const loading = ref(false)
@@ -165,7 +167,7 @@ const saveStaff = async () => {
 
 const navigateToAddContract = (cccd) => {
     sessionStorage.setItem('cccdStaff', cccd)
-    router.push('/admin/contract/addcontract')
+    router.push(`/${role}/contract/addcontract`)
 }
 
 const setStaffInfo = () => {

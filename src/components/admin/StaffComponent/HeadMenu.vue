@@ -15,7 +15,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="drop_save">
                         <li>
-                            <router-link :to="{ path: '/admin/staff/AddStaff' }" class="dropdown-item">{{
+                            <router-link :to="{ path: `/${role}/staff/AddStaff` }" class="dropdown-item">{{
                                 $t('staffManagement.buttons.add')
                             }}</router-link>
                         </li>
@@ -108,6 +108,8 @@ import { get } from '@/stores/https'
 const { t, locale } = useI18n()
 const searchQuery = ref('')
 const showPopup = ref(false)
+
+const role = sessionStorage.getItem('role').toLowerCase()
 
 const emit = defineEmits(['tab-change', 'prevPage', 'nextPage', 'search', 'filter-change'])
 

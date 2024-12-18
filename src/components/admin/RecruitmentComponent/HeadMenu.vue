@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
                 <button @click="showPopup = true" class="btn btn-primary me-2">{{ t('recruitment.new') }}</button>
-                <router-link :to="{ path: '/admin/recruitment/add' }" class="btn btn-primary me-2"
+                <router-link :to="{ path: `/${role}/recruitment/add` }" class="btn btn-primary me-2"
                     >Add candidates</router-link
                 >
                 <h5 class="mb-0">{{ t('recruitment.title') }}</h5>
@@ -68,6 +68,8 @@
 import { ref } from 'vue'
 import AddRecruitment from './AddRecruitment.vue'
 import { useI18n } from 'vue-i18n'
+
+const role = sessionStorage.getItem('role').toLowerCase()
 
 const { t, locale } = useI18n()
 
