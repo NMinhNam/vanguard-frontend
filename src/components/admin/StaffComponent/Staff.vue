@@ -14,6 +14,7 @@
                 <div>
                     <StaffTable
                         v-if="activeTab === 'table'"
+                        :getAllStaff="getAllStaff"
                         :listStaff="listStaff"
                         :searchQuery="searchQuery"
                         :currentPage="currentPage"

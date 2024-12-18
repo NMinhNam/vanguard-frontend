@@ -133,7 +133,6 @@ const saveRecruitment = async () => {
 const reloadData = () => {
     location.reload()
 }
-
 </script>
 
 <style>

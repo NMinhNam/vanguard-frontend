@@ -1,11 +1,19 @@
 <template>
     <div class="container-fluid mt-3" style="overflow-x: auto">
         <div class="row">
-            <HeadMenu :getDepartment="getDepartments" @tab-change="setActiveTab" :activeTab="activeTab" @search="handleSearch" />
+            <HeadMenu
+                :departmentDetail="departmentDetail"
+                :getDepartment="getDepartments"
+                @tab-change="setActiveTab"
+                :activeTab="activeTab"
+                @search="handleSearch"
+            />
             <div class="col-12" style="overflow-x: auto">
                 <div>
                     <DepartmentTable
                         v-if="activeTab === 'table'"
+                        @getDepartmentById="handleDepartmentDetail"
+                        :getDepartment="getDepartments"
                         :searchQuery="searchQuery"
                         :currentPage="currentPage"
                         :pageSize="pageSize"
@@ -39,6 +47,11 @@ const currentPage = ref(1)
 const pageSize = ref(9)
 const searchQuery = ref('')
 
+const departmentDetail = ref({})
+
+const handleDepartmentDetail = (detail) => {
+    departmentDetail.value = detail
+}
 onMounted(async () => {
     await getDepartments()
 })

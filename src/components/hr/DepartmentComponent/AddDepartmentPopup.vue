@@ -1,7 +1,9 @@
 <template>
     <div class="container-fluid">
         <div class="d-flex align-items-center mb-2">
-            <label for="tenPhongBan" class="form-label me-2 text-nowrap" style="width: 12rem"> {{ t('department.add.name') }} </label>
+            <label for="tenPhongBan" class="form-label me-2 text-nowrap" style="width: 12rem">
+                {{ t('department.add.name') }}
+            </label>
             <input
                 v-model="phongBanInfo.tenPhongBan"
                 type="text"
@@ -53,8 +55,8 @@
         </div>
     </div>
 </template>
-    
-  <script setup>
+
+<script setup>
 import { onMounted, reactive, ref } from 'vue'
 import { get, post } from '@/stores/https'
 import SlimSelect from 'slim-select'
@@ -128,7 +130,7 @@ const getListLeadStaff = async () => {
     listLeadStaff.value = response.data
 }
 </script>
-    
+
 <style>
 @import url('https://cdn.jsdelivr.net/npm/slim-select@latest/dist/slimselect.min.css');
 </style>

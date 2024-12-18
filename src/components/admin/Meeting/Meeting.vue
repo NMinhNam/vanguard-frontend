@@ -31,7 +31,7 @@ import { useI18n } from 'vue-i18n'
 import { format } from 'date-fns'
 const { locale } = useI18n()
 
-const user = ref(sessionStorage.getItem('user'))
+const maNhanVien = ref(sessionStorage.getItem('maNhanVien'))
 const userLogin = ref({})
 const showPopup = ref(false)
 const listMeeting = ref([])
@@ -44,8 +44,7 @@ onMounted(async () => {
 
 const getUserLogin = async () => {
     try {
-        const username = user.value
-        const response = await get('/api/v1/employees/me', { username })
+        const response = await get(`/api/v1/employees/${maNhanVien.value}`)
         userLogin.value = response.data
     } catch (error) {
         console.error(error)
@@ -60,7 +59,6 @@ const getMeetings = async () => {
     } catch (error) {
         console.error(error)
     }
-    console.log(listMeeting.value)
     showPopup.value = false
 }
 
@@ -70,6 +68,7 @@ const selectedEvent = ref({
     maCuocHop: null,
     thoiGianBatDau: null,
     userLogin: null,
+    maNhanVien: null,
 })
 
 const calendarEvents = computed(() =>
@@ -116,6 +115,7 @@ const calendarOptions = ref({
         showPopup.value = true
         selectedEvent.value = {
             maCuocHop: info.event.id,
+            maNhanVien: maNhanVien.value,
         }
         info.jsEvent.preventDefault()
     },
@@ -126,13 +126,12 @@ const calendarOptions = ref({
             nguoiToChuc: userLogin.value.maNhanVien,
             thoiGianBatDau: info.dateStr,
             userLogin: userLogin.value.maNhanVien,
+            maNhanVien: maNhanVien.value,
         }
     },
     events: calendarEvents.value,
 })
 </script>
-
-
 
 <style scoped>
 /* Popup container */
@@ -149,7 +148,9 @@ const calendarOptions = ref({
     z-index: 1050; /* Đảm bảo popup luôn trên các phần tử khác */
     opacity: 0; /* Ban đầu ẩn */
     visibility: hidden; /* Ban đầu ẩn */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 /* Hiển thị popup */
@@ -164,7 +165,9 @@ const calendarOptions = ref({
     border-radius: 12px; /* Bo góc */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Đổ bóng */
     transform: translateY(-30px); /* Bắt đầu với vị trí hơi cao hơn */
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
     max-width: 800px; /* Giới hạn chiều rộng */
     width: 90%; /* Chiếm 90% chiều rộng màn hình */
     padding: 1.5rem; /* Khoảng cách bên trong */

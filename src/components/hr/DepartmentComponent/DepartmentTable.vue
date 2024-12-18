@@ -67,7 +67,6 @@ const props = defineProps({
 })
 
 const filteredDepartments = computed(() => {
-    console.log(props.searchQuery)
     let departments = props.departments
     if (props.searchQuery) {
         departments = departments.filter((department) =>

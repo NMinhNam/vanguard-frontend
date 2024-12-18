@@ -21,7 +21,7 @@ const error = reactive({
 const email = ref('')
 const otp = ref('')
 const newPass = ref('')
-const showPassword = ref(false);
+const showPassword = ref(false)
 const otpTrue = ref(false)
 
 const countdown = ref(0)
@@ -33,20 +33,20 @@ const selectLanguage_Change = () => {
 }
 
 const togglePasswordVisibility = () => {
-    showPassword.value = !showPassword.value;
-};
+    showPassword.value = !showPassword.value
+}
 
 const btnValidateOTP_Click = async () => {
     try {
         const otpValidate = reactive({
             email: email.value,
-            otp: otp.value
+            otp: otp.value,
         })
 
         const response = await post('/api/v1/otp/validate', otpValidate)
 
         if (response.success) {
-            return otpTrue.value = true
+            return (otpTrue.value = true)
         } else {
             await Swal.fire({
                 title: 'Mã OTP không hợp lệ',
@@ -54,7 +54,7 @@ const btnValidateOTP_Click = async () => {
                 icon: 'error',
                 timer: 1500,
             })
-            return otpTrue.value = false
+            return (otpTrue.value = false)
         }
     } catch (error) {
         await Swal.fire({
@@ -63,8 +63,8 @@ const btnValidateOTP_Click = async () => {
             icon: 'error',
             timer: 1500,
         })
-        console.log("Lỗi", error)
-        return otpTrue.value = false
+        console.log('Lỗi', error)
+        return (otpTrue.value = false)
     }
 }
 
@@ -86,17 +86,17 @@ const validate = () => {
 }
 
 const errorPass = reactive({
-    newPass: ''
+    newPass: '',
 })
 
 const validatePass = () => {
     const formRule = {
         newPass: {
             required: true,
-        }
+        },
     }
     const formData = {
-        newPass: newPass.value
+        newPass: newPass.value,
     }
     Object.assign(errorPass, validateForm(formRule, formData))
     for (let key in errorPass) {
@@ -118,7 +118,7 @@ const sendCode = async () => {
 
     try {
         const sendEmail = reactive({
-            email: email.value
+            email: email.value,
         })
 
         const response = await post('/api/v1/auth/forgot-password', sendEmail)
@@ -145,7 +145,7 @@ const sendCode = async () => {
             icon: 'error',
             timer: 1500,
         })
-        console.log("Lỗi", error)
+        console.log('Lỗi', error)
     }
 }
 
@@ -154,7 +154,7 @@ const resetPassword = async () => {
     try {
         const reset = reactive({
             email: email.value,
-            newPassword: newPass.value
+            newPassword: newPass.value,
         })
         const response = await post('/api/v1/auth/reset-password', reset)
 
@@ -219,17 +219,26 @@ onMounted(() => {
                             <div class="mb-3">
                                 <label for="email" class="form-label fw-bold">Email</label>
                                 <div
-                                    class="col-sm-12 gap-2 d-flex flex-row m-0 justify-content-center align-items-center">
+                                    class="col-sm-12 gap-2 d-flex flex-row m-0 justify-content-center align-items-center"
+                                >
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" :class="{ 'is-invalid': error.email }"
-                                            id="email" v-model="email" placeholder="Vui lòng nhập email" />
-                                        <div class="invalid-feedback">
-                                            Email không hợp lệ
-                                        </div>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            :class="{ 'is-invalid': error.email }"
+                                            id="email"
+                                            v-model="email"
+                                            placeholder="Vui lòng nhập email"
+                                        />
+                                        <div class="invalid-feedback">Email không hợp lệ</div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <a v-if="!countdown" href="javascript:void(0)" class="text-decoration-none"
-                                            @click="sendCode">
+                                        <a
+                                            v-if="!countdown"
+                                            href="javascript:void(0)"
+                                            class="text-decoration-none"
+                                            @click="sendCode"
+                                        >
                                             Gửi mã
                                         </a>
                                         <span class="text-primary" v-else>{{ countdown + 's' }}</span>
@@ -254,11 +263,19 @@ onMounted(() => {
                             <div class="mb-3">
                                 <label for="newPass" class="form-label fw-bold">Mật khẩu mới:</label>
                                 <div class="input-group">
-                                    <input :type="showPassword ? 'text' : 'password'" class="form-control rounded-2"
-                                        :class="{ 'is-invalid': errorPass.newPass }" id="newPass" v-model="newPass"
-                                        placeholder="Vui lòng nhập mật khẩu mới" />
-                                    <button type="button" class="btn btn-outline-secondary eye_icon"
-                                        @click="togglePasswordVisibility">
+                                    <input
+                                        :type="showPassword ? 'text' : 'password'"
+                                        class="form-control rounded-2"
+                                        :class="{ 'is-invalid': errorPass.newPass }"
+                                        id="newPass"
+                                        v-model="newPass"
+                                        placeholder="Vui lòng nhập mật khẩu mới"
+                                    />
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-secondary eye_icon"
+                                        @click="togglePasswordVisibility"
+                                    >
                                         <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                                     </button>
                                     <div class="invalid-feedback">Mật khẩu không được để trống</div>
@@ -278,11 +295,11 @@ onMounted(() => {
 <style scoped>
 .eye_icon {
     position: absolute;
-    right: 10px; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    background: none; 
-    border: none; 
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
     cursor: pointer;
 }
 .eye_icon:hover {

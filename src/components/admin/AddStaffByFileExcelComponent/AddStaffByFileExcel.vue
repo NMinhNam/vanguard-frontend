@@ -14,17 +14,20 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-success" @click="saveStaffs">{{ $t('addstaffbyfileexcelcomponent.buttons.save') }}</button>
+                    <button class="btn btn-success" @click="saveStaffs">
+                        {{ $t('addstaffbyfileexcelcomponent.buttons.save') }}
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script setup>
 import { onMounted, ref } from 'vue'
 import { get } from '@/stores/https'
 import axios from 'axios'
+import { post } from '@/stores/https'
 import * as XLSX from 'xlsx'
 import { useI18n } from 'vue-i18n'
 
@@ -99,7 +102,7 @@ const saveStaffs = async () => {
         const formData = new FormData()
         formData.append('file', file)
         try {
-            const responseData = await axios.post('http://localhost:1688/api/v1/upload-file/employees', formData)
+            const responseData = await post('http://localhost:1688/api/v1/upload-file/employees', formData)
             Swal.fire({
                 title: t('addstaffbyfileexcelcomponent.swal.save.success.title'),
                 text: t('addstaffbyfileexcelcomponent.swal.save.success.text'),
@@ -128,16 +131,33 @@ const saveStaffs = async () => {
     }
 }
 
+const isCCCDNullOrEmpty = (record) => {
+    return record.CCCD === null || record.CCCD === ''
+}
+
 const isExist = async () => {
     await getAllStaff()
+    data.value = data.value.filter((record) => record?.CCCD)
     const staffCCCDSet = new Set(listStaff.value.map((staff) => staff.cccd))
-    const duplicateRecords = data.value.filter((record) => staffCCCDSet.has(record.CCCD))
+    const duplicateRecords = data.value
+        .filter((record) => record?.CCCD)
+        .filter((record) => staffCCCDSet.has(String(record.CCCD).trim()))
     if (duplicateRecords.length > 0) {
-        console.log(duplicateRecords)
-        console.log(staffCCCDSet)
         Swal.fire({
             title: t('addstaffbyfileexcelcomponent.swal.isExist.title'),
             text: t('addstaffbyfileexcelcomponent.swal.isExist.text'),
+            icon: 'warning',
+            timer: 2000,
+        })
+        console.log(duplicateRecords)
+        return true
+    }
+
+    const recordsWithNullCCCD = data.value.filter(isCCCDNullOrEmpty)
+    if (recordsWithNullCCCD.length > 0 || data.value.length <= 0) {
+        Swal.fire({
+            title: t('addstaffbyfileexcelcomponent.swal.nullCCCDInExcel.title'),
+            text: t('addstaffbyfileexcelcomponent.swal.nullCCCDInExcel.text'),
             icon: 'warning',
             timer: 2000,
         })
@@ -158,6 +178,8 @@ const isExistInExcel = () => {
         seenCCCD.add(record.CCCD)
         return false
     })
+
+    console.log(isDuplicateInExcel)
 
     if (isDuplicateInExcel) {
         Swal.fire({

@@ -55,9 +55,9 @@
 import { get } from '@/stores/https'
 import { ref, onMounted } from 'vue'
 
-const tongNhanVien = ref({})
-const tongPhongBan = ref({})
-const nhanVienMoi = ref({})
+const tongNhanVien = ref(0)
+const tongPhongBan = ref(0)
+const nhanVienMoi = ref(0)
 
 onMounted(async () => {
     await getTongNhanVien()
@@ -78,7 +78,6 @@ const getNhanVienMoi = async () => {
     nhanVienMoi.value = response.data.length
 }
 </script>
-
 
 <style scoped>
 .boder-left-1 {

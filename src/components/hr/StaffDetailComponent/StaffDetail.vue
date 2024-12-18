@@ -122,7 +122,6 @@ const getStaffById = async () => {
     } catch (error) {
         console.error(error)
     }
-    console.log(staff.value)
 }
 
 const saveStaff = async () => {

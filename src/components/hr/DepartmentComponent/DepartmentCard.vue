@@ -10,7 +10,9 @@
                                 <span class="status-indicator">:</span>
                             </div>
                             <div>
-                                <button class="btn btn-primary mb-3">{{ department.soLuongNhanVien }} {{ $t('department.table.staff') }}</button>
+                                <button class="btn btn-primary mb-3">
+                                    {{ department.soLuongNhanVien }} {{ $t('department.table.staff') }}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -62,7 +64,6 @@ const props = defineProps({
 })
 
 const filteredDepartments = computed(() => {
-    console.log(props.searchQuery)
     let departments = props.departments
     if (props.searchQuery) {
         departments = departments.filter((department) =>

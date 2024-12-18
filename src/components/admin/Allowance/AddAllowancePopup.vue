@@ -4,8 +4,13 @@
             <label for="tenPhongBan" class="form-label me-2 text-nowrap" style="width: 12rem">
                 {{ $t('configuration.allowance.table.allowance_name') }}
             </label>
-            <input v-model="phuCapInfo.tenPhuCap" type="text" class="form-control" id="tenPhuCap"
-                :class="{ 'is-invalid': error.tenPhuCap }" />
+            <input
+                v-model="phuCapInfo.tenPhuCap"
+                type="text"
+                class="form-control"
+                id="tenPhuCap"
+                :class="{ 'is-invalid': error.tenPhuCap }"
+            />
             <div class="invalid-feedback">
                 {{ $t('configuration.allowance.validate.name') }}
             </div>
@@ -14,8 +19,13 @@
             <label for="tenPhongBan" class="form-label me-2 text-nowrap" style="width: 12rem">
                 {{ $t('configuration.allowance.table.amount') }}
             </label>
-            <input v-model="phuCapInfo.soTien" type="text" class="form-control" id="soTien"
-                :class="{ 'is-invalid': error.soTien }" />
+            <input
+                v-model="phuCapInfo.soTien"
+                type="text"
+                class="form-control"
+                id="soTien"
+                :class="{ 'is-invalid': error.soTien }"
+            />
             <div class="invalid-feedback">
                 {{ $t('configuration.allowance.validate.amount') }}
             </div>
@@ -30,7 +40,7 @@
 
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
-import {  post } from '@/stores/https'
+import { post } from '@/stores/https'
 import { useValidation } from '@/stores/mixin/validate_form'
 import { useI18n } from 'vue-i18n'
 
@@ -38,16 +48,14 @@ const { t, locale } = useI18n()
 
 const phuCapInfo = reactive({
     tenPhuCap: '',
-    soTien: ''
+    soTien: '',
 })
 
 const props = defineProps({
-    getPhuCap: Function
+    getPhuCap: Function,
 })
 
-onMounted(async () => {
-
-})
+onMounted(async () => {})
 
 const btnLuuPhuCap_click = async () => {
     if (!validate()) {
@@ -70,7 +78,7 @@ const btnLuuPhuCap_click = async () => {
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
-                props.getPhuCap();
+                props.getPhuCap()
             })
         } else {
             Swal.fire({
@@ -96,7 +104,7 @@ const { validateForm } = useValidation()
 
 const error = reactive({
     tenPhuCap: '',
-    soTien: ''
+    soTien: '',
 })
 
 const validate = () => {
@@ -106,12 +114,12 @@ const validate = () => {
         },
         soTien: {
             required: true,
-            number: phuCapInfo.soTien
-        }
+            number: phuCapInfo.soTien,
+        },
     }
     const formData = {
         tenPhuCap: phuCapInfo.tenPhuCap,
-        soTien: phuCapInfo.soTien
+        soTien: phuCapInfo.soTien,
     }
     Object.assign(error, validateForm(formRule, formData))
     for (let key in error) {

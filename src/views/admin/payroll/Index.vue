@@ -15,14 +15,14 @@
     </div>
 </template>
 <script setup>
-import Header from '@/components/main/Header.vue';
-import Aside from '@/components/main/Aside.vue';
+import Header from '@/components/main/Header.vue'
+import Aside from '@/components/main/Aside.vue'
 import PayRoll from '@/components/admin/PayRoll/PayRoll.vue'
-import { ref } from 'vue';
-const isShow = ref(true);
+import { ref } from 'vue'
+const isShow = ref(true)
 const handleToggleSidebar = (show) => {
-    isShow.value = show;
-};
+    isShow.value = show
+}
 </script>
 <style scoped>
 main {

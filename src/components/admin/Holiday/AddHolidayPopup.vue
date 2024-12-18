@@ -54,7 +54,7 @@
         </div>
     </div>
 </template>
-    
+
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
 import { post } from '@/stores/https'
@@ -66,14 +66,14 @@ const { t, locale } = useI18n()
 const props = defineProps({
     getNgayLe: {
         type: Function,
-        required: true
-    }
+        required: true,
+    },
 })
 
 const ngayLeInfo = reactive({
     tenNgayLe: '',
     ngayThangBatDau: '',
-    ngayThangKetThuc: ''
+    ngayThangKetThuc: '',
 })
 
 onMounted(async () => {
@@ -100,7 +100,7 @@ const btnLuuNgayLe_click = async () => {
                 icon: 'success',
                 timer: 1500,
             }).then(() => {
-                props.getNgayLe();
+                props.getNgayLe()
             })
         } else {
             Swal.fire({
@@ -127,7 +127,7 @@ const { validateForm } = useValidation()
 const error = reactive({
     tenNgayLe: '',
     ngayThangBatDau: '',
-    ngayThangKetThuc: ''
+    ngayThangKetThuc: '',
 })
 
 const validate = () => {
@@ -140,12 +140,12 @@ const validate = () => {
         },
         ngayThangKetThuc: {
             required: true,
-        }
+        },
     }
     const formData = {
         tenNgayLe: ngayLeInfo.tenNgayLe,
         ngayThangBatDau: ngayLeInfo.ngayThangBatDau,
-        ngayThangKetThuc: ngayLeInfo.ngayThangKetThuc
+        ngayThangKetThuc: ngayLeInfo.ngayThangKetThuc,
     }
     Object.assign(error, validateForm(formRule, formData))
     for (let key in error) {
@@ -155,6 +155,4 @@ const validate = () => {
 }
 </script>
 
-    
-<style>
-</style>
+<style></style>

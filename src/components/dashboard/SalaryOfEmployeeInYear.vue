@@ -13,8 +13,8 @@
         <div ref="chart" style="width: 100%; height: 300px"></div>
     </div>
 </template>
-  
-  <script setup>
+
+<script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import * as echarts from 'echarts'
 import { get } from '@/stores/https'
@@ -155,7 +155,5 @@ const resizeChart = () => {
     }
 }
 </script>
-  
-  <style scoped>
-</style>
-  
+
+<style scoped></style>

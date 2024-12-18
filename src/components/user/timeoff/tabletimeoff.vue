@@ -16,20 +16,29 @@
         <div class="card-body">
             <div class="col-sm-12 row m-0">
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-secondary rounded-2 fw-bolder">{{ $t('leave.table.not_submitted')
-                        }}</label>
+                    <label class="p-2 text-bg-secondary rounded-2 fw-bolder">{{
+                        $t('leave.table.not_submitted')
+                    }}</label>
                     <!-- Card Item with Modal Trigger -->
                     <div v-for="item in listChuaGui" :key="item.maDon" class="card p-2 my-2">
-                        <div class="d-flex m-0 justify-content-between text-header" data-bs-toggle="modal"
-                            data-bs-target="#timeOffModal" @click="openModal(item)">
+                        <div
+                            class="d-flex m-0 justify-content-between text-header"
+                            data-bs-toggle="modal"
+                            data-bs-target="#timeOffModal"
+                            @click="openModal(item)"
+                        >
                             <div class="fw-medium text-start">
                                 <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
-                            <div class="fw-medium text-end text-secondary"> <i class="fa-solid fa-circle-dot"></i></div>
+                            <div class="fw-medium text-end text-secondary"><i class="fa-solid fa-circle-dot"></i></div>
                         </div>
-                        <div class="content my-2" data-bs-toggle="modal" data-bs-target="#timeOffModal"
-                            @click="openModal(item)">
+                        <div
+                            class="content my-2"
+                            data-bs-toggle="modal"
+                            data-bs-target="#timeOffModal"
+                            @click="openModal(item)"
+                        >
                             <label class="w-100">
                                 <b>{{ $t('leave.table.reason') }}: </b>
                                 {{ item.loaiDon }}
@@ -46,18 +55,31 @@
                         </div>
                         <!-- Modal Trigger Button -->
                         <div class="row col-sm-12 gap-2 m-0 justify-content-center">
-                            <button type="button" class="btn btn-success col-sm-3" data-bs-toggle="modal"
-                                data-bs-target="#timeOffModalDuyet" @click="openModal(item)">
+                            <button
+                                type="button"
+                                class="btn btn-success col-sm-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#timeOffModalDuyet"
+                                @click="openModal(item)"
+                            >
                                 <i class="fa-solid fa-paper-plane"></i>
                                 {{ $t('leave.buttons.send') }}
                             </button>
-                            <button type="button" class="btn btn-warning col-sm-3" data-bs-toggle="modal"
-                                data-bs-target="#changeTimeOffModal" @click="openModal(item)">
+                            <button
+                                type="button"
+                                class="btn btn-warning col-sm-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#changeTimeOffModal"
+                                @click="openModal(item)"
+                            >
                                 <i class="fa-solid fa-pen-to-square"></i>
                                 {{ $t('leave.buttons.edit') }}
                             </button>
-                            <button type=" button" class="btn btn-danger col-sm-4"
-                                @click="btnDeleteDonYeuCau_click(item.maDon)">
+                            <button
+                                type=" button"
+                                class="btn btn-danger col-sm-4"
+                                @click="btnDeleteDonYeuCau_click(item.maDon)"
+                            >
                                 <i class="fa-solid fa-trash-can"></i>
                                 {{ $t('leave.buttons.delete') }}
                             </button>
@@ -65,8 +87,9 @@
                     </div>
                 </div>
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-primary  rounded-2 fw-bolder">{{ $t('leave.table.pending_approval')
-                        }}</label>
+                    <label class="p-2 text-bg-primary rounded-2 fw-bolder">{{
+                        $t('leave.table.pending_approval')
+                    }}</label>
                     <!-- Card Item with Modal Trigger -->
                     <div v-for="item in listChoDuyet" :key="item.maDon" class="card p-2 my-2">
                         <div class="d-flex m-0 justify-content-between text-header">
@@ -74,7 +97,7 @@
                                 <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
-                            <div class="fw-medium text-end text-primary"> <i class="fa-solid fa-circle-dot"></i></div>
+                            <div class="fw-medium text-end text-primary"><i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2">
                             <label class="w-100">
@@ -93,13 +116,21 @@
                         </div>
                         <!-- Modal Trigger Button -->
                         <div class="row col-sm-12 m-0 gap-2 justify-content-center">
-                            <button type="button" class="btn btn-info col-sm-4" data-bs-toggle="modal"
-                                data-bs-target="#timeOffModal" @click="openModal(item)">
+                            <button
+                                type="button"
+                                class="btn btn-info col-sm-4"
+                                data-bs-toggle="modal"
+                                data-bs-target="#timeOffModal"
+                                @click="openModal(item)"
+                            >
                                 <i class="fa-solid fa-eye"></i>
                                 {{ $t('leave.buttons.view') }}
                             </button>
-                            <button type="button" class="btn btn-danger col-sm-4"
-                                @click="btnDeleteDonYeuCau_click(item.maDon)">
+                            <button
+                                type="button"
+                                class="btn btn-danger col-sm-4"
+                                @click="btnDeleteDonYeuCau_click(item.maDon)"
+                            >
                                 <i class="fa-solid fa-trash-can"></i>
                                 {{ $t('leave.buttons.delete') }}
                             </button>
@@ -107,8 +138,9 @@
                     </div>
                 </div>
                 <div class="col-sm-3 px-2">
-                    <label class="p-2 text-bg-success text-white rounded-2 fw-bolder">{{ $t('leave.table.approved')
-                        }}</label>
+                    <label class="p-2 text-bg-success text-white rounded-2 fw-bolder">{{
+                        $t('leave.table.approved')
+                    }}</label>
                     <!-- Card Item with Modal Trigger -->
                     <div v-for="item in listDaDuyet" :key="item.maDon" class="card p-2 my-2">
                         <div class="d-flex m-0 justify-content-between text-header">
@@ -116,7 +148,7 @@
                                 <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
-                            <div class="fw-medium text-end text-success"> <i class="fa-solid fa-circle-dot"></i></div>
+                            <div class="fw-medium text-end text-success"><i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2">
                             <label class="w-100">
@@ -135,13 +167,21 @@
                         </div>
                         <!-- Modal Trigger Button -->
                         <div class="row col-sm-12 m-0 gap-2 justify-content-center">
-                            <button type="button" class="btn btn-info col-sm-4" data-bs-toggle="modal"
-                                data-bs-target="#timeOffModal" @click="openModal(item)">
+                            <button
+                                type="button"
+                                class="btn btn-info col-sm-4"
+                                data-bs-toggle="modal"
+                                data-bs-target="#timeOffModal"
+                                @click="openModal(item)"
+                            >
                                 <i class="fa-solid fa-eye"></i>
                                 {{ $t('leave.buttons.view') }}
                             </button>
-                            <button type="button" class="btn btn-danger col-sm-4"
-                                @click="btnDeleteDonYeuCau_click(item.maDon)">
+                            <button
+                                type="button"
+                                class="btn btn-danger col-sm-4"
+                                @click="btnDeleteDonYeuCau_click(item.maDon)"
+                            >
                                 <i class="fa-solid fa-trash-can"></i>
                                 {{ $t('leave.buttons.delete') }}
                             </button>
@@ -157,7 +197,7 @@
                                 <b>{{ $t('leave.table.request_id') }}: </b>
                                 {{ item.maDon }}
                             </div>
-                            <div class="fw-medium text-end text-danger"> <i class="fa-solid fa-circle-dot"></i></div>
+                            <div class="fw-medium text-end text-danger"><i class="fa-solid fa-circle-dot"></i></div>
                         </div>
                         <div class="content my-2">
                             <label class="w-100">
@@ -176,13 +216,21 @@
                         </div>
                         <!-- Modal Trigger Button -->
                         <div class="row col-sm-12 m-0 gap-2 justify-content-center">
-                            <button type="button" class="btn btn-info col-sm-4" data-bs-toggle="modal"
-                                data-bs-target="#timeOffModal" @click="openModal(item)">
+                            <button
+                                type="button"
+                                class="btn btn-info col-sm-4"
+                                data-bs-toggle="modal"
+                                data-bs-target="#timeOffModal"
+                                @click="openModal(item)"
+                            >
                                 <i class="fa-solid fa-eye"></i>
                                 {{ $t('leave.buttons.view') }}
                             </button>
-                            <button type="button" class="btn btn-danger col-sm-4"
-                                @click="btnDeleteDonYeuCau_click(item.maDon)">
+                            <button
+                                type="button"
+                                class="btn btn-danger col-sm-4"
+                                @click="btnDeleteDonYeuCau_click(item.maDon)"
+                            >
                                 <i class="fa-solid fa-trash-can"></i>
                                 {{ $t('leave.buttons.delete') }}
                             </button>
@@ -205,69 +253,123 @@
                         <div class="py-2 card card-body">
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="maNhanVien" class="form-label disabled">{{
-                                        $t('create_onleave.items.employee_id') }}:</label>
-                                    <input type="text" id="maNhanVien" class="bg-active form-control"
-                                        :value="userInfo.maNhanVien" disabled>
+                                    <label for="maNhanVien" class="form-label disabled"
+                                        >{{ $t('create_onleave.items.employee_id') }}:</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="maNhanVien"
+                                        class="bg-active form-control"
+                                        :value="userInfo.maNhanVien"
+                                        disabled
+                                    />
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="hoTen" class="form-label">{{ $t('create_onleave.items.full_name')
-                                        }}:</label>
-                                    <input type="text" id="hoTen" class="bg-active form-control" :value="userInfo.hoTen"
-                                        disabled>
+                                    <label for="hoTen" class="form-label"
+                                        >{{ $t('create_onleave.items.full_name') }}:</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="hoTen"
+                                        class="bg-active form-control"
+                                        :value="userInfo.hoTen"
+                                        disabled
+                                    />
                                 </div>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="chucVu" class="form-label">{{ $t('create_onleave.items.position')
-                                        }}:</label>
-                                    <input type="text" id="chucVu" class="bg-active form-control"
-                                        :value="userInfo.tenChucVu" disabled>
+                                    <label for="chucVu" class="form-label"
+                                        >{{ $t('create_onleave.items.position') }}:</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="chucVu"
+                                        class="bg-active form-control"
+                                        :value="userInfo.tenChucVu"
+                                        disabled
+                                    />
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="phongBan" class="form-label disabled">{{
-                                        $t('create_onleave.items.department') }}:</label>
-                                    <input type="text" id="phongBan" class="bg-active form-control"
-                                        :value="userInfo.tenPhongBan" disabled>
+                                    <label for="phongBan" class="form-label disabled"
+                                        >{{ $t('create_onleave.items.department') }}:</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="phongBan"
+                                        class="bg-active form-control"
+                                        :value="userInfo.tenPhongBan"
+                                        disabled
+                                    />
                                 </div>
                             </div>
                             <div class="col-md-12 mb-2">
-                                <label for="truongPhong" class="form-label">{{ $t('create_onleave.items.approver')
-                                    }}:</label>
-                                <input type="text" id="truongPhong" class="bg-active form-control" value="Phạm Hoàng Hà"
-                                    disabled>
+                                <label for="truongPhong" class="form-label"
+                                    >{{ $t('create_onleave.items.approver') }}:</label
+                                >
+                                <input
+                                    type="text"
+                                    id="truongPhong"
+                                    class="bg-active form-control"
+                                    value="Phạm Hoàng Hà"
+                                    disabled
+                                />
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="lydo" class="form-label">{{ $t('create_onleave.items.reason') }}:</label>
-                                <input type="text" id="lydo" class="bg-active form-control"
-                                    :value="selectedItem.loaiDon" disabled>
+                                <input
+                                    type="text"
+                                    id="lydo"
+                                    class="bg-active form-control"
+                                    :value="selectedItem.loaiDon"
+                                    disabled
+                                />
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="batdau" class="form-label">{{ $t('create_onleave.items.from_day')
-                                        }}:</label>
-                                    <input type="text" id="batdau" class="bg-active form-control"
-                                        :value="formatDate(selectedItem.ngayBatDau)" disabled>
+                                    <label for="batdau" class="form-label"
+                                        >{{ $t('create_onleave.items.from_day') }}:</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="batdau"
+                                        class="bg-active form-control"
+                                        :value="formatDate(selectedItem.ngayBatDau)"
+                                        disabled
+                                    />
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="ketthuc" class="form-label">{{ $t('create_onleave.items.to_day')
-                                        }}:</label>
-                                    <input type="text" id="ketthuc" class="bg-active form-control"
-                                        :value="formatDate(selectedItem.ngayKetThuc)" disabled>
+                                    <label for="ketthuc" class="form-label"
+                                        >{{ $t('create_onleave.items.to_day') }}:</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="ketthuc"
+                                        class="bg-active form-control"
+                                        :value="formatDate(selectedItem.ngayKetThuc)"
+                                        disabled
+                                    />
                                 </div>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-12">
                                     <label for="ghichu" class="form-label">{{ $t('create_onleave.items.note') }}</label>
-                                    <textarea type="text" id="ghichu" rows="5" class="bg-active form-control"
-                                        :value="selectedItem.moTa" disabled></textarea>
+                                    <textarea
+                                        type="text"
+                                        id="ghichu"
+                                        rows="5"
+                                        class="bg-active form-control"
+                                        :value="selectedItem.moTa"
+                                        disabled
+                                    ></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
-                            $t('create_onleave.buttons.close') }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            {{ $t('create_onleave.buttons.close') }}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -286,24 +388,41 @@
                         <div class="py-2 card card-body">
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="maNhanVien" class="form-label disabled">{{
-                                        $t('create_onleave.items.employee_id') }}:</label>
-                                    <input type="text" id="maNhanVien" class="bg-active form-control"
-                                        :value="userInfo.maNhanVien" disabled>
+                                    <label for="maNhanVien" class="form-label disabled"
+                                        >{{ $t('create_onleave.items.employee_id') }}:</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="maNhanVien"
+                                        class="bg-active form-control"
+                                        :value="userInfo.maNhanVien"
+                                        disabled
+                                    />
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="hoTen" class="form-label">{{ $t('create_onleave.items.full_name')
-                                        }}:</label>
-                                    <input type="text" id="hoTen" class="bg-active form-control" :value="userInfo.hoTen"
-                                        disabled>
+                                    <label for="hoTen" class="form-label"
+                                        >{{ $t('create_onleave.items.full_name') }}:</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="hoTen"
+                                        class="bg-active form-control"
+                                        :value="userInfo.hoTen"
+                                        disabled
+                                    />
                                 </div>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-6 mb-2">
-                                    <label for="lydo" class="form-label">{{ $t('create_onleave.items.reason')
-                                        }}:</label>
-                                    <select class="form-select" id="lydo" v-model="selectedItem.loaiDon"
-                                        :class="{ 'is-invalid': errorChange.loaiDon }">
+                                    <label for="lydo" class="form-label"
+                                        >{{ $t('create_onleave.items.reason') }}:</label
+                                    >
+                                    <select
+                                        class="form-select"
+                                        id="lydo"
+                                        v-model="selectedItem.loaiDon"
+                                        :class="{ 'is-invalid': errorChange.loaiDon }"
+                                    >
                                         <option selected disabled>Chọn loại nghỉ phép</option>
                                         <option v-if="nghiPhepNam">Nghỉ phép năm</option>
                                         <option>Nghỉ ốm</option>
@@ -318,19 +437,31 @@
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label for="batdau" class="form-label">{{ $t('create_onleave.items.from_day')
-                                        }}</label>
-                                    <input type="date" v-model="selectedItem.ngayBatDau" id="batdau"
-                                        class="form-control" :class="{ 'is-invalid': errorChange.ngayBatDau }">
+                                    <label for="batdau" class="form-label">{{
+                                        $t('create_onleave.items.from_day')
+                                    }}</label>
+                                    <input
+                                        type="date"
+                                        v-model="selectedItem.ngayBatDau"
+                                        id="batdau"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': errorChange.ngayBatDau }"
+                                    />
                                     <div class="invalid-feedback">
                                         {{ $t('create_onleave.validate.from_day') }}
                                     </div>
                                 </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="ketthuc" class="form-label">{{ $t('create_onleave.items.to_day')
-                                        }}</label>
-                                    <input type="date" v-model="selectedItem.ngayKetThuc" id="ketthuc"
-                                        class="form-control" :class="{ 'is-invalid': errorChange.ngayKetThuc }">
+                                    <label for="ketthuc" class="form-label">{{
+                                        $t('create_onleave.items.to_day')
+                                    }}</label>
+                                    <input
+                                        type="date"
+                                        v-model="selectedItem.ngayKetThuc"
+                                        id="ketthuc"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': errorChange.ngayKetThuc }"
+                                    />
                                     <div class="invalid-feedback">
                                         {{ $t('create_onleave.validate.to_day') }}
                                     </div>
@@ -339,8 +470,13 @@
                             <div class="row py-2">
                                 <div class="col-md-12">
                                     <label for="ghichu" class="form-label">{{ $t('create_onleave.items.note') }}</label>
-                                    <textarea type="text" id="ghichu" rows="5" class="bg-active form-control"
-                                        :value="selectedItem.moTa"></textarea>
+                                    <textarea
+                                        type="text"
+                                        id="ghichu"
+                                        rows="5"
+                                        class="bg-active form-control"
+                                        :value="selectedItem.moTa"
+                                    ></textarea>
                                 </div>
                             </div>
                         </div>
@@ -349,8 +485,9 @@
                         <button type="button" class="btn btn-warning" @click="btnChangeYeuCau_click(selectedItem)">
                             {{ $t('create_onleave.buttons.save') }}
                         </button>
-                        <button type="button text-end" class="btn btn-secondary" data-bs-dismiss="modal">{{
-                            $t('create_onleave.buttons.close') }}</button>
+                        <button type="button text-end" class="btn btn-secondary" data-bs-dismiss="modal">
+                            {{ $t('create_onleave.buttons.close') }}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -368,12 +505,21 @@
                         <!-- Reusable Card Structure Inside Modal -->
                         <div class="py-2 card card-body">
                             <div class="col-md-12">
-                                <label for="truongPhong" class="form-label">{{ $t('create_onleave.items.approver')
-                                    }}</label>
-                                <select id="nhanVienSelect" v-model="nhanVienSelect" singer class="slim-select"
-                                    :class="{ 'is-invalid': error.nhanVienSelect }">
-                                    <option v-for="staff in dataAllStaff" :key="staff.maNhanVien"
-                                        :value="staff.maNhanVien">
+                                <label for="truongPhong" class="form-label">{{
+                                    $t('create_onleave.items.approver')
+                                }}</label>
+                                <select
+                                    id="nhanVienSelect"
+                                    v-model="nhanVienSelect"
+                                    singer
+                                    class="slim-select"
+                                    :class="{ 'is-invalid': error.nhanVienSelect }"
+                                >
+                                    <option
+                                        v-for="staff in dataAllStaff"
+                                        :key="staff.maNhanVien"
+                                        :value="staff.maNhanVien"
+                                    >
                                         {{ staff.maNhanVien }} - {{ staff.hoTen }}
                                     </option>
                                 </select>
@@ -381,27 +527,33 @@
                             <div class="row py-2">
                                 <div class="col-md-12">
                                     <label for="ghichu" class="form-label">{{ $t('create_onleave.items.note') }}</label>
-                                    <textarea type="text" id="ghichu" rows="5" class="bg-active form-control"
-                                        v-model="ghiChu"></textarea>
+                                    <textarea
+                                        type="text"
+                                        id="ghichu"
+                                        rows="5"
+                                        class="bg-active form-control"
+                                        v-model="ghiChu"
+                                    ></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" @click="guiDuyetYeuCau(selectedItem.maDon)">{{
-                            $t('create_onleave.buttons.send') }}</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
-                            $t('create_onleave.buttons.close') }}</button>
+                        <button type="button" class="btn btn-success" @click="guiDuyetYeuCau(selectedItem.maDon)">
+                            {{ $t('create_onleave.buttons.send') }}
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            {{ $t('create_onleave.buttons.close') }}
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup>
-import { del, get, post, put } from '@/stores/https';
+import { del, get, post, put } from '@/stores/https'
 import { onMounted, ref, reactive } from 'vue'
 import { useValidation } from '@/stores/mixin/validate_form'
 import SlimSelect from 'slim-select'
@@ -433,7 +585,7 @@ const getAllStaff = async () => {
 const { validateForm } = useValidation()
 
 const error = reactive({
-    nhanVienSelect: ''
+    nhanVienSelect: '',
 })
 
 const guiDuyetYeuCau = async (maDon) => {
@@ -441,7 +593,7 @@ const guiDuyetYeuCau = async (maDon) => {
         const formData = ref({
             maDon: maDon,
             maNhanVien: nhanVienSelect.value,
-            ghiChu: ghiChu.value
+            ghiChu: ghiChu.value,
         })
         const response = await post('/api/v1/approvals', formData.value)
         if (response.success) {
@@ -474,7 +626,7 @@ const createSlimSelect = () => {
     slimSelectInstance.value = new SlimSelect({
         select: '#nhanVienSelect',
         closeOnSelect: false,
-    });
+    })
 }
 
 //Định dạng ngày theo dạng dd-mm-yyyy
@@ -498,11 +650,10 @@ const loadYeuCau = async () => {
         listTuChoi.value = []
 
         //Phân các list theo các trạng thái tương ứng: 1-chờ duyệt, 2-đã duyệt, 3-từ chối
-        listYeuCau.value.forEach(item => {
+        listYeuCau.value.forEach((item) => {
             if (item.trangThai === 0) {
                 listChuaGui.value.push(item)
-            }
-            else if (item.trangThai === 1) {
+            } else if (item.trangThai === 1) {
                 listChoDuyet.value.push(item)
             } else if (item.trangThai === 2) {
                 listDaDuyet.value.push(item)
@@ -511,10 +662,9 @@ const loadYeuCau = async () => {
             }
         })
 
-        listChoDuyet.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao));
-        listDaDuyet.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao));
-        listTuChoi.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao));
-
+        listChoDuyet.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao))
+        listDaDuyet.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao))
+        listTuChoi.value.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao))
     } catch (error) {
         Swal.fire({
             title: t('create_onleave.error.title'),
@@ -536,7 +686,7 @@ const loadInfoUser = async () => {
             tenChucVu: response.data.tenChucVu,
             tenBoPhan: response.data.tenBoPhan,
             tenPhongBan: response.data.tenPhongBan,
-            hinhAnh: response.data.hinhAnh
+            hinhAnh: response.data.hinhAnh,
         }
     } catch (error) {
         Swal.fire({
@@ -551,27 +701,27 @@ const loadInfoUser = async () => {
 const errorChange = reactive({
     loaiDon: '',
     ngayBatDau: '',
-    ngayKetThuc: ''
+    ngayKetThuc: '',
 })
 
 const validateChange = (item) => {
     const formRule = {
         loaiDon: {
-            required: true
+            required: true,
         },
         ngayBatDau: {
             required: true,
-            compareDate: `>= ${new Date().toISOString().split('T')[0]}`
+            compareDate: `>= ${new Date().toISOString().split('T')[0]}`,
         },
         ngayKetThuc: {
             required: true,
-            compareDate: `>= ${item.ngayBatDau}`
-        }
+            compareDate: `>= ${item.ngayBatDau}`,
+        },
     }
     const validationData = {
         loaiDon: item.loaiDon,
         ngayBatDau: item.ngayBatDau,
-        ngayKetThuc: item.ngayKetThuc
+        ngayKetThuc: item.ngayKetThuc,
     }
     Object.assign(errorChange, validateForm(formRule, validationData))
     for (let key in errorChange) {
@@ -624,10 +774,10 @@ const btnDeleteDonYeuCau_click = async (maDon) => {
         Swal.fire({
             title: t('create_onleave.delete_request.question.title'),
             text: t('create_onleave.delete_request.question.text'),
-            icon: "warning",
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
             confirmButtonText: t('create_onleave.delete_request.button.delete'),
             cancelButtonText: t('create_onleave.delete_request.button.cancel'),
         }).then(async (result) => {
@@ -635,19 +785,19 @@ const btnDeleteDonYeuCau_click = async (maDon) => {
                 const response = await del(`/api/v1/don-yeu-cau/${maDon}`)
                 if (response.success) {
                     // Xóa item khỏi listYeuCau
-                    listYeuCau.value = listYeuCau.value.filter(item => item.maDon !== maDon)
+                    listYeuCau.value = listYeuCau.value.filter((item) => item.maDon !== maDon)
 
                     // Xóa item khỏi các danh sách phân loại
-                    listChoDuyet.value = listChoDuyet.value.filter(item => item.maDon !== maDon)
-                    listDaDuyet.value = listDaDuyet.value.filter(item => item.maDon !== maDon)
-                    listTuChoi.value = listTuChoi.value.filter(item => item.maDon !== maDon)
+                    listChoDuyet.value = listChoDuyet.value.filter((item) => item.maDon !== maDon)
+                    listDaDuyet.value = listDaDuyet.value.filter((item) => item.maDon !== maDon)
+                    listTuChoi.value = listTuChoi.value.filter((item) => item.maDon !== maDon)
                     Swal.fire({
                         title: t('create_onleave.delete_request.success.title'),
                         text: t('create_onleave.delete_request.success.text'),
                         icon: 'success',
                         timer: 1500,
                     }).then(() => {
-                        location.reload();
+                        location.reload()
                     })
                 } else {
                     Swal.fire({
@@ -658,7 +808,7 @@ const btnDeleteDonYeuCau_click = async (maDon) => {
                     })
                 }
             }
-        });
+        })
     } catch (error) {
         Swal.fire({
             title: t('create_onleave.error.title'),

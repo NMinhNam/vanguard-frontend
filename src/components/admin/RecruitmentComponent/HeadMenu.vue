@@ -3,6 +3,9 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
                 <button @click="showPopup = true" class="btn btn-primary me-2">{{ t('recruitment.new') }}</button>
+                <router-link :to="{ path: '/admin/recruitment/add' }" class="btn btn-primary me-2"
+                    >Add candidates</router-link
+                >
                 <h5 class="mb-0">{{ t('recruitment.title') }}</h5>
             </div>
             <div class="form-group fs has-search me-2">
@@ -104,7 +107,9 @@ const props = defineProps({
     z-index: 100;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 .popup.show {

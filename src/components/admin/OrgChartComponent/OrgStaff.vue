@@ -103,5 +103,4 @@ const renderChart = () => {
 }
 </script>
 
-<style>
-</style>
+<style></style>

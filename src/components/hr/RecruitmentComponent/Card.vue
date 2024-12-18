@@ -26,7 +26,10 @@
                         <div class="recruitment-info px-3 py-0 flex-grow-1">
                             <div class="d-flex justify-content-between align-items-start mt-2">
                                 <h5 class="card-title">{{ Recruitment.tenViTri }}</h5>
-                                <span v-if="Recruitment.soLuongUngTuyen >= Recruitment.soLuongTuyen" class="badge bg-danger">
+                                <span
+                                    v-if="Recruitment.soLuongUngTuyen >= Recruitment.soLuongTuyen"
+                                    class="badge bg-danger"
+                                >
                                     {{ t('recruitment.table.full') }}
                                 </span>
                                 <span v-else class="badge bg-success">
@@ -34,7 +37,8 @@
                                 </span>
                             </div>
                             <p class="card-text">
-                                <i class="bi bi-people"></i> {{ t('recruitment.table.number') }}: {{ Recruitment.soLuongTuyen }}
+                                <i class="bi bi-people"></i> {{ t('recruitment.table.number') }}:
+                                {{ Recruitment.soLuongTuyen }}
                             </p>
                             <p class="card-text">
                                 <button class="btn btn-primary oe_kanban_action oe_kanban_action_button" type="action">

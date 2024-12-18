@@ -1,6 +1,6 @@
 <template>
     <div class="text-center fw-bolder chart-container pt-2">
-        <span>Mức lương nhân viên theo độ tuổi</span>
+        <span>Thống kê nhân viên theo mức lương</span>
         <div ref="chart" style="width: 100%; height: 300px"></div>
     </div>
 </template>
@@ -100,5 +100,4 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
