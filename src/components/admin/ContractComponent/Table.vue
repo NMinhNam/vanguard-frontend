@@ -14,7 +14,7 @@
                 <tr
                     v-for="(Contract, index) in paginatedContract"
                     :key="Contract.soHopDong || index"
-                    @click="$router.push(`/admin/contract/${Contract.soHopDong}`)"
+                    @click="$router.push(`/${role}/contract/${Contract.soHopDong}`)"
                     style="cursor: pointer"
                 >
                     <td>{{ index + 1 }}</td>
@@ -50,6 +50,8 @@ import { computed } from 'vue'
 import { ref, onMounted } from 'vue'
 import { get } from '@/stores/https'
 import { useI18n } from 'vue-i18n'
+
+const role = sessionStorage.getItem('role').toLowerCase()
 
 const emit = defineEmits(['updatePage'])
 const { t, locale } = useI18n()

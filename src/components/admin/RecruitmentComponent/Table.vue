@@ -17,7 +17,7 @@
                 <tr
                     v-for="(Recruitment, index) in paginatedRecruitment"
                     :key="Recruitment.viTriTuyenDung || index"
-                    @dblclick="$router.push(`/admin/recruitment/${Recruitment.tenViTri}`)"
+                    @dblclick="$router.push(`/${role}/recruitment/${Recruitment.tenViTri}`)"
                     style="cursor: pointer"
                 >
                     <td>{{ (props.currentPage - 1) * props.pageSize + index + 1 }}</td>
@@ -59,6 +59,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+
+const role = sessionStorage.getItem('role').toLowerCase()
 
 const { t, locale } = useI18n()
 const props = defineProps({

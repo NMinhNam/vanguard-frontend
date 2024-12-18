@@ -120,7 +120,7 @@
                 <button class="btn btn-primary me-3" @click.prevent="btnCreateDonYeuCau_click">
                     {{ $t('create_onleave.buttons.send') }}
                 </button>
-                <router-link :to="{ path: '/user/timeoff' }">
+                <router-link :to="{ path: `/${role}/timeoff` }">
                     <button class="btn btn-outline-secondary">{{ $t('create_onleave.buttons.back') }}</button>
                 </router-link>
             </div>
@@ -147,6 +147,7 @@ import { ref, onMounted, reactive } from 'vue'
 import { post, get } from '@/stores/https'
 import { useValidation } from '@/stores/mixin/validate_form'
 import { useI18n } from 'vue-i18n'
+const role = sessionStorage.getItem('role').toLowerCase()
 
 const { t, locale } = useI18n()
 

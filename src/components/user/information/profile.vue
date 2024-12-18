@@ -100,7 +100,7 @@
                                 <hr />
                                 <div class="row text-end">
                                     <div class="col-sm-12">
-                                        <router-link :to="{ path: `/user/information/${infoNV.maNhanVien}` }">
+                                        <router-link :to="{ path: `/${role}/information/${infoNV.maNhanVien}` }">
                                             <button class="btn btn-info">{{ $t('profile.buttons.edit') }}</button>
                                         </router-link>
                                     </div>
@@ -258,6 +258,8 @@ const infoNV = ref({})
 const listHistory_Works = ref([])
 const listEducations = ref([])
 const listHopDong = ref([])
+
+const role = sessionStorage.getItem('role').toLowerCase()
 
 //Lấy thông tin user
 const loadInfoUser = async () => {

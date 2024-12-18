@@ -80,9 +80,10 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const role = sessionStorage.getItem('role').toLowerCase()
-
 const { t, locale } = useI18n()
 const emit = defineEmits(['setTrangThaiApprove', 'updatePage'])
+
+console.log(sessionStorage.getItem('role').toLowerCase)
 
 const props = defineProps({
     listApprove: Array,

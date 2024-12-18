@@ -148,7 +148,7 @@
                 <button class="btn btn-primary me-3" @click.prevent="btnUpdateInfo_Click">
                     {{ $t('edit_profile.buttons.change') }}
                 </button>
-                <router-link :to="{ path: '/user/information' }" class="btn btn-outline-secondary">
+                <router-link :to="{ path: `/${role}/information` }" class="btn btn-outline-secondary">
                     {{ $t('edit_profile.buttons.back') }}
                 </router-link>
             </div>
@@ -161,6 +161,7 @@ import { reactive, onMounted, ref } from 'vue'
 import { useValidation } from '@/stores/mixin/validate_form'
 import { post, get, put } from '@/stores/https'
 import { useI18n } from 'vue-i18n'
+const role = sessionStorage.getItem('role').toLowerCase()
 
 const { t, locale } = useI18n()
 

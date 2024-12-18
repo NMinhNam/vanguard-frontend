@@ -5,7 +5,7 @@
             <h4 class="float-start fw-medium">
                 {{ $t('leave.title') }}
             </h4>
-            <router-link :to="{ path: '/user/timeoff/newrequest' }">
+            <router-link :to="{ path: `/${role}/timeoff/newrequest` }">
                 <div class="btn btn-add float-end">
                     {{ $t('leave.buttons.create') }}
                     <i class="fa-solid fa-plus"></i>
@@ -415,6 +415,8 @@ import { onMounted, ref, reactive, computed } from 'vue'
 import { useValidation } from '@/stores/mixin/validate_form'
 import SlimSelect from 'slim-select'
 import { useI18n } from 'vue-i18n'
+
+const role = sessionStorage.getItem('role').toLowerCase()
 
 const { t, locale } = useI18n()
 
