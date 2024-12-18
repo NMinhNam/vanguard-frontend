@@ -20,7 +20,7 @@
                 <tr
                     v-for="(staff, index) in paginatedStaffs"
                     :key="staff.maNhanVien"
-                    @dblclick="$router.push('/admin/staff/' + staff.maNhanVien)"
+                    @dblclick="$router.push('/hr/staff/' + staff.maNhanVien)"
                 >
                     <td>{{ (props.currentPage - 1) * props.pageSize + index + 1 }}</td>
                     <td>{{ staff.hoTen }}</td>

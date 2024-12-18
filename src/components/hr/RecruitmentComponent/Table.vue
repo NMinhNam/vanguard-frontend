@@ -17,7 +17,7 @@
                 <tr
                     v-for="(Recruitment, index) in paginatedRecruitment"
                     :key="Recruitment.viTriTuyenDung || index"
-                    @dblclick="$router.push(`/admin/recruitment/${Recruitment.tenViTri}`)"
+                    @dblclick="$router.push(`/hr/recruitment/${Recruitment.tenViTri}`)"
                     style="cursor: pointer"
                 >
                     <td>{{ (props.currentPage - 1) * props.pageSize + index + 1 }}</td>

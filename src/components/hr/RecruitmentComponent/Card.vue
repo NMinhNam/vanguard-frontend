@@ -4,7 +4,7 @@
             <div
                 v-for="(Recruitment, index) in paginatedRecruitment"
                 :key="Recruitment.viTriTuyenDung || index"
-                @dblclick="$router.push(`/admin/recruitment/${Recruitment.tenViTri}`)"
+                @dblclick="$router.push(`/hr/recruitment/${Recruitment.tenViTri}`)"
                 style="cursor: pointer"
             >
                 <div class="card h-100 p-0">

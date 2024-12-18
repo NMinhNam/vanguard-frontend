@@ -15,7 +15,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="drop_save">
                         <li>
-                            <router-link :to="{ path: '/admin/staff/AddStaff' }" class="dropdown-item">{{
+                            <router-link :to="{ path: '/hr/staff/AddStaff' }" class="dropdown-item">{{
                                 $t('staffManagement.buttons.add')
                             }}</router-link>
                         </li>
