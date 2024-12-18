@@ -148,9 +148,7 @@ const calendarOptions = ref({
     z-index: 1050; /* Đảm bảo popup luôn trên các phần tử khác */
     opacity: 0; /* Ban đầu ẩn */
     visibility: hidden; /* Ban đầu ẩn */
-    transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 /* Hiển thị popup */
@@ -165,9 +163,7 @@ const calendarOptions = ref({
     border-radius: 12px; /* Bo góc */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Đổ bóng */
     transform: translateY(-30px); /* Bắt đầu với vị trí hơi cao hơn */
-    transition:
-        transform 0.3s ease,
-        opacity 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     max-width: 800px; /* Giới hạn chiều rộng */
     width: 90%; /* Chiếm 90% chiều rộng màn hình */
     padding: 1.5rem; /* Khoảng cách bên trong */

@@ -1,5 +1,5 @@
 <template>
-    <div class="chart-container pt-3 text-center fw-bolder">
+    <div class="pt-3 text-center fw-bolder">
         <span>Mức lương theo phòng ban</span>
         <div ref="chart" style="width: 100%; height: 300px"></div>
     </div>

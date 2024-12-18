@@ -162,7 +162,7 @@ const formData = reactive({
     thoiGianKetThuc: '',
     viTri: '',
     videoCallUrl: '',
-    danhSachThamGia: ['NV01'],
+    danhSachThamGia: [],
 })
 
 onMounted(async () => {
@@ -176,6 +176,8 @@ onMounted(async () => {
 })
 
 const setDataforFormData = (data) => {
+    console.log(data)
+
     formData.maNhanVien = data.maNhanVien
     formData.maCuocHop = data.maCuocHop
     formData.ghiChu = data.ghiChu || ''
@@ -188,9 +190,12 @@ const setDataforFormData = (data) => {
     formData.tenNguoiToChuc = data.tenNguoiToChuc || props.event.tenNguoiToChuc || ''
     if (data.danhSachThamGia) {
         formData.danhSachThamGia = data.danhSachThamGia.split(',').map((item) => item.trim())
-        formData.danhSachThamGia.push(props.event.maNhanVien)
+        formData.danhSachThamGia.push(data.maNhanVien)
         setSlimSelectValues(formData.danhSachThamGia)
+    } else {
+        formData.danhSachThamGia = [data.maNhanVien]
     }
+    console.log(formData.danhSachThamGia)
 }
 
 const getMeetingByMeetingId = async (maCuocHop) => {
@@ -288,6 +293,18 @@ const getListStaff = async () => {
 }
 
 const validate = (data) => {
+    console.log(data.thoiGianKetThuc)
+
+    if (!data.thoiGianBatDau || !data.thoiGianKetThuc) {
+        Swal.fire({
+            title: 'Lỗi định dạng',
+            text: 'Vui lòng nhập thời gian bắt đầu và thời gian kết thúc',
+            icon: 'error',
+            timer: 1500,
+        })
+        return true
+    }
+
     if (data.thoiGianBatDau > data.thoiGianKetThuc) {
         Swal.fire({
             title: 'Lỗi định dạng',
@@ -300,6 +317,9 @@ const validate = (data) => {
     return false
 }
 const saveMeeting = async () => {
+    if (validate(formData)) {
+        return
+    }
     formData.thoiGianBatDau = format(formData.thoiGianBatDau, "yyyy-MM-dd'T'HH:mm:ss")
     formData.thoiGianKetThuc = format(formData.thoiGianKetThuc, "yyyy-MM-dd'T'HH:mm:ss")
     if (props.event.maCuocHop) {
@@ -311,9 +331,6 @@ const saveMeeting = async () => {
 }
 
 const createMeeting = async () => {
-    if (validate(formData)) {
-        return
-    }
     try {
         const response = await post('/api/v1/meetings', formData)
 
@@ -339,6 +356,7 @@ const createMeeting = async () => {
                 icon: 'success',
                 timer: 1500,
             })
+            saveSuccess()
         }
     } catch (error) {
         console.error('Lỗi khi tạo cuộc họp:', error)
@@ -348,13 +366,10 @@ const createMeeting = async () => {
             icon: 'error',
             timer: 1500,
         })
+        saveSuccess()
     }
-    saveSuccess()
 }
 const updateMeeting = async () => {
-    if (validate(formData)) {
-        return
-    }
     try {
         const response = await put('/api/v1/meetings', formData)
         if (formData.danhSachThamGia.length > 0) {
@@ -379,6 +394,7 @@ const updateMeeting = async () => {
                 icon: 'success',
                 timer: 1500,
             })
+            saveSuccess()
         }
     } catch (error) {
         console.error(error)
@@ -388,8 +404,8 @@ const updateMeeting = async () => {
             icon: 'error',
             timer: 1500,
         })
+        saveSuccess()
     }
-    saveSuccess()
 }
 
 const openMeeting = () => {
