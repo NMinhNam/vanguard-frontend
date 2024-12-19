@@ -108,20 +108,11 @@ const checkInQr = async (maNhanVien) => {
 
     try {
         const response = await post('/api/v1/attendances/checkin', formData.value)
-        if (response.data) {
+        if (response) {
             Swal.fire({
                 title: t('checkin.check_in.success.title'),
-                text: `${t('checkin.check_in.success.text')}: ${currentDateTime}`,
+                text: t('checkin.check_in.success.text'),
                 icon: 'success',
-                timer: 1500,
-            }).then(() => {
-                location.reload()
-            })
-        } else {
-            Swal.fire({
-                title: t('checkin.check_in.fail.title'),
-                text: t('checkin.check_in.fail.text'),
-                icon: 'error',
                 timer: 1500,
             })
         }

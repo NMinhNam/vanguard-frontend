@@ -111,15 +111,12 @@ const CheckOut = async (maNhanVien) => {
     })
     try {
         const response = await post('/api/v1/attendances/checkout', formData.value)
-
-        if (response.success) {
+        if (response) {
             Swal.fire({
                 title: t('checkin.check_out.success.title'),
-                text: `${t('checkin.check_out.success.text')}: ${currentDateTime}`,
+                text: t('checkin.check_out.success.text'),
                 icon: 'success',
                 timer: 1500,
-            }).then(() => {
-                location.reload()
             })
         } else {
             Swal.fire({
