@@ -138,6 +138,7 @@ const btnLogin_Click = async () => {
             authStore.setToken(response.data.accessToken, response.data.refreshToken)
             authStore.setRole(response.data.role)
             await getUserLogin()
+            await listeningMail()
             console.log(userLogin.value)
             sessionStorage.setItem('maNhanVien', userLogin.value.maNhanVien)
             Swal.fire({
@@ -203,6 +204,15 @@ const getUserLogin = async () => {
         console.error(error)
     }
 }
+
+const listeningMail = async () => {
+    try {
+        const response = await get('/api/v1/mail/start-listening')
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 const selectLanguage_Change = () => {
     locale.value = language.value
     setCookie('HRMWebSuitLanguage', language.value, 30)
